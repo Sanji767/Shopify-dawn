@@ -1,0 +1,276 @@
+@font-face {
+  font-family: "Gill Sans Nova Cond XBd";
+  src: url("GillSansNova-CondXBd.woff2") format("woff2"), url("GillSansNova-CondXBd.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos-Bold.woff2") format("woff2"), url("Aptos-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos-ExtraBold.woff2") format("woff2"), url("Aptos-ExtraBold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos-SemiBold.woff2") format("woff2"), url("Aptos-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos-Light.woff2") format("woff2"), url("Aptos-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos.woff2") format("woff2"), url("Aptos.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aptos";
+  src: url("Aptos-Black.woff2") format("woff2"), url("Aptos-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  scroll-behavior: unset;
+}
+
+body {
+  margin: 0;
+}
+
+.comming-soon-area {
+  background: #135541;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+@media (max-width: 575px) {
+  .comming-soon-area {
+    min-height: 400px;
+  }
+}
+.comming-soon-area h1 {
+  margin: 0;
+  font-size: 250px;
+  color: #fff;
+  font-family: "Gill Sans Nova Cond XBd";
+  text-transform: uppercase;
+  line-height: 200px;
+  position: relative;
+}
+@media (max-width: 991px) {
+  .comming-soon-area h1 {
+    font-size: 150px;
+    line-height: 150px;
+  }
+}
+@media (max-width: 767px) {
+  .comming-soon-area h1 {
+    font-size: 120px;
+    line-height: 120px;
+  }
+}
+@media (max-width: 575px) {
+  .comming-soon-area h1 {
+    font-size: 92px;
+    line-height: 95px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h1 {
+    font-size: 65px;
+    line-height: 60px;
+  }
+}
+.comming-soon-area h1 .shape1 {
+  position: absolute;
+  left: -95px;
+  top: -125px;
+  animation: zoom-in-zoom-out 4s ease-in infinite;
+}
+@media (max-width: 767px) {
+  .comming-soon-area h1 .shape1 {
+    left: -64px;
+    top: -64px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h1 .shape1 {
+    left: -45px;
+    top: -45px;
+  }
+}
+@media (max-width: 767px) {
+  .comming-soon-area h1 .shape1 img {
+    max-width: 120px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h1 .shape1 img {
+    max-width: 80px;
+  }
+}
+.comming-soon-area h2 {
+  margin: 0;
+  font-size: 140px;
+  color: #fff;
+  font-family: "Gill Sans Nova Cond XBd";
+  text-transform: uppercase;
+}
+@media (max-width: 991px) {
+  .comming-soon-area h2 {
+    font-size: 90px;
+    line-height: 90px;
+  }
+}
+@media (max-width: 767px) {
+  .comming-soon-area h2 {
+    font-size: 70px;
+    line-height: 70px;
+  }
+}
+@media (max-width: 575px) {
+  .comming-soon-area h2 {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h2 {
+    font-size: 35px;
+    line-height: 35px;
+  }
+}
+.comming-soon-area h3 {
+  margin: 0;
+  font-size: 90px;
+  color: #FF8900;
+  font-family: "Gill Sans Nova Cond XBd";
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .comming-soon-area h3 {
+    font-size: 60px;
+    line-height: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .comming-soon-area h3 {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 575px) {
+  .comming-soon-area h3 {
+    font-size: 35px;
+    line-height: 35px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h3 {
+    font-size: 25px;
+    line-height: 25px;
+  }
+}
+.comming-soon-area h3 .shape2 {
+  position: relative;
+  top: 20px;
+  padding-left: 15px;
+  animation: zoom-in-zoom-out 4s ease-in infinite;
+}
+@media (max-width: 575px) {
+  .comming-soon-area h3 .shape2 img {
+    max-width: 60px;
+  }
+}
+@media (max-width: 440px) {
+  .comming-soon-area h3 .shape2 img {
+    max-width: 40px;
+  }
+}
+.comming-soon-area .right-shape {
+  position: absolute;
+  right: 0;
+  top: 80px;
+  z-index: -1;
+}
+.comming-soon-area .right-shape img {
+  animation: leafAniamtion 8s ease-in infinite;
+}
+@media (max-width: 767px) {
+  .comming-soon-area .right-shape img {
+    max-width: 130px;
+  }
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes kenburn {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  to {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+}
+@keyframes leafAniamtion {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: rotate(5deg) translateX(20px);
+  }
+}
+@-webkit-keyframes zoom-in-zoom-out {
+  0% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}/*# sourceMappingURL=style.css.map */
