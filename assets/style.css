@@ -1,48 +1,48 @@
 @font-face {
-  font-family: "Gill Sans Nova Cond XBd";
-  src: url("GillSansNova-CondXBd.woff2") format("woff2"), url("GillSansNova-CondXBd.woff") format("woff");
+  font-family: 'Gill Sans Nova Cond XBd';
+  src: url('GillSansNova-CondXBd.woff2') format('woff2'), url('GillSansNova-CondXBd.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Bold.woff2") format("woff2"), url("Aptos-Bold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Bold.woff2') format('woff2'), url('Aptos-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-ExtraBold.woff2") format("woff2"), url("Aptos-ExtraBold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-ExtraBold.woff2') format('woff2'), url('Aptos-ExtraBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-SemiBold.woff2") format("woff2"), url("Aptos-SemiBold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-SemiBold.woff2') format('woff2'), url('Aptos-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Light.woff2") format("woff2"), url("Aptos-Light.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Light.woff2') format('woff2'), url('Aptos-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos.woff2") format("woff2"), url("Aptos.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos.woff2') format('woff2'), url('Aptos.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Black.woff2") format("woff2"), url("Aptos-Black.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Black.woff2') format('woff2'), url('Aptos-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -76,7 +76,7 @@ body {
   margin: 0;
   font-size: 250px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   line-height: 200px;
   position: relative;
@@ -137,7 +137,7 @@ body {
   margin: 0;
   font-size: 140px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
 }
 @media (max-width: 991px) {
@@ -167,8 +167,8 @@ body {
 .comming-soon-area h3 {
   margin: 0;
   font-size: 90px;
-  color: #FF8900;
-  font-family: "Gill Sans Nova Cond XBd";
+  color: #ff8900;
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -253,7 +253,8 @@ body {
   }
 }
 @keyframes leafAniamtion {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg) translateX(0);
   }
   50% {
@@ -273,4 +274,11 @@ body {
     -webkit-transform: scale(1, 1);
     transform: scale(1, 1);
   }
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
+.constraction {
+  font-size: 52px;
+  font-family: 'Aptos', sans-serif;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+}
