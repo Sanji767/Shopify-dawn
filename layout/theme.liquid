@@ -59,11 +59,11 @@
       <!-- end preloader -->
       <!-- Start header -->
 
-      {% section 'header' %}
+      {% comment %} {% section 'header' %} {% endcomment %}
 
       {{ content_for_layout }}
 
-      {% section 'footer' %}
+      {% comment %} {% section 'footer' %} {% endcomment %}
     </div>
 
     <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>

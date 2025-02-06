@@ -5,18 +5,45 @@
         <div class="row align-items-center">
           <div class="col-lg-2 col-md-6 col-6 d-lg-none d-block">
             <div class="navbar-header">
-              <a class="navbar-brand" href="/"
-                ><img src="{{ 'logo.png' | asset_url }}" width="" height="" alt="logo"
-              ></a>
+              {% if section.settings.logo != blank %}
+                <a class="navbar-brand" href="/"
+                  ><img src="{{ section.settings.logo | image_url: width: 600  }}" width="" height="" alt="logo"
+                ></a>
+              {% else %}
+                <a class="navbar-brand" href="/"
+                  ><img src="{{ 'logo.png' | asset_url }}" width="" height="" alt="logo"
+                ></a>
+              {% endif %}
             </div>
           </div>
           <div class="col-lg-12 col-md-1 col-1">
             <div id="navbar" class="collapse navbar-collapse navigation-holder">
               <button class="menu-close"><i class="ti-close"></i></button>
               <ul class="nav navbar-nav mb-2 mb-lg-0">
-                <li><a href="/">HOME</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li>
+                  <a href="/">{{ section.settings.home_text }}</a>
+                </li>
+                <li>
+                  <a href="{{section.settings.shop_url}}">{{ section.settings.shop_text }}</a>
+                </li>
                 <li class="middle-logo">
+                  {% if section.settings.logo != blank %}
+                    <a href="/"
+                      ><img
+                        src="{{ section.settings.logo | image_url: width: 600  }}"
+                        width=""
+                        height=""
+                        alt="logo"
+                    ></a>
+                  {% else %}
+                    <a href="/"
+                      ><img
+                        src="{{ 'logo.png' | asset_url }}"
+                        width=""
+                        height=""
+                        alt="logo"
+                    ></a>
+                  {% endif %}
                   <a href="/"
                     ><img
                       src="{{ 'logo.png' | asset_url }}"
@@ -25,8 +52,12 @@
                       alt="logo"
                   ></a>
                 </li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li>
+                  <a href="{{section.settings.about_url}}">{{ section.settings.about_text }}</a>
+                </li>
+                <li>
+                  <a href="{{section.settings.contact_url}}">{{ section.settings.contact_text }}</a>
+                </li>
               </ul>
             </div>
             <!-- end of nav-collapse -->
@@ -47,3 +78,60 @@
     </nav>
   </div>
 </header>
+
+{% schema %}
+{
+  "name": "Header Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "url",
+      "id": "shop_url",
+      "label": "Shop URL"
+    },
+    {
+      "type": "url",
+      "id": "about_url",
+      "label": "About URL"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact URL"
+    },
+    {
+      "type": "text",
+      "id": "home_text",
+      "label": "Home Text",
+      "default": "HOME"
+    },
+    {
+      "type": "text",
+      "id": "shop_text",
+      "label": "Shop Text",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "about_text",
+      "label": "About Text",
+      "default": "About Us"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "Contact Us"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Section"
+    }
+  ]
+}
+{% endschema %}
