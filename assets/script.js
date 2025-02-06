@@ -323,6 +323,7 @@
       },
       success: function (data) {
         console.log('Item added to cart:', data);
+        window.location.href = '/checkout';
         // Update cart count
         // fetch(window.Shopify.routes.root + 'cart.js')
         //   .then((response) => response.json())
