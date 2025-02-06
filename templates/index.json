@@ -46,8 +46,9 @@
         "block_knXVFV": {
           "type": "block",
           "settings": {
-            "feature_title": "GINGER",
-            "description": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+            "image": "shopify://shop_images/features3.png",
+            "feature_title": "LIME",
+            "description": "Known to be a good source of Vitamin C, antioxidants, and other nutrients."
           }
         }
       },
