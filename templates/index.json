@@ -23,10 +23,47 @@
         "button_text": "Shop Now",
         "image": "shopify://shop_images/slide1.png"
       }
+    },
+    "feature_section_yr9MjE": {
+      "type": "feature-section",
+      "blocks": {
+        "block_d3TkrW": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/features1.png",
+            "feature_title": "GINGER",
+            "description": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+          }
+        },
+        "block_phzkpK": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/features2.png",
+            "feature_title": "ACEROLA CHERRY",
+            "description": "One of natures most powerful super food which and is one of the richest known natural sources of Vitamin C"
+          }
+        },
+        "block_knXVFV": {
+          "type": "block",
+          "settings": {
+            "feature_title": "GINGER",
+            "description": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+          }
+        }
+      },
+      "block_order": [
+        "block_d3TkrW",
+        "block_phzkpK",
+        "block_knXVFV"
+      ],
+      "settings": {
+        "title": "IMMUNITY SUPPORT - GINGER SHOT"
+      }
     }
   },
   "order": [
     "main",
-    "hero_section_nPxPwU"
+    "hero_section_nPxPwU",
+    "feature_section_yr9MjE"
   ]
 }
