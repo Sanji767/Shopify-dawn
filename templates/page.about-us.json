@@ -11,10 +11,21 @@
   "sections": {
     "main": {
       "type": "404",
+      "disabled": true,
       "settings": {}
+    },
+    "about_us_UebmLR": {
+      "type": "about-us",
+      "settings": {
+        "title": "ABOUT US",
+        "subtitle": "SHOTS SO GOOD WE CALL IT",
+        "heading": "THE SUPER GOOD SHOT FROM NATURE!",
+        "description": "<p>After getting frustrated with most of the ginger shots on the market where they: Only contain between 17% to 25% ginger juice, Contain lab-made Vitamin C known as ascorbic acid, Cost an arm and a leg (😆) for a tiny 60ml shot bottle which finishes in one second.</p><p>We decided it was time to take matters into our own hands and create a nutrient-rich super ginger shot with:</p><ul><li>35% ginger juice,</li><li>100% natural Vitamin C from plants,</li><li>Comes in a super 100ml glass bottle (not plastic), which you can enjoy in multiple sips.</li></ul> <p>Super Nature is a 100% natural superfood shot that aims to support wellness from nature’s superfood without additives and preservatives.</p>"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "about_us_UebmLR"
   ]
 }
