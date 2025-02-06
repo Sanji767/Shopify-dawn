@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "content"
+      "type": "404"
     }
   },
   "order": ["main"]
