@@ -35,11 +35,13 @@
 
     {{ content_for_header }}
 
-    <script>
-      if (window.location.pathname !== '/') {
-        window.location.href = '/';
-      }
-    </script>
+    {% comment %}
+      <script>
+        if (window.location.pathname !== '/') {
+          window.location.href = '/';
+        }
+      </script>
+    {% endcomment %}
   </head>
 
   <body class="">
@@ -59,11 +61,11 @@
       <!-- end preloader -->
       <!-- Start header -->
 
-      {% comment %} {% section 'header' %} {% endcomment %}
+      {% section 'header' %}
 
       {{ content_for_layout }}
 
-      {% comment %} {% section 'footer' %} {% endcomment %}
+      {% section 'footer' %}
     </div>
 
     <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
