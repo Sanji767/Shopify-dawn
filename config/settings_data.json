@@ -156,7 +156,7 @@
           "newsletter_button": "JOIN",
           "newsletter_email": "Enter your email address",
           "newsletter_success": "Thank you for signing up!",
-          "footer_link": ""
+          "footer_link": "footer"
         }
       }
     },
