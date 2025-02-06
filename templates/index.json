@@ -79,12 +79,71 @@
         "nutrition1": "Nutrition per 100 ml:",
         "nutrition": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 200MG (250%)*"
       }
+    },
+    "social_media_6e3G9z": {
+      "type": "social-media",
+      "blocks": {
+        "block_3V6Wnq": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-1.png",
+            "url": ""
+          }
+        },
+        "block_rjHfxc": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-2.png",
+            "url": ""
+          }
+        },
+        "block_Pfkern": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-3.png",
+            "url": ""
+          }
+        },
+        "block_emkFB4": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-4.png",
+            "url": ""
+          }
+        },
+        "block_T9T33k": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-5.png",
+            "url": ""
+          }
+        },
+        "block_T9nCgb": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/social-6.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "block_3V6Wnq",
+        "block_rjHfxc",
+        "block_Pfkern",
+        "block_emkFB4",
+        "block_T9T33k",
+        "block_T9nCgb"
+      ],
+      "settings": {
+        "title": "SOCIAL"
+      }
     }
   },
   "order": [
     "main",
     "hero_section_nPxPwU",
     "feature_section_yr9MjE",
-    "shop_now_TxPmHU"
+    "shop_now_TxPmHU",
+    "social_media_6e3G9z"
   ]
 }
