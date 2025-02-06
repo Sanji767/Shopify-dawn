@@ -1,0 +1,63 @@
+<!-- social-area -->
+<div class="social-area">
+  <div class="title wow fadeInDown" data-wow-duration="1600ms">
+    <h3>{{ section.settings.title }}</h3>
+  </div>
+  <div class="container">
+    <div class="social-wrap">
+      <div class="row s-5">
+        {% for block in section.blocks %}
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="social-item wow fadeInUp" data-wow-duration="1200ms">
+              <a href="{{ block.settings.url }}" class="social-img">
+                <img src="{{ block.settings.image | image_url: width: 800 }}" width="" height="" alt="">
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Social Media",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "SOCIAL"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slider",
+      "type": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Social Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Social Profile Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Media",
+      "blocks": [
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

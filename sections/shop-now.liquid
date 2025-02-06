@@ -1,0 +1,138 @@
+<!-- cta-area -->
+<div class="cta-area section-padding pt-0">
+  <div class="container">
+    <div class="cta-wrap">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="cta-item-left wow fadeInLeftSlow" data-wow-duration="1200ms">
+            <div class="cta-img">
+              <img src="{{ section.settings.image |  image_url: width: 900  }}" alt="" width="" height="">
+              <a href="{{ section.settings.button_url }}" class="theme-btn">{{ section.settings.button_text }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="cta-item wow fadeInRightSlow" data-wow-duration="1200ms">
+            <div class="cta-item-box">
+              <div class="title wow fadeInDown" data-wow-duration="1600ms">
+                <h3>{{ section.settings.title }}</h3>
+              </div>
+              <h2>
+                {{ section.settings.subtitle -}}
+                <span><img src="{{ 'shape1.png' | asset_url }}" width="" height="" alt=""></span>
+                {{- section.settings.subtitle2 }}
+              </h2>
+              <h4>{{ section.settings.subtitle3 }}</h4>
+              {{ section.settings.textList }}
+              {{ section.settings.ingredients }}
+              <small>{{ section.settings.small2 }}</small>
+            </div>
+            <div class="cta-bottom">
+              <p>
+                <span>{{ section.settings.vitamin }}</span>{{ section.settings.small }}
+              </p>
+              <p>
+                <strong>{{ section.settings.nutrition1 }}</strong> {{ section.settings.nutrition }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop Now Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "100% NATURAL"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "THE"
+    },
+    {
+      "type": "text",
+      "id": "subtitle2",
+      "label": "Subtitle2",
+      "default": "THE SUPER GOOD SHOT"
+    },
+    {
+      "type": "text",
+      "id": "subtitle3",
+      "label": "Description",
+      "default": "FROM NATURE"
+    },
+    {
+      "type": "liquid",
+      "id": "textList",
+      "label": "List of Text",
+      "default": "<ul><li><span>NO</span> ADDED SUGAR</li><li><span>NO</span> ADDED PRESERVATIVES</li></ul>"
+    },
+    {
+      "type": "richtext",
+      "id": "ingredients",
+      "label": "Ingredients",
+      "default": " <p><strong>INGREDIENTS:</strong> Apple juice from concentrated juice, ginger juice NFC (35%), lime juice from concentrated juice (6%), acerola extract (0.3%) with natural vitamin C.</p>"
+    },
+    {
+      "type": "text",
+      "id": "small2",
+      "label": "Small Text",
+      "default": "FRUIT JUICE BASED DRINK WITH GINGER ROOT JUICE."
+    },
+    {
+      "type": "text",
+      "id": "vitamin",
+      "label": "Vitamin",
+      "default": "VITAMIN C CONTRIBUTES TO THE NORMAL FUNCTION OF THE IMMUNE SYSTEM"
+    },
+    {
+      "type": "text",
+      "id": "small",
+      "label": "Enjoyed",
+      "default": "Enjoyed as part of a healthy lifestyle and balance diet."
+    },
+    {
+      "type": "text",
+      "id": "nutrition1",
+      "label": "Nutrition1",
+      "default": "Nutrition per 100 ml:"
+    },
+    {
+      "type": "text",
+      "id": "nutrition",
+      "label": "Nutrition",
+      "default": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 200MG (250%)*"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Now Section"
+    }
+  ]
+}
+{% endschema %}

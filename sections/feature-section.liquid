@@ -1,0 +1,99 @@
+<!-- features-area -->
+<div class="features-area section-padding">
+  <div class="container">
+    <div class="features-wrap">
+      <div class="title wow fadeInDown" data-wow-duration="1600ms">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+      <div class="row">
+        {% for block in section.blocks %}
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="features-item wow fadeInUp" data-wow-duration="1200ms">
+              <div class="features-img">
+                <img src="{{ block.settings.image |  image_url: width: 500  }}" width="" height="" alt="">
+              </div>
+              <div class="features-text">
+                <h3>
+                  <span><img src="{{ 'shape1.png' | asset_url }}" width="" height="" alt=""></span>
+                  {{- block.settings.feature_title }}
+                </h3>
+                <p>
+                  {{ block.settings.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="left-shape">
+        <img
+          src="{{ 'features-left.png' | asset_url }}"
+          width=""
+          height=""
+          alt=""
+          class="wow fadeInLeftSlow"
+          data-wow-duration="1600ms"
+        >
+      </div>
+      <div class="right-shape">
+        <img
+          src="{{ 'features-right.png' | asset_url }}"
+          width=""
+          height=""
+          alt=""
+          class="wow fadeInRightSlow"
+          data-wow-duration="1600ms"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feature Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "IMMUNITY SUPPORT - GINGER SHOT"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slider",
+      "type": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title",
+          "default": "GINGER"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Section",
+      "blocks": [
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

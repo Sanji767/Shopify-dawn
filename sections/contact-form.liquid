@@ -1,0 +1,108 @@
+<!-- footer-area -->
+<div class="footer-area contact-page">
+  <div class="footer-top">
+    <div class="footer-wrap">
+      <div class="row">
+        <div class="col-lg-3 order-lg-1 order-2"></div>
+        <div class="col-lg-6 order-lg-2 order-1">
+          <div class="contact-wrap">
+            <div class="contact-title">
+              <h2>{{ section.settings.title }}</h2>
+              <p>{{ section.settings.subtitle }}</p>
+            </div>
+
+            {% form 'contact', class: '', id: '' %}
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <input type="text" name="contact[firstName]" placeholder="First Name">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <input type="text" placeholder="Last Name" name="contact[lastName]">
+                  </div>
+                </div>
+                <div class="col-lg-12 col-12">
+                  <div class="form-group">
+                    <input type="text" placeholder="Email" name="contact[email]">
+                  </div>
+                </div>
+                <div class="col-lg-12 col-12">
+                  <div class="form-group">
+                    <textarea name="#" id="" placeholder="Message" name="contact[message]"></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-12">
+                  <div class="form-group">
+                    <button type="submit" class="theme-btn">Send Massage</button>
+                  </div>
+                </div>
+
+                {% if form.posted_successfully? %}
+                  <div class="clearfix error-handling-messages">
+                    <div id="success">Thank you for contacting us!</div>
+                  </div>
+                {% endif %}
+
+                {% if form.errors %}
+                  <div class="clearfix error-handling-messages">
+                    <div id="error">
+                      {{ form.errors | default_errors }}
+                    </div>
+                  </div>
+                {% endif %}
+
+                <div class="col-lg-12 col-12 mt-3">
+                  <p>
+                    {{ section.settings.compnay }}
+                    <br>
+                    {{ section.settings.address }}
+                  </p>
+                </div>
+              </div>
+            {% endform %}
+          </div>
+        </div>
+        <div class="col-lg-3 order-lg-3 order-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "EMAIL - ONLINE@SUPERNATURESHOT.COM"
+    },
+    {
+      "type": "text",
+      "id": "compnay",
+      "label": "Company",
+      "default": "IMPRESSION BEVERAGES LTD."
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "71 – 75 SHELTON STREET, LONDON WC2H 9JQ"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Us"
+    }
+  ]
+}
+{% endschema %}

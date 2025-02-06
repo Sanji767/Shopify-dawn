@@ -28,7 +28,10 @@
 
     {% render 'meta-tags' %}
 
-    <link href="{{ 'style.css' |  asset_url }}" rel="stylesheet">
+    <link href="{{ 'bootstrap.min.css' | asset_url }}" rel="stylesheet">
+    <link href="{{ 'animate.css' | asset_url }}" rel="stylesheet">
+    <link href="{{ 'themify-icons.css' | asset_url }}" rel="stylesheet">
+    <link href="{{ 'style.css' | asset_url }}" rel="stylesheet">
 
     {{ content_for_header }}
 
@@ -40,22 +43,32 @@
   </head>
 
   <body class="">
-    <div class="comming-soon-area">
-      <div class="comming-soon-wrap">
-        <h1>
-          Super <span class="shape1"><img src="{{ 'shape1.png' | asset_url}}" alt="" width="" height=""></span>
-        </h1>
-        <h2>Good Shot</h2>
-        <h3>
-          From Nature <span class="shape2"><img src="{{ 'shape3.png' | asset_url }}" width="" height="" alt=""></span>
-        </h3>
+    <div class="page-wrapper">
+      <!-- start preloader -->
+      <div class="preloader">
+        <div class="vertical-centered-box">
+          <div class="content">
+            <div class="loader-circle"></div>
+            <div class="loader-line-mask">
+              <div class="loader-line"></div>
+            </div>
+            <img src="{{ 'preloader.png' | asset_url }}" width="" height="" alt="">
+          </div>
+        </div>
       </div>
-      <div class="right-shape">
-        <img src="{{ 'shape2.png' | asset_url }}" alt="" width="" height="">
-      </div>
-      <div><p class="constraction">website under construction</p></div>
+      <!-- end preloader -->
+      <!-- Start header -->
+
+      {% section 'header' %}
+
+      {{ content_for_layout }}
+
+      {% section 'footer' %}
     </div>
 
-    {{ content_for_layout }}
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'bootstrap.bundle.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'jquery-plugin-collection.js' | asset_url }}" defer></script>
+    <script src="{{ 'script.js' | asset_url }}" defer></script>
   </body>
 </html>

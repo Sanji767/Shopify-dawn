@@ -1,0 +1,91 @@
+<script>
+  window.product = {{ product | json }} || {}
+</script>
+<script type="application/json">
+  {{ product.variants | json }}
+</script>
+
+<section class="shop-single-section product-details section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-6 col-12">
+        <div class="product-single-img">
+          <div class="product-active owl-carousel">
+            {% for image in product.images %}
+              <div class="item">
+                <img src="{{ image.src | image_url: width: 1024 }}" width="" height="" alt="">
+              </div>
+            {% endfor %}
+          </div>
+          <div class="product-thumbnil-active  owl-carousel">
+            {% for image in product.images %}
+              <div class="item">
+                <img src="{{ image.src | image_url: width: 400 }}" width="" height="" alt="">
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-6 col-12">
+        <div class="product-details">
+          <h2>
+            {{ product.title }}
+          </h2>
+          <div class="pro-single-btn">
+            <h3>{{ product.price | money }}}}</h3>
+            <div class="quantity cart-plus-minus">
+              <input type="text" value="1">
+              <div class="dec qtybutton"></div>
+              <div class="inc qtybutton"></div>
+            </div>
+            <span>QUANTITY</span>
+
+            <input
+              type="hidden"
+              name="id"
+              id="variantId"
+              value="{{ product.variants.first.id }}"
+            >
+            <input
+              type="hidden"
+              name="quantity"
+              id="quantity"
+              value="1"
+              min="1"
+            >
+            <input
+              type="hidden"
+              name="handle"
+              id="handle"
+              value="{{ product.handle }}"
+            >
+
+            <input
+              type="hidden"
+              name="currency"
+              id="currency"
+              value="{{cart.currency.symbol}}"
+            >
+
+            <div class="buy-btn">
+              <a href="#" class="theme-btn addToCart"
+                >Add To Cart
+                <i
+                  class="fa fa-shopping-cart"
+                  aria-hidden="true"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <!-- end product details -->
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end of container -->
+</section>
+<div class="details-note">
+  {{ product.description }}
+</div>

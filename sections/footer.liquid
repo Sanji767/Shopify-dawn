@@ -1,0 +1,127 @@
+<!-- footer-area -->
+<div class="footer-area">
+  <div class="footer-top">
+    <div class="footer-wrap">
+      <h3>{{ section.settings.follow_title }}</h3>
+      <ul>
+        {% if section.settings.instagram != blank %}
+          <li>
+            <a href="{{section.settings.instagram}}"
+              ><img src="{{ 'instagram.png' | asset_url }}" width="" height="" alt=""
+            ></a>
+          </li>
+        {% endif %}
+        {% if section.settings.tiktok != blank %}
+          <li>
+            <a href="{{section.settings.tiktok}}"
+              ><img src="{{ 'tiktok.png' | asset_url }}" width="" height="" alt=""
+            ></a>
+          </li>
+        {% endif %}
+      </ul>
+      <div class="newslatter-area">
+        <h4>{{ section.settings.newsletter_title }}</h4>
+        {% form 'customer' %}
+          <input
+            type="hidden"
+            name="contact[tags]"
+            value="newsletter"
+          >
+          <input type="text" name="contact[email]" placeholder="{{section.settings.newsletter_email}}">
+          <button type="submit">{{ section.settings.newsletter_button }}</button>
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <p class="text-center mt-2">{{ section.settings.newsletter_success }}</p>
+          {% endif %}
+        {%- endform -%}
+      </div>
+      <div class="shape1"><img src="{{ 'footer1.png' | asset_url }}" width="" height="" alt=""></div>
+      <div class="shape2"><img src="{{ 'footer2.png' | asset_url }}" width="" height="" alt=""></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <ul>
+      {% for link in section.settings.footer_link.links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <ul class="paymets">
+      <li>
+        <a href="#"><img src="{{ 'payment1.svg' | asset_url }}" width="" height="" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="{{ 'payment2.svg' | asset_url }}" width="" height="" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="{{ 'payment3.svg' | asset_url }}" width="" height="" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="{{ 'payment4.svg' | asset_url }}" width="" height="" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="{{ 'payment5.svg' | asset_url }}" width="" height="" alt=""></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "follow_title",
+      "label": "Follow Title",
+      "default": "FOLLOW US ON SOCIAL"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram Link"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "Tiktok Link"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "JOIN THE SUPER COMMUNITY AND GET 15% OFF FIRST ORDER"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Newsletter Button",
+      "default": "JOIN"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_email",
+      "label": "Newsletter Email Placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_success",
+      "label": "Newsletter Success Message",
+      "default": "Thank you for signing up!"
+    },
+    {
+      "type": "url",
+      "id": "footer_link",
+      "label": "Footer Link"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Footer Section"
+    }
+  ]
+}
+{% endschema %}
