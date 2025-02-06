@@ -13,9 +13,14 @@
       "type": "404",
       "disabled": true,
       "settings": {}
+    },
+    "coming_6H33gM": {
+      "type": "coming",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "coming_6H33gM"
   ]
 }
