@@ -11,10 +11,21 @@
   "sections": {
     "main": {
       "type": "content",
+      "disabled": true,
       "settings": {}
+    },
+    "contact_form_baatPz": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact Us",
+        "subtitle": "EMAIL - ONLINE@SUPERNATURESHOT.COM",
+        "compnay": "IMPRESSION BEVERAGES LTD.",
+        "address": "71 – 75 SHELTON STREET, LONDON WC2H 9JQ"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "contact_form_baatPz"
   ]
 }
