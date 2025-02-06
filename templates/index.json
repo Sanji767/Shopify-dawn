@@ -14,13 +14,19 @@
       "disabled": true,
       "settings": {}
     },
-    "coming_6H33gM": {
-      "type": "coming",
-      "settings": {}
+    "hero_section_nPxPwU": {
+      "type": "hero-section",
+      "settings": {
+        "title": "Super Good Shot",
+        "subtitle": "From Nature",
+        "button_url": "",
+        "button_text": "Shop Now",
+        "image": "shopify://shop_images/slide1.png"
+      }
     }
   },
   "order": [
     "main",
-    "coming_6H33gM"
+    "hero_section_nPxPwU"
   ]
 }
