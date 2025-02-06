@@ -13,9 +13,14 @@
       "type": "404",
       "disabled": true,
       "settings": {}
+    },
+    "content_tzTttd": {
+      "type": "content",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "content_tzTttd"
   ]
 }
