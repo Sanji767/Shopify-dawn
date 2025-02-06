@@ -60,11 +60,31 @@
       "settings": {
         "title": "IMMUNITY SUPPORT - GINGER SHOT"
       }
+    },
+    "shop_now_TxPmHU": {
+      "type": "shop-now",
+      "settings": {
+        "image": "shopify://shop_images/slide1.png",
+        "button_url": "",
+        "button_text": "Shop Now",
+        "title": "100% NATURAL",
+        "subtitle": "THE",
+        "subtitle2": "THE SUPER GOOD SHOT",
+        "subtitle3": "FROM NATURE",
+        "textList": "<ul><li><span>NO</span> ADDED SUGAR</li><li><span>NO</span> ADDED PRESERVATIVES</li></ul>",
+        "ingredients": "<p><strong>INGREDIENTS:</strong> Apple juice from concentrated juice, ginger juice NFC (35%), lime juice from concentrated juice (6%), acerola extract (0.3%) with natural vitamin C.</p>",
+        "small2": "FRUIT JUICE BASED DRINK WITH GINGER ROOT JUICE.",
+        "vitamin": "VITAMIN C CONTRIBUTES TO THE NORMAL FUNCTION OF THE IMMUNE SYSTEM",
+        "small": "Enjoyed as part of a healthy lifestyle and balance diet.",
+        "nutrition1": "Nutrition per 100 ml:",
+        "nutrition": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 200MG (250%)*"
+      }
     }
   },
   "order": [
     "main",
     "hero_section_nPxPwU",
-    "feature_section_yr9MjE"
+    "feature_section_yr9MjE",
+    "shop_now_TxPmHU"
   ]
 }
