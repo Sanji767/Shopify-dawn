@@ -137,9 +137,9 @@
         "type": "header",
         "settings": {
           "logo": "shopify://shop_images/LOGO_8038cb95-3a4b-4939-9d60-ae0fc6be998f.png",
-          "shop_url": "",
-          "about_url": "",
-          "contact_url": "",
+          "shop_url": "shopify://products/ginger-shot",
+          "about_url": "shopify://pages/about-us",
+          "contact_url": "shopify://pages/contact",
           "home_text": "HOME",
           "shop_text": "Shop",
           "about_text": "About Us",
