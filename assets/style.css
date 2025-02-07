@@ -1,48 +1,48 @@
 @font-face {
-  font-family: "Gill Sans Nova Cond XBd";
-  src: url("GillSansNova-CondXBd.woff2") format("woff2"), url("GillSansNova-CondXBd.woff") format("woff");
+  font-family: 'Gill Sans Nova Cond XBd';
+  src: url('GillSansNova-CondXBd.woff2') format('woff2'), url('GillSansNova-CondXBd.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Bold.woff2") format("woff2"), url("Aptos-Bold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Bold.woff2') format('woff2'), url('Aptos-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-ExtraBold.woff2") format("woff2"), url("Aptos-ExtraBold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-ExtraBold.woff2') format('woff2'), url('Aptos-ExtraBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-SemiBold.woff2") format("woff2"), url("Aptos-SemiBold.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-SemiBold.woff2') format('woff2'), url('Aptos-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Light.woff2") format("woff2"), url("Aptos-Light.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Light.woff2') format('woff2'), url('Aptos-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos.woff2") format("woff2"), url("Aptos.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos.woff2') format('woff2'), url('Aptos.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Aptos";
-  src: url("Aptos-Black.woff2") format("woff2"), url("Aptos-Black.woff") format("woff");
+  font-family: 'Aptos';
+  src: url('Aptos-Black.woff2') format('woff2'), url('Aptos-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -56,7 +56,7 @@ html {
 }
 
 body {
-  font-family: "Aptos";
+  font-family: 'Aptos';
   color: #010924;
   background-color: #fff;
   font-size: 20px;
@@ -82,7 +82,7 @@ h4,
 h5,
 h6 {
   color: #010924;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   font-weight: 900;
 }
 
@@ -167,7 +167,7 @@ img {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  border: 2px solid #FF8900;
+  border: 2px solid #ff8900;
   border-radius: 45px;
   text-align: center;
   display: none;
@@ -185,7 +185,7 @@ img {
   }
 }
 .back-to-top:hover {
-  background-color: #FF8900;
+  background-color: #ff8900;
 }
 
 .back-to-top i {
@@ -215,7 +215,7 @@ img {
   text-align: center;
 }
 .preloader .vertical-centered-box:after {
-  content: "";
+  content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
@@ -415,7 +415,7 @@ img {
 .theme-btn,
 .theme-btn-2,
 .theme-btn-4 {
-  background: #FF8900;
+  background: #ff8900;
   color: #010924;
   display: inline-block;
   font-weight: 500;
@@ -438,12 +438,12 @@ img {
 .theme-btn-2::before,
 .theme-btn-4::before {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background: #FF8900;
+  background: #ff8900;
   transform-origin: 50%;
   transition-property: transform;
   transition-duration: 0.3s;
@@ -451,7 +451,9 @@ img {
   transition: 0.5s;
   z-index: -1;
 }
-.theme-btn:hover, .theme-btn:focus, .theme-btn:active,
+.theme-btn:hover,
+.theme-btn:focus,
+.theme-btn:active,
 .theme-btn-2:hover,
 .theme-btn-2:focus,
 .theme-btn-2:active,
@@ -461,7 +463,9 @@ img {
   background-color: #073225;
   color: #fff;
 }
-.theme-btn:hover:before, .theme-btn:focus:before, .theme-btn:active:before,
+.theme-btn:hover:before,
+.theme-btn:focus:before,
+.theme-btn:active:before,
 .theme-btn-2:hover:before,
 .theme-btn-2:focus:before,
 .theme-btn-2:active:before,
@@ -542,8 +546,8 @@ img {
   transform: translateX(-50%);
   bottom: 0;
   height: 1.7px;
-  content: "";
-  background: #FF8900;
+  content: '';
+  background: #ff8900;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
@@ -554,7 +558,7 @@ img {
 .site-header #navbar > ul li a.active,
 .site-header #navbar > ul li a:focus {
   text-decoration: none;
-  color: #FF8900;
+  color: #ff8900;
 }
 .site-header #navbar > ul li a:hover:before,
 .site-header #navbar > ul li a.active:before,
@@ -576,8 +580,8 @@ img {
     position: relative;
   }
   .site-header #navbar > ul > li > .sub-menu > .menu-item-has-children > a:before {
-    font-family: "themify";
-    content: "\e649";
+    font-family: 'themify';
+    content: '\e649';
     font-size: 11px;
     font-size: 0.73333rem;
     position: absolute;
@@ -643,7 +647,7 @@ img {
   }
   .site-header #navbar ul a:hover,
   .site-header #navbar ul li.current a {
-    color: #FF8900;
+    color: #ff8900;
   }
   .site-header #navbar .close-navbar .ti-close {
     position: relative;
@@ -776,8 +780,8 @@ img {
     right: 5px;
     top: 50%;
     transform: translateY(-50%);
-    content: "\e64b";
-    font-family: "themify";
+    content: '\e64b';
+    font-family: 'themify';
     color: #fff;
     font-size: 12px;
   }
@@ -813,9 +817,10 @@ img {
   .site-header #navbar > ul > li .sub-menu a::before {
     display: none;
   }
-  .site-header #navbar > ul > li .sub-menu a:hover, .site-header #navbar > ul > li .sub-menu a.active {
+  .site-header #navbar > ul > li .sub-menu a:hover,
+  .site-header #navbar > ul > li .sub-menu a.active {
     font-weight: 700;
-    color: #FF8900;
+    color: #ff8900;
   }
   .site-header #navbar > ul > li > .sub-menu .sub-menu {
     left: 110%;
@@ -825,8 +830,8 @@ img {
     position: relative;
   }
   .site-header #navbar > ul > li > .sub-menu > .menu-item-has-children > a:before {
-    font-family: "themify";
-    content: "\e649";
+    font-family: 'themify';
+    content: '\e649';
     font-size: 11px;
     position: absolute;
     right: 15px;
@@ -850,7 +855,8 @@ img {
     color: #fff;
     font-weight: 700;
   }
-  .site-header #navbar > ul > li a:hover, .site-header #navbar > ul > li a.active {
+  .site-header #navbar > ul > li a:hover,
+  .site-header #navbar > ul > li a.active {
     color: #fff;
   }
   .site-header #navbar > ul .sub-menu > li:last-child {
@@ -866,12 +872,13 @@ img {
     position: relative;
     color: #ddd;
   }
-  .site-header #navbar > ul .menu-item-has-children > a:hover, .site-header #navbar > ul .menu-item-has-children > a.active {
+  .site-header #navbar > ul .menu-item-has-children > a:hover,
+  .site-header #navbar > ul .menu-item-has-children > a.active {
     color: #fff;
   }
   .site-header #navbar > ul .menu-item-has-children > a:before {
-    font-family: "themify";
-    content: "\e649";
+    font-family: 'themify';
+    content: '\e649';
     font-size: 11px;
     position: absolute;
     right: 30px;
@@ -913,7 +920,7 @@ img {
     text-align: right;
   }
   .site-header .mobail-menu button {
-    background-color: #FF8900;
+    background-color: #ff8900;
     width: 40px;
     height: 35px;
     border: 0;
@@ -960,13 +967,13 @@ img {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
   .site-header #navbar ul a {
-    color: #2F2F31;
+    color: #2f2f31;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-transform: uppercase;
   }
   .site-header #navbar ul a:hover,
   .site-header #navbar ul li.current a {
-    color: #FF8900;
+    color: #ff8900;
   }
   .site-header #navbar .navbar-nav {
     height: 100%;
@@ -977,7 +984,7 @@ img {
     background-color: #fff;
     width: 40px;
     height: 40px;
-    color: #2F2F31;
+    color: #2f2f31;
     border: 0;
     outline: none;
     position: absolute;
@@ -1160,7 +1167,7 @@ img {
   margin: 0;
   font-size: 250px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   line-height: 200px;
   position: relative;
@@ -1221,7 +1228,7 @@ img {
   margin: 0;
   font-size: 140px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
 }
 @media (max-width: 991px) {
@@ -1251,8 +1258,8 @@ img {
 .comming-soon-area h3 {
   margin: 0;
   font-size: 90px;
-  color: #FF8900;
-  font-family: "Gill Sans Nova Cond XBd";
+  color: #ff8900;
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -1337,7 +1344,8 @@ img {
   }
 }
 @keyframes leafAniamtion {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg) translateX(0);
   }
   50% {
@@ -1398,7 +1406,7 @@ img {
   margin: 0;
   font-size: 180px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   line-height: 180px;
   position: relative;
@@ -1459,7 +1467,7 @@ img {
   margin: 0;
   font-size: 100px;
   color: #fff;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
 }
 @media (max-width: 991px) {
@@ -1489,8 +1497,8 @@ img {
 .hero-area h3 {
   margin: 0;
   font-size: 60px;
-  color: #FF8900;
-  font-family: "Gill Sans Nova Cond XBd";
+  color: #ff8900;
+  font-family: 'Gill Sans Nova Cond XBd';
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -1544,9 +1552,9 @@ img {
     max-width: 550px;
   }
 }
-.hero-area .hero-img .main-img {
+/* .hero-area .hero-img .main-img {
   animation: bounce 3s linear infinite;
-}
+} */
 .hero-area .hero-img .main-img img {
   width: 650px;
 }
@@ -1649,7 +1657,7 @@ img {
   left: 12px;
 }
 .features-area .features-wrap .features-item .features-text p {
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   color: #fff;
 }
 .features-area .features-wrap .left-shape {
@@ -1761,7 +1769,7 @@ img {
 }
 .cta-area .cta-item-box h4 {
   font-size: 40px;
-  color: #FF8900;
+  color: #ff8900;
   margin-bottom: 20px;
 }
 .cta-area .cta-item-box ul {
@@ -1980,7 +1988,7 @@ img {
 .footer-area .footer-bottom ul li a {
   color: #fff;
   font-weight: 700;
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
 }
 @media (max-width: 767px) {
   .footer-area .footer-bottom ul li a {
@@ -1988,7 +1996,7 @@ img {
   }
 }
 .footer-area .footer-bottom ul li a:hover {
-  color: #FF8900;
+  color: #ff8900;
 }
 .footer-area .footer-bottom ul.paymets {
   margin-top: 10px;
@@ -2017,7 +2025,7 @@ img {
   }
 }
 .about-area .about-wrap strong {
-  font-family: "Gill Sans Nova Cond XBd";
+  font-family: 'Gill Sans Nova Cond XBd';
   text-align: center;
   display: block;
 }
@@ -2045,7 +2053,7 @@ img {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  content: "";
+  content: '';
   width: 6px;
   height: 6px;
   background: #fff;
@@ -2077,7 +2085,7 @@ img {
   background: #135541;
   /*** product slider ***/
 }
-.shop-single-section .product-single-img .owl-nav [class*=owl-] {
+.shop-single-section .product-single-img .owl-nav [class*='owl-'] {
   position: absolute;
   left: 10px;
   top: 46%;
@@ -2092,7 +2100,7 @@ img {
   transition: all 0.3s;
   color: #fff;
 }
-.shop-single-section .product-single-img .owl-nav [class*=owl-].owl-next {
+.shop-single-section .product-single-img .owl-nav [class*='owl-'].owl-next {
   left: auto;
   right: 10px;
 }
@@ -2111,7 +2119,7 @@ img {
 .shop-single-section .product-single-img .item img {
   border-radius: 10px;
 }
-.shop-single-section .product-single-img:hover .owl-nav [class*=owl-] {
+.shop-single-section .product-single-img:hover .owl-nav [class*='owl-'] {
   opacity: 1;
   visibility: visible;
 }
@@ -2162,7 +2170,7 @@ img {
   width: 100px;
   height: 40px;
   background: #000000;
-  content: "";
+  content: '';
   color: #fff;
 }
 .shop-single-section .product-details .pro-single-btn .quantity input {
@@ -2284,8 +2292,8 @@ img {
 .contact-page .contact-wrap .form-group input:focus,
 .contact-page .contact-wrap .form-group textarea:focus {
   outline: none;
-  border-color: #FF8900;
+  border-color: #ff8900;
 }
 .contact-page .contact-wrap .form-group textarea {
   height: 130px;
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
