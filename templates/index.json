@@ -17,7 +17,7 @@
     "hero_section_nPxPwU": {
       "type": "hero-section",
       "settings": {
-        "title": "Super Good Shot",
+        "title": "Good Shot",
         "subtitle": "From Nature",
         "button_url": "",
         "button_text": "Shop Now",
@@ -69,7 +69,7 @@
         "button_text": "Shop Now",
         "title": "100% NATURAL",
         "subtitle": "THE",
-        "subtitle2": "THE SUPER GOOD SHOT",
+        "subtitle2": "SUPER GOOD SHOT",
         "subtitle3": "FROM NATURE",
         "textList": "<ul><li><span>NO</span> ADDED SUGAR</li><li><span>NO</span> ADDED PRESERVATIVES</li></ul>",
         "ingredients": "<p><strong>INGREDIENTS:</strong> Apple juice from concentrated juice, ginger juice NFC (35%), lime juice from concentrated juice (6%), acerola extract (0.3%) with natural vitamin C.</p>",
@@ -77,7 +77,7 @@
         "vitamin": "VITAMIN C CONTRIBUTES TO THE NORMAL FUNCTION OF THE IMMUNE SYSTEM",
         "small": "Enjoyed as part of a healthy lifestyle and balance diet.",
         "nutrition1": "Nutrition per 100 ml:",
-        "nutrition": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 200MG (250%)*"
+        "nutrition": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 200MG (250% RI)*"
       }
     },
     "social_media_6e3G9z": {
@@ -107,14 +107,14 @@
         "block_emkFB4": {
           "type": "block",
           "settings": {
-            "image": "shopify://shop_images/social-4.png",
+            "image": "shopify://shop_images/product-details3.jpg",
             "url": ""
           }
         },
         "block_T9T33k": {
           "type": "block",
           "settings": {
-            "image": "shopify://shop_images/social-5.png",
+            "image": "shopify://shop_images/product-details2.jpg",
             "url": ""
           }
         },
