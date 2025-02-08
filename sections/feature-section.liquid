@@ -2,13 +2,13 @@
 <div class="features-area section-padding">
   <div class="container">
     <div class="features-wrap">
-      <div class="title wow fadeInDown" data-wow-duration="1600ms">
+      <div class="title">
         <h2>{{ section.settings.title }}</h2>
       </div>
       <div class="row">
         {% for block in section.blocks %}
           <div class="col-lg-4 col-md-6 col-12">
-            <div class="features-item wow fadeInUp" data-wow-duration="1200ms">
+            <div class="features-item">
               <div class="features-img">
                 <img src="{{ block.settings.image |  image_url: width: 500  }}" width="" height="" alt="">
               </div>
@@ -31,8 +31,7 @@
           width=""
           height=""
           alt=""
-          class="wow fadeInLeftSlow"
-          data-wow-duration="1600ms"
+          class=""
         >
       </div>
       <div class="right-shape">
@@ -41,8 +40,6 @@
           width=""
           height=""
           alt=""
-          class="wow fadeInRightSlow"
-          data-wow-duration="1600ms"
         >
       </div>
     </div>

@@ -26,20 +26,20 @@
               </h3>
             {% endcomment %}
 
-            <div class="heroImg wow fadeInUp" data-wow-duration="1400ms">
+            <div class="heroImg">
               {% if section.settings.left_image != blank %}
                 <img src="{{ section.settings.left_image | image_url: width: 1920 }}" width="" height="" alt="">
               {% else %}
                 <img src="{{'hero_home.png' | asset_url}}" width="" height="" alt="">
               {% endif %}
             </div>
-            <div class="hero-btn wow fadeInUp" data-wow-duration="1800ms">
+            <div class="hero-btn">
               <a href="{{ section.settings.button_url }}" class="theme-btn">{{ section.settings.button_text }}</a>
             </div>
           </div>
         </div>
         <div class="col-lg-6 col-12">
-          <div class="hero-img wow fadeInRightSlow" data-wow-duration="1800ms">
+          <div class="hero-img">
             <div class="main-img">
               <img src="{{ section.settings.image | image_url: width: 1300  }}" width="" height="" alt="">
             </div>
