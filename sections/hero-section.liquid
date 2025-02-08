@@ -5,24 +5,34 @@
       <div class="row align-items-center">
         <div class="col-lg-6 col-12">
           <div class="hero-text">
-            <h1 class="wow fadeInUp" data-wow-duration="1200ms">
-              Super
-              <span class="shape1"
-                ><img
-                  src="{{ 'shape1.png' | asset_url }}"
-                  width=""
-                  height=""
-                  alt=""
-              ></span>
-            </h1>
-            <h2 class="wow fadeInUp" data-wow-duration="1400ms">{{ section.settings.title }}</h2>
-            <h3 class="wow fadeInUp" data-wow-duration="1600ms">
-              {{ section.settings.subtitle }}
-              <span
-                class="shape2"
-                ><img src="{{ 'shape3.png' | asset_url }}" alt="" width="" height=""
-              ></span>
-            </h3>
+            {% comment %}
+              <h1 class="wow fadeInUp" data-wow-duration="1200ms">
+                Super
+                <span class="shape1"
+                  ><img
+                    src="{{ 'shape1.png' | asset_url }}"
+                    width=""
+                    height=""
+                    alt=""
+                ></span>
+              </h1>
+              <h2 class="wow fadeInUp" data-wow-duration="1400ms">{{ section.settings.title }}</h2>
+              <h3 class="wow fadeInUp" data-wow-duration="1600ms">
+                {{ section.settings.subtitle }}
+                <span
+                  class="shape2"
+                  ><img src="{{ 'shape3.png' | asset_url }}" alt="" width="" height=""
+                ></span>
+              </h3>
+            {% endcomment %}
+
+            <div class="heroImg wow fadeInUp" data-wow-duration="1400ms">
+              {% if section.settings.left_image != blank %}
+                <img src="{{ section.settings.left_image | image_url: width: 1920 }}" width="" height="" alt="">
+              {% else %}
+                <img src="{{'hero_home.png' | asset_url}}" width="" height="" alt="">
+              {% endif %}
+            </div>
             <div class="hero-btn wow fadeInUp" data-wow-duration="1800ms">
               <a href="{{ section.settings.button_url }}" class="theme-btn">{{ section.settings.button_text }}</a>
             </div>
@@ -33,12 +43,16 @@
             <div class="main-img">
               <img src="{{ section.settings.image | image_url: width: 1300  }}" width="" height="" alt="">
             </div>
-            <div class="shape1">
-              <img src="{{ 'leaf1.png' | asset_url }}" width="" height="" alt="">
-            </div>
-            <div class="shape2 wow zoomIn" data-wow-duration="1800ms">
-              <img src="{{ 'thumb1.png' | asset_url }}" alt="" width="" height="">
-            </div>
+            {% comment %}
+              <div class="shape1">
+                <img src="{{ 'leaf1.png' | asset_url }}" width="" height="" alt="">
+              </div>
+            {% endcomment %}
+            {% comment %}
+              <div class="shape2 wow zoomIn" data-wow-duration="1800ms">
+                <img src="{{ 'thumb1.png' | asset_url }}" alt="" width="" height="">
+              </div>
+            {% endcomment %}
           </div>
         </div>
       </div>
@@ -46,10 +60,33 @@
   </div>
 </div>
 
+<style>
+  .heroImg img {
+    margin-left: -100px;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 800px) {
+    .hero-area .hero-text {
+      max-width: 100%;
+    }
+    .heroImg img {
+      margin-left: 0px;
+    }
+    .hero-btn {
+      text-align: center;
+    }
+  }
+</style>
+
 {% schema %}
 {
   "name": "Hero Section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
+    },
     {
       "type": "text",
       "id": "title",
