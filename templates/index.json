@@ -17,6 +17,7 @@
     "hero_section_nPxPwU": {
       "type": "hero-section",
       "settings": {
+        "left_image": "shopify://shop_images/hero_home.png",
         "title": "Good Shot",
         "subtitle": "From Nature",
         "button_url": "",
