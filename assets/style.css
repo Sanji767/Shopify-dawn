@@ -757,7 +757,7 @@ img {
   }
   .site-header #navbar li {
     position: relative;
-    padding: 35px 30px;
+    padding: 35px 60px;
   }
   .site-header #navbar li:last-child {
     padding-right: 0;
@@ -1372,7 +1372,7 @@ img {
   overflow: hidden;
   z-index: 1;
   padding: 120px 0;
-  padding-top: 180px;
+  padding-top: 100px;
 }
 @media (max-width: 767px) {
   .hero-area {
@@ -2297,3 +2297,6 @@ img {
 .contact-page .contact-wrap .form-group textarea {
   height: 130px;
 } /*# sourceMappingURL=style.css.map */
+.hero-btn {
+  margin-left: 100px;
+}
