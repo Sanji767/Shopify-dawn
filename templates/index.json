@@ -83,60 +83,9 @@
     },
     "social_media_6e3G9z": {
       "type": "social-media",
-      "blocks": {
-        "block_3V6Wnq": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/social-1.png",
-            "url": ""
-          }
-        },
-        "block_rjHfxc": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/social-2.png",
-            "url": ""
-          }
-        },
-        "block_Pfkern": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/social-3.png",
-            "url": ""
-          }
-        },
-        "block_emkFB4": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/product-details3.jpg",
-            "url": ""
-          }
-        },
-        "block_T9T33k": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/product-details2.jpg",
-            "url": ""
-          }
-        },
-        "block_T9nCgb": {
-          "type": "block",
-          "settings": {
-            "image": "shopify://shop_images/social-6.png",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "block_3V6Wnq",
-        "block_rjHfxc",
-        "block_Pfkern",
-        "block_emkFB4",
-        "block_T9T33k",
-        "block_T9nCgb"
-      ],
       "settings": {
-        "title": "SOCIAL"
+        "title": "SOCIAL",
+        "social": "<script src='https://static.elfsight.com/platform/platform.js' async></script><div class='elfsight-app-64616117-e487-4070-9e7f-69652258ed73' data-elfsight-app-lazy></div>"
       }
     }
   },
