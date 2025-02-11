@@ -2621,3 +2621,6 @@ header cart
   visibility: visible;
   right: 0;
 } /*# sourceMappingURL=style.css.map */
+.eapps-instagram-feed-header.es-header {
+  display: none !important;
+}
