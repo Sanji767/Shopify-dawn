@@ -65,6 +65,95 @@
               </button>
             </div>
           </div>
+
+          <div class="mini-cart">
+            <button class="cart-toggle-btn">
+              <i><img src="{{ 'shopping-cart.png' | asset_url }}" width="" height="" alt=""></i>
+              <span
+                class="cart-count"
+              >
+                {{- cart.item_count -}}
+              </span>
+            </button>
+            <div class="mini-cart-content">
+              <div class="title"></div>
+              <button class="mini-cart-close"><i class="ti-close"></i></button>
+              <div class="mini-cart-items">
+                <p class="top-p">Your Cart ({{ cart.item_count }})</p>
+                {% for item in cart.items %}
+                  <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-item-image">
+                      <a href="{{ item.url }}"
+                        ><img
+                          src="{{ item.image |  image_url: width: 300  }}"
+                          width=""
+                          height=""
+                          alt
+                      ></a>
+                    </div>
+                    <div class="mini-cart-item-des">
+                      <h4>
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      </h4>
+                      <ul class="product-text-sub">
+                        <li>
+                          {{ item.variant.title }}
+                        </li>
+                      </ul>
+                      <a
+                        href="#"
+                        onclick="removeItem({{ forloop.index }}, 0)"
+                        class="dlt-btn"
+                      >
+                        <i class="ti-trash"></i>
+                      </a>
+                    </div>
+                    <div class="pro-single-btn">
+                      <span class="price">{{ item.price | money }}</span>
+                      <div class="quantity cart-plus-minus">
+                        <input
+                          type="text"
+                          value="{{ item.quantity }}"
+                          onkeyup="updateQty({{ forloop.index }})"
+                        >
+                        <div
+                          class="dec qtybutton"
+                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})"
+                        ></div>
+                        <div
+                          class="inc qtybutton"
+                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})"
+                        ></div>
+                        <div
+                          class="dec qtybutton"
+                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})"
+                        >
+                          -
+                        </div>
+                        <div
+                          class="inc qtybutton"
+                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})"
+                        >
+                          +
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="mini-cart-action clearfix">
+                <ul>
+                  <li>Subtotal ({{ cart.item_count }} items)</li>
+                  <li>
+                    <strong> {{ cart.items_subtotal_price | money }}</strong>
+                  </li>
+                </ul>
+                <div class="mini-btn">
+                  <a href="/checkout" class="theme-btn">CONTINUE TO CHECKOUT</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- end of container -->

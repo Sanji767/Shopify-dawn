@@ -167,8 +167,8 @@
   /*-----------------------
        cart-plus-minus-button 
      -------------------------*/
-  $('.cart-plus-minus').append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
-  $('.qtybutton').on('click', function () {
+  $('.quantitys').append('<div class="dec qtybutton qtybuttons">-</div><div class="inc qtybutton qtybuttons">+</div>');
+  $('.qtybuttons').on('click', function () {
     var $button = $(this);
     var oldValue = $button.parent().find('input').val();
     if ($button.text() == '+') {
@@ -323,7 +323,8 @@
       },
       success: function (data) {
         console.log('Item added to cart:', data);
-        window.location.href = '/checkout';
+        var current_url = window.location.href;
+        window.location.href = current_url;
         // Update cart count
         // fetch(window.Shopify.routes.root + 'cart.js')
         //   .then((response) => response.json())
@@ -339,4 +340,67 @@
       },
     });
   });
+
+  /*------------------------------------------
+        = Header shopping cart toggle
+    -------------------------------------------*/
+  if ($('.mini-cart').length) {
+    var cartToggleBtn = $('.cart-toggle-btn');
+    var cartContent = $('.mini-cart-content');
+    var cartContent2 = $('.header-right');
+    var cartCloseBtn = $('.mini-cart-close');
+    var body = $('body');
+
+    cartToggleBtn.on('click', function (e) {
+      cartContent.toggleClass('mini-cart-content-toggle');
+      cartContent2.toggleClass('active');
+      e.stopPropagation();
+    });
+
+    cartCloseBtn.on('click', function (e) {
+      cartContent.removeClass('mini-cart-content-toggle');
+      cartContent2.removeClass('active');
+      e.stopPropagation();
+    });
+
+    body
+      .on('click', function () {
+        cartContent.removeClass('mini-cart-content-toggle');
+        cartContent2.removeClass('active');
+      })
+      .find(cartContent)
+      .on('click', function (e) {
+        e.stopPropagation();
+      });
+  }
 })(window.jQuery);
+function updateQty(id, qty) {
+  $.ajax({
+    type: 'POST',
+    url: '/cart/change',
+    dataType: 'json',
+    data: {
+      line: id,
+      quantity: qty,
+    },
+    success: function (data) {
+      console.log('success', data);
+      window.location.reload();
+    },
+  });
+}
+function removeItem(id, qty) {
+  $.ajax({
+    type: 'POST',
+    url: '/cart/change',
+    dataType: 'json',
+    data: {
+      line: id,
+      quantity: qty,
+    },
+    success: function (data) {
+      console.log('success', data);
+      window.location.reload();
+    },
+  });
+}

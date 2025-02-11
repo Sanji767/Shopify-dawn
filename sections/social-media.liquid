@@ -8,11 +8,15 @@
       <div class="row s-5">
         {% for block in section.blocks %}
           <div class="col-lg-4 col-sm-6 col-12">
-            <div class="social-item">
-              <a href="{{ block.settings.url }}" class="social-img">
-                <img src="{{ block.settings.image | image_url: width: 800 }}" width="" height="" alt="">
-              </a>
-            </div>
+            {% if section.settings.social != blank %}
+              {{ section.settings.social }}
+            {% else %}
+              <div class="social-item">
+                <a href="{{ block.settings.url }}" class="social-img">
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" width="" height="" alt="">
+                </a>
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
@@ -29,6 +33,12 @@
       "id": "title",
       "label": "Title",
       "default": "SOCIAL"
+    },
+    {
+      "type": "liquid",
+      "id": "social",
+      "label": "Social Media",
+      "default": "<script src='https://static.elfsight.com/platform/platform.js' async></script><div class='elfsight-app-64616117-e487-4070-9e7f-69652258ed73' data-elfsight-app-lazy></div>"
     }
   ],
   "blocks": [
