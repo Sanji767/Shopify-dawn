@@ -1698,6 +1698,10 @@ img {
   .cta-area .cta-img {
     margin-bottom: 50px;
   }
+  .features-area .features-wrap .left-shape img,
+  .features-area .features-wrap .right-shape img {
+    max-width: 55px;
+  }
 }
 .cta-area .cta-img img {
   width: 100%;
@@ -1753,6 +1757,7 @@ img {
   font-size: 80px;
   color: #fff;
   margin-bottom: 0;
+  line-height: 65px;
 }
 @media (max-width: 1199px) {
   .cta-area .cta-item-box h2 {

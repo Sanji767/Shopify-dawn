@@ -6,19 +6,21 @@
   <div class="container">
     <div class="social-wrap">
       <div class="row s-5">
-        {% for block in section.blocks %}
-          <div class="col-lg-4 col-sm-6 col-12">
-            {% if section.settings.social != blank %}
+        {% if section.settings.social != blank %}
+          {{ section.settings.social }}
+        {% else %}
+          {% for block in section.blocks %}
+            <div class="col-lg-4 col-sm-6 col-12">
               {{ section.settings.social }}
-            {% else %}
+
               <div class="social-item">
                 <a href="{{ block.settings.url }}" class="social-img">
                   <img src="{{ block.settings.image | image_url: width: 800 }}" width="" height="" alt="">
                 </a>
               </div>
-            {% endif %}
-          </div>
-        {% endfor %}
+            </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
