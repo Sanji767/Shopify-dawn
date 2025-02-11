@@ -1615,6 +1615,7 @@ img {
   border-radius: 30px;
   padding-top: 0;
   position: relative;
+  border: 3px solid #000;
 }
 .features-area .features-wrap .title {
   text-align: center;
@@ -1624,6 +1625,10 @@ img {
 @media (max-width: 575px) {
   .features-area .features-wrap .title {
     top: -10px;
+  }
+  .features-area .features-wrap {
+    border: 3px solid #000;
+    margin: 0px 25px;
   }
 }
 .features-area .features-wrap .title h2 {
@@ -1668,7 +1673,7 @@ img {
 }
 @media (max-width: 575px) {
   .features-area .features-wrap .left-shape {
-    left: -10px;
+    left: -25px;
   }
 }
 .features-area .features-wrap .left-shape img {
@@ -1682,7 +1687,7 @@ img {
 }
 @media (max-width: 575px) {
   .features-area .features-wrap .right-shape {
-    right: -10px;
+    right: -40px;
   }
 }
 .features-area .features-wrap .right-shape img {
@@ -1698,9 +1703,11 @@ img {
   .cta-area .cta-img {
     margin-bottom: 50px;
   }
-  .features-area .features-wrap .left-shape img,
+  .features-area .features-wrap .left-shape img {
+    max-width: 60px;
+  }
   .features-area .features-wrap .right-shape img {
-    max-width: 55px;
+    max-width: 65px;
   }
 }
 .cta-area .cta-img img {
