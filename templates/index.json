@@ -66,7 +66,7 @@
       "type": "shop-now",
       "settings": {
         "image": "shopify://shop_images/SuperNatureGingerShot.png",
-        "button_url": "",
+        "button_url": "shopify://products/ginger-shot",
         "button_text": "Shop Now",
         "title": "100% NATURAL",
         "subtitle": "THE",
