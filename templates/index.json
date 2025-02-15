@@ -20,7 +20,7 @@
         "left_image": "shopify://shop_images/hero_home_f30be8f0-c72b-47ca-951c-ad6dd5355514.png",
         "title": "Good Shot",
         "subtitle": "From Nature",
-        "button_url": "",
+        "button_url": "shopify://products/ginger-shot",
         "button_text": "Shop Now",
         "image": "shopify://shop_images/homerights.png"
       }
@@ -33,7 +33,7 @@
           "settings": {
             "image": "shopify://shop_images/features1.png",
             "feature_title": "GINGER",
-            "description": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+            "description": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and aiding digestion."
           }
         },
         "block_phzkpK": {
@@ -41,7 +41,7 @@
           "settings": {
             "image": "shopify://shop_images/features2.png",
             "feature_title": "ACEROLA CHERRY",
-            "description": "One of natures most powerful super food which and is one of the richest known natural sources of Vitamin C"
+            "description": "One of natures most powerful super food and is one of the richest known natural sources of Vitamin C"
           }
         },
         "block_knXVFV": {
@@ -66,7 +66,7 @@
       "type": "shop-now",
       "settings": {
         "image": "shopify://shop_images/SuperNatureGingerShot.png",
-        "button_url": "",
+        "button_url": "shopify://products/ginger-shot",
         "button_text": "Shop Now",
         "title": "100% NATURAL",
         "subtitle": "THE",
