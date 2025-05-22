@@ -65,7 +65,7 @@
     "shop_now_TxPmHU": {
       "type": "shop-now",
       "settings": {
-        "image": "shopify://shop_images/SuperNatureGingerShot.png",
+        "image": "shopify://shop_images/Super_Nature_Ginger_Shot.png",
         "button_url": "shopify://products/ginger-shot",
         "button_text": "Shop Now",
         "title": "100% NATURAL",
