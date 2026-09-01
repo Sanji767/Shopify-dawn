@@ -1,92 +1,176 @@
-<!-- Cart Page -->
-<section class="pet-cart-page">
-  <div class="pet-container">
-    <h1>Tu carrito</h1>
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-cart-page" style="padding: 60px 0; background-color: var(--pet-cream, #FBF8F3); min-height: 80vh;">
+  <div class="pet-container container" style="max-width: 1080px;">
+    
+    <!-- Cart Title Header -->
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+      <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy, #1A2B4A); margin: 0;">
+        Tu Carrito 🛒
+      </h1>
+      {% if cart.item_count > 0 %}
+        <span style="background: var(--pet-navy, #1A2B4A); color: #fff; padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700;">
+          {{ cart.item_count }} {% if cart.item_count == 1 %}producto{% else %}productos{% endif %}
+        </span>
+      {% endif %}
+    </div>
 
     {% if cart.item_count > 0 %}
-      <!-- Free Shipping Bar -->
+      <!-- Free Shipping Progress Bar -->
       {% assign free_shipping_threshold = 5000 %}
       {% assign remaining = free_shipping_threshold | minus: cart.total_price %}
       {% assign progress = cart.total_price | times: 100 | divided_by: free_shipping_threshold %}
       {% if progress > 100 %}{% assign progress = 100 %}{% endif %}
 
-      <div class="pet-cart-free-shipping" style="max-width: 600px; margin: 0 auto var(--spacing-xl);">
-        <p class="pet-cart-free-shipping-text">
+      <div style="background: #FFFFFF; border: 1px solid #E5E1DB; border-radius: 20px; padding: 20px 24px; margin-bottom: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--pet-navy); margin-bottom: 10px; text-align: center;">
           {% if remaining > 0 %}
-            Te faltan <strong>{{ remaining | money }}</strong> para conseguir envío gratis 🚚
+            Te faltan <span style="color: var(--pet-coral);">{{ remaining | money }}</span> para conseguir <strong style="color: #166534;">ENVÍO GRATIS 🚚</strong>
           {% else %}
-            🎉 ¡Tienes envío gratis!
+            🎉 ¡Enhorabuena! Has conseguido <strong style="color: #166534;">ENVÍO GRATIS</strong> en este pedido.
           {% endif %}
         </p>
-        <div class="pet-cart-free-shipping-bar {% if remaining <= 0 %}complete{% endif %}">
-          <div class="pet-cart-free-shipping-progress" style="width: {{ progress }}%;"></div>
+        <div style="background: #F3F0EC; border-radius: 50px; height: 10px; width: 100%; overflow: hidden;">
+          <div style="background: linear-gradient(90deg, #E8734A 0%, #22C55E 100%); height: 100%; width: {{ progress }}%; border-radius: 50px; transition: width 0.4s ease;"></div>
         </div>
       </div>
 
-      <!-- Cart Table -->
-      <table class="pet-cart-table">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in cart.items %}
-            <tr>
-              <td>
-                <div class="pet-cart-item-info">
-                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" class="pet-cart-item-img">
-                  <div>
-                    <div class="pet-cart-item-title">
-                      <a href="{{ item.url }}" style="color: var(--pet-navy); text-decoration: none;">{{ item.title }}</a>
-                    </div>
-                    {% if item.variant.title != 'Default Title' %}
-                      <div class="pet-cart-item-variant">{{ item.variant.title }}</div>
-                    {% endif %}
+      <!-- 2-Column Cart Grid -->
+      <div class="row">
+        <!-- Left Column: Items List -->
+        <div class="col-lg-8 col-12 mb-4">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            {% for item in cart.items %}
+              <div style="background: #FFFFFF; border: 1px solid #E5E1DB; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <!-- Product Thumbnail -->
+                <a href="{{ item.url }}" style="width: 90px; height: 90px; border-radius: 14px; overflow: hidden; background: #FBF8F3; flex-shrink: 0; display: block;">
+                  {% if item.image %}
+                    <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2rem;">🐾</div>
+                  {% endif %}
+                </a>
+
+                <!-- Product Details -->
+                <div style="flex: 1; min-width: 180px;">
+                  <h3 style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--pet-navy); margin: 0 0 4px;">
+                    <a href="{{ item.url }}" style="color: var(--pet-navy); text-decoration: none;">{{ item.product.title | default: item.title }}</a>
+                  </h3>
+                  {% if item.variant.title != 'Default Title' and item.variant.title != blank %}
+                    <p style="font-size: 0.85rem; color: var(--pet-muted); margin: 0 0 8px;">Talla/Opción: {{ item.variant.title }}</p>
+                  {% endif %}
+                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--pet-coral);">
+                    {{ item.final_price | money }}
                   </div>
                 </div>
-              </td>
-              <td>{{ item.price | money }}</td>
-              <td>
-                <div class="pet-product-qty" style="margin: 0;">
-                  <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})">−</button>
-                  <input type="text" value="{{ item.quantity }}" readonly style="width: 45px;">
-                  <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})">+</button>
-                </div>
-              </td>
-              <td><strong>{{ item.line_price | money }}</strong></td>
-              <td>
-                <button class="pet-cart-remove" onclick="removeItem({{ forloop.index }}, 0)">Eliminar</button>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
 
-      <!-- Cart Summary -->
-      <div class="pet-cart-summary">
-        <div class="pet-cart-totals">
-          <span class="pet-cart-totals-label">Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}producto{% else %}productos{% endif %})</span>
-          <span class="pet-cart-totals-value">{{ cart.items_subtotal_price | money }}</span>
+                <!-- Quantity Stepper & Actions -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div style="display: flex; align-items: center; border: 1px solid #E5E1DB; border-radius: 50px; overflow: hidden; background: #FFF;">
+                    <button type="button" onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})" style="padding: 6px 14px; border: none; background: transparent; cursor: pointer; font-weight: 700; color: var(--pet-navy);">−</button>
+                    <input type="text" value="{{ item.quantity }}" readonly style="width: 36px; text-align: center; border: none; font-weight: 700; font-size: 0.9rem; color: var(--pet-navy);">
+                    <button type="button" onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})" style="padding: 6px 14px; border: none; background: transparent; cursor: pointer; font-weight: 700; color: var(--pet-navy);">+</button>
+                  </div>
+
+                  <button type="button" onclick="removeItem({{ forloop.index }}, 0)" style="background: #FEE2E2; color: #991B1B; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;" title="Eliminar del carrito">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- 1-Click Upsell Cross-Sell Card -->
+          <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 20px 24px; margin-top: 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+            <div style="font-size: 2.5rem; flex-shrink: 0;">🛋️</div>
+            <div style="flex: 1; min-width: 200px;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase;">AÑADE A TU PEDIDO</span>
+              <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--pet-navy); margin: 2px 0 4px;">Rodillo Reutilizable Quitapelos</h4>
+              <p style="font-size: 0.85rem; color: var(--pet-muted); margin: 0;">Ideal para limpiar sofás y mantas en segundos.</p>
+            </div>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; text-decoration: none;">+ Añadir por 19,99 €</a>
+          </div>
         </div>
-        <p style="font-size: 0.8rem; color: var(--pet-muted); margin-bottom: 16px;">Impuestos y gastos de envío se calculan en el checkout.</p>
-        <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%; font-size: 1.1rem; padding: 14px;">Finalizar compra</a>
-        <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: var(--pet-muted);">
-          🔒 Pago 100% Seguro · Visa, Mastercard, PayPal, Apple Pay, Klarna, iDEAL
+
+        <!-- Right Column: Order Summary Card -->
+        <div class="col-lg-4 col-12">
+          <div style="background: #FFFFFF; border: 1px solid #E5E1DB; border-radius: 24px; padding: 28px; position: sticky; top: 100px; box-shadow: 0 10px 30px rgba(26,43,74,0.06);">
+            <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 0 0 20px; padding-bottom: 16px; border-bottom: 1px solid #E5E1DB;">
+              Resumen de Pedido
+            </h2>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; color: var(--pet-muted);">
+              <span>Subtotal</span>
+              <span style="font-weight: 700; color: var(--pet-navy);">{{ cart.items_subtotal_price | money }}</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 0.95rem; color: var(--pet-muted);">
+              <span>Envío</span>
+              {% if remaining <= 0 %}
+                <span style="font-weight: 700; color: #166534;">GRATIS</span>
+              {% else %}
+                <span style="font-weight: 700; color: var(--pet-navy);">3,99 €</span>
+              {% endif %}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 24px; padding-top: 16px; border-top: 2px dashed #E5E1DB; font-size: 1.25rem; font-weight: 700; color: var(--pet-navy);">
+              <span>Total IVA Inc.</span>
+              <span style="color: var(--pet-coral);">{{ cart.total_price | money }}</span>
+            </div>
+
+            <!-- Checkout Button -->
+            <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%; font-size: 1.1rem; padding: 16px; border-radius: 50px; text-decoration: none; margin-bottom: 16px; box-shadow: 0 8px 20px rgba(232, 115, 74, 0.3);">
+              Finalizar Compra →
+            </a>
+
+            <!-- Delivery & Payment Trust -->
+            <div style="background: #FBF8F3; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 16px;">
+              <p style="font-size: 0.8rem; color: #166534; font-weight: 700; margin-bottom: 4px;">🚚 Entrega en 3-6 días laborables</p>
+              <p style="font-size: 0.75rem; color: var(--pet-muted); margin: 0;">En España Peninsular y Europa con SEUR / Correos</p>
+            </div>
+
+            <div style="text-align: center; font-size: 0.75rem; color: var(--pet-muted); margin-bottom: 16px;">
+              🔒 Pago 100% Seguro · Visa, Mastercard, PayPal, Apple Pay, Klarna, iDEAL
+            </div>
+
+            <a href="/collections/all" style="display: block; text-align: center; font-size: 0.85rem; color: var(--pet-navy); font-weight: 600; text-decoration: underline;">
+              ← Seguir comprando
+            </a>
+          </div>
         </div>
-        <a href="/collections/all" style="display: block; text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--pet-muted); text-decoration: underline;">Seguir comprando</a>
       </div>
+
     {% else %}
-      <!-- Empty Cart -->
-      <div style="text-align: center; padding: 60px 0;">
-        <p style="font-size: 4rem; margin-bottom: 16px;">🛒 🐾</p>
-        <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Tu carrito está vacío</h2>
-        <p style="color: var(--pet-muted); margin-bottom: 24px;">Descubre nuestra selección de productos para ti y tu mascota.</p>
-        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Explorar productos</a>
+      <!-- Empty Cart Showcase State -->
+      <div style="background: #FFFFFF; border-radius: 28px; padding: 48px 24px; text-align: center; max-width: 860px; margin: 0 auto; border: 1px solid #E5E1DB;">
+        <div style="font-size: 4rem; margin-bottom: 16px;">🛒 🐾</div>
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">Tu carrito está vacío</h2>
+        <p style="color: var(--pet-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 32px;">Descubre nuestra selección de productos recomendados para el descanso, paseo y limpieza en el hogar.</p>
+        
+        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 1.05rem; display: inline-block;">
+          Explorar todo el catálogo →
+        </a>
+
+        <!-- Popular Recommendations Grid -->
+        <div style="margin-top: 48px; text-align: left;">
+          <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin-bottom: 20px; text-align: center;">
+            Productos más buscados este mes
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+            {% assign sample_titles = "Cama Ortopédica,Manta Coche,Rodillo Pelos,Botella Paseo" | split: "," %}
+            {% assign sample_prices = "34,99 €,29,99 €,19,99 €,14,99 €" | split: "," %}
+            {% for i in (0..3) %}
+              <div style="background: #FBF8F3; border-radius: 16px; padding: 16px; text-align: center; border: 1px solid #E5E1DB;">
+                <div style="font-size: 2.5rem; margin-bottom: 8px;">
+                  {% if i == 0 %}🛏️{% elsif i == 1 %}🚗{% elsif i == 2 %}🛋️{% else %}🦮{% endif %}
+                </div>
+                <h4 style="font-size: 0.9rem; margin: 0 0 4px; color: var(--pet-navy);">{{ sample_titles[i] }}</h4>
+                <p style="font-weight: 700; color: var(--pet-coral); margin: 0 0 10px; font-size: 0.95rem;">{{ sample_prices[i] }}</p>
+                <a href="/collections/all" class="pet-btn pet-btn-secondary" style="padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; text-decoration: none; display: block; border: 1px solid var(--pet-navy); color: var(--pet-navy);">Ver producto</a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     {% endif %}
   </div>
@@ -94,12 +178,8 @@
 
 {% schema %}
 {
-  "name": "Carrito",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Carrito"
-    }
-  ]
+  "name": "Carrito Principal",
+  "tag": "section",
+  "class": "pet-cart-main-section"
 }
 {% endschema %}
