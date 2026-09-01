@@ -2,96 +2,262 @@
 
 <section class="pet-section pet-blog-section" style="padding: 60px 0; background-color: var(--pet-cream, #FBF8F3);">
   <div class="pet-container container">
-    <!-- Blog Header Banner -->
-    <div class="pet-blog-header" style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
-      <span class="pet-blog-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border: 1px solid #E8734A; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
-        📖 CONSEJOS Y LIFESTYLE
-      </span>
-      <h1 class="pet-blog-title" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
-        {{ blog.title | default: "El Blog de Paw & Home" }}
-      </h1>
-      <p class="pet-blog-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted, #6B7280); line-height: 1.6;">
-        Guías prácticas, consejos de limpieza, viajes sin estrés y todo lo necesario para disfrutar al máximo de la vida con tu mascota.
-      </p>
+    <!-- View Switcher Container -->
+    <div id="blogListView">
+      <!-- Blog Header Banner -->
+      <div class="pet-blog-header" style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+        <span class="pet-blog-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border: 1px solid #E8734A; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+          📖 CONSEJOS Y LIFESTYLE
+        </span>
+        <h1 class="pet-blog-title" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
+          {{ blog.title | default: "El Blog de Paw & Home" }}
+        </h1>
+        <p class="pet-blog-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted, #6B7280); line-height: 1.6;">
+          Guías prácticas, consejos de limpieza, viajes sin estrés y todo lo necesario para disfrutar al máximo de la vida con tu mascota.
+        </p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="pet-blog-categories" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+        <span class="pet-blog-cat-chip active" style="padding: 8px 18px; border-radius: 50px; background: var(--pet-navy); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Todos los artículos</span>
+        <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐶 Perros</span>
+        <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐱 Gatos</span>
+        <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🏠 Hogar y Limpieza</span>
+        <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🚗 Viajes en Coche</span>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="pet-blog-grid">
+        {% if blog.articles.size > 0 %}
+          {% for article in blog.articles %}
+            <article class="pet-article-card">
+              <a href="{{ article.url }}" class="pet-article-image-wrapper">
+                {% if article.image %}
+                  <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title }}" loading="lazy" class="pet-article-image">
+                {% else %}
+                  <div class="pet-article-placeholder">📖 🐾</div>
+                {% endif %}
+                <span class="pet-article-tag">Lifestyle</span>
+              </a>
+              <div class="pet-article-content">
+                <div class="pet-article-meta">
+                  <span class="pet-article-date">{{ article.published_at | date: "%d %b, %Y" }}</span>
+                  <span class="pet-article-dot">•</span>
+                  <span class="pet-article-read-time">⏱️ 4 min</span>
+                </div>
+                <h2 class="pet-article-card-title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+                <p class="pet-article-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+                <a href="{{ article.url }}" class="pet-article-link">
+                  Leer artículo
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <!-- Rich Out-of-the-Box Sample Pet Articles -->
+          {% assign blog_titles = "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato,Cómo Viajar en Coche con tu Perro de Forma Segura y Sin Estrés,Guía Completa para Elegir la Cama Ortopédica Perfecta para tu Mascota,Paseos Nocturnos: Seguridad e Iluminación Indispensable,Alimentación y Comederos Antivoracidad: Beneficios para la Digestión,Cómo Organizar los Juguetes y Accesorios de tu Mascota en Casa" | split: "," %}
+          {% assign blog_tags = "Hogar y Limpieza,Viajes en Coche,Salud y Descanso,Paseos y Seguridad,Nutrición,Organización" | split: "," %}
+          {% assign blog_emojis = "🛋️,🚗,🛏️,🦮,🥣,📦" | split: "," %}
+          {% assign blog_reads = "4 min,5 min,6 min,3 min,4 min,5 min" | split: "," %}
+          {% assign blog_excerpts = "Descubre los mejores trucos y herramientas para eliminar los pelos de tapicerías y mantener tu salón impecable sin esfuerzo.,Todo lo que necesitas saber sobre cinturones de seguridad, fundas protectoras e hidratación durante los trayectos en carretera.,El descanso adecuado previene problemas articulares. Aprende a evaluar el tamaño y firmeza idóneos para tu perro o gato.,Consejos y accesorios reflectantes y con luz LED para que los paseos al anochecer sean 100% seguros y tranquilos.,Explicamos cómo los comederos lentos reducen la ansiedad al comer y evitan problemas de digestión en mascotas.,Soluciones prácticas y estéticas para guardar correas, juguetes y cepillos sin desordenar tu hogar." | split: "," %}
+
+          {% for i in (0..5) %}
+            {% assign art_id = i | plus: 1 %}
+            <article class="pet-article-card">
+              <a href="/blogs/news?article={{ art_id }}" class="pet-article-image-wrapper">
+                <div class="pet-article-placeholder" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; height: 100%; min-height: 220px;">
+                  {{ blog_emojis[i] }}
+                </div>
+                <span class="pet-article-tag">{{ blog_tags[i] }}</span>
+              </a>
+              <div class="pet-article-content">
+                <div class="pet-article-meta">
+                  <span class="pet-article-date">Paw & Home Equipo</span>
+                  <span class="pet-article-dot">•</span>
+                  <span class="pet-article-read-time">⏱️ {{ blog_reads[i] }}</span>
+                </div>
+                <h2 class="pet-article-card-title">
+                  <a href="/blogs/news?article={{ art_id }}">{{ blog_titles[i] }}</a>
+                </h2>
+                <p class="pet-article-excerpt">{{ blog_excerpts[i] }}</p>
+                <a href="/blogs/news?article={{ art_id }}" class="pet-article-link">
+                  Leer artículo
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
 
-    <!-- Category Filters -->
-    <div class="pet-blog-categories" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
-      <span class="pet-blog-cat-chip active" style="padding: 8px 18px; border-radius: 50px; background: var(--pet-navy); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Todos los artículos</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐶 Perros</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐱 Gatos</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🏠 Hogar y Limpieza</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🚗 Viajes en Coche</span>
-    </div>
+    <!-- Article Detail Reading View Container (Shown when ?article=X is present) -->
+    <div id="blogDetailView" style="display: none; max-width: 840px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
+      <nav style="margin-bottom: 24px; font-size: 0.85rem; color: var(--pet-muted);">
+        <a href="/blogs/news" style="color: var(--pet-muted);">← Volver a todos los artículos</a>
+      </nav>
 
-    <!-- Articles Grid -->
-    <div class="pet-blog-grid">
-      {% if blog.articles.size > 0 %}
-        {% for article in blog.articles %}
-          <article class="pet-article-card">
-            <a href="{{ article.url }}" class="pet-article-image-wrapper">
-              {% if article.image %}
-                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title }}" loading="lazy" class="pet-article-image">
-              {% else %}
-                <div class="pet-article-placeholder">📖 🐾</div>
-              {% endif %}
-              <span class="pet-article-tag">Lifestyle</span>
-            </a>
-            <div class="pet-article-content">
-              <div class="pet-article-meta">
-                <span class="pet-article-date">{{ article.published_at | date: "%d %b, %Y" }}</span>
-                <span class="pet-article-dot">•</span>
-                <span class="pet-article-read-time">⏱️ 4 min</span>
-              </div>
-              <h2 class="pet-article-card-title">
-                <a href="{{ article.url }}">{{ article.title }}</a>
-              </h2>
-              <p class="pet-article-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
-              <a href="{{ article.url }}" class="pet-article-link">
-                Leer artículo
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
-          </article>
-        {% endfor %}
-      {% else %}
-        <!-- Rich Out-of-the-Box Sample Pet Articles -->
-        {% assign blog_titles = "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato,Cómo Viajar en Coche con tu Perro de Forma Segura y Sin Estrés,Guía Completa para Elegir la Cama Ortopédica Perfecta para tu Mascota,Paseos Nocturnos: Seguridad e Iluminación Indispensable,Alimentación y Comederos Antivoracidad: Beneficios para la Digestión,Cómo Organizar los Juguetes y Accesorios de tu Mascota en Casa" | split: "," %}
-        {% assign blog_tags = "Hogar y Limpieza,Viajes en Coche,Salud y Descanso,Paseos y Seguridad,Nutrición,Organización" | split: "," %}
-        {% assign blog_emojis = "🛋️,🚗,🛏️,🦮,🥣,📦" | split: "," %}
-        {% assign blog_reads = "4 min,5 min,6 min,3 min,4 min,5 min" | split: "," %}
-        {% assign blog_excerpts = "Descubre los mejores trucos y herramientas para eliminar los pelos de tapicerías y mantener tu salón impecable sin esfuerzo.,Todo lo que necesitas saber sobre cinturones de seguridad, fundas protectoras e hidratación durante los trayectos en carretera.,El descanso adecuado previene problemas articulares. Aprende a evaluar el tamaño y firmeza idóneos para tu perro o gato.,Consejos y accesorios reflectantes y con luz LED para que los paseos al anochecer sean 100% seguros y tranquilos.,Explicamos cómo los comederos lentos reducen la ansiedad al comer y evitan problemas de digestión en mascotas.,Soluciones prácticas y estéticas para guardar correas, juguetes y cepillos sin desordenar tu hogar." | split: "," %}
+      <header style="margin-bottom: 32px;">
+        <span id="demoBadge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; margin-bottom: 16px;">
+          Hogar y Limpieza
+        </span>
+        <h1 id="demoTitle" style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy); margin-bottom: 16px; line-height: 1.2;">
+          Título del artículo
+        </h1>
+        <div style="display: flex; gap: 16px; font-size: 0.85rem; color: var(--pet-muted); padding-bottom: 16px; border-bottom: 1px solid #E5E1DB;">
+          <span>✍️ Por <strong>Equipo Paw & Home</strong></span>
+          <span>•</span>
+          <span>📅 28 de Agosto, 2026</span>
+          <span>•</span>
+          <span id="demoReadTime">⏱️ 4 min de lectura</span>
+        </div>
+      </header>
 
-        {% for i in (0..5) %}
-          {% assign art_id = i | plus: 1 %}
-          <article class="pet-article-card">
-            <a href="/blogs/news/articulo-{{ art_id }}" class="pet-article-image-wrapper">
-              <div class="pet-article-placeholder" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; height: 100%; min-height: 220px;">
-                {{ blog_emojis[i] }}
-              </div>
-              <span class="pet-article-tag">{{ blog_tags[i] }}</span>
-            </a>
-            <div class="pet-article-content">
-              <div class="pet-article-meta">
-                <span class="pet-article-date">Paw & Home Equipo</span>
-                <span class="pet-article-dot">•</span>
-                <span class="pet-article-read-time">⏱️ {{ blog_reads[i] }}</span>
-              </div>
-              <h2 class="pet-article-card-title">
-                <a href="/blogs/news/articulo-{{ art_id }}">{{ blog_titles[i] }}</a>
-              </h2>
-              <p class="pet-article-excerpt">{{ blog_excerpts[i] }}</p>
-              <a href="/blogs/news/articulo-{{ art_id }}" class="pet-article-link">
-                Leer artículo
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
-          </article>
-        {% endfor %}
-      {% endif %}
+      <div id="demoEmojiBox" style="margin-bottom: 32px; border-radius: 20px; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); height: 260px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">
+        🛋️
+      </div>
+
+      <div id="demoBody" style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-navy); line-height: 1.8; margin-bottom: 40px;">
+        <!-- Body injected via JS -->
+      </div>
+
+      <footer style="padding-top: 24px; border-top: 1px solid #E5E1DB; display: flex; justify-content: space-between; align-items: center;">
+        <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.85rem;">
+          ← Volver al Blog
+        </a>
+      </footer>
     </div>
   </div>
 </section>
+
+<script>
+  var articlesData = {
+    "1": {
+      title: "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato",
+      badge: "Hogar y Limpieza",
+      readTime: "⏱️ 4 min de lectura",
+      emoji: "🛋️",
+      body: `
+        <p>Convivir con peludos es una de las mayores alegrías del hogar, pero la acumulación de pelos en sofás, alfombras y mantas puede convertirse en un desafío diario si no contamos con la rutina adecuada.</p>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">1. Cepillado preventivo diario</h3>
+        <p>La mejor manera de evitar que los pelos terminen en el sofá es eliminarlos antes de que se desprendan. Un cepillado diario de 5 minutos con un cepillo adecuado reduce hasta un 80% la caída de pelo en casa.</p>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">2. Mantas protectoras lavables</h3>
+        <p>Colocar una manta protectora suave en las zonas favoritas de descanso de tu mascota protege el tejido del sofá. Busca textiles impermeables que repelan la humedad y se puedan lavar a 30°C.</p>
+        <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 24px; margin: 32px 0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="font-size: 3rem;">🛋️</div>
+          <div style="flex: 1; min-width: 200px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral);">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--pet-navy); margin: 4px 0;">Rodillo Reutilizable Quitapelos para Sofá</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 10px;">Elimina pelos en segundos sin recambios adhesivos.</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 8px 18px; border-radius: 50px; text-decoration: none; font-size: 0.85rem;">Ver Producto (19,99 €) →</a>
+          </div>
+        </div>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">3. Rodillos electrostáticos reutilizables</h3>
+        <p>Los rodillos con depósito recolector atraen el pelo incrustado en el tejido sin dañarlo ni gastar rollos adhesivos.</p>
+      `
+    },
+    "2": {
+      title: "Cómo Viajar en Coche con tu Perro de Forma Segura y Sin Estrés",
+      badge: "Viajes en Coche",
+      readTime: "⏱️ 5 min de lectura",
+      emoji: "🚗",
+      body: `
+        <p>Viajar con nuestro compañero canino es una experiencia maravillosa, pero requiere tomar precauciones de seguridad vial tanto para proteger a la mascota como para evitar distracciones al volante.</p>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">1. Sistema de sujeción homologado obligatorio</h3>
+        <p>Nunca lleves al perro suelto en el habitáculo. Utiliza un arnés de doble enganche fijado al cinturón de seguridad o una red divisoria rígida homologada.</p>
+        <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 24px; margin: 32px 0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="font-size: 3rem;">🚗</div>
+          <div style="flex: 1; min-width: 200px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral);">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--pet-navy); margin: 4px 0;">Manta Protectora Impermeable para Coche</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 10px;">Protege los asientos traseros contra barro y humedad.</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 8px 18px; border-radius: 50px; text-decoration: none; font-size: 0.85rem;">Ver Producto (29,99 €) →</a>
+          </div>
+        </div>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">2. Paradas de hidratación cada 2 horas</h3>
+        <p>En trayectos largos, realiza paradas regulares para caminar y ofrecerle agua fresca con una botella portátil.</p>
+      `
+    },
+    "3": {
+      title: "Guía Completa para Elegir la Cama Ortopédica Perfecta para tu Mascota",
+      badge: "Salud y Descanso",
+      readTime: "⏱️ 6 min de lectura",
+      emoji: "🛏️",
+      body: `
+        <p>Los perros y gatos adultos duermen entre 12 y 16 horas diarias. Un descanso de calidad sobre una superficie adecuada es fundamental para prevenir problemas articulares.</p>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin: 28px 0 12px;">1. Espumas ortopédicas de densidad adaptativa</h3>
+        <p>Las camas de viscoelástica alivian los puntos de presión en caderas y codos, protegiendo las articulaciones en todas las edades.</p>
+        <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 24px; margin: 32px 0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="font-size: 3rem;">🛏️</div>
+          <div style="flex: 1; min-width: 200px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral);">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--pet-navy); margin: 4px 0;">Cama Ortopédica Lavable para Mascotas</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 10px;">Diseño desenfundable con bordes elevados tipo nido.</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 8px 18px; border-radius: 50px; text-decoration: none; font-size: 0.85rem;">Ver Producto (34,99 €) →</a>
+          </div>
+        </div>
+      `
+    },
+    "4": {
+      title: "Paseos Nocturnos: Seguridad e Iluminación Indispensable",
+      badge: "Paseos y Seguridad",
+      readTime: "⏱️ 3 min de lectura",
+      emoji: "🦮",
+      body: `
+        <p>Al caer el sol, la visibilidad en calles y parques se reduce. Equipar a tu mascota con elementos reflectantes permite que conductores y ciclistas os vean a más de 150 metros.</p>
+        <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 24px; margin: 32px 0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="font-size: 3rem;">🦮</div>
+          <div style="flex: 1; min-width: 200px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral);">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--pet-navy); margin: 4px 0;">Botella Portátil de Agua para Paseo</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 10px;">Con plato integrado antidesperdicio. Ligera y compacta.</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 8px 18px; border-radius: 50px; text-decoration: none; font-size: 0.85rem;">Ver Producto (14,99 €) →</a>
+          </div>
+        </div>
+      `
+    },
+    "5": {
+      title: "Alimentación y Comederos Antivoracidad: Beneficios para la Digestión",
+      badge: "Nutrición",
+      readTime: "⏱️ 4 min de lectura",
+      emoji: "🥣",
+      body: `
+        <p>Muchos perros engullen su alimento en segundos. Esta ingesta ansiosa causa gases y digestiones pesadas. Los comederos lentos multiplican por 5 el tiempo de ingesta.</p>
+      `
+    },
+    "6": {
+      title: "Cómo Organizar los Juguetes y Accesorios de tu Mascota en Casa",
+      badge: "Organización",
+      readTime: "⏱️ 5 min de lectura",
+      emoji: "📦",
+      body: `
+        <p>Crear un rincón con cestas accesibles a la altura de tu mascota permite tener los juguetes ordenados y mantener la armonía estética en tu hogar.</p>
+      `
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+    var artId = params.get('article');
+
+    if (artId && articlesData[artId]) {
+      var data = articlesData[artId];
+      document.getElementById('blogListView').style.display = 'none';
+      var detailView = document.getElementById('blogDetailView');
+      detailView.style.display = 'block';
+
+      document.getElementById('demoTitle').textContent = data.title;
+      document.getElementById('demoBadge').textContent = data.badge;
+      document.getElementById('demoReadTime').textContent = data.readTime;
+      document.getElementById('demoEmojiBox').textContent = data.emoji;
+      document.getElementById('demoBody').innerHTML = data.body;
+      window.scrollTo(0, 0);
+    }
+  });
+</script>
 
 <style>
   .pet-blog-grid {
