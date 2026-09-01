@@ -243,7 +243,17 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var params = new URLSearchParams(window.location.search);
-    var artId = params.get('article') || "1";
+    var path = window.location.pathname;
+    var artId = params.get('article');
+
+    if (!artId) {
+      var match = path.match(/articulo-(\d+)/i);
+      if (match) {
+        artId = match[1];
+      }
+    }
+    if (!artId) artId = "1";
+
     var data = articlesData[artId] || articlesData["1"];
 
     if (data) {
@@ -254,7 +264,7 @@
       document.getElementById('artEmoji').textContent = data.emoji;
       
       var bodyContainer = document.getElementById('artBody');
-      if (bodyContainer && bodyContainer.children.length === 0) {
+      if (bodyContainer) {
         bodyContainer.innerHTML = data.body;
       }
     }
