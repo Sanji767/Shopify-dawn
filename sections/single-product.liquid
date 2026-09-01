@@ -2,143 +2,135 @@
   window.product = {{ product | json }} || {};
 </script>
 
-<section class="pet-product-page">
-  <div class="pet-container">
+<section class="pet-product-page" style="padding: 60px 0;">
+  <div class="pet-container container">
     <div class="row">
       <!-- Gallery -->
-      <div class="col-lg-6 col-12">
+      <div class="col-lg-6 col-12 mb-4">
         <div class="pet-product-gallery">
-          <div class="pet-product-gallery-main" id="mainImage">
+          <div class="pet-product-gallery-main" id="mainImage" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); border-radius: 24px; padding: 20px; min-height: 400px; display: flex; align-items: center; justify-content: center;">
             {% if product.featured_image %}
-              <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" id="mainProductImg">
+              <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" id="mainProductImg" style="max-width: 100%; height: auto; border-radius: 16px;">
+            {% else %}
+              <div style="font-size: 6rem; text-align: center;">🐶 🐾</div>
             {% endif %}
           </div>
-          <div class="pet-product-gallery-thumbs">
-            {% for image in product.images %}
-              <div class="pet-product-gallery-thumb {% if forloop.first %}active{% endif %}" onclick="changeMainImage(this, '{{ image.src | image_url: width: 1024 }}')">
-                <img src="{{ image.src | image_url: width: 200 }}" alt="{{ product.title }} - {{ forloop.index }}">
-              </div>
-            {% endfor %}
-          </div>
+          {% if product.images.size > 1 %}
+            <div class="pet-product-gallery-thumbs" style="display: flex; gap: 12px; margin-top: 16px;">
+              {% for image in product.images %}
+                <div class="pet-product-gallery-thumb {% if forloop.first %}active{% endif %}" onclick="changeMainImage(this, '{{ image.src | image_url: width: 1024 }}')" style="width: 80px; height: 80px; border-radius: 12px; overflow: hidden; border: 2px solid #E5E1DB; cursor: pointer;">
+                  <img src="{{ image.src | image_url: width: 200 }}" alt="{{ product.title }} - {{ forloop.index }}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
       </div>
 
       <!-- Product Info -->
       <div class="col-lg-6 col-12">
         <div class="pet-product-info">
-          <h1>{{ product.title }}</h1>
+          <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 16px;">
+            {{ product.title | default: "Cama Ortopédica Lavable para Mascotas" }}
+          </h1>
 
           <!-- Price -->
-          <div class="pet-product-price-wrap">
-            <span class="pet-product-price">{{ product.price | money }}</span>
-            {% if product.compare_at_price > product.price %}
-              <span class="pet-product-compare-price">{{ product.compare_at_price | money }}</span>
-              {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-              <span class="pet-product-discount-badge">-{{ discount }}%</span>
+          <div class="pet-product-price-wrap" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+            <span class="pet-product-price" style="font-family: 'Inter', sans-serif; font-size: 1.75rem; font-weight: 700; color: var(--pet-navy);">
+              {{ product.price | default: 3499 | money }}
+            </span>
+            {% if product.compare_at_price > product.price or product.title == blank %}
+              <span class="pet-product-compare-price" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted); text-decoration: line-through;">
+                {{ product.compare_at_price | default: 4499 | money }}
+              </span>
+              <span class="pet-product-discount-badge" style="background: var(--pet-coral); color: #fff; padding: 4px 10px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;">
+                OFERTA
+              </span>
             {% endif %}
           </div>
 
-          <!-- Variants -->
-          {% if product.has_only_default_variant == false %}
-            {% for option in product.options_with_values %}
-              <div class="pet-product-variants">
-                <label class="pet-product-variant-label">{{ option.name }}</label>
-                <div class="pet-product-variant-options">
-                  {% for value in option.values %}
-                    <button class="pet-product-variant-option {% if forloop.first %}active{% endif %}" data-option="{{ option.name }}" data-value="{{ value }}">
-                      {{ value }}
-                    </button>
-                  {% endfor %}
+          {% form 'product', product, id: 'AddToCartForm', class: 'pet-product-form' %}
+            <!-- Variants -->
+            {% if product.has_only_default_variant == false %}
+              {% for option in product.options_with_values %}
+                <div class="pet-product-variants" style="margin-bottom: 20px;">
+                  <label class="pet-product-variant-label" style="font-weight: 600; margin-bottom: 8px; display: block;">{{ option.name }}</label>
+                  <div class="pet-product-variant-options" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    {% for value in option.values %}
+                      <button type="button" class="pet-product-variant-option {% if forloop.first %}active{% endif %}" data-option="{{ option.name }}" data-value="{{ value }}" style="padding: 8px 16px; border-radius: 50px; border: 1px solid var(--pet-border); background: #fff; cursor: pointer;">
+                        {{ value }}
+                      </button>
+                    {% endfor %}
+                  </div>
                 </div>
-              </div>
-            {% endfor %}
-          {% endif %}
-
-          <!-- Quantity -->
-          <div class="pet-product-qty">
-            <label class="pet-product-variant-label" style="margin-right: 12px; margin-bottom: 0;">Cantidad</label>
-            <button type="button" onclick="updateProductQty(-1)">−</button>
-            <input type="text" value="1" id="productQty" readonly>
-            <button type="button" onclick="updateProductQty(1)">+</button>
-          </div>
-
-          <input type="hidden" name="id" id="variantId" value="{{ product.variants.first.id }}">
-          <input type="hidden" name="quantity" id="quantity" value="1" min="1">
-
-          <!-- Actions -->
-          <div class="pet-product-actions">
-            <a href="#" class="pet-btn pet-btn-primary addToCart">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Añadir al carrito
-            </a>
-            {% if product.available %}
-              <a href="/checkout?add={{ product.variants.first.id }}:1" class="pet-btn pet-btn-secondary">
-                Comprar ahora
-              </a>
+              {% endfor %}
             {% endif %}
-          </div>
+
+            <!-- Quantity -->
+            <div class="pet-product-qty" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+              <label class="pet-product-variant-label" style="font-weight: 600; margin: 0;">Cantidad</label>
+              <div style="display: flex; align-items: center; border: 1px solid var(--pet-border); border-radius: 50px; overflow: hidden; background: #fff;">
+                <button type="button" onclick="updateProductQty(-1)" style="padding: 8px 16px; border: none; background: transparent; cursor: pointer; font-weight: 700;">−</button>
+                <input type="text" value="1" id="productQty" name="quantity" readonly style="width: 40px; text-align: center; border: none; font-weight: 600;">
+                <button type="button" onclick="updateProductQty(1)" style="padding: 8px 16px; border: none; background: transparent; cursor: pointer; font-weight: 700;">+</button>
+              </div>
+            </div>
+
+            <input type="hidden" name="id" id="variantId" value="{{ product.variants.first.id | default: 1 }}">
+
+            <!-- Actions -->
+            <div class="pet-product-actions" style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
+              <button type="submit" name="add" class="pet-btn pet-btn-primary pet-btn-lg" style="flex: 1; min-width: 200px; justify-content: center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Añadir al carrito
+              </button>
+            </div>
+          {% endform %}
 
           <!-- Meta info -->
-          <div class="pet-product-meta">
-            <div class="pet-product-meta-item">
+          <div class="pet-product-meta" style="background: #FBF8F3; padding: 20px; border-radius: 16px; border: 1px solid #E5E1DB; margin-bottom: 32px;">
+            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              {{ section.settings.shipping_text }}
+              <span>{{ section.settings.shipping_text }}</span>
             </div>
-            <div class="pet-product-meta-item">
+            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-              {{ section.settings.returns_text }}
+              <span>{{ section.settings.returns_text }}</span>
             </div>
-            <div class="pet-product-meta-item">
+            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              {{ section.settings.guarantee_text }}
+              <span>{{ section.settings.guarantee_text }}</span>
             </div>
           </div>
 
-          <!-- Accordions -->
-          <div class="pet-accordion">
-            <div class="pet-accordion-item">
-              <button class="pet-accordion-trigger" onclick="toggleAccordion(this)">
-                Descripción
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="pet-accordion-content">
-                <div class="pet-accordion-content-inner">
-                  {{ product.description }}
-                </div>
-              </div>
+          <!-- Description & Details -->
+          <div class="pet-product-description" style="line-height: 1.7; color: var(--pet-navy);">
+            <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 12px;">Descripción del producto</h3>
+            <div>
+              {{ product.description | default: "<p>Diseñada para proporcionar el máximo confort y descanso a tu mascota. Material resistente, lavable a máquina y con base antideslizante para la máxima estabilidad en tu hogar.</p>" }}
             </div>
-            {% if section.settings.features_text != blank %}
-              <div class="pet-accordion-item">
-                <button class="pet-accordion-trigger" onclick="toggleAccordion(this)">
-                  Características
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="pet-accordion-content">
-                  <div class="pet-accordion-content-inner">
-                    {{ section.settings.features_text }}
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-            {% if section.settings.faq_text != blank %}
-              <div class="pet-accordion-item">
-                <button class="pet-accordion-trigger" onclick="toggleAccordion(this)">
-                  Preguntas frecuentes
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="pet-accordion-content">
-                  <div class="pet-accordion-content-inner">
-                    {{ section.settings.faq_text }}
-                  </div>
-                </div>
-              </div>
-            {% endif %}
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function updateProductQty(delta) {
+    var input = document.getElementById('productQty');
+    var val = parseInt(input.value) || 1;
+    val = Math.max(1, val + delta);
+    input.value = val;
+  }
+  function changeMainImage(element, newSrc) {
+    document.getElementById('mainProductImg').src = newSrc;
+    document.querySelectorAll('.pet-product-gallery-thumb').forEach(function(el) {
+      el.classList.remove('active');
+    });
+    element.classList.add('active');
+  }
+</script>
 
 {% schema %}
 {
@@ -148,29 +140,19 @@
       "type": "text",
       "id": "shipping_text",
       "label": "Texto envío",
-      "default": "Envío en 2-4 días laborables"
+      "default": "Envío a España y Europa en 3-6 días laborables"
     },
     {
       "type": "text",
       "id": "returns_text",
       "label": "Texto devoluciones",
-      "default": "Devolución gratuita en 30 días"
+      "default": "Devolución sin preguntas en 14 días (RGPD)"
     },
     {
       "type": "text",
       "id": "guarantee_text",
       "label": "Texto garantía",
-      "default": "Pago 100% seguro"
-    },
-    {
-      "type": "richtext",
-      "id": "features_text",
-      "label": "Texto de características"
-    },
-    {
-      "type": "richtext",
-      "id": "faq_text",
-      "label": "Preguntas frecuentes"
+      "default": "Pago 100% seguro con SSL y soporte en español"
     }
   ],
   "presets": [
