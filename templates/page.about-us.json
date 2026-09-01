@@ -1,14 +1,10 @@
 {
   "sections": {
-    "about": {
-      "type": "about-us",
-      "settings": {
-        "title": "NUESTRA HISTORIA",
-        "subtitle": "CREAMOS ALGO ESPECIAL",
-        "heading": "Productos para vivir mejor con ellos",
-        "description": "<p>Somos una tienda creada por amantes de los animales que entienden los retos y alegrías de vivir con una mascota. Seleccionamos cuidadosamente cada producto para que tanto tú como tu compañero peludo disfrutéis de la mejor calidad, diseño y funcionalidad.</p><p>No vendemos solo productos para mascotas. Vendemos productos para vivir mejor con ellas.</p>"
-      }
+    "main": {
+      "type": "about-us"
     }
   },
-  "order": ["about"]
+  "order": [
+    "main"
+  ]
 }
