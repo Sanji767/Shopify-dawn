@@ -1,0 +1,100 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<article class="pet-article-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
+  <div class="pet-container container" style="max-width: 840px;">
+    <!-- Breadcrumb -->
+    <nav class="pet-article-breadcrumb" style="margin-bottom: 24px; font-size: 0.85rem; color: var(--pet-muted);">
+      <a href="/" style="color: var(--pet-muted);">Inicio</a>
+      <span style="margin: 0 6px;">/</span>
+      <a href="/blogs/news" style="color: var(--pet-muted);">Blog</a>
+      <span style="margin: 0 6px;">/</span>
+      <span style="color: var(--pet-navy); font-weight: 500;">{{ article.title | default: "5 Consejos para Mantener tu Sofá Libre de Pelos" }}</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="pet-article-header" style="margin-bottom: 40px;">
+      <span class="pet-article-category-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+        Hogar y Limpieza
+      </span>
+
+      <h1 style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy); margin-bottom: 20px; line-height: 1.2;">
+        {{ article.title | default: "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato" }}
+      </h1>
+
+      <div class="pet-article-meta-bar" style="display: flex; align-items: center; gap: 16px; font-size: 0.9rem; color: var(--pet-muted); padding-bottom: 20px; border-bottom: 1px solid #E5E1DB;">
+        <span>✍️ Por <strong>{{ article.author | default: "Equipo Paw & Home" }}</strong></span>
+        <span>•</span>
+        <span>📅 {{ article.published_at | date: "%d de %B, %Y" | default: "28 de Agosto, 2026" }}</span>
+        <span>•</span>
+        <span>⏱️ 4 min de lectura</span>
+      </div>
+    </header>
+
+    <!-- Featured Visual -->
+    <div class="pet-article-featured-media" style="margin-bottom: 40px; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); min-height: 380px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">
+      {% if article.image %}
+        <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title }}" style="width: 100%; height: auto; display: block;">
+      {% else %}
+        🛋️ 🐱 🐶
+      {% endif %}
+    </div>
+
+    <!-- Article Content Body -->
+    <div class="pet-article-body" style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-navy); line-height: 1.8; margin-bottom: 48px;">
+      {% if article.content != blank %}
+        {{ article.content }}
+      {% else %}
+        <p>Convivir con peludos es una de las mayores alegrías del hogar, pero la acumulación de pelos en sofás, alfombras y mantas puede convertirse en un desafío diario si no contamos con la rutina adecuada.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. Cepillado preventivo diario</h3>
+        <p>La mejor manera de evitar que los pelos terminen en el sofá es eliminarlos antes de que se desprendan. Un cepillado diario de 5 minutos con un cepillo adecuado para el tipo de manto de tu perro o gato reduce hasta un 80% la caída de pelo en casa.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">2. Utiliza mantas y protectores lavables</h3>
+        <p>Colocar una manta protectora suave en las zonas favoritas de descanso de tu mascota protege el tejido del sofá. Busca textiles impermeables que repelan la humedad y se puedan lavar en la lavadora a 30°C.</p>
+
+        <!-- High-Converting Embedded Product CTA Box inside Article -->
+        <div class="pet-article-product-cta" style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 28px; margin: 40px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+          <div style="font-size: 3.5rem; flex-shrink: 0; background: #fff; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            🛋️
+          </div>
+          <div style="flex: 1; min-width: 240px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Rodillo Reutilizable Quitapelos para Sofá</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Elimina pelos de mascotas en segundos sin necesidad de recambios adhesivos. 100% reutilizable.</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">19,99 €</span>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">3. Herramientas quitapelos de fricción electrostática</h3>
+        <p>Los rodillos reutilizables con tecnología de recolección en depósito son infinitamente más eficientes que los rollos adhesivos desechables. Al pasarlos en pasadas cortas de ida y vuelta, atraen el pelo incrustado en el tejido sin dañarlo.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">4. Aspira con boquillas para tapicería</h3>
+        <p>Pasar el aspirador dos veces por semana con la boquilla especial para mascotas evita que los pelos más finos se filtren entre las fibras del tejido.</p>
+      {% endif %}
+    </div>
+
+    <!-- Article Footer / Share -->
+    <footer class="pet-article-footer" style="padding-top: 32px; border-top: 1px solid #E5E1DB; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
+        ← Volver al Blog
+      </a>
+      <div style="display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--pet-muted);">
+        <span>Compartir:</span>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
+      </div>
+    </footer>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Artículo Individual",
+  "tag": "section",
+  "class": "pet-article-main-section"
+}
+{% endschema %}

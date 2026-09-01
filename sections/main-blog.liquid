@@ -1,0 +1,203 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-blog-section" style="padding: 60px 0; background-color: var(--pet-cream, #FBF8F3);">
+  <div class="pet-container container">
+    <!-- Blog Header Banner -->
+    <div class="pet-blog-header" style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+      <span class="pet-blog-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border: 1px solid #E8734A; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+        📖 CONSEJOS Y LIFESTYLE
+      </span>
+      <h1 class="pet-blog-title" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
+        {{ blog.title | default: "El Blog de Paw & Home" }}
+      </h1>
+      <p class="pet-blog-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted, #6B7280); line-height: 1.6;">
+        Guías prácticas, consejos de limpieza, viajes sin estrés y todo lo necesario para disfrutar al máximo de la vida con tu mascota.
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="pet-blog-categories" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+      <span class="pet-blog-cat-chip active" style="padding: 8px 18px; border-radius: 50px; background: var(--pet-navy); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Todos los artículos</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐶 Perros</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐱 Gatos</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🏠 Hogar y Limpieza</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🚗 Viajes en Coche</span>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="pet-blog-grid">
+      {% if blog.articles.size > 0 %}
+        {% for article in blog.articles %}
+          <article class="pet-article-card">
+            <a href="{{ article.url }}" class="pet-article-image-wrapper">
+              {% if article.image %}
+                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title }}" loading="lazy" class="pet-article-image">
+              {% else %}
+                <div class="pet-article-placeholder">📖 🐾</div>
+              {% endif %}
+              <span class="pet-article-tag">Lifestyle</span>
+            </a>
+            <div class="pet-article-content">
+              <div class="pet-article-meta">
+                <span class="pet-article-date">{{ article.published_at | date: "%d %b, %Y" }}</span>
+                <span class="pet-article-dot">•</span>
+                <span class="pet-article-read-time">⏱️ 4 min</span>
+              </div>
+              <h2 class="pet-article-card-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h2>
+              <p class="pet-article-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+              <a href="{{ article.url }}" class="pet-article-link">
+                Leer artículo
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <!-- Rich Out-of-the-Box Sample Pet Articles -->
+        {% assign blog_titles = "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato,Cómo Viajar en Coche con tu Perro de Forma Segura y Sin Estrés,Guía Completa para Elegir la Cama Ortopédica Perfecta para tu Mascota,Paseos Nocturnos: Seguridad e Iluminación Indispensable,Alimentación y Comederos Antivoracidad: Beneficios para la Digestión,Cómo Organizar los Juguetes y Accesorios de tu Mascota en Casa" | split: "," %}
+        {% assign blog_tags = "Hogar y Limpieza,Viajes en Coche,Salud y Descanso,Paseos y Seguridad,Nutrición,Organización" | split: "," %}
+        {% assign blog_emojis = "🛋️,🚗,🛏️,🦮,🥣,📦" | split: "," %}
+        {% assign blog_reads = "4 min,5 min,6 min,3 min,4 min,5 min" | split: "," %}
+        {% assign blog_excerpts = "Descubre los mejores trucos y herramientas para eliminar los pelos de tapicerías y mantener tu salón impecable sin esfuerzo.,Todo lo que necesitas saber sobre cinturones de seguridad, fundas protectoras e hidratación durante los trayectos en carretera.,El descanso adecuado previene problemas articulares. Aprende a evaluar el tamaño y firmeza idóneos para tu perro o gato.,Consejos y accesorios reflectantes y con luz LED para que los paseos al anochecer sean 100% seguros y tranquilos.,Explicamos cómo los comederos lentos reducen la ansiedad al comer y evitan problemas de digestión en mascotas.,Soluciones prácticas y estéticas para guardar correas, juguetes y cepillos sin desordenar tu hogar." | split: "," %}
+
+        {% for i in (0..5) %}
+          <article class="pet-article-card">
+            <a href="/blogs/news" class="pet-article-image-wrapper">
+              <div class="pet-article-placeholder" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; height: 100%; min-height: 220px;">
+                {{ blog_emojis[i] }}
+              </div>
+              <span class="pet-article-tag">{{ blog_tags[i] }}</span>
+            </a>
+            <div class="pet-article-content">
+              <div class="pet-article-meta">
+                <span class="pet-article-date">Paw & Home Equipo</span>
+                <span class="pet-article-dot">•</span>
+                <span class="pet-article-read-time">⏱️ {{ blog_reads[i] }}</span>
+              </div>
+              <h2 class="pet-article-card-title">
+                <a href="/blogs/news">{{ blog_titles[i] }}</a>
+              </h2>
+              <p class="pet-article-excerpt">{{ blog_excerpts[i] }}</p>
+              <a href="/blogs/news" class="pet-article-link">
+                Leer artículo
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .pet-article-card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #E5E1DB;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pet-article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 36px rgba(26, 43, 74, 0.1);
+  }
+  .pet-article-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .pet-article-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--pet-navy);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pet-article-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .pet-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--pet-muted);
+    margin-bottom: 12px;
+  }
+  .pet-article-card-title {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.35rem !important;
+    color: var(--pet-navy) !important;
+    margin: 0 0 12px !important;
+    line-height: 1.3 !important;
+  }
+  .pet-article-card-title a {
+    color: var(--pet-navy);
+    text-decoration: none;
+  }
+  .pet-article-card-title a:hover {
+    color: var(--pet-coral);
+  }
+  .pet-article-excerpt {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: var(--pet-muted) !important;
+    line-height: 1.6 !important;
+    margin: 0 0 20px !important;
+  }
+  .pet-article-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--pet-coral);
+    text-decoration: none;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+  }
+  .pet-article-card:hover .pet-article-link {
+    gap: 10px;
+  }
+
+  @media (max-width: 991px) {
+    .pet-blog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  }
+  @media (max-width: 575px) {
+    .pet-blog-grid { grid-template-columns: 1fr; gap: 16px; }
+    .pet-blog-title { font-size: 2.2rem !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Blog Principal",
+  "tag": "section",
+  "class": "pet-blog-main-section"
+}
+{% endschema %}
