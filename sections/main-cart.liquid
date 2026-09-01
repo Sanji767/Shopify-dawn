@@ -74,16 +74,19 @@
           <span class="pet-cart-totals-value">{{ cart.items_subtotal_price | money }}</span>
         </div>
         <p style="font-size: 0.8rem; color: var(--pet-muted); margin-bottom: 16px;">Impuestos y gastos de envío se calculan en el checkout.</p>
-        <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%;">Finalizar compra</a>
-        <a href="/collections" style="display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--pet-muted);">Seguir comprando</a>
+        <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%; font-size: 1.1rem; padding: 14px;">Finalizar compra</a>
+        <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: var(--pet-muted);">
+          🔒 Pago 100% Seguro · Visa, Mastercard, PayPal, Apple Pay, Klarna, iDEAL
+        </div>
+        <a href="/collections/all" style="display: block; text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--pet-muted); text-decoration: underline;">Seguir comprando</a>
       </div>
     {% else %}
       <!-- Empty Cart -->
       <div style="text-align: center; padding: 60px 0;">
-        <p style="font-size: 4rem; margin-bottom: 16px;">🛒</p>
+        <p style="font-size: 4rem; margin-bottom: 16px;">🛒 🐾</p>
         <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Tu carrito está vacío</h2>
-        <p style="color: var(--pet-muted); margin-bottom: 24px;">Parece que aún no has encontrado lo que buscas.</p>
-        <a href="/collections" class="pet-btn pet-btn-primary">Explorar productos</a>
+        <p style="color: var(--pet-muted); margin-bottom: 24px;">Descubre nuestra selección de productos para ti y tu mascota.</p>
+        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Explorar productos</a>
       </div>
     {% endif %}
   </div>

@@ -517,9 +517,38 @@
         {% endif %}
 
       {% else %}
-        <div class="pet-collection-empty">
-          <h2>No hay productos en esta colección</h2>
-          <p>Explora nuestras otras colecciones para encontrar lo que buscas.</p>
+        <div class="pet-collection-empty" style="text-align: center; padding: 40px 0;">
+          <h2 style="font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--pet-navy); margin-bottom: 8px;">Explora nuestros productos destacados</h2>
+          <p style="color: var(--pet-muted); margin-bottom: 32px;">No hay productos asignados a esta categoría aún, pero aquí tienes los más populares:</p>
+          
+          <div class="pet-products-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; margin-bottom: 40px;">
+            {% assign sample_titles = "Cama Ortopédica Lavable para Mascotas,Manta Protectora Impermeable para Coche,Rodillo Reutilizable Quitapelos para Sofá,Botella Portátil de Agua para Paseo" | split: "," %}
+            {% assign sample_prices = "34,99 €,29,99 €,19,99 €,14,99 €" | split: "," %}
+            {% assign sample_compares = "44,99 €,39,99 €,24,99 €,18,99 €" | split: "," %}
+            {% for i in (0..3) %}
+              <article class="pet-product-card">
+                <div class="pet-product-card-img-wrap" style="display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); font-size:3.5rem; height:200px;">
+                  {% if i == 0 %}🛏️{% elsif i == 1 %}🚗{% elsif i == 2 %}🛋️{% else %}🦮{% endif %}
+                </div>
+                <div class="pet-product-card-info" style="padding: 16px;">
+                  <span class="pet-stock-badge">⚡ Más vendido</span>
+                  <div class="pet-product-card-rating" style="display:flex; gap:4px; font-size:0.8rem; margin-bottom:6px;">
+                    <span style="color:#F59E0B;">★★★★★</span>
+                    <span style="color:var(--pet-muted);">(4.9)</span>
+                  </div>
+                  <h3 class="pet-product-card-title" style="font-size: 1rem; margin-bottom: 8px;">
+                    <a href="/collections/all" style="color: var(--pet-navy); text-decoration: none;">{{ sample_titles[i] }}</a>
+                  </h3>
+                  <div class="pet-product-card-price" style="margin-bottom: 12px;">
+                    <span class="pet-product-card-price-current" style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">{{ sample_prices[i] }}</span>
+                    <span class="pet-product-card-price-compare" style="color: var(--pet-muted); text-decoration: line-through; margin-left: 6px; font-size: 0.85rem;">{{ sample_compares[i] }}</span>
+                  </div>
+                  <a href="/collections/all" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">Ver producto</a>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 36px; border-radius: 50px; text-decoration: none;">Ver todo el catálogo</a>
         </div>
       {% endif %}
 

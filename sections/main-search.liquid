@@ -1,0 +1,86 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-search-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
+  <div class="pet-container container">
+    <!-- Header -->
+    <header style="text-align: center; max-width: 640px; margin: 0 auto 40px;">
+      <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy); margin-bottom: 16px;">
+        {% if search.performed %}
+          Resultados para "{{ search.terms }}"
+        {% else %}
+          Buscar productos
+        {% endif %}
+      </h1>
+
+      <!-- Search Input Bar -->
+      <form action="/search" method="get" role="search" style="display: flex; gap: 10px; max-width: 500px; margin: 0 auto;">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="¿Qué buscas para tu mascota?..."
+          style="flex: 1; padding: 14px 20px; border-radius: 50px; border: 1px solid var(--pet-border, #E5E1DB); font-family: 'Inter', sans-serif; font-size: 0.95rem;"
+          required
+        >
+        <button type="submit" class="pet-btn pet-btn-primary" style="padding: 14px 28px; border-radius: 50px;">
+          Buscar
+        </button>
+      </form>
+    </header>
+
+    {% if search.performed %}
+      {% if search.results_count > 0 %}
+        <p style="text-align: center; color: var(--pet-muted); margin-bottom: 32px; font-size: 0.95rem;">
+          Hemos encontrado <strong>{{ search.results_count }}</strong> resultado(s) para tu búsqueda.
+        </p>
+
+        <div class="pet-products-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+          {% for item in search.results %}
+            <article class="pet-product-card">
+              <a href="{{ item.url }}" class="pet-product-card-img-wrap">
+                {% if item.featured_image %}
+                  <img src="{{ item.featured_image | image_url: width: 600 }}" alt="{{ item.title }}" loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
+                {% else %}
+                  <div style="height: 220px; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    🔍 🐾
+                  </div>
+                {% endif %}
+              </a>
+              <div class="pet-product-card-info" style="padding: 16px;">
+                <h3 class="pet-product-card-title" style="font-size: 1rem; margin-bottom: 8px;">
+                  <a href="{{ item.url }}" style="color: var(--pet-navy); text-decoration: none;">{{ item.title }}</a>
+                </h3>
+                {% if item.price %}
+                  <div class="pet-product-card-price" style="margin-bottom: 12px; font-weight: 700; color: var(--pet-navy);">
+                    {{ item.price | money }}
+                  </div>
+                {% endif %}
+                <a href="{{ item.url }}" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">Ver resultado</a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div style="text-align: center; padding: 40px 0;">
+          <p style="font-size: 3.5rem; margin-bottom: 12px;">🔍 🐾</p>
+          <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--pet-navy); margin-bottom: 8px;">No encontramos resultados para "{{ search.terms }}"</h2>
+          <p style="color: var(--pet-muted); margin-bottom: 24px;">Intenta buscar otros términos como "cama", "manta", "viaje" o "rodillo".</p>
+          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Ver todo el catálogo</a>
+        </div>
+      {% endif %}
+    {% else %}
+      <div style="text-align: center; padding: 40px 0;">
+        <p style="color: var(--pet-muted); margin-bottom: 24px;">Escribe una palabra en el buscador superior para encontrar lo que necesitas.</p>
+        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Explorar catálogo</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Búsqueda principal",
+  "tag": "section",
+  "class": "pet-search-section"
+}
+{% endschema %}

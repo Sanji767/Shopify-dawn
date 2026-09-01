@@ -1,8 +1,10 @@
 {
   "sections": {
     "main": {
-      "type": "404"
+      "type": "main-search"
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
