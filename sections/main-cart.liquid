@@ -6,11 +6,11 @@
     <!-- Cart Title Header -->
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
       <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy, #1A2B4A); margin: 0;">
-        Tu Carrito 🛒
+        Tu Carrito para mimar a tu peludo 🛒🐾
       </h1>
       {% if cart.item_count > 0 %}
         <span style="background: var(--pet-navy, #1A2B4A); color: #fff; padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700;">
-          {{ cart.item_count }} {% if cart.item_count == 1 %}producto{% else %}productos{% endif %}
+          {{ cart.item_count }} {% if cart.item_count == 1 %}mimo{% else %}mimos{% endif %}
         </span>
       {% endif %}
     </div>
@@ -25,9 +25,9 @@
       <div style="background: #FFFFFF; border: 1px solid #E5E1DB; border-radius: 20px; padding: 20px 24px; margin-bottom: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
         <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--pet-navy); margin-bottom: 10px; text-align: center;">
           {% if remaining > 0 %}
-            Te faltan <span style="color: var(--pet-coral);">{{ remaining | money }}</span> para conseguir <strong style="color: #166534;">ENVÍO GRATIS 🚚</strong>
+            Te faltan <span style="color: var(--pet-coral);">{{ remaining | money }}</span> para que le llegue el <strong style="color: #166534;">ENVÍO GRATIS A CASA 🏡</strong>
           {% else %}
-            🎉 ¡Enhorabuena! Has conseguido <strong style="color: #166534;">ENVÍO GRATIS</strong> en este pedido.
+            🎉 ¡Enhorabuena! Has conseguido <strong style="color: #166534;">ENVÍO GRATIS</strong> para consentir a tu compañero.
           {% endif %}
         </p>
         <div style="background: #F3F0EC; border-radius: 50px; height: 10px; width: 100%; overflow: hidden;">
@@ -84,9 +84,9 @@
           <div style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 20px 24px; margin-top: 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
             <div style="font-size: 2.5rem; flex-shrink: 0;">🛋️</div>
             <div style="flex: 1; min-width: 200px;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase;">AÑADE A TU PEDIDO</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase;">MÍMALE UN POQUITO MÁS</span>
               <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--pet-navy); margin: 2px 0 4px;">Rodillo Reutilizable Quitapelos</h4>
-              <p style="font-size: 0.85rem; color: var(--pet-muted); margin: 0;">Ideal para limpiar sofás y mantas en segundos.</p>
+              <p style="font-size: 0.85rem; color: var(--pet-muted); margin: 0;">Para tener el sofá y las mantas impecables en segundos.</p>
             </div>
             <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; text-decoration: none;">+ Añadir por 19,99 €</a>
           </div>
@@ -105,7 +105,7 @@
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 0.95rem; color: var(--pet-muted);">
-              <span>Envío</span>
+              <span>Envío con mimo</span>
               {% if remaining <= 0 %}
                 <span style="font-weight: 700; color: #166534;">GRATIS</span>
               {% else %}
@@ -120,13 +120,13 @@
 
             <!-- Checkout Button -->
             <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%; font-size: 1.1rem; padding: 16px; border-radius: 50px; text-decoration: none; margin-bottom: 16px; box-shadow: 0 8px 20px rgba(232, 115, 74, 0.3);">
-              Finalizar Compra →
+              Finalizar Pedido con Amor →
             </a>
 
             <!-- Delivery & Payment Trust -->
             <div style="background: #FBF8F3; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 16px;">
-              <p style="font-size: 0.8rem; color: #166534; font-weight: 700; margin-bottom: 4px;">🚚 Entrega en 3-6 días laborables</p>
-              <p style="font-size: 0.75rem; color: var(--pet-muted); margin: 0;">En España Peninsular y Europa con SEUR / Correos</p>
+              <p style="font-size: 0.8rem; color: #166534; font-weight: 700; margin-bottom: 4px;">🚚 Cuidado y entrega en 3-6 días</p>
+              <p style="font-size: 0.75rem; color: var(--pet-muted); margin: 0;">En España Peninsular y Europa con transportista certificado</p>
             </div>
 
             <div style="text-align: center; font-size: 0.75rem; color: var(--pet-muted); margin-bottom: 16px;">
@@ -134,7 +134,7 @@
             </div>
 
             <a href="/collections/all" style="display: block; text-align: center; font-size: 0.85rem; color: var(--pet-navy); font-weight: 600; text-decoration: underline;">
-              ← Seguir comprando
+              ← Seguir explorando mimos
             </a>
           </div>
         </div>
@@ -143,18 +143,18 @@
     {% else %}
       <!-- Empty Cart Showcase State -->
       <div style="background: #FFFFFF; border-radius: 28px; padding: 48px 24px; text-align: center; max-width: 860px; margin: 0 auto; border: 1px solid #E5E1DB;">
-        <div style="font-size: 4rem; margin-bottom: 16px;">🛒 🐾</div>
-        <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">Tu carrito está vacío</h2>
-        <p style="color: var(--pet-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 32px;">Descubre nuestra selección de productos recomendados para el descanso, paseo y limpieza en el hogar.</p>
+        <div style="font-size: 4rem; margin-bottom: 16px;">😴 🐾</div>
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">Tu carrito está descansando... como ellos en el sofá</h2>
+        <p style="color: var(--pet-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 32px;">Parece que aún no has elegido nada para consentir a tu compañero. Date una vuelta y encuentra ese detalle especial que le alegrará el día.</p>
         
         <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 1.05rem; display: inline-block;">
-          Explorar todo el catálogo →
+          Explorar mimos para ellos →
         </a>
 
         <!-- Popular Recommendations Grid -->
         <div style="margin-top: 48px; text-align: left;">
           <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin-bottom: 20px; text-align: center;">
-            Productos más buscados este mes
+            Los favoritos más mimados este mes
           </h3>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
             {% assign sample_titles = "Cama Ortopédica,Manta Coche,Rodillo Pelos,Botella Paseo" | split: "," %}
@@ -166,7 +166,7 @@
                 </div>
                 <h4 style="font-size: 0.9rem; margin: 0 0 4px; color: var(--pet-navy);">{{ sample_titles[i] }}</h4>
                 <p style="font-weight: 700; color: var(--pet-coral); margin: 0 0 10px; font-size: 0.95rem;">{{ sample_prices[i] }}</p>
-                <a href="/collections/all" class="pet-btn pet-btn-secondary" style="padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; text-decoration: none; display: block; border: 1px solid var(--pet-navy); color: var(--pet-navy);">Ver producto</a>
+                <a href="/collections/all" class="pet-btn pet-btn-secondary" style="padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; text-decoration: none; display: block; border: 1px solid var(--pet-navy); color: var(--pet-navy);">Ver con cariño</a>
               </div>
             {% endfor %}
           </div>

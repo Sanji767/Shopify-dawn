@@ -45,9 +45,9 @@
           </div>
         {% endfor %}
       {% else %}
-        {% assign def_emojis = "🛋️,🚗,🐾,📦" | split: "," %}
-        {% assign def_probs = "¿Tu sofá está lleno de pelos?,¿Viajar con tu perro es complicado?,¿Tu mascota ensucia la casa?,¿Necesitas organizar sus cosas?" | split: "," %}
-        {% assign def_sols = "Descubre nuestros productos de limpieza,Todo para viajar cómodo con ellos,Productos para mantener tu hogar impecable,Organizadores y almacenamiento con estilo" | split: "," %}
+        {% assign def_emojis = "🛋️,🚗,🐾,🛏️" | split: "," %}
+        {% assign def_probs = "¿Tu sofá parece tener su propio abrigo de pelos?,¿Ir en coche con tu peludo es un mar de nervios o pelos?,¿Llega del paseo y deja huellitas por toda la casa?,¿Notas que le cuesta levantarse tras una siesta larga?" | split: "," %}
+        {% assign def_sols = "Descubre cómo tenerlo limpio en segundos sin estropear las telas.,Mantas y protectores impermeables para que viaje seguro y relajado.,Soluciones suaves para limpiar sus patitas antes de entrar al salón.,Camas ortopédicas con viscoelástica para cuidar sus articulaciones." | split: "," %}
         {% for i in (0..3) %}
           <div class="pet-problem-col">
             <a href="/collections/all" class="pet-problem-card">

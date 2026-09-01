@@ -22,9 +22,9 @@
       {% endfor %}
 
       {% if section.blocks.size == 0 %}
-        {% assign default_icons = "✨,🚚,💚" | split: "," %}
-        {% assign default_titles = "Calidad premium,Envío rápido,Atención cercana" | split: "," %}
-        {% assign default_descs = "Seleccionamos cada producto para garantizar la mejor calidad para tu mascota y para ti.,Recibe tu pedido en 3-6 días laborables. Envío gratis a partir de 50 €.,Estamos aquí para ayudarte. Contacta con nosotros cuando lo necesites." | split: "," %}
+        {% assign default_icons = "✨,🏠,💚" | split: "," %}
+        {% assign default_titles = "Amor en cada detalle,Pensado para la vida real,Siempre a tu lado" | split: "," %}
+        {% assign default_descs = "Solo elegimos productos cómodos, seguros y duraderos que usaríamos sin dudarlo con nuestros propios compañeros peludos.,Sabemos lo que es un sofá con pelos o unas patitas llenas de barro tras pasear. Te ayudamos a disfrutar juntos sin estrés.,Hablamos tu mismo idioma: el de quienes nos desvivimos por su bienestar y felicidad. Escríbenos cuando lo necesites." | split: "," %}
         {% for i in (0..2) %}
           <div class="pet-feature-col">
             <div class="pet-feature-card">

@@ -3,11 +3,11 @@
     "hero_section": {
       "type": "hero-section",
       "settings": {
-        "title": "Productos diseñados para ti y para ellos.",
-        "subtitle": "Descubre nuestra selección pensada para hacer la vida con tu mascota más fácil, cómoda y bonita.",
-        "button_text": "Ver productos",
+        "title": "Hacerlos felices es nuestra forma de darles las gracias.",
+        "subtitle": "Cuidamos de su descanso, sus paseos y la armonía de tu hogar con soluciones hechas con auténtico cariño por los animales.",
+        "button_text": "Ver mimos para ellos",
         "button_url": "/collections/all",
-        "secondary_button_text": "Para tu mascota",
+        "secondary_button_text": "Para tu hogar",
         "secondary_button_url": "/collections/all"
       }
     },
@@ -69,14 +69,14 @@
       ],
       "settings": {
         "title": "Explora por categoría",
-        "subtitle": "Encuentra justo lo que necesitas para tu día a día"
+        "subtitle": "Encuentra justo lo que necesitas para tu día a día con ellos"
       }
     },
     "featured_products": {
       "type": "featured-products",
       "settings": {
-        "title": "Los favoritos de nuestros clientes",
-        "subtitle": "Los productos mejor valorados por dueños de mascotas"
+        "title": "Los favoritos más mimados",
+        "subtitle": "Los productos mejor valorados por familias con perros y gatos"
       }
     },
     "feature_values": {
@@ -86,24 +86,24 @@
           "type": "block",
           "settings": {
             "icon": "✨",
-            "feature_title": "Calidad premium",
-            "description": "Seleccionamos cada producto para garantizar la mejor calidad para tu mascota y para ti."
+            "feature_title": "Amor en cada detalle",
+            "description": "Solo elegimos productos cómodos, seguros y duraderos que usaríamos sin dudarlo con nuestros propios compañeros peludos."
           }
         },
         "val_shipping": {
           "type": "block",
           "settings": {
-            "icon": "🚚",
-            "feature_title": "Envío rápido",
-            "description": "Recibe tu pedido en 3-6 días laborables en España y Europa. Envío gratis a partir de 50 €."
+            "icon": "🏠",
+            "feature_title": "Pensado para la vida real",
+            "description": "Sabemos lo que es un sofá lleno de pelos o unas patitas con barro tras pasear. Te ayudamos a disfrutar juntos sin estrés."
           }
         },
         "val_support": {
           "type": "block",
           "settings": {
             "icon": "💚",
-            "feature_title": "Atención cercana",
-            "description": "Estamos aquí para ayudarte en español. Contacta con nosotros cuando lo necesites."
+            "feature_title": "Siempre a tu lado",
+            "description": "Hablamos tu mismo idioma: el de quienes nos desvivimos por su bienestar y felicidad. Escríbenos cuando lo necesites."
           }
         }
       },
@@ -113,16 +113,16 @@
         "val_support"
       ],
       "settings": {
-        "title": "¿Por qué elegirnos?",
-        "subtitle": "Productos pensados para ti y para ellos"
+        "title": "Hecho por y para quienes no imaginamos la vida sin ellos",
+        "subtitle": "Amor, respeto y calidad en cada rincón de nuestra tienda"
       }
     },
     "pet_owners": {
       "type": "pet-owners",
       "settings": {
-        "title": "Porque ellos forman parte de tu vida.",
-        "description": "Creamos productos pensados para ti, el dueño de mascotas. Soluciones prácticas y con estilo para que la convivencia con tu compañero peludo sea aún mejor.",
-        "cta_text": "Ver productos para ti",
+        "title": "Vivir con ellos es maravilloso (incluso cuando llenan todo de pelos).",
+        "description": "Convivir con un perro o un gato llena la casa de alegría, miradas cómplices y momentos únicos. Creamos soluciones pensadas desde el corazón para que disfrutes de su compañía manteniendo tu hogar bonito, limpio y en calma.",
+        "cta_text": "Mímale como se merece",
         "cta_url": "/collections/all"
       },
       "blocks": {
@@ -225,17 +225,17 @@
     "pet_problems": {
       "type": "pet-problems",
       "settings": {
-        "title": "Tenemos la solución a tu día a día",
-        "subtitle": "Resolvemos las situaciones más comunes al convivir con mascotas"
+        "title": "Te entendemos porque también nos pasa",
+        "subtitle": "Pequeñas soluciones a los retos diarios de convivir con nuestros compañeros peludos"
       },
       "blocks": {
         "prob_1": {
           "type": "problem",
           "settings": {
             "emoji": "🛋️",
-            "problem": "¿Tu sofá está lleno de pelos?",
-            "solution": "Descubre nuestros productos de limpieza",
-            "link_text": "Ver productos",
+            "problem": "¿Tu sofá parece tener su propio abrigo de pelos?",
+            "solution": "Descubre cómo tenerlo limpio en segundos sin estropear las telas.",
+            "link_text": "Ver solución con amor",
             "link": "/collections/casa"
           }
         },
@@ -243,29 +243,29 @@
           "type": "problem",
           "settings": {
             "emoji": "🚗",
-            "problem": "¿Viajar con tu perro es complicado?",
-            "solution": "Todo para viajar con ellos",
-            "link_text": "Ver productos",
+            "problem": "¿Ir en coche con tu peludo es un mar de nervios o pelos?",
+            "solution": "Mantas y protectores impermeables para que viaje seguro y relajado.",
+            "link_text": "Viajar tranquilos",
             "link": "/collections/viajar"
           }
         },
         "prob_3": {
           "type": "problem",
           "settings": {
-            "emoji": "🏠",
-            "problem": "¿Tu mascota ensucia toda la casa?",
-            "solution": "Productos para mantener tu hogar",
-            "link_text": "Ver productos",
+            "emoji": "🐾",
+            "problem": "¿Llega del paseo y deja huellitas por toda la casa?",
+            "solution": "Soluciones suaves para limpiar sus patitas antes de entrar al salón.",
+            "link_text": "Cuidar sus patitas",
             "link": "/collections/casa"
           }
         },
         "prob_4": {
           "type": "problem",
           "settings": {
-            "emoji": "📦",
-            "problem": "¿Necesitas organizar sus cosas?",
-            "solution": "Organizadores y almacenamiento",
-            "link_text": "Ver productos",
+            "emoji": "🛏️",
+            "problem": "¿Notas que le cuesta levantarse tras una siesta larga?",
+            "solution": "Camas ortopédicas con viscoelástica para cuidar sus articulaciones.",
+            "link_text": "Cuidar su descanso",
             "link": "/collections/casa"
           }
         }

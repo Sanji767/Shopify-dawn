@@ -10,11 +10,11 @@
   <div class="pet-hero-content">
     <div class="pet-hero-badge">
       <span class="pet-hero-badge-icon">🐾</span>
-      <span>Productos seleccionados para personas que viven con mascotas</span>
+      <span>Porque nunca han sido solo mascotas: son nuestra familia</span>
     </div>
 
-    <h1>{{ section.settings.title }}</h1>
-    <p>{{ section.settings.subtitle }}</p>
+    <h1>{{ section.settings.title | default: "Hacerlos felices es nuestra forma de darles las gracias." }}</h1>
+    <p>{{ section.settings.subtitle | default: "Cuidamos de su descanso, sus paseos y la armonía de tu hogar con soluciones hechas con auténtico cariño por los animales." }}</p>
 
     <div class="pet-hero-buttons">
       {% if section.settings.button_text != blank %}
@@ -34,15 +34,15 @@
     <div class="pet-hero-trust">
       <div class="pet-hero-trust-item">
         <span class="pet-hero-stars">★★★★★</span>
-        <span>4.9/5 por +10.000 clientes</span>
+        <span>4.9/5 por miles de familias con mascota</span>
       </div>
       <div class="pet-hero-trust-divider"></div>
       <div class="pet-hero-trust-item">
-        <span>🚚 Envío rápido 24-48h</span>
+        <span>🚚 Envíos cuidados con cariño (3-6 días)</span>
       </div>
       <div class="pet-hero-trust-divider"></div>
       <div class="pet-hero-trust-item">
-        <span>💚 100% Garantía de devolución</span>
+        <span>💚 14 días para probar con tu peludo</span>
       </div>
     </div>
   </div>
