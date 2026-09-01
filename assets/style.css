@@ -52,6 +52,16 @@ html {
 }
 
 :root {
+  /* Visual System Variables */
+  --color-primary: {{ settings.color_primary | default: '#121212' }};
+  --color-secondary: {{ settings.color_secondary | default: '#FF8900' }};
+  --color-background: {{ settings.color_background | default: '#FFFFFF' }};
+  --color-foreground: {{ settings.color_text | default: '#121212' }};
+  --radius-small: {{ settings.radius_small | default: '4px' }};
+  --radius-medium: {{ settings.radius_medium | default: '8px' }};
+  --radius-large: {{ settings.radius_large | default: '12px' }};
+  --spacing-unit: {{ settings.spacing_unit | default: '8px' }};
+
   scroll-behavior: unset;
 }
 

@@ -1,0 +1,102 @@
+<!-- Cart Page -->
+<section class="pet-cart-page">
+  <div class="pet-container">
+    <h1>Tu carrito</h1>
+
+    {% if cart.item_count > 0 %}
+      <!-- Free Shipping Bar -->
+      {% assign free_shipping_threshold = 5000 %}
+      {% assign remaining = free_shipping_threshold | minus: cart.total_price %}
+      {% assign progress = cart.total_price | times: 100 | divided_by: free_shipping_threshold %}
+      {% if progress > 100 %}{% assign progress = 100 %}{% endif %}
+
+      <div class="pet-cart-free-shipping" style="max-width: 600px; margin: 0 auto var(--spacing-xl);">
+        <p class="pet-cart-free-shipping-text">
+          {% if remaining > 0 %}
+            Te faltan <strong>{{ remaining | money }}</strong> para conseguir envío gratis 🚚
+          {% else %}
+            🎉 ¡Tienes envío gratis!
+          {% endif %}
+        </p>
+        <div class="pet-cart-free-shipping-bar {% if remaining <= 0 %}complete{% endif %}">
+          <div class="pet-cart-free-shipping-progress" style="width: {{ progress }}%;"></div>
+        </div>
+      </div>
+
+      <!-- Cart Table -->
+      <table class="pet-cart-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr>
+              <td>
+                <div class="pet-cart-item-info">
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" class="pet-cart-item-img">
+                  <div>
+                    <div class="pet-cart-item-title">
+                      <a href="{{ item.url }}" style="color: var(--pet-navy); text-decoration: none;">{{ item.title }}</a>
+                    </div>
+                    {% if item.variant.title != 'Default Title' %}
+                      <div class="pet-cart-item-variant">{{ item.variant.title }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </td>
+              <td>{{ item.price | money }}</td>
+              <td>
+                <div class="pet-product-qty" style="margin: 0;">
+                  <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})">−</button>
+                  <input type="text" value="{{ item.quantity }}" readonly style="width: 45px;">
+                  <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})">+</button>
+                </div>
+              </td>
+              <td><strong>{{ item.line_price | money }}</strong></td>
+              <td>
+                <button class="pet-cart-remove" onclick="removeItem({{ forloop.index }}, 0)">Eliminar</button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Cart Summary -->
+      <div class="pet-cart-summary">
+        <div class="pet-cart-totals">
+          <span class="pet-cart-totals-label">Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}producto{% else %}productos{% endif %})</span>
+          <span class="pet-cart-totals-value">{{ cart.items_subtotal_price | money }}</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--pet-muted); margin-bottom: 16px;">Impuestos y gastos de envío se calculan en el checkout.</p>
+        <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%;">Finalizar compra</a>
+        <a href="/collections" style="display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--pet-muted);">Seguir comprando</a>
+      </div>
+    {% else %}
+      <!-- Empty Cart -->
+      <div style="text-align: center; padding: 60px 0;">
+        <p style="font-size: 4rem; margin-bottom: 16px;">🛒</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Tu carrito está vacío</h2>
+        <p style="color: var(--pet-muted); margin-bottom: 24px;">Parece que aún no has encontrado lo que buscas.</p>
+        <a href="/collections" class="pet-btn pet-btn-primary">Explorar productos</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Carrito"
+    }
+  ]
+}
+{% endschema %}

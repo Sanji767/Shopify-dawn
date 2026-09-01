@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Super Nature",
-    "theme_version": "15.2.0",
-    "theme_author": "Oru Studio",
+    "theme_name": "Pet Lifestyle",
+    "theme_version": "1.0.0",
+    "theme_author": "Pet Lifestyle Store",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://orustudio.com/"
+    "theme_support_url": "https://help.shopify.com/"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -99,6 +99,17 @@
           "secondary_button_border": "secondary_button_label"
         }
       }
+    ]
+  },
+  {
+    "name": "Visual System",
+    "settings": [
+      {"type": "color", "id": "color_primary", "label": "Primary Color", "default": "#121212"},
+      {"type": "color", "id": "color_secondary", "label": "Secondary Color", "default": "#FF8900"},
+      {"type": "range", "id": "radius_small", "label": "Small Radius", "min": 0, "max": 20, "step": 2, "unit": "px", "default": 4},
+      {"type": "range", "id": "radius_medium", "label": "Medium Radius", "min": 0, "max": 30, "step": 2, "unit": "px", "default": 8},
+      {"type": "range", "id": "radius_large", "label": "Large Radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12},
+      {"type": "range", "id": "spacing_unit", "label": "Base Spacing Unit", "min": 4, "max": 20, "step": 2, "unit": "px", "default": 8}
     ]
   },
   {

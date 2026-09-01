@@ -1,0 +1,312 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-reviews-section" style="background-color: {{ section.settings.background_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="pet-container container">
+    {% if section.settings.title != blank %}
+      <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+    {% endif %}
+
+    <div class="pet-reviews-grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="pet-review-col" {{ block.shopify_attributes }}>
+            <article class="pet-review-card">
+              <div class="pet-review-card__header">
+                <div class="pet-review-card__stars" aria-label="{{ block.settings.rating }} de 5 estrellas">
+                  {% for i in (1..5) %}
+                    {% if i <= block.settings.rating %}
+                      <span class="pet-review-card__star pet-review-card__star--filled" aria-hidden="true">★</span>
+                    {% else %}
+                      <span class="pet-review-card__star pet-review-card__star--empty" aria-hidden="true">★</span>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <span class="pet-review-verified">✓ Compra verificada</span>
+              </div>
+
+              {% if block.settings.review_text != blank %}
+                <blockquote class="pet-review-card__text">
+                  <p>“{{ block.settings.review_text }}”</p>
+                </blockquote>
+              {% endif %}
+
+              <footer class="pet-review-card__footer">
+                <div class="pet-review-card__avatar" aria-hidden="true">
+                  {{ block.settings.author_name | slice: 0 | upcase }}
+                </div>
+                <div class="pet-review-card__author-info">
+                  {% if block.settings.author_name != blank %}
+                    <cite class="pet-review-card__author">{{ block.settings.author_name }}</cite>
+                  {% endif %}
+                  {% if block.settings.author_detail != blank %}
+                    <span class="pet-review-card__detail">{{ block.settings.author_detail }}</span>
+                  {% endif %}
+                </div>
+              </footer>
+            </article>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% assign rev_authors = "María G.,Carlos R.,Laura S." | split: "," %}
+        {% assign rev_details = "Dueña de Max (Golden Retriever),Dueño de Misa y Leo,Dueña de Bubu (Caniche)" | split: "," %}
+        {% assign rev_texts = "Los productos para el coche han cambiado nuestros viajes. La manta protectora es facilísima de limpiar y súper resistente.,El rodillo quitapelos para el sofá funciona de maravilla. Por fin puedo tener la casa limpia teniendo gatos.,Excelente calidad y envío muy rápido. El dispensador de bolsas y la botella de agua para paseos son indispensables." | split: "," %}
+        {% for i in (0..2) %}
+          <div class="pet-review-col">
+            <article class="pet-review-card">
+              <div class="pet-review-card__header">
+                <div class="pet-review-card__stars">★★★★★</div>
+                <span class="pet-review-verified">✓ Compra verificada</span>
+              </div>
+              <blockquote class="pet-review-card__text">
+                <p>“{{ rev_texts[i] }}”</p>
+              </blockquote>
+              <footer class="pet-review-card__footer">
+                <div class="pet-review-card__avatar">{{ rev_authors[i] | slice: 0 | upcase }}</div>
+                <div class="pet-review-card__author-info">
+                  <cite class="pet-review-card__author">{{ rev_authors[i] }}</cite>
+                  <span class="pet-review-card__detail">{{ rev_details[i] }}</span>
+                </div>
+              </footer>
+            </article>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-reviews-section {
+    background-color: var(--pet-cream, #FBF8F3);
+    padding: 80px 0;
+  }
+  .pet-reviews-section .pet-section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--pet-navy, #1A2B4A);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .pet-reviews-section .pet-section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--pet-muted, #6B7280);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pet-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .pet-review-col {
+    width: 100%;
+    display: flex;
+  }
+  .pet-review-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E1DB;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pet-review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(26, 43, 74, 0.08);
+  }
+  .pet-review-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .pet-review-card__stars {
+    color: #F59E0B;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
+  .pet-review-verified {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--pet-sage);
+    background: #EFF8F5;
+    padding: 4px 10px;
+    border-radius: 50px;
+  }
+  .pet-review-card__text {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    flex-grow: 1;
+  }
+  .pet-review-card__text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--pet-navy);
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+  }
+  .pet-review-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 1rem;
+    border-top: 1px solid #E5E1DB;
+  }
+  .pet-review-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--pet-sage);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .pet-review-card__author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .pet-review-card__author {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--pet-navy);
+    font-style: normal;
+  }
+  .pet-review-card__detail {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--pet-muted);
+  }
+
+  @media (max-width: 991px) {
+    .pet-reviews-section .pet-section-title { font-size: 2rem; }
+    .pet-reviews-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  }
+  @media (max-width: 575px) {
+    .pet-reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Reviews Clientes",
+  "tag": "section",
+  "class": "pet-reviews-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Lo que dicen nuestros clientes"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Experiencias reales de personas que viven con mascotas"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FBF8F3"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#1A2B4A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del subtítulo",
+      "default": "#6B7280"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Estrellas (1-5)",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Texto de la review",
+          "default": "Excelente producto, superó mis expectativas."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nombre del cliente",
+          "default": "Cliente satisfecho"
+        },
+        {
+          "type": "text",
+          "id": "author_detail",
+          "label": "Detalle del cliente",
+          "default": "Cliente verificado"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Clientes"
+    }
+  ]
+}
+{% endschema %}

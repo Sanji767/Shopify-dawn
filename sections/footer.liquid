@@ -1,126 +1,182 @@
-<!-- footer-area -->
-<div class="footer-area">
-  <div class="footer-top">
-    <div class="footer-wrap">
-      <h3>{{ section.settings.follow_title }}</h3>
-      <ul>
-        {% if section.settings.instagram != blank %}
-          <li>
-            <a href="{{section.settings.instagram}}"
-              ><img src="{{ 'instagram.png' | asset_url }}" width="" height="" alt=""
-            ></a>
-          </li>
-        {% endif %}
-        {% if section.settings.tiktok != blank %}
-          <li>
-            <a href="{{section.settings.tiktok}}"
-              ><img src="{{ 'tiktok.png' | asset_url }}" width="" height="" alt=""
-            ></a>
-          </li>
-        {% endif %}
-      </ul>
-      <div class="newslatter-area">
+<!-- Footer -->
+<footer class="pet-footer">
+  <div class="pet-container">
+    <div class="pet-footer-grid">
+      <!-- About -->
+      <div class="pet-footer-about">
+        <h4>{{ section.settings.brand_name | default: shop.name }}</h4>
+        <p>{{ section.settings.brand_description }}</p>
+        <div class="pet-footer-social">
+          {% if section.settings.instagram != blank %}
+            <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.tiktok != blank %}
+            <a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.73a8.19 8.19 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.16z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.facebook != blank %}
+            <a href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Shop Links -->
+      <div>
+        <h4>{{ section.settings.col2_title }}</h4>
+        <ul class="pet-footer-links">
+          {% for link in linklists[section.settings.footer_menu_1].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          {% if linklists[section.settings.footer_menu_1].links.size == 0 %}
+            <li><a href="{% if collections['perros'] != blank and collections['perros'].title != blank %}{{ collections['perros'].url }}{% else %}/collections/all{% endif %}">Perros</a></li>
+            <li><a href="{% if collections['gatos'] != blank and collections['gatos'].title != blank %}{{ collections['gatos'].url }}{% else %}/collections/all{% endif %}">Gatos</a></li>
+            <li><a href="{% if collections['casa'] != blank and collections['casa'].title != blank %}{{ collections['casa'].url }}{% else %}/collections/all{% endif %}">Casa</a></li>
+            <li><a href="{% if collections['ofertas'] != blank and collections['ofertas'].title != blank %}{{ collections['ofertas'].url }}{% else %}/collections/all{% endif %}">Ofertas</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- Help & Legal Links -->
+      <div>
+        <h4>{{ section.settings.col3_title | default: 'Ayuda y Legal' }}</h4>
+        <ul class="pet-footer-links">
+          {% for link in linklists[section.settings.footer_menu_2].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          {% if linklists[section.settings.footer_menu_2].links.size == 0 %}
+            <li><a href="/pages/about-us">Sobre nosotros</a></li>
+            <li><a href="/pages/contact">Contacto & Ayuda</a></li>
+            <li><a href="/policies/shipping-policy">Envíos (3-6 días laborables)</a></li>
+            <li><a href="/policies/refund-policy">Devoluciones (14 días RGPD)</a></li>
+            <li><a href="/policies/legal-notice">Aviso Legal</a></li>
+            <li><a href="/policies/privacy-policy">Política de Privacidad</a></li>
+            <li><a href="/policies/terms-of-service">Términos y Condiciones</a></li>
+            <li><a href="/policies/cookie-policy">Política de Cookies</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
         <h4>{{ section.settings.newsletter_title }}</h4>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 16px;">{{ section.settings.newsletter_subtitle }}</p>
         {% form 'customer' %}
-          <input
-            type="hidden"
-            name="contact[tags]"
-            value="newsletter"
-          >
-          <input type="text" name="contact[email]" placeholder="{{section.settings.newsletter_email}}">
-          <button type="submit">{{ section.settings.newsletter_button }}</button>
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="pet-newsletter-form">
+            <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder }}" required>
+            <button type="submit">{{ section.settings.newsletter_button }}</button>
+          </div>
           {{ form.errors | default_errors }}
           {% if form.posted_successfully? %}
-            <p class="text-center mt-2">{{ section.settings.newsletter_success }}</p>
+            <p style="color: var(--pet-sage); margin-top: 8px; font-size: 0.85rem;">{{ section.settings.newsletter_success }}</p>
           {% endif %}
         {%- endform -%}
       </div>
-      <div class="shape1"><img src="{{ 'footer1.png' | asset_url }}" width="" height="" alt=""></div>
-      <div class="shape2"><img src="{{ 'footer2.png' | asset_url }}" width="" height="" alt=""></div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="pet-footer-bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {% if shop.name contains 'My Store' or shop.name == blank %}Paw & Home{% else %}{{ shop.name }}{% endif %}. Todos los derechos reservados.</p>
+      <div class="pet-footer-payments" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <span class="pet-pay-badge" style="background:#fff; color:#1A2B4A; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">VISA</span>
+        <span class="pet-pay-badge" style="background:#fff; color:#EB001B; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">Mastercard</span>
+        <span class="pet-pay-badge" style="background:#003087; color:#fff; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">PayPal</span>
+        <span class="pet-pay-badge" style="background:#000; color:#fff; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">Pay</span>
+        <span class="pet-pay-badge" style="background:#fff; color:#4285F4; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">GPay</span>
+        <span class="pet-pay-badge" style="background:#FFB3C7; color:#0A0A0A; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">Klarna.</span>
+        <span class="pet-pay-badge" style="background:#CC0066; color:#fff; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">iDEAL</span>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <ul>
-      {% for link in section.settings.footer_link.links %}
-        <li>
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-    <ul class="paymets">
-      <li>
-        <a href="#"><img src="{{ 'payment1.svg' | asset_url }}" width="" height="" alt=""></a>
-      </li>
-      <li>
-        <a href="#"><img src="{{ 'payment2.svg' | asset_url }}" width="" height="" alt=""></a>
-      </li>
-      <li>
-        <a href="#"><img src="{{ 'payment3.svg' | asset_url }}" width="" height="" alt=""></a>
-      </li>
-      <li>
-        <a href="#"><img src="{{ 'payment4.svg' | asset_url }}" width="" height="" alt=""></a>
-      </li>
-      <li>
-        <a href="#"><img src="{{ 'payment5.svg' | asset_url }}" width="" height="" alt=""></a>
-      </li>
-    </ul>
-  </div>
-</div>
+</footer>
 
 {% schema %}
 {
-  "name": "Footer Section",
+  "name": "Footer",
   "settings": [
     {
       "type": "text",
-      "id": "follow_title",
-      "label": "Follow Title",
-      "default": "FOLLOW US ON SOCIAL"
+      "id": "brand_name",
+      "label": "Nombre de marca",
+      "default": "Pet Lifestyle"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Descripción de la marca",
+      "default": "Productos seleccionados para hacer la vida con tu mascota más fácil, cómoda y divertida. Calidad, diseño y funcionalidad."
     },
     {
       "type": "url",
       "id": "instagram",
-      "label": "Instagram Link"
+      "label": "Instagram"
     },
     {
       "type": "url",
       "id": "tiktok",
-      "label": "Tiktok Link"
+      "label": "TikTok"
+    },
+    {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "text",
+      "id": "col2_title",
+      "label": "Título columna 2",
+      "default": "Tienda"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_1",
+      "label": "Menú columna 2"
+    },
+    {
+      "type": "text",
+      "id": "col3_title",
+      "label": "Título columna 3",
+      "default": "Ayuda"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_2",
+      "label": "Menú columna 3"
     },
     {
       "type": "text",
       "id": "newsletter_title",
-      "label": "Newsletter Title",
-      "default": "JOIN THE SUPER COMMUNITY AND GET 15% OFF FIRST ORDER"
+      "label": "Título newsletter",
+      "default": "Únete a la comunidad"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subtitle",
+      "label": "Subtítulo newsletter",
+      "default": "Consejos, novedades y ofertas para tu mascota."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder email",
+      "default": "Tu email"
     },
     {
       "type": "text",
       "id": "newsletter_button",
-      "label": "Newsletter Button",
-      "default": "JOIN"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_email",
-      "label": "Newsletter Email Placeholder",
-      "default": "Enter your email address"
+      "label": "Texto botón newsletter",
+      "default": "Unirme"
     },
     {
       "type": "text",
       "id": "newsletter_success",
-      "label": "Newsletter Success Message",
-      "default": "Thank you for signing up!"
-    },
-    {
-      "type": "link_list",
-      "id": "footer_link",
-      "label": "Footer Link"
-    }
-  ],
-
-  "presets": [
-    {
-      "name": "Footer Section"
+      "label": "Mensaje de éxito",
+      "default": "¡Gracias por unirte! 🐾"
     }
   ]
 }

@@ -1,0 +1,34 @@
+<div class="pet-announcement">
+  {{ section.settings.announcement_text }}
+</div>
+
+{% schema %}
+{
+  "name": "Barra de anuncio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Texto del anuncio",
+      "default": "Envío gratis desde 50 € · Diseñado para vivir mejor con ellos 🐾"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#1A2B4A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncio"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,106 @@
+<!-- Cookie Consent Banner (EU RGPD / GDPR Compliance) -->
+<div id="pet-cookie-banner" class="pet-cookie-banner">
+  <div class="pet-cookie-inner">
+    <div class="pet-cookie-text">
+      <span class="pet-cookie-icon">🍪</span>
+      <p>
+        Utilizamos cookies propias y de terceros para garantizar la mejor experiencia en nuestra tienda, analizar el tráfico y personalizar contenido. Puedes aceptar todas las cookies o configurar tus preferencias. Más información en nuestra <a href="/policies/privacy-policy" style="color: var(--pet-coral); text-decoration: underline;">Política de Privacidad</a>.
+      </p>
+    </div>
+    <div class="pet-cookie-actions">
+      <button type="button" id="pet-cookie-accept" class="pet-btn pet-btn-primary pet-btn-sm">
+        Aceptar todas
+      </button>
+      <button type="button" id="pet-cookie-reject" class="pet-btn pet-btn-secondary pet-btn-sm" style="border: 1px solid var(--pet-border); color: var(--pet-navy);">
+        Solo necesarias
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pet-cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--pet-border);
+    border-radius: 18px;
+    padding: 18px 24px;
+    box-shadow: 0 16px 40px rgba(26, 43, 74, 0.15);
+    z-index: 9999;
+    display: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .pet-cookie-banner.show {
+    display: block;
+  }
+  .pet-cookie-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pet-cookie-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 280px;
+  }
+  .pet-cookie-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+  .pet-cookie-text p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    color: var(--pet-navy) !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+  .pet-cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 767px) {
+    .pet-cookie-banner { bottom: 12px; left: 12px; right: 12px; padding: 16px; }
+    .pet-cookie-inner { flex-direction: column; align-items: flex-start; }
+    .pet-cookie-actions { width: 100%; justify-content: flex-end; }
+  }
+</style>
+
+<script>
+  (function() {
+    var banner = document.getElementById('pet-cookie-banner');
+    var acceptBtn = document.getElementById('pet-cookie-accept');
+    var rejectBtn = document.getElementById('pet-cookie-reject');
+
+    if (!localStorage.getItem('pet_cookie_consent')) {
+      setTimeout(function() {
+        if (banner) banner.classList.add('show');
+      }, 800);
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
+        localStorage.setItem('pet_cookie_consent', 'accepted');
+        if (banner) banner.classList.remove('show');
+      });
+    }
+
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', function() {
+        localStorage.setItem('pet_cookie_consent', 'necessary_only');
+        if (banner) banner.classList.remove('show');
+      });
+    }
+  })();
+</script>

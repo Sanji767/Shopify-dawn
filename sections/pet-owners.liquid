@@ -1,0 +1,272 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-owners" id="pet-owners-{{ section.id }}">
+  <div class="pet-container container">
+    <div class="row pet-owners-wrapper align-items-center">
+      <div class="col-lg-6 col-12 pet-owners-content">
+        <span class="pet-owners-eyebrow">DISEÑADO PARA TU DÍA A DÍA</span>
+        <h2 class="pet-owners-title">{{ section.settings.title }}</h2>
+        <p class="pet-owners-description">{{ section.settings.description }}</p>
+
+        <div class="pet-owners-features">
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'feature' %}
+                <div class="pet-owners-feature-item" {{ block.shopify_attributes }}>
+                  <span class="pet-owners-feature-icon">{{ block.settings.icon }}</span>
+                  <span class="pet-owners-feature-title">{{ block.settings.title }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div class="pet-owners-feature-item"><span class="pet-owners-feature-icon">🏠</span><span class="pet-owners-feature-title">Casa limpia</span></div>
+            <div class="pet-owners-feature-item"><span class="pet-owners-feature-icon">🚗</span><span class="pet-owners-feature-title">Viajes</span></div>
+            <div class="pet-owners-feature-item"><span class="pet-owners-feature-icon">📦</span><span class="pet-owners-feature-title">Organización</span></div>
+            <div class="pet-owners-feature-item"><span class="pet-owners-feature-icon">✨</span><span class="pet-owners-feature-title">Lifestyle</span></div>
+          {% endif %}
+        </div>
+
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="pet-btn pet-btn-primary pet-btn-lg">
+          {{ section.settings.cta_text | default: 'Ver productos para ti' }}
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4.166 10h11.668M10 4.166L15.833 10 10 15.833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="col-lg-6 col-12 pet-owners-image">
+        {% if section.settings.section_image != blank %}
+          <div class="pet-owners-image-card">
+            <img
+              src="{{ section.settings.section_image | image_url: width: 800 }}"
+              alt="{{ section.settings.section_image.alt | default: section.settings.title }}"
+              width="800"
+              height="{{ 800 | divided_by: section.settings.section_image.aspect_ratio | round }}"
+              loading="lazy"
+            >
+            <div class="pet-owners-floating-badge">
+              <span>💚 100% Creado por Pet Lovers</span>
+            </div>
+          </div>
+        {% else %}
+          <div class="pet-owners-image-card pet-owners-image-placeholder-card">
+            <div class="pet-owners-placeholder-inner">
+              <div class="pet-owners-placeholder-emojis">🐶 🐱 🏠</div>
+              <h3>Para el hogar, viajes y paseos</h3>
+              <p>Productos pensados para mejorar la convivencia y hacer la vida más fácil.</p>
+              <div class="pet-owners-placeholder-tags">
+                <span>✨ Práctico</span>
+                <span>🧹 Limpio</span>
+                <span>🧡 Duradero</span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-owners {
+    padding: 96px 0;
+    background-color: var(--pet-cream, #FBF8F3);
+  }
+  .pet-owners-eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--pet-coral);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .pet-owners-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.75rem;
+    color: var(--pet-navy);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .pet-owners-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--pet-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .pet-owners-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .pet-owners-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    border: 1px solid #E5E1DB;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .pet-owners-feature-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(26, 43, 74, 0.06);
+    border-color: var(--pet-coral);
+  }
+  .pet-owners-feature-icon {
+    font-size: 1.35rem;
+    flex-shrink: 0;
+  }
+  .pet-owners-feature-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--pet-navy);
+  }
+  .pet-owners-image-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(26, 43, 74, 0.1);
+  }
+  .pet-owners-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 24px;
+  }
+  .pet-owners-floating-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--pet-navy);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .pet-owners-image-placeholder-card {
+    background: linear-gradient(135deg, #F5EDE3 0%, #EADECF 100%);
+    border: 2px dashed rgba(232, 115, 74, 0.4);
+    padding: 48px 32px;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pet-owners-placeholder-inner {
+    text-align: center;
+  }
+  .pet-owners-placeholder-emojis {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+  }
+  .pet-owners-placeholder-inner h3 {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.6rem !important;
+    color: var(--pet-navy) !important;
+    margin-bottom: 12px !important;
+  }
+  .pet-owners-placeholder-inner p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.95rem !important;
+    color: var(--pet-muted) !important;
+    max-width: 320px;
+    margin: 0 auto 24px !important;
+    line-height: 1.6 !important;
+  }
+  .pet-owners-placeholder-tags {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pet-owners-placeholder-tags span {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #FFFFFF;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pet-navy);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  @media (max-width: 991px) {
+    .pet-owners-wrapper { flex-direction: column-reverse; gap: 40px; }
+    .pet-owners-title { font-size: 2.1rem; }
+  }
+  @media (max-width: 575px) {
+    .pet-owners { padding: 56px 0; }
+    .pet-owners-features { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Pet Owners",
+  "tag": "section",
+  "class": "pet-owners-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "section_image",
+      "label": "Imagen de la sección"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Porque ellos forman parte de tu vida."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Creamos productos pensados para ti, el dueño de mascotas. Soluciones prácticas y con estilo para que la convivencia con tu compañero peludo sea aún mejor."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "Ver productos para ti"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Enlace del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Característica",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icono (emoji)",
+          "default": "🏠"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Casa limpia"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Owners"
+    }
+  ]
+}
+{% endschema %}

@@ -1,107 +1,89 @@
-<!-- footer-area -->
-<div class="footer-area contact-page">
-  <div class="footer-top">
-    <div class="footer-wrap">
-      <div class="row">
-        <div class="col-lg-3 order-lg-1 order-2"></div>
-        <div class="col-lg-6 order-lg-2 order-1">
-          <div class="contact-wrap">
-            <div class="contact-title">
-              <h2>{{ section.settings.title }}</h2>
-              <p>{{ section.settings.subtitle }}</p>
+<!-- Contact Page -->
+<section class="pet-section" style="background: var(--pet-white);">
+  <div class="pet-container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-12">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h1 style="font-size: 2.5rem; margin-bottom: 8px;">{{ section.settings.title }}</h1>
+          <p style="color: var(--pet-muted);">{{ section.settings.subtitle }}</p>
+        </div>
+
+        {% form 'contact' %}
+          <div class="row">
+            <div class="col-lg-6 col-12 mb-3">
+              <input type="text" name="contact[firstName]" placeholder="Nombre" required
+                style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
+            </div>
+            <div class="col-lg-6 col-12 mb-3">
+              <input type="text" name="contact[lastName]" placeholder="Apellido"
+                style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
+            </div>
+            <div class="col-12 mb-3">
+              <input type="email" name="contact[email]" placeholder="Email" required
+                style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
+            </div>
+            <div class="col-12 mb-3">
+              <textarea name="contact[message]" placeholder="Mensaje" rows="5" required
+                style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem; resize: vertical;"></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="pet-btn pet-btn-primary" style="width: 100%;">Enviar mensaje</button>
             </div>
 
-            {% form 'contact', class: '', id: '' %}
-              <div class="row">
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <input type="text" name="contact[firstName]" placeholder="First Name">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <input type="text" placeholder="Last Name" name="contact[lastName]">
-                  </div>
-                </div>
-                <div class="col-lg-12 col-12">
-                  <div class="form-group">
-                    <input type="text" placeholder="Email" name="contact[email]">
-                  </div>
-                </div>
-                <div class="col-lg-12 col-12">
-                  <div class="form-group">
-                    <textarea id="" placeholder="Message" name="contact[message]"></textarea>
-                  </div>
-                </div>
-                <div class="col-lg-12 col-12">
-                  <div class="form-group">
-                    <button type="submit" class="theme-btn">Send Massage</button>
-                  </div>
-                </div>
-
-                {% if form.posted_successfully? %}
-                  <div class="clearfix error-handling-messages">
-                    <div id="success">Thank you for contacting us!</div>
-                  </div>
-                {% endif %}
-
-                {% if form.errors %}
-                  <div class="clearfix error-handling-messages">
-                    <div id="error">
-                      {{ form.errors | default_errors }}
-                    </div>
-                  </div>
-                {% endif %}
-
-                <div class="col-lg-12 col-12 mt-3">
-                  <p>
-                    {{ section.settings.compnay }}
-                    <br>
-                    {{ section.settings.address }}
-                  </p>
-                </div>
+            {% if form.posted_successfully? %}
+              <div class="col-12 mt-3">
+                <p style="text-align: center; color: var(--pet-sage); font-weight: 500;">¡Gracias por contactarnos! Te responderemos lo antes posible. 🐾</p>
               </div>
-            {% endform %}
+            {% endif %}
+            {% if form.errors %}
+              <div class="col-12 mt-3">
+                <p style="text-align: center; color: var(--pet-error);">{{ form.errors | default_errors }}</p>
+              </div>
+            {% endif %}
           </div>
-        </div>
-        <div class="col-lg-3 order-lg-3 order-3"></div>
+        {% endform %}
+
+        {% if section.settings.company != blank %}
+          <div style="text-align: center; margin-top: 40px; color: var(--pet-muted); font-size: 0.85rem;">
+            <p><strong>{{ section.settings.company }}</strong></p>
+            <p>{{ section.settings.address }}</p>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Contact us",
+  "name": "Contacto",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "Contact Us"
+      "label": "Título",
+      "default": "Contáctanos"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
-      "default": "EMAIL - ONLINE@SUPERNATURESHOT.COM"
+      "label": "Subtítulo",
+      "default": "¿Tienes alguna pregunta? Estamos aquí para ayudarte."
     },
     {
       "type": "text",
-      "id": "compnay",
-      "label": "Company",
-      "default": "IMPRESSION BEVERAGES LTD."
+      "id": "company",
+      "label": "Empresa"
     },
     {
       "type": "text",
       "id": "address",
-      "label": "Address",
-      "default": "71 – 75 SHELTON STREET, LONDON WC2H 9JQ"
+      "label": "Dirección"
     }
   ],
   "presets": [
     {
-      "name": "Contact Us"
+      "name": "Contacto"
     }
   ]
 }

@@ -1,23 +1,25 @@
-<div class="about-area section-padding page-content">
-  <div class="container">
-    <div class="about-wrap">
-      <div class="title">
-        <h2>{{ page.title }}</h2>
+<section class="pet-section" style="background: var(--pet-white);">
+  <div class="pet-container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-12">
+        <div class="pet-section-title">
+          <h1>{{ page.title }}</h1>
+        </div>
+        <div style="line-height: 1.8; font-size: 0.95rem; color: var(--pet-navy);">
+          {{ page.content }}
+        </div>
       </div>
-      {{ page.content }}
-      <span class="shape1"><img src="{{ 'shape3.png' | asset_url }}" width="" height="" alt=""></span>
-      <div class="shape2"><img src="{{ 'footer2.png' | asset_url }}" alt="" width="" height=""></div>
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Content Page",
+  "name": "Contenido de página",
   "settings": [],
   "presets": [
     {
-      "name": "Content Page"
+      "name": "Contenido de página"
     }
   ]
 }

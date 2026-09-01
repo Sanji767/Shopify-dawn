@@ -1,73 +1,75 @@
-<!-- social-area -->
-<div class="social-area">
-  <div class="title">
-    <h3>{{ section.settings.title }}</h3>
-  </div>
-  <div class="container">
-    <div class="social-wrap">
-      <div class="row s-5">
-        {% if section.settings.social != blank %}
-          {{ section.settings.social }}
-        {% else %}
-          {% for block in section.blocks %}
-            <div class="col-lg-4 col-sm-6 col-12">
-              {{ section.settings.social }}
-
-              <div class="social-item">
-                <a href="{{ block.settings.url }}" class="social-img">
-                  <img src="{{ block.settings.image | image_url: width: 800 }}" width="" height="" alt="">
-                </a>
-              </div>
-            </div>
-          {% endfor %}
-        {% endif %}
-      </div>
+<!-- UGC / Social Gallery -->
+<section class="pet-section" style="background: var(--pet-warm);">
+  <div class="pet-container">
+    <div class="pet-section-title">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="pet-ugc-grid">
+      {% for block in section.blocks %}
+        <div class="pet-ugc-item">
+          {% if block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" target="_blank" rel="noopener">
+          {% endif %}
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ section.settings.title }}" loading="lazy">
+            {% else %}
+              <div style="width: 100%; height: 100%; background: var(--pet-border); display: flex; align-items: center; justify-content: center; font-size: 2rem;">📷</div>
+            {% endif %}
+          {% if block.settings.url != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Social Media",
+  "name": "Galería Social",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "SOCIAL"
+      "label": "Título",
+      "default": "#VidaConMascota"
     },
     {
-      "type": "liquid",
-      "id": "social",
-      "label": "Social Media",
-      "default": "<script src='https://static.elfsight.com/platform/platform.js' async></script><div class='elfsight-app-64616117-e487-4070-9e7f-69652258ed73' data-elfsight-app-lazy></div>"
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Comparte tu momento — Síguenos en Instagram"
     }
   ],
   "blocks": [
     {
-      "name": "Slider",
-      "type": "block",
+      "name": "Imagen",
+      "type": "image",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Social Image"
+          "label": "Imagen"
         },
         {
           "type": "url",
           "id": "url",
-          "label": "Social Profile Link"
+          "label": "Enlace (opcional)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Social Media",
+      "name": "Galería Social",
       "blocks": [
-        {
-          "type": "block"
-        }
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
       ]
     }
   ]

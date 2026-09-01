@@ -1,95 +1,161 @@
-<!-- features-area -->
-<div class="features-area section-padding">
-  <div class="container">
-    <div class="features-wrap">
-      <div class="title">
-        <h2>{{ section.settings.title }}</h2>
-      </div>
-      <div class="row">
-        {% for block in section.blocks %}
-          <div class="col-lg-4 col-md-6 col-12">
-            <div class="features-item">
-              <div class="features-img">
-                <img src="{{ block.settings.image |  image_url: width: 500  }}" width="" height="" alt="">
+<!-- Feature Section / Brand Values -->
+<section class="pet-section pet-features-section">
+  <div class="pet-container container">
+    <div class="pet-section-title" style="text-align: center; margin-bottom: 2.5rem;">
+      <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 0.5rem;">{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-muted); max-width: 600px; margin: 0 auto;">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="pet-features-grid">
+      {% for block in section.blocks %}
+        <div class="pet-feature-col" {{ block.shopify_attributes }}>
+          <div class="pet-feature-card">
+            <div class="pet-feature-icon-wrapper">
+              <span class="pet-feature-icon">{{ block.settings.icon }}</span>
+            </div>
+            <h3>{{ block.settings.feature_title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+      {% if section.blocks.size == 0 %}
+        {% assign default_icons = "✨,🚚,💚" | split: "," %}
+        {% assign default_titles = "Calidad premium,Envío rápido,Atención cercana" | split: "," %}
+        {% assign default_descs = "Seleccionamos cada producto para garantizar la mejor calidad para tu mascota y para ti.,Recibe tu pedido en 3-6 días laborables. Envío gratis a partir de 50 €.,Estamos aquí para ayudarte. Contacta con nosotros cuando lo necesites." | split: "," %}
+        {% for i in (0..2) %}
+          <div class="pet-feature-col">
+            <div class="pet-feature-card">
+              <div class="pet-feature-icon-wrapper">
+                <span class="pet-feature-icon">{{ default_icons[i] }}</span>
               </div>
-              <div class="features-text">
-                <h3>
-                  <span><img src="{{ 'shape1.png' | asset_url }}" width="" height="" alt=""></span>
-                  {{- block.settings.feature_title }}
-                </h3>
-                <p>
-                  {{ block.settings.description }}
-                </p>
-              </div>
+              <h3>{{ default_titles[i] }}</h3>
+              <p>{{ default_descs[i] }}</p>
             </div>
           </div>
         {% endfor %}
-      </div>
-      <div class="left-shape">
-        <img
-          src="{{ '80MG.png' | asset_url }}"
-          width="90px"
-          height="90px"
-          alt=""
-          class=""
-        >
-      </div>
-      <div class="right-shape">
-        <img
-          src="{{ 'features-right.png' | asset_url }}"
-          width=""
-          height=""
-          alt=""
-        >
-      </div>
+      {% endif %}
     </div>
   </div>
-</div>
+</section>
+
+<style>
+  .pet-features-section {
+    background-color: var(--pet-white, #FFFFFF);
+    padding: 80px 0;
+  }
+  .pet-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .pet-feature-col {
+    width: 100%;
+    display: flex;
+  }
+  .pet-feature-card {
+    background: #FBF8F3;
+    border: 1px solid #E5E1DB;
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .pet-feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(26, 43, 74, 0.08);
+    border-color: var(--pet-coral);
+  }
+  .pet-feature-icon-wrapper {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 14px rgba(26, 43, 74, 0.06);
+    border: 1px solid #E5E1DB;
+  }
+  .pet-feature-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .pet-feature-card h3 {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.4rem !important;
+    color: var(--pet-navy) !important;
+    margin-bottom: 12px !important;
+  }
+  .pet-feature-card p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.95rem !important;
+    color: var(--pet-muted) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+  }
+
+  @media (max-width: 991px) {
+    .pet-features-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  }
+  @media (max-width: 575px) {
+    .pet-features-grid { grid-template-columns: 1fr; gap: 1rem; }
+  }
+</style>
 
 {% schema %}
 {
-  "name": "Feature Section",
+  "name": "Valores de Marca",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "IMMUNITY SUPPORT - GINGER SHOT"
+      "label": "Título",
+      "default": "¿Por qué elegirnos?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Productos pensados para ti y para ellos"
     }
   ],
   "blocks": [
     {
-      "name": "Slider",
       "type": "block",
+      "name": "Valor",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
+          "type": "text",
+          "id": "icon",
+          "label": "Icono (emoji)",
+          "default": "✨"
         },
         {
           "type": "text",
           "id": "feature_title",
-          "label": "Feature Title",
-          "default": "GINGER"
+          "label": "Título",
+          "default": "Calidad premium"
         },
         {
-          "type": "text",
+          "type": "textarea",
           "id": "description",
-          "label": "Description",
-          "default": "Know for its antioxidant and anti-inflammatory properties. A natural energy booster and with digestion."
+          "label": "Descripción",
+          "default": "Seleccionamos cada producto para garantizar la mejor calidad para tu mascota y para ti."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Feature Section",
-      "blocks": [
-        {
-          "type": "block"
-        }
-      ]
+      "name": "Valores de Marca"
     }
   ]
 }

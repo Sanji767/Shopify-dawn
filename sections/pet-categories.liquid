@@ -1,0 +1,326 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-categories-section" style="background-color: {{ section.settings.background_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="pet-container container">
+    {% if section.settings.title != blank %}
+      <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+    {% endif %}
+
+    <div class="pet-categories-grid">
+      {% assign pastel_bgs = "#FAF4EB,#F2F6F0,#FDF3EF,#F0F4F8,#EFF8F5" | split: "," %}
+
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign bg_index = forloop.index0 | modulo: 5 %}
+          {% assign card_bg = pastel_bgs[bg_index] %}
+          <div class="pet-category-col" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '/collections/all' }}" class="pet-category-card" style="background-color: {{ card_bg }};">
+              <div class="pet-category-card__image-wrapper">
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    class="pet-category-card__image"
+                  >
+                {% else %}
+                  <div class="pet-category-card__placeholder">
+                    <span class="pet-category-emoji-badge">{{ block.settings.emoji | default: '🐾' }}</span>
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="pet-category-card__content">
+                {% if block.settings.emoji != blank and block.settings.image != blank %}
+                  <span class="pet-category-card__emoji">{{ block.settings.emoji }}</span>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h3 class="pet-category-card__title">{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.subtitle != blank %}
+                  <p class="pet-category-card__subtitle">{{ block.settings.subtitle }}</p>
+                {% endif %}
+                
+                <span class="pet-category-card__link-text">
+                  Explorar
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% assign def_emojis = "🐶,🐱,🏠,🚗,🦮" | split: "," %}
+        {% assign def_titles = "Perros,Gatos,Para casa,Para viajar,Para pasear" | split: "," %}
+        {% assign def_subtitles = "Para tu mejor amigo,Todo para tu felino,Mantén tu hogar limpio,Viaja cómodo con ellos,Paseos fáciles y divertidos" | split: "," %}
+        {% for i in (0..4) %}
+          <div class="pet-category-col">
+            <a href="/collections/all" class="pet-category-card" style="background-color: {{ pastel_bgs[i] }};">
+              <div class="pet-category-card__image-wrapper">
+                <div class="pet-category-card__placeholder">
+                  <span class="pet-category-emoji-badge">{{ def_emojis[i] }}</span>
+                </div>
+              </div>
+              <div class="pet-category-card__content">
+                <h3 class="pet-category-card__title">{{ def_titles[i] }}</h3>
+                <p class="pet-category-card__subtitle">{{ def_subtitles[i] }}</p>
+                <span class="pet-category-card__link-text">
+                  Explorar
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-categories-section {
+    background-color: var(--pet-cream, #FBF8F3);
+  }
+  .pet-categories-section .pet-section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--pet-navy, #1A2B4A);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .pet-categories-section .pet-section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--pet-muted, #6B7280);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pet-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+  }
+  .pet-category-col {
+    width: 100%;
+  }
+  .pet-category-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(229, 225, 219, 0.7);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+  }
+  .pet-category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 36px rgba(26, 43, 74, 0.1);
+  }
+  .pet-category-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 85%;
+    overflow: hidden;
+  }
+  .pet-category-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .pet-category-card:hover .pet-category-card__image {
+    transform: scale(1.06);
+  }
+  .pet-category-card__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pet-category-emoji-badge {
+    font-size: 2.75rem;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(26, 43, 74, 0.08);
+    transition: transform 0.3s ease;
+  }
+  .pet-category-card:hover .pet-category-emoji-badge {
+    transform: scale(1.1) rotate(6deg);
+  }
+  .pet-category-card__content {
+    padding: 1.25rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  .pet-category-card__title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--pet-navy, #1A2B4A);
+    margin: 0 0 0.3rem;
+    line-height: 1.3;
+  }
+  .pet-category-card__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--pet-muted, #6B7280);
+    margin: 0 0 1rem;
+    line-height: 1.4;
+  }
+  .pet-category-card__link-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--pet-coral, #E8734A);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+  }
+  .pet-category-card:hover .pet-category-card__link-text {
+    gap: 10px;
+  }
+
+  @media (max-width: 991px) {
+    .pet-categories-section .pet-section-title { font-size: 2rem; }
+    .pet-categories-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  }
+  @media (max-width: 767px) {
+    .pet-categories-section .pet-section-title { font-size: 1.65rem; }
+    .pet-categories-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "🐾 Categorías",
+  "tag": "section",
+  "class": "pet-categories-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Explora por categoría"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Encuentra todo lo que tu mascota necesita"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FBF8F3"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#1A2B4A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del subtítulo",
+      "default": "#6B7280"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen de categoría"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "🐾"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Categoría"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Descripción breve de la categoría"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace a colección"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "🐾 Categorías"
+    }
+  ]
+}
+{% endschema %}

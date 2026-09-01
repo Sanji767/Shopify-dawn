@@ -1,99 +1,391 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "404",
-      "disabled": true,
-      "settings": {}
-    },
-    "hero_section_nPxPwU": {
-      "type": "hero-section",
+    "announcement_bar": {
+      "type": "announcement-bar",
       "settings": {
-        "left_image": "shopify://shop_images/hero_home_f30be8f0-c72b-47ca-951c-ad6dd5355514.png",
-        "title": "Good Shot",
-        "subtitle": "From Nature",
-        "button_url": "shopify://products/ginger-shot",
-        "button_text": "Shop Now",
-        "image": "shopify://shop_images/homerights.png"
+        "announcement_text": "Envío gratis desde 50 € · Diseñado para vivir mejor con ellos 🐾",
+        "background_color": "#1A2B4A",
+        "text_color": "#FFFFFF"
       }
     },
-    "feature_section_yr9MjE": {
-      "type": "feature-section",
+    "hero_section": {
+      "type": "hero-section",
+      "settings": {
+        "title": "Todo para una vida mejor juntos.",
+        "subtitle": "Productos seleccionados para hacer más fácil, cómoda y divertida la vida con tu mascota.",
+        "button_text": "Comprar ahora",
+        "button_url": "/collections/all",
+        "button2_text": "Descubrir novedades",
+        "button2_url": "/collections/all"
+      }
+    },
+    "pet_categories": {
+      "type": "pet-categories",
+      "settings": {
+        "title": "Explora por categoría",
+        "subtitle": "Encuentra todo lo que tu mascota necesita"
+      },
       "blocks": {
-        "block_d3TkrW": {
-          "type": "block",
+        "cat_perros": {
+          "type": "category",
           "settings": {
-            "image": "shopify://shop_images/features1.png",
-            "feature_title": "GINGER",
-            "description": "A natural energy booster also known for its antioxidant and anti-inflammatory properties."
+            "emoji": "🐶",
+            "title": "Perros",
+            "subtitle": "Productos para tu mejor amigo",
+            "link": "/collections/perros"
           }
         },
-        "block_phzkpK": {
-          "type": "block",
+        "cat_gatos": {
+          "type": "category",
           "settings": {
-            "image": "shopify://shop_images/features2.png",
-            "feature_title": "ACEROLA CHERRY",
-            "description": "One of natures most powerful super food and is one of the richest known natural sources of Vitamin C"
+            "emoji": "🐱",
+            "title": "Gatos",
+            "subtitle": "Comodidad y juego para felinos",
+            "link": "/collections/gatos"
           }
         },
-        "block_knXVFV": {
-          "type": "block",
+        "cat_casa": {
+          "type": "category",
           "settings": {
-            "image": "shopify://shop_images/features3.png",
-            "feature_title": "LIME",
-            "description": "Known to be a good source of Vitamin C, antioxidants, and other nutrients."
+            "emoji": "🏠",
+            "title": "Para casa",
+            "subtitle": "Mantén tu hogar impecable",
+            "link": "/collections/casa"
+          }
+        },
+        "cat_viajar": {
+          "type": "category",
+          "settings": {
+            "emoji": "🚗",
+            "title": "Para viajar",
+            "subtitle": "Viaja cómodo con tu mascota",
+            "link": "/collections/viajar"
+          }
+        },
+        "cat_pasear": {
+          "type": "category",
+          "settings": {
+            "emoji": "🦮",
+            "title": "Para pasear",
+            "subtitle": "Paseos fáciles y divertidos",
+            "link": "/collections/pasear"
           }
         }
       },
       "block_order": [
-        "block_d3TkrW",
-        "block_phzkpK",
-        "block_knXVFV"
-      ],
+        "cat_perros",
+        "cat_gatos",
+        "cat_casa",
+        "cat_viajar",
+        "cat_pasear"
+      ]
+    },
+    "featured_products": {
+      "type": "featured-products",
       "settings": {
-        "title": "IMMUNITY SUPPORT - GINGER SHOT"
+        "title": "Los favoritos de nuestros clientes",
+        "subtitle": "Productos que hacen la vida con tu mascota más fácil",
+        "products_to_show": 8
       }
     },
-    "shop_now_TxPmHU": {
-      "type": "shop-now",
+    "feature_values": {
+      "type": "feature-section",
+      "blocks": {
+        "val_quality": {
+          "type": "block",
+          "settings": {
+            "icon": "✨",
+            "feature_title": "Calidad premium",
+            "description": "Seleccionamos cada producto para garantizar la mejor calidad para tu mascota y para ti."
+          }
+        },
+        "val_shipping": {
+          "type": "block",
+          "settings": {
+            "icon": "🚚",
+            "feature_title": "Envío rápido",
+            "description": "Recibe tu pedido en 2-4 días laborables. Envío gratis a partir de 50 €."
+          }
+        },
+        "val_support": {
+          "type": "block",
+          "settings": {
+            "icon": "💚",
+            "feature_title": "Atención cercana",
+            "description": "Estamos aquí para ayudarte. Contacta con nosotros cuando lo necesites."
+          }
+        }
+      },
+      "block_order": ["val_quality", "val_shipping", "val_support"],
       "settings": {
-        "image": "shopify://shop_images/Super_Nature_Ginger_Shot.png",
-        "button_url": "shopify://products/ginger-shot",
-        "button_text": "Shop Now",
-        "title": "NATURAL GINGER SHOT",
-        "subtitle": "THE",
-        "subtitle2": "SUPER GOOD SHOT",
-        "subtitle3": "FROM NATURE",
-        "textList": "<ul><li><span>NO</span> ADDED SUGAR</li><li><span>NO</span> ADDED PRESERVATIVES</li></ul>",
-        "ingredients": "<p><strong>INGREDIENTS:</strong> Apple juice from concentrated juice, ginger juice NFC (35%), lime juice from concentrated juice (6%), acerola extract (0.3%) with natural vitamin C.</p>",
-        "small2": "FRUIT JUICE BASED DRINK WITH GINGER ROOT JUICE.",
-        "vitamin": "VITAMIN C CONTRIBUTES TO THE NORMAL FUNCTION OF THE IMMUNE SYSTEM",
-        "small": "Enjoyed as part of a healthy lifestyle and balance diet.",
-        "nutrition1": "Nutrition per 100 ml:",
-        "nutrition": "Energy 182 kJ/44kcal, Fat 0.3g of which Saturates 0g, Carbohydrate 9.3g of which Sugars 8.9g, Fibre 0.4g, Protein 0.3g, Salt 0.01g, Vitamin C 80MG (100% RI)*"
+        "title": "¿Por qué elegirnos?",
+        "subtitle": "Productos pensados para ti y para ellos"
       }
     },
-    "social_media_6e3G9z": {
-      "type": "social-media",
+    "pet_owners": {
+      "type": "pet-owners",
       "settings": {
-        "title": "SOCIAL",
-        "social": "<script src='https://static.elfsight.com/platform/platform.js' async></script><div class='elfsight-app-64616117-e487-4070-9e7f-69652258ed73' data-elfsight-app-lazy></div>"
+        "title": "Porque ellos forman parte de tu vida.",
+        "description": "Creamos productos pensados para ti, el dueño de mascotas. Soluciones prácticas y con estilo para que la convivencia con tu compañero peludo sea aún mejor.",
+        "cta_text": "Ver productos para ti",
+        "cta_url": "/collections/all"
+      },
+      "blocks": {
+        "feat_casa": {
+          "type": "feature",
+          "settings": {
+            "icon": "🏠",
+            "title": "Casa limpia"
+          }
+        },
+        "feat_viajes": {
+          "type": "feature",
+          "settings": {
+            "icon": "🚗",
+            "title": "Viajes"
+          }
+        },
+        "feat_organizacion": {
+          "type": "feature",
+          "settings": {
+            "icon": "📦",
+            "title": "Organización"
+          }
+        },
+        "feat_lifestyle": {
+          "type": "feature",
+          "settings": {
+            "icon": "✨",
+            "title": "Lifestyle"
+          }
+        }
+      },
+      "block_order": [
+        "feat_casa",
+        "feat_viajes",
+        "feat_organizacion",
+        "feat_lifestyle"
+      ]
+    },
+    "best_sellers": {
+      "type": "best-sellers",
+      "settings": {
+        "title": "Lo que más quieren ellos",
+        "subtitle": "Los productos más vendidos de nuestra tienda"
+      }
+    },
+    "pet_bundles": {
+      "type": "pet-bundles",
+      "settings": {
+        "title": "Todo lo que necesitas, en un solo pack",
+        "subtitle": "Ahorra y equípate al completo con nuestros packs seleccionados"
+      },
+      "blocks": {
+        "bundle_1": {
+          "type": "bundle",
+          "settings": {
+            "title": "Home Pack",
+            "description": "Todo lo que necesitas para mantener tu casa limpia y organizada con tu mascota.",
+            "badge": "Popular",
+            "link_text": "Ver pack",
+            "link": "/collections/casa"
+          }
+        },
+        "bundle_2": {
+          "type": "bundle",
+          "settings": {
+            "title": "Travel Pack",
+            "description": "Viaja tranquilo con todo lo que tu mascota necesita para el camino.",
+            "link_text": "Ver pack",
+            "link": "/collections/viajar"
+          }
+        },
+        "bundle_3": {
+          "type": "bundle",
+          "settings": {
+            "title": "Walk Pack",
+            "description": "Paseos más cómodos y organizados con los accesorios esenciales.",
+            "link_text": "Ver pack",
+            "link": "/collections/pasear"
+          }
+        },
+        "bundle_4": {
+          "type": "bundle",
+          "settings": {
+            "title": "New Pet Pack",
+            "description": "¿Acabas de adoptar? Este pack tiene todo lo básico para empezar.",
+            "badge": "Nuevo",
+            "link_text": "Ver pack",
+            "link": "/collections/perros"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_1",
+        "bundle_2",
+        "bundle_3",
+        "bundle_4"
+      ]
+    },
+    "pet_problems": {
+      "type": "pet-problems",
+      "settings": {
+        "title": "Tenemos la solución a tu día a día",
+        "subtitle": "Resolvemos las situaciones más comunes al convivir con mascotas"
+      },
+      "blocks": {
+        "prob_1": {
+          "type": "problem",
+          "settings": {
+            "emoji": "🛋️",
+            "problem": "¿Tu sofá está lleno de pelos?",
+            "solution": "Descubre nuestros productos de limpieza",
+            "link_text": "Ver productos",
+            "link": "/collections/casa"
+          }
+        },
+        "prob_2": {
+          "type": "problem",
+          "settings": {
+            "emoji": "🚗",
+            "problem": "¿Viajar con tu perro es complicado?",
+            "solution": "Todo para viajar con ellos",
+            "link_text": "Ver productos",
+            "link": "/collections/viajar"
+          }
+        },
+        "prob_3": {
+          "type": "problem",
+          "settings": {
+            "emoji": "🐾",
+            "problem": "¿Tu mascota ensucia toda la casa?",
+            "solution": "Productos para mantener tu hogar",
+            "link_text": "Ver productos",
+            "link": "/collections/casa"
+          }
+        },
+        "prob_4": {
+          "type": "problem",
+          "settings": {
+            "emoji": "📦",
+            "problem": "¿Necesitas organizar sus cosas?",
+            "solution": "Organizadores y almacenamiento",
+            "link_text": "Ver productos",
+            "link": "/collections/casa"
+          }
+        }
+      },
+      "block_order": [
+        "prob_1",
+        "prob_2",
+        "prob_3",
+        "prob_4"
+      ]
+    },
+    "pet_reviews": {
+      "type": "pet-reviews",
+      "settings": {
+        "title": "Lo que dicen nuestros clientes",
+        "subtitle": "Experiencias reales de personas que viven con mascotas"
+      },
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "Los productos para el coche han cambiado nuestros viajes. La manta protectora es facilísima de limpiar y súper resistente.",
+            "author_name": "María G.",
+            "author_detail": "Dueña de Max (Golden Retriever)"
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "El rodillo quitapelos para el sofá funciona de maravilla. Por fin puedo tener la casa limpia teniendo dos gatos.",
+            "author_name": "Carlos R.",
+            "author_detail": "Dueño de Misa y Leo"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "Excelente calidad y envío muy rápido. El dispensador de bolsas y la botella de agua para paseos son imprescindibles.",
+            "author_name": "Laura S.",
+            "author_detail": "Dueña de Bubu (Caniche)"
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3"
+      ]
+    },
+    "pet_ugc": {
+      "type": "pet-ugc",
+      "settings": {
+        "title": "#VidaConMascota",
+        "subtitle": "Comparte tu momento — Síguenos en Instagram"
+      },
+      "blocks": {
+        "ugc_1": {
+          "type": "image",
+          "settings": {}
+        },
+        "ugc_2": {
+          "type": "image",
+          "settings": {}
+        },
+        "ugc_3": {
+          "type": "image",
+          "settings": {}
+        },
+        "ugc_4": {
+          "type": "image",
+          "settings": {}
+        },
+        "ugc_5": {
+          "type": "image",
+          "settings": {}
+        },
+        "ugc_6": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "ugc_1",
+        "ugc_2",
+        "ugc_3",
+        "ugc_4",
+        "ugc_5",
+        "ugc_6"
+      ]
+    },
+    "pet_newsletter": {
+      "type": "pet-newsletter",
+      "settings": {
+        "title": "Únete a nuestra comunidad",
+        "subtitle": "Consejos, novedades y productos para disfrutar aún más de la vida con tu mascota.",
+        "placeholder_text": "Tu correo electrónico",
+        "button_text": "Quiero unirme"
       }
     }
   },
   "order": [
-    "main",
-    "hero_section_nPxPwU",
-    "feature_section_yr9MjE",
-    "shop_now_TxPmHU",
-    "social_media_6e3G9z"
+    "announcement_bar",
+    "hero_section",
+    "pet_categories",
+    "featured_products",
+    "feature_values",
+    "pet_owners",
+    "best_sellers",
+    "pet_bundles",
+    "pet_problems",
+    "pet_reviews",
+    "pet_ugc",
+    "pet_newsletter"
   ]
 }

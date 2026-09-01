@@ -1,0 +1,386 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-ugc-section" style="background-color: {{ section.settings.background_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="pet-container container">
+    {% if section.settings.title != blank %}
+      <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.instagram_url != blank %}
+      <div class="pet-ugc-cta-wrapper">
+        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" class="pet-ugc-instagram-link" aria-label="Síguenos en Instagram">
+          <svg class="pet-ugc-instagram-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+          </svg>
+          <span>{{ section.settings.instagram_text | default: 'Síguenos en Instagram' }}</span>
+        </a>
+      </div>
+    {% endif %}
+
+    <div class="pet-ugc-grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="pet-ugc-item" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="pet-ugc-item__link" target="_blank" rel="noopener noreferrer" aria-label="Ver publicación {{ forloop.index }}">
+            {% endif %}
+
+              <div class="pet-ugc-item__image-wrapper">
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.image.alt | default: 'Contenido de comunidad' }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    class="pet-ugc-item__image"
+                  >
+                {% else %}
+                  <div class="pet-ugc-item__placeholder">
+                    <svg class="pet-ugc-item__placeholder-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.5"/>
+                      <circle cx="8.5" cy="8.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+                      <path d="M3 16l4-4c.7-.7 1.8-.7 2.5 0L14 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14 14.5l1.5-1.5c.7-.7 1.8-.7 2.5 0L21 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                {% endif %}
+
+                <div class="pet-ugc-item__overlay">
+                  <svg class="pet-ugc-item__overlay-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% assign ugc_emojis = "🐶,🐱,🚗,🛋️,🦮,🐾" | split: "," %}
+        {% assign ugc_tags = "#VidaConMascota,#GatosDeEspaña,#ViajarConPerros,#HogarLimpio,#PaseosFelices,#PawAndHome" | split: "," %}
+        {% assign ugc_bgs = "#FAF4EB,#F2F6F0,#FDF3EF,#F0F4F8,#EFF8F5,#FBF8F3" | split: "," %}
+        {% for i in (0..5) %}
+          <div class="pet-ugc-item">
+            <div class="pet-ugc-item__image-wrapper" style="background: {{ ugc_bgs[i] }}; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center;">
+              <span style="font-size: 3rem; margin-bottom: 8px;">{{ ugc_emojis[i] }}</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--pet-navy);">{{ ugc_tags[i] }}</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--pet-coral); margin-top: 4px;">@pawandhome</span>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-ugc-section {
+    background-color: var(--pet-white, #FFFFFF);
+  }
+
+  .pet-ugc-section .pet-section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.25rem;
+    color: var(--pet-navy, #1A2B4A);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .pet-ugc-section .pet-section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--pet-muted, #6B7280);
+    text-align: center;
+    margin-bottom: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pet-ugc-cta-wrapper {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .pet-ugc-instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--pet-coral, #E8734A);
+    text-decoration: none;
+    padding: 0.5rem 1.25rem;
+    border: 2px solid var(--pet-coral, #E8734A);
+    border-radius: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pet-ugc-instagram-link:hover {
+    background-color: var(--pet-coral, #E8734A);
+    color: var(--pet-white, #FFFFFF);
+  }
+
+  .pet-ugc-instagram-icon {
+    flex-shrink: 0;
+  }
+
+  .pet-ugc-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+  }
+
+  .pet-ugc-item {
+    position: relative;
+  }
+
+  .pet-ugc-item__link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .pet-ugc-item__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: var(--pet-warm, #F5EDE3);
+  }
+
+  .pet-ugc-item__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .pet-ugc-item:hover .pet-ugc-item__image {
+    transform: scale(1.08);
+  }
+
+  .pet-ugc-item__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pet-warm, #F5EDE3);
+  }
+
+  .pet-ugc-item__placeholder-icon {
+    color: var(--pet-border, #E5E1DB);
+  }
+
+  .pet-ugc-item__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(26, 43, 74, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+  }
+
+  .pet-ugc-item:hover .pet-ugc-item__overlay {
+    opacity: 1;
+  }
+
+  .pet-ugc-item__overlay-icon {
+    color: var(--pet-white, #FFFFFF);
+  }
+
+  @media (max-width: 991px) {
+    .pet-ugc-section .pet-section-title {
+      font-size: 1.85rem;
+    }
+
+    .pet-ugc-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pet-ugc-section .pet-section-title {
+      font-size: 1.5rem;
+    }
+
+    .pet-ugc-section .pet-section-subtitle {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pet-ugc-cta-wrapper {
+      margin-bottom: 1.5rem;
+    }
+
+    .pet-ugc-instagram-link {
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+    }
+
+    .pet-ugc-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .pet-ugc-item__image-wrapper {
+      border-radius: 8px;
+    }
+
+    .pet-ugc-item__overlay {
+      border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pet-ugc-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "📸 Galería UGC",
+  "tag": "section",
+  "class": "pet-ugc-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "#VidaConMascota"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Comparte tu momento — Síguenos en Instagram"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "URL de Instagram"
+    },
+    {
+      "type": "text",
+      "id": "instagram_text",
+      "label": "Texto del botón de Instagram",
+      "default": "Síguenos en Instagram"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#1A2B4A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del subtítulo",
+      "default": "#6B7280"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Imagen",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace (opcional)",
+          "info": "Enlace a la publicación de Instagram o página"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "📸 Galería UGC",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

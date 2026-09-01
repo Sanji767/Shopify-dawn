@@ -1,128 +1,222 @@
-<!-- end of header -->
-<div class="hero-area">
-  <div class="hero-wrap">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 col-12">
-          <div class="hero-text">
-            {% comment %}
-              <h1 class="wow fadeInUp" data-wow-duration="1200ms">
-                Super
-                <span class="shape1"
-                  ><img
-                    src="{{ 'shape1.png' | asset_url }}"
-                    width=""
-                    height=""
-                    alt=""
-                ></span>
-              </h1>
-              <h2 class="wow fadeInUp" data-wow-duration="1400ms">{{ section.settings.title }}</h2>
-              <h3 class="wow fadeInUp" data-wow-duration="1600ms">
-                {{ section.settings.subtitle }}
-                <span
-                  class="shape2"
-                  ><img src="{{ 'shape3.png' | asset_url }}" alt="" width="" height=""
-                ></span>
-              </h3>
-            {% endcomment %}
+<!-- Hero Section -->
+<section class="pet-hero {% if section.settings.image == blank %}pet-hero--no-image{% endif %}">
+  {% if section.settings.image != blank %}
+    <img src="{{ section.settings.image | image_url: width: 1920 }}" alt="{{ section.settings.title }}" class="pet-hero-bg" loading="eager">
+    <div class="pet-hero-overlay"></div>
+  {% else %}
+    <div class="pet-hero-fallback-bg"></div>
+  {% endif %}
+  
+  <div class="pet-hero-content">
+    <div class="pet-hero-badge">
+      <span class="pet-hero-badge-icon">🐾</span>
+      <span>Productos seleccionados para personas que viven con mascotas</span>
+    </div>
 
-            <div class="heroImg">
-              {% if section.settings.left_image != blank %}
-                <img src="{{ section.settings.left_image | image_url: width: 1920 }}" width="" height="" alt="">
-              {% else %}
-                <img src="{{'hero_home.png' | asset_url}}" width="" height="" alt="">
-              {% endif %}
-            </div>
-            <div class="hero-btn">
-              <a href="{{ section.settings.button_url }}" class="theme-btn">{{ section.settings.button_text }}</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-12">
-          <div class="hero-img">
-            <div class="main-img">
-              <img src="{{ section.settings.image | image_url: width: 1300  }}" width="" height="" alt="">
-            </div>
-            {% comment %}
-              <div class="shape1">
-                <img src="{{ 'leaf1.png' | asset_url }}" width="" height="" alt="">
-              </div>
-            {% endcomment %}
-            {% comment %}
-              <div class="shape2 wow zoomIn" data-wow-duration="1800ms">
-                <img src="{{ 'thumb1.png' | asset_url }}" alt="" width="" height="">
-              </div>
-            {% endcomment %}
-          </div>
-        </div>
+    <h1>{{ section.settings.title }}</h1>
+    <p>{{ section.settings.subtitle }}</p>
+
+    <div class="pet-hero-buttons">
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="pet-btn pet-btn-primary pet-btn-lg">
+          {{ section.settings.button_text }}
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4.166 10h11.668M10 4.166L15.833 10 10 15.833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      {% endif %}
+      {% if section.settings.button2_text != blank %}
+        <a href="{{ section.settings.button2_url | default: '/collections/all' }}" class="pet-btn pet-btn-hero-secondary pet-btn-lg">
+          {{ section.settings.button2_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Trust Stats Ticker -->
+    <div class="pet-hero-trust">
+      <div class="pet-hero-trust-item">
+        <span class="pet-hero-stars">★★★★★</span>
+        <span>4.9/5 por +10.000 clientes</span>
+      </div>
+      <div class="pet-hero-trust-divider"></div>
+      <div class="pet-hero-trust-item">
+        <span>🚚 Envío rápido 24-48h</span>
+      </div>
+      <div class="pet-hero-trust-divider"></div>
+      <div class="pet-hero-trust-item">
+        <span>💚 100% Garantía de devolución</span>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  .heroImg img {
-    margin-bottom: 50px;
+  .pet-hero {
+    position: relative;
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 80px 0 60px;
   }
-  @media (max-width: 800px) {
-    .hero-area .hero-text {
-      max-width: 100%;
-    }
-    .heroImg img {
-      margin-left: 0px;
-    }
-    .hero-btn {
-      text-align: center;
-      margin-left: 0px;
-      margin-bottom: 30px;
-    }
-    .heroImg img {
-      margin-bottom: 20px;
-    }
+  .pet-hero--no-image {
+    background: radial-gradient(circle at 80% 20%, #2A3F66 0%, #1A2B4A 60%, #121D33 100%);
+  }
+  .pet-hero-fallback-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+  .pet-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    color: #FFFFFF;
+    width: 100%;
+  }
+  .pet-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #F8FAFC;
+  }
+  .pet-hero h1 {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 3.75rem !important;
+    color: #FFFFFF !important;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    max-width: 760px;
+    letter-spacing: -0.02em;
+  }
+  .pet-hero p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.2rem !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    max-width: 600px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .pet-hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .pet-btn-hero-secondary {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+  }
+  .pet-btn-hero-secondary:hover {
+    background-color: #FFFFFF;
+    color: #1A2B4A;
+    border-color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+  .pet-hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .pet-hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pet-hero-stars {
+    color: #F59E0B;
+    letter-spacing: 2px;
+  }
+  .pet-hero-trust-divider {
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 991px) {
+    .pet-hero h1 { font-size: 2.75rem !important; }
+    .pet-hero p { font-size: 1.05rem !important; }
+  }
+  @media (max-width: 575px) {
+    .pet-hero { padding: 50px 0 40px; }
+    .pet-hero h1 { font-size: 2.1rem !important; }
+    .pet-hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pet-hero-trust-divider { display: none; }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Hero Section",
+  "name": "Hero Principal",
+  "tag": "section",
+  "class": "pet-hero-wrapper",
   "settings": [
     {
       "type": "image_picker",
-      "id": "left_image",
-      "label": "Left Image"
+      "id": "image",
+      "label": "Imagen de fondo",
+      "info": "Recomendado: 1920x1080px."
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "Super Good Shot"
+      "label": "Título principal",
+      "default": "Todo para una vida mejor juntos."
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "subtitle",
-      "label": "Subtitle",
-      "default": "From Nature"
-    },
-    {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL"
+      "label": "Subtítulo",
+      "default": "Productos seleccionados para hacer más fácil, cómoda y divertida la vida con tu mascota."
     },
     {
       "type": "text",
       "id": "button_text",
-      "label": "Button Text",
-      "default": "Shop Now"
+      "label": "Texto botón principal",
+      "default": "Comprar ahora"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
+      "type": "url",
+      "id": "button_url",
+      "label": "URL botón principal"
+    },
+    {
+      "type": "text",
+      "id": "button2_text",
+      "label": "Texto botón secundario",
+      "default": "Descubrir novedades"
+    },
+    {
+      "type": "url",
+      "id": "button2_url",
+      "label": "URL botón secundario"
     }
   ],
   "presets": [
     {
-      "name": "Hero Section"
+      "name": "Hero Principal"
     }
   ]
 }

@@ -1,26 +1,13 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "404",
-      "disabled": true,
-      "settings": {}
-    },
-    "single_product_V3xA3Q": {
       "type": "single-product",
-      "settings": {}
+      "settings": {
+        "shipping_text": "Envío en 2-4 días laborables",
+        "returns_text": "Devolución gratuita en 30 días",
+        "guarantee_text": "Pago 100% seguro"
+      }
     }
   },
-  "order": [
-    "main",
-    "single_product_V3xA3Q"
-  ]
+  "order": ["main"]
 }

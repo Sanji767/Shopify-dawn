@@ -1,0 +1,225 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-newsletter" id="pet-newsletter-{{ section.id }}">
+  <div class="pet-container container">
+    <div class="pet-newsletter-card">
+      <div class="pet-newsletter-inner">
+        <span class="pet-newsletter-badge">💌 COMUNIDAD PET LOVERS</span>
+        <h2 class="pet-newsletter-title">{{ section.settings.title }}</h2>
+        <p class="pet-newsletter-subtitle">{{ section.settings.subtitle }}</p>
+
+        {% form 'customer', class: 'pet-newsletter-form-wrapper' %}
+          {% if form.posted_successfully? %}
+            <div class="pet-newsletter-success">
+              🎉 {{ section.settings.success_message }}
+            </div>
+          {% else %}
+            <div class="pet-newsletter-form">
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input
+                type="email"
+                name="contact[email]"
+                class="pet-newsletter-input"
+                placeholder="{{ section.settings.placeholder_text }}"
+                required
+                autocomplete="email"
+                aria-label="{{ section.settings.placeholder_text }}"
+              >
+              <button type="submit" class="pet-newsletter-btn">
+                {{ section.settings.button_text }}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            {% if form.errors %}
+              <div class="pet-newsletter-error">
+                <p>Por favor introduce un correo válido.</p>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endform %}
+
+        <div class="pet-newsletter-trust">
+          <span>🔒 Sin spam</span>
+          <span>•</span>
+          <span>🐾 10% dto en tu primer pedido</span>
+          <span>•</span>
+          <span>Cancela cuando quieras</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pet-newsletter {
+    padding: 80px 0;
+    background-color: var(--pet-white, #FFFFFF);
+  }
+  .pet-newsletter-card {
+    background: radial-gradient(circle at top right, #2A3F66 0%, #1A2B4A 60%, #121D33 100%);
+    border-radius: 32px;
+    padding: 72px 32px;
+    box-shadow: 0 24px 60px rgba(26, 43, 74, 0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .pet-newsletter-card::before {
+    content: '🐾';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 10rem;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .pet-newsletter-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .pet-newsletter-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #F8FAFC;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+  }
+  .pet-newsletter-title {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 3rem !important;
+    color: #FFFFFF !important;
+    margin-bottom: 16px !important;
+    line-height: 1.2 !important;
+  }
+  .pet-newsletter-subtitle {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.1rem !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 36px !important;
+  }
+  .pet-newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto 24px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+  }
+  .pet-newsletter-input {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    background: transparent;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+  }
+  .pet-newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .pet-newsletter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background-color: var(--pet-coral);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+  .pet-newsletter-btn:hover {
+    background-color: #d4643d;
+    transform: translateY(-2px);
+  }
+  .pet-newsletter-success {
+    padding: 16px 24px;
+    background-color: rgba(139, 170, 124, 0.25);
+    border: 1px solid var(--pet-sage);
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .pet-newsletter-trust {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 767px) {
+    .pet-newsletter-card { padding: 48px 20px; border-radius: 24px; }
+    .pet-newsletter-title { font-size: 2.2rem !important; }
+    .pet-newsletter-form { flex-direction: column; background: transparent; padding: 0; border: none; }
+    .pet-newsletter-input { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50px; }
+    .pet-newsletter-btn { width: 100%; justify-content: center; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Pet Newsletter",
+  "tag": "section",
+  "class": "pet-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Únete a nuestra comunidad"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Consejos, novedades y productos para disfrutar aún más de la vida con tu mascota."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Texto del placeholder",
+      "default": "Tu correo electrónico"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "Quiero unirme"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Mensaje de éxito",
+      "default": "¡Gracias por unirte! Pronto recibirás tus ventajas exclusivas."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Newsletter"
+    }
+  ]
+}
+{% endschema %}

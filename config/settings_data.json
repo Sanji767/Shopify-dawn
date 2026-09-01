@@ -136,27 +136,29 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo": "shopify://shop_images/LOGO_8038cb95-3a4b-4939-9d60-ae0fc6be998f.png",
-          "shop_url": "shopify://products/ginger-shot",
-          "about_url": "shopify://pages/about-us",
-          "contact_url": "shopify://pages/contact",
-          "home_text": "HOME",
-          "shop_text": "Shop",
-          "about_text": "About Us",
-          "contact_text": "Contact Us"
+          "announcement_text": "Envío gratis en pedidos superiores a 50 € · Envíos 3-6 días laborables 🐾",
+          "home_text": "Inicio",
+          "perros_text": "Perros",
+          "gatos_text": "Gatos",
+          "casa_text": "Casa",
+          "viajar_text": "Viajar",
+          "pasear_text": "Pasear",
+          "ofertas_text": "Ofertas",
+          "blog_text": "Blog"
         }
       },
       "footer": {
         "type": "footer",
         "settings": {
-          "follow_title": "FOLLOW US ON SOCIAL",
-          "instagram": "https://www.instagram.com/supernatureshot/",
-          "tiktok": "#",
-          "newsletter_title": "JOIN THE SUPER COMMUNITY AND GET 15% OFF FIRST ORDER",
-          "newsletter_button": "JOIN",
-          "newsletter_email": "Enter your email address",
-          "newsletter_success": "Thank you for signing up!",
-          "footer_link": "footer"
+          "brand_name": "Paw & Home",
+          "brand_description": "Productos seleccionados para hacer la vida con tu mascota más fácil, cómoda y divertida.",
+          "col2_title": "Tienda",
+          "col3_title": "Ayuda",
+          "newsletter_title": "Únete a la comunidad",
+          "newsletter_subtitle": "Consejos, novedades y ofertas para tu mascota.",
+          "newsletter_placeholder": "Tu email",
+          "newsletter_button": "Unirme",
+          "newsletter_success": "¡Gracias por unirte! 🐾"
         }
       }
     },
@@ -164,57 +166,57 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
+          "background": "#FBF8F3",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#1A2B4A",
+          "button": "#E8734A",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#1A2B4A",
+          "shadow": "#1A2B4A"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#f3f3f3",
+          "background": "#F5EDE3",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#f3f3f3",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#1A2B4A",
+          "button": "#E8734A",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#1A2B4A",
+          "shadow": "#1A2B4A"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#242833",
+          "background": "#1A2B4A",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#000000",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
+          "text": "#FFFFFF",
+          "button": "#E8734A",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#1A2B4A"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#121212",
+          "background": "#8BAA7C",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#121212",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
+          "text": "#FFFFFF",
+          "button": "#1A2B4A",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#1A2B4A"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#334fb4",
+          "background": "#E8734A",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#334fb4",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#E8734A",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#1A2B4A"
         }
       }
     }

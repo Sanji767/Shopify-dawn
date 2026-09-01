@@ -4,12 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#1A2B4A">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
+
+    <!-- Google Fonts: DM Serif Display + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -29,38 +34,15 @@
     {% render 'meta-tags' %}
 
     <link href="{{ 'bootstrap.min.css' | asset_url }}" rel="stylesheet">
-    <link href="{{ 'animate.css' | asset_url }}" rel="stylesheet">
     <link href="{{ 'themify-icons.css' | asset_url }}" rel="stylesheet">
     <link href="{{ 'style.css' | asset_url }}" rel="stylesheet">
+    <link href="{{ 'pet-theme.css' | asset_url }}" rel="stylesheet">
 
     {{ content_for_header }}
-
-    {% comment %}
-      <script>
-        if (window.location.pathname !== '/') {
-          window.location.href = '/';
-        }
-      </script>
-    {% endcomment %}
   </head>
 
   <body class="">
     <div class="page-wrapper">
-      <!-- start preloader -->
-      <div class="preloader">
-        <div class="vertical-centered-box">
-          <div class="content">
-            <div class="loader-circle"></div>
-            <div class="loader-line-mask">
-              <div class="loader-line"></div>
-            </div>
-            <img src="{{ 'preloader.png' | asset_url }}" width="" height="" alt="">
-          </div>
-        </div>
-      </div>
-      <!-- end preloader -->
-      <!-- Start header -->
-
       {% section 'header' %}
 
       {{ content_for_layout }}
@@ -72,5 +54,8 @@
     <script src="{{ 'bootstrap.bundle.min.js' | asset_url }}" defer></script>
     <script src="{{ 'jquery-plugin-collection.js' | asset_url }}" defer></script>
     <script src="{{ 'script.js' | asset_url }}" defer></script>
+    <script src="{{ 'pet-theme.js' | asset_url }}" defer></script>
+
+    {% render 'cookie-banner' %}
   </body>
 </html>

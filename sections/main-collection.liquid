@@ -1,0 +1,552 @@
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .pet-collection-page {
+    padding-bottom: 80px;
+    background-color: var(--pet-white);
+  }
+
+  .pet-collection-header {
+    background-color: var(--pet-cream);
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pet-collection-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.75rem;
+    color: var(--pet-navy);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .pet-collection-header-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--pet-muted);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .pet-collection-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--pet-border);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .pet-collection-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--pet-muted);
+  }
+
+  .pet-collection-sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pet-collection-sort-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--pet-muted);
+    white-space: nowrap;
+  }
+
+  .pet-collection-sort-select {
+    padding: 8px 16px;
+    border: 1px solid var(--pet-border);
+    border-radius: 8px;
+    background-color: var(--pet-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--pet-navy);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .pet-collection-sort-select:focus {
+    border-color: var(--pet-sage);
+  }
+
+  .pet-collection-page .pet-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .pet-collection-page .pet-product-card {
+    background-color: var(--pet-white);
+    border-radius: 16px;
+    border: 1px solid var(--pet-border);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pet-collection-page .pet-product-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .pet-collection-page .pet-product-card-img-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--pet-cream);
+  }
+
+  .pet-collection-page .pet-product-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s ease;
+  }
+
+  .pet-collection-page .pet-product-card-img-wrap .pet-product-card-img-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  .pet-collection-page .pet-product-card:hover .pet-product-card-img-wrap .pet-product-card-img-secondary {
+    opacity: 1;
+  }
+
+  .pet-collection-page .pet-product-card:hover .pet-product-card-img-wrap .pet-product-card-img-primary {
+    opacity: 0;
+  }
+
+  .pet-collection-page .pet-product-card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .pet-collection-page .pet-product-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .pet-collection-page .pet-product-badge--sale {
+    background-color: var(--pet-coral);
+    color: var(--pet-white);
+  }
+
+  .pet-collection-page .pet-product-badge--sold-out {
+    background-color: var(--pet-navy);
+    color: var(--pet-white);
+  }
+
+  .pet-collection-page .pet-product-card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .pet-collection-page .pet-product-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--pet-navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .pet-collection-page .pet-product-card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .pet-collection-page .pet-product-card-title a:hover {
+    color: var(--pet-coral);
+  }
+
+  .pet-collection-page .pet-product-card-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .pet-collection-page .pet-product-card-price-current {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--pet-navy);
+  }
+
+  .pet-collection-page .pet-product-card-price-compare {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: var(--pet-muted);
+    text-decoration: line-through;
+  }
+
+  .pet-collection-page .pet-product-card-actions {
+    margin-top: auto;
+  }
+
+  .pet-collection-page .pet-product-quick-add {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    background-color: var(--pet-sage);
+    color: var(--pet-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .pet-collection-page .pet-product-quick-add:hover {
+    background-color: #769966;
+    color: var(--pet-white);
+  }
+
+  .pet-collection-page .pet-product-quick-add--sold-out {
+    background-color: var(--pet-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Pagination */
+  .pet-pagination {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pet-pagination a,
+  .pet-pagination span.current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .pet-pagination a {
+    color: var(--pet-navy);
+    border: 1px solid var(--pet-border);
+    background-color: var(--pet-white);
+  }
+
+  .pet-pagination a:hover {
+    background-color: var(--pet-sage);
+    color: var(--pet-white);
+    border-color: var(--pet-sage);
+  }
+
+  .pet-pagination span.current {
+    background-color: var(--pet-navy);
+    color: var(--pet-white);
+    border: 1px solid var(--pet-navy);
+  }
+
+  .pet-pagination span.deco {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--pet-muted);
+    padding: 0 4px;
+  }
+
+  .pet-collection-empty {
+    text-align: center;
+    padding: 80px 20px;
+    font-family: 'Inter', sans-serif;
+    color: var(--pet-muted);
+  }
+
+  .pet-collection-empty h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: var(--pet-navy);
+    margin-bottom: 12px;
+  }
+
+  .pet-collection-empty p {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 991px) {
+    .pet-collection-page .pet-products-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .pet-collection-header-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pet-collection-page .pet-products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .pet-collection-header {
+      padding: 40px 0;
+    }
+
+    .pet-collection-header-title {
+      font-size: 1.75rem;
+    }
+
+    .pet-collection-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .pet-collection-page {
+      padding-bottom: 48px;
+    }
+
+    .pet-collection-header {
+      padding: 32px 0;
+      margin-bottom: 32px;
+    }
+
+    .pet-collection-header-title {
+      font-size: 1.5rem;
+    }
+
+    .pet-collection-page .pet-product-card-info {
+      padding: 12px;
+    }
+
+    .pet-collection-sort-select {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<section class="pet-section pet-collection-page" id="pet-collection-{{ section.id }}">
+  {%- comment -%} Collection Header Banner {%- endcomment -%}
+  <header class="pet-collection-header">
+    <div class="pet-container container">
+      <h1 class="pet-collection-header-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="pet-collection-header-description">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="pet-container container">
+    {% paginate collection.products by section.settings.products_per_page %}
+
+      {%- comment -%} Toolbar: Count + Sort {%- endcomment -%}
+      <div class="pet-collection-toolbar">
+        <p class="pet-collection-count">
+          {{ collection.products_count }}
+          {% if collection.products_count == 1 %}producto{% else %}productos{% endif %}
+        </p>
+
+        <div class="pet-collection-sort">
+          <label for="pet-sort-select-{{ section.id }}" class="pet-collection-sort-label">Ordenar por:</label>
+          <select
+            id="pet-sort-select-{{ section.id }}"
+            class="pet-collection-sort-select"
+            onchange="window.location.href = this.value;"
+          >
+            <option value="{{ collection.url }}?sort_by=manual"
+              {% if collection.sort_by == 'manual' or collection.sort_by == blank %} selected{% endif %}
+            >Destacados</option>
+            <option value="{{ collection.url }}?sort_by=best-selling"
+              {% if collection.sort_by == 'best-selling' %} selected{% endif %}
+            >Más vendidos</option>
+            <option value="{{ collection.url }}?sort_by=price-ascending"
+              {% if collection.sort_by == 'price-ascending' %} selected{% endif %}
+            >Precio: Menor a Mayor</option>
+            <option value="{{ collection.url }}?sort_by=price-descending"
+              {% if collection.sort_by == 'price-descending' %} selected{% endif %}
+            >Precio: Mayor a Menor</option>
+            <option value="{{ collection.url }}?sort_by=title-ascending"
+              {% if collection.sort_by == 'title-ascending' %} selected{% endif %}
+            >Nombre: A-Z</option>
+            <option value="{{ collection.url }}?sort_by=created-descending"
+              {% if collection.sort_by == 'created-descending' %} selected{% endif %}
+            >Más recientes</option>
+          </select>
+        </div>
+      </div>
+
+      {%- comment -%} Product Grid {%- endcomment -%}
+      {% if collection.products.size > 0 %}
+        <div class="pet-products-grid">
+          {% for product in collection.products %}
+            {% assign on_sale = false %}
+            {% if product.compare_at_price > product.price %}
+              {% assign on_sale = true %}
+            {% endif %}
+
+            {% assign sold_out = false %}
+            {% unless product.available %}
+              {% assign sold_out = true %}
+            {% endunless %}
+
+            <article class="pet-product-card">
+              <a href="{{ product.url }}" class="pet-product-card-img-wrap" aria-label="{{ product.title }}">
+                {% if on_sale or sold_out %}
+                  <div class="pet-product-card-badges">
+                    {% if sold_out %}
+                      <span class="pet-product-badge pet-product-badge--sold-out">Agotado</span>
+                    {% elsif on_sale %}
+                      <span class="pet-product-badge pet-product-badge--sale">Oferta</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if product.featured_image != blank %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    class="pet-product-card-img-primary"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'product-1' | placeholder_svg_tag }}"
+                    alt="{{ product.title | escape }}"
+                    class="pet-product-card-img-primary"
+                  >
+                {% endif %}
+
+                {% if product.images[1] != blank %}
+                  <img
+                    src="{{ product.images[1] | image_url: width: 600 }}"
+                    alt="{{ product.images[1].alt | default: product.title | escape }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    class="pet-product-card-img-secondary"
+                  >
+                {% endif %}
+              </a>
+
+              <div class="pet-product-card-info">
+                <h3 class="pet-product-card-title">
+                  <a href="{{ product.url }}">{{ product.title }}</a>
+                </h3>
+
+                <div class="pet-product-card-price">
+                  <span class="pet-product-card-price-current">{{ product.price | money }}</span>
+                  {% if on_sale %}
+                    <span class="pet-product-card-price-compare">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="pet-product-card-actions">
+                  {% if sold_out %}
+                    <span class="pet-product-quick-add pet-product-quick-add--sold-out">Agotado</span>
+                  {% else %}
+                    <a href="{{ product.url }}" class="pet-product-quick-add">Agregar rápido</a>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        {%- comment -%} Pagination {%- endcomment -%}
+        {% if paginate.pages > 1 %}
+          <nav class="pet-pagination" aria-label="Paginación de la colección">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" aria-label="Página anterior">&laquo; Anterior</a>
+            {% endif %}
+
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              {% else %}
+                {% if part.title == '&hellip;' %}
+                  <span class="deco">{{ part.title }}</span>
+                {% else %}
+                  <span class="current" aria-current="page">{{ part.title }}</span>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" aria-label="Página siguiente">Siguiente &raquo;</a>
+            {% endif %}
+          </nav>
+        {% endif %}
+
+      {% else %}
+        <div class="pet-collection-empty">
+          <h2>No hay productos en esta colección</h2>
+          <p>Explora nuestras otras colecciones para encontrar lo que buscas.</p>
+        </div>
+      {% endif %}
+
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección principal",
+  "tag": "section",
+  "class": "pet-collection-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Productos por página",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Colección principal"
+    }
+  ]
+}
+{% endschema %}

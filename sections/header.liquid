@@ -1,169 +1,213 @@
-<header id="header">
-  <div class="site-header header-style-1">
-    <nav class="navigation navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <div class="row align-items-center">
-          <div class="col-lg-2 col-md-6 col-6 d-lg-none d-block">
-            <div class="navbar-header">
-              {% if section.settings.logo != blank %}
-                <a class="navbar-brand" href="/"
-                  ><img src="{{ section.settings.logo | image_url: width: 600  }}" width="" height="" alt="logo"
-                ></a>
-              {% else %}
-                <a class="navbar-brand" href="/"
-                  ><img src="{{ 'logo.png' | asset_url }}" width="" height="" alt="logo"
-                ></a>
-              {% endif %}
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-1 col-1">
-            <div id="navbar" class="collapse navbar-collapse navigation-holder">
-              <button class="menu-close"><i class="ti-close"></i></button>
-              <ul class="nav navbar-nav mb-2 mb-lg-0">
-                <li>
-                  <a href="/">{{ section.settings.home_text }}</a>
-                </li>
-                <li>
-                  <a href="{{section.settings.shop_url}}">{{ section.settings.shop_text }}</a>
-                </li>
-                <li class="middle-logo">
-                  {% if section.settings.logo != blank %}
-                    <a href="/"
-                      ><img
-                        src="{{ section.settings.logo | image_url: width: 600  }}"
-                        width=""
-                        height=""
-                        alt="logo"
-                    ></a>
-                  {% else %}
-                    <a href="/"
-                      ><img
-                        src="{{ 'logo.png' | asset_url }}"
-                        width=""
-                        height=""
-                        alt="logo"
-                    ></a>
-                  {% endif %}
-                </li>
-                <li>
-                  <a href="{{section.settings.about_url}}">{{ section.settings.about_text }}</a>
-                </li>
-                <li>
-                  <a href="{{section.settings.contact_url}}">{{ section.settings.contact_text }}</a>
-                </li>
-              </ul>
-            </div>
-            <!-- end of nav-collapse -->
-          </div>
-          <div class="col-lg-3 col-md-5 col-5 d-lg-none dl-block">
-            <div class="mobail-menu">
-              <button type="button" class="navbar-toggler open-btn">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar first-angle"></span>
-                <span class="icon-bar middle-angle"></span>
-                <span class="icon-bar last-angle"></span>
-              </button>
-            </div>
-          </div>
+<!-- Header -->
+<header class="pet-header" id="pet-header">
+  <div class="pet-header-inner">
+    <!-- Mobile Toggle -->
+    <button class="pet-mobile-toggle" aria-label="Abrir menú" onclick="document.querySelector('.pet-mobile-menu').classList.add('open'); document.querySelector('.pet-mobile-overlay').classList.add('open');">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
 
-          <div class="mini-cart">
-            <button class="cart-toggle-btn">
-              <i><img src="{{ 'shopping-cart.png' | asset_url }}" width="" height="" alt=""></i>
-              <span
-                class="cart-count"
-              >
-                {{- cart.item_count -}}
-              </span>
-            </button>
-            <div class="mini-cart-content">
-              <div class="title"></div>
-              <button class="mini-cart-close"><i class="ti-close"></i></button>
-              <div class="mini-cart-items">
-                <p class="top-p">Your Cart ({{ cart.item_count }})</p>
-                {% for item in cart.items %}
-                  <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-item-image">
-                      <a href="{{ item.url }}"
-                        ><img
-                          src="{{ item.image |  image_url: width: 300  }}"
-                          width=""
-                          height=""
-                          alt
-                      ></a>
-                    </div>
-                    <div class="mini-cart-item-des">
-                      <h4>
-                        <a href="{{ item.url }}">{{ item.title }}</a>
-                      </h4>
-                      <ul class="product-text-sub">
-                        <li>
-                          {{ item.variant.title }}
-                        </li>
-                      </ul>
-                      <a
-                        href="#"
-                        onclick="removeItem({{ forloop.index }}, 0)"
-                        class="dlt-btn"
-                      >
-                        <i class="ti-trash"></i>
-                      </a>
-                    </div>
-                    <div class="pro-single-btn">
-                      <span class="price">{{ item.price | money }}</span>
-                      <div class="quantity cart-plus-minus">
-                        <input
-                          type="text"
-                          value="{{ item.quantity }}"
-                          onkeyup="updateQty({{ forloop.index }})"
-                        >
-                        <div
-                          class="dec qtybutton"
-                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})"
-                        ></div>
-                        <div
-                          class="inc qtybutton"
-                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})"
-                        ></div>
-                        <div
-                          class="dec qtybutton"
-                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})"
-                        >
-                          -
-                        </div>
-                        <div
-                          class="inc qtybutton"
-                          onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})"
-                        >
-                          +
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-              <div class="mini-cart-action clearfix">
-                <ul>
-                  <li>Subtotal ({{ cart.item_count }} items)</li>
-                  <li>
-                    <strong> {{ cart.items_subtotal_price | money }}</strong>
-                  </li>
-                </ul>
-                <div class="mini-btn">
-                  <a href="/checkout" class="theme-btn">CONTINUE TO CHECKOUT</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end of container -->
-    </nav>
+    <!-- Logo -->
+    <a href="/" class="pet-header-logo">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" loading="lazy">
+      {% else %}
+        {% if shop.name contains 'My Store' or shop.name == blank %}
+          Paw & Home 🐾
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      {% endif %}
+    </a>
+
+    {% assign perros_link = section.settings.perros_url %}
+    {% if perros_link == blank %}
+      {% if collections['perros'] != blank and collections['perros'].title != blank %}
+        {% assign perros_link = collections['perros'].url %}
+      {% else %}
+        {% assign perros_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign gatos_link = section.settings.gatos_url %}
+    {% if gatos_link == blank %}
+      {% if collections['gatos'] != blank and collections['gatos'].title != blank %}
+        {% assign gatos_link = collections['gatos'].url %}
+      {% else %}
+        {% assign gatos_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign casa_link = section.settings.casa_url %}
+    {% if casa_link == blank %}
+      {% if collections['casa'] != blank and collections['casa'].title != blank %}
+        {% assign casa_link = collections['casa'].url %}
+      {% else %}
+        {% assign casa_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign viajar_link = section.settings.viajar_url %}
+    {% if viajar_link == blank %}
+      {% if collections['viajar'] != blank and collections['viajar'].title != blank %}
+        {% assign viajar_link = collections['viajar'].url %}
+      {% else %}
+        {% assign viajar_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign pasear_link = section.settings.pasear_url %}
+    {% if pasear_link == blank %}
+      {% if collections['pasear'] != blank and collections['pasear'].title != blank %}
+        {% assign pasear_link = collections['pasear'].url %}
+      {% else %}
+        {% assign pasear_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign ofertas_link = section.settings.ofertas_url %}
+    {% if ofertas_link == blank %}
+      {% if collections['ofertas'] != blank and collections['ofertas'].title != blank %}
+        {% assign ofertas_link = collections['ofertas'].url %}
+      {% else %}
+        {% assign ofertas_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    {% assign blog_link = section.settings.blog_url %}
+    {% if blog_link == blank %}
+      {% if blogs['news'] != blank and blogs['news'].title != blank %}
+        {% assign blog_link = blogs['news'].url %}
+      {% elsif blogs['blog'] != blank and blogs['blog'].title != blank %}
+        {% assign blog_link = blogs['blog'].url %}
+      {% else %}
+        {% assign blog_link = '/collections/all' %}
+      {% endif %}
+    {% endif %}
+
+    <!-- Desktop Navigation -->
+    <ul class="pet-header-nav">
+      <li><a href="/">{{ section.settings.home_text }}</a></li>
+      <li><a href="{{ perros_link }}">{{ section.settings.perros_text }}</a></li>
+      <li><a href="{{ gatos_link }}">{{ section.settings.gatos_text }}</a></li>
+      <li><a href="{{ casa_link }}">{{ section.settings.casa_text }}</a></li>
+      <li><a href="{{ viajar_link }}">{{ section.settings.viajar_text }}</a></li>
+      <li><a href="{{ pasear_link }}">{{ section.settings.pasear_text }}</a></li>
+      <li><a href="{{ ofertas_link }}">{{ section.settings.ofertas_text }}</a></li>
+      <li><a href="{{ blog_link }}">{{ section.settings.blog_text }}</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="pet-header-actions">
+      <!-- Cart -->
+      <button class="pet-header-cart cart-toggle-btn" aria-label="Carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        {% if cart.item_count > 0 %}
+          <span class="pet-header-cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </button>
+    </div>
   </div>
 </header>
 
+<!-- Mobile Menu -->
+<div class="pet-mobile-overlay" onclick="this.classList.remove('open'); document.querySelector('.pet-mobile-menu').classList.remove('open');"></div>
+<nav class="pet-mobile-menu">
+  <button class="pet-mobile-menu-close" onclick="this.parentElement.classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="Cerrar menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <ul class="pet-mobile-nav">
+    <li><a href="/">{{ section.settings.home_text }}</a></li>
+    <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text }}</a></li>
+    <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text }}</a></li>
+    <li><a href="{{ casa_link }}">🏠 {{ section.settings.casa_text }}</a></li>
+    <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text }}</a></li>
+    <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text }}</a></li>
+    <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text }}</a></li>
+    <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text }}</a></li>
+  </ul>
+</nav>
+
+<!-- Mini Cart Drawer -->
+<div class="mini-cart">
+  <div class="mini-cart-content">
+    <button class="mini-cart-close" aria-label="Cerrar carrito">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="mini-cart-items">
+      <p class="top-p" style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--pet-navy);">Tu Carrito ({{ cart.item_count }})</p>
+
+      {% if cart.item_count > 0 %}
+        <!-- Free shipping bar -->
+        {% assign free_shipping_threshold = 5000 %}
+        {% assign remaining = free_shipping_threshold | minus: cart.total_price %}
+        {% assign progress = cart.total_price | times: 100 | divided_by: free_shipping_threshold %}
+        {% if progress > 100 %}{% assign progress = 100 %}{% endif %}
+        <div class="pet-cart-free-shipping" style="margin-bottom: 20px;">
+          <p class="pet-cart-free-shipping-text" style="font-size: 0.85rem; text-align: center; margin-bottom: 8px;">
+            {% if remaining > 0 %}
+              Te faltan <strong>{{ remaining | money }}</strong> para envío gratis 🚚
+            {% else %}
+              ¡Tienes envío gratis! 🎉
+            {% endif %}
+          </p>
+          <div class="pet-cart-free-shipping-bar {% if remaining <= 0 %}complete{% endif %}">
+            <div class="pet-cart-free-shipping-progress" style="width: {{ progress }}%;"></div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for item in cart.items %}
+        <div class="mini-cart-item clearfix" style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--pet-border);">
+          <div class="mini-cart-item-image" style="width: 70px; flex-shrink: 0;">
+            <a href="{{ item.url }}">
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px;">
+            </a>
+          </div>
+          <div class="mini-cart-item-des" style="flex: 1;">
+            <h4 style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; margin: 0 0 4px;">
+              <a href="{{ item.url }}" style="color: var(--pet-navy); text-decoration: none;">{{ item.title }}</a>
+            </h4>
+            {% if item.variant.title != 'Default Title' %}
+              <p style="font-size: 0.75rem; color: var(--pet-muted); margin: 0 0 4px;">{{ item.variant.title }}</p>
+            {% endif %}
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 600; font-size: 0.9rem;">{{ item.price | money }}</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})" style="width: 28px; height: 28px; border: 1px solid var(--pet-border); border-radius: 4px; background: white; cursor: pointer; font-size: 1rem;">−</button>
+                <span style="font-size: 0.85rem; min-width: 20px; text-align: center;">{{ item.quantity }}</span>
+                <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})" style="width: 28px; height: 28px; border: 1px solid var(--pet-border); border-radius: 4px; background: white; cursor: pointer; font-size: 1rem;">+</button>
+              </div>
+            </div>
+            <a href="#" onclick="removeItem({{ forloop.index }}, 0); return false;" style="font-size: 0.75rem; color: var(--pet-muted); text-decoration: underline; display: inline-block; margin-top: 4px;">Eliminar</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <div class="mini-cart-action clearfix" style="padding-top: 16px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+          <span style="font-weight: 600;">Subtotal</span>
+          <span style="font-weight: 700; font-size: 1.1rem;">{{ cart.items_subtotal_price | money }}</span>
+        </div>
+        <div class="mini-btn">
+          <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%;">Finalizar compra</a>
+        </div>
+        <a href="/cart" style="display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--pet-muted);">Ver carrito completo</a>
+      </div>
+    {% else %}
+      <div style="text-align: center; padding: 40px 0;">
+        <p style="font-size: 3rem; margin-bottom: 8px;">🛒</p>
+        <p style="color: var(--pet-muted);">Tu carrito está vacío</p>
+        <a href="/collections" class="pet-btn pet-btn-primary pet-btn-sm" style="margin-top: 16px;">Explorar productos</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
 {
-  "name": "Header Section",
+  "name": "Header",
   "settings": [
     {
       "type": "image_picker",
@@ -171,48 +215,93 @@
       "label": "Logo"
     },
     {
-      "type": "url",
-      "id": "shop_url",
-      "label": "Shop URL"
-    },
-    {
-      "type": "url",
-      "id": "about_url",
-      "label": "About URL"
-    },
-    {
-      "type": "url",
-      "id": "contact_url",
-      "label": "Contact URL"
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Texto del anuncio",
+      "default": "Envío gratis desde 50 € · Diseñado para vivir mejor con ellos 🐾"
     },
     {
       "type": "text",
       "id": "home_text",
-      "label": "Home Text",
-      "default": "HOME"
+      "label": "Texto Inicio",
+      "default": "Inicio"
     },
     {
       "type": "text",
-      "id": "shop_text",
-      "label": "Shop Text",
-      "default": "Shop"
+      "id": "perros_text",
+      "label": "Texto Perros",
+      "default": "Perros"
+    },
+    {
+      "type": "url",
+      "id": "perros_url",
+      "label": "URL Perros"
     },
     {
       "type": "text",
-      "id": "about_text",
-      "label": "About Text",
-      "default": "About Us"
+      "id": "gatos_text",
+      "label": "Texto Gatos",
+      "default": "Gatos"
+    },
+    {
+      "type": "url",
+      "id": "gatos_url",
+      "label": "URL Gatos"
     },
     {
       "type": "text",
-      "id": "contact_text",
-      "label": "Contact Text",
-      "default": "Contact Us"
-    }
-  ],
-  "presets": [
+      "id": "casa_text",
+      "label": "Texto Casa",
+      "default": "Casa"
+    },
     {
-      "name": "Header Section"
+      "type": "url",
+      "id": "casa_url",
+      "label": "URL Casa"
+    },
+    {
+      "type": "text",
+      "id": "viajar_text",
+      "label": "Texto Viajar",
+      "default": "Viajar"
+    },
+    {
+      "type": "url",
+      "id": "viajar_url",
+      "label": "URL Viajar"
+    },
+    {
+      "type": "text",
+      "id": "pasear_text",
+      "label": "Texto Pasear",
+      "default": "Pasear"
+    },
+    {
+      "type": "url",
+      "id": "pasear_url",
+      "label": "URL Pasear"
+    },
+    {
+      "type": "text",
+      "id": "ofertas_text",
+      "label": "Texto Ofertas",
+      "default": "Ofertas"
+    },
+    {
+      "type": "url",
+      "id": "ofertas_url",
+      "label": "URL Ofertas"
+    },
+    {
+      "type": "text",
+      "id": "blog_text",
+      "label": "Texto Blog",
+      "default": "Blog"
+    },
+    {
+      "type": "url",
+      "id": "blog_url",
+      "label": "URL Blog"
     }
   ]
 }
