@@ -448,9 +448,11 @@
                     class="pet-product-card-img-primary"
                   >
                 {% else %}
-                  <div class="pet-product-card-img-primary" style="display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); font-size:3.5rem; height: 100%;">
-                    🐾
-                  </div>
+                  <img
+                    src="{{ 'product-1' | placeholder_svg_tag }}"
+                    alt="{{ product.title | escape }}"
+                    class="pet-product-card-img-primary"
+                  >
                 {% endif %}
 
                 {% if product.images[1] != blank %}
