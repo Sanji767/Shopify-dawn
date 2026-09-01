@@ -86,14 +86,20 @@
 
     <!-- Desktop Navigation -->
     <ul class="pet-header-nav">
-      <li><a href="/">{{ section.settings.home_text }}</a></li>
-      <li><a href="{{ perros_link }}">{{ section.settings.perros_text }}</a></li>
-      <li><a href="{{ gatos_link }}">{{ section.settings.gatos_text }}</a></li>
-      <li><a href="{{ casa_link }}">{{ section.settings.casa_text }}</a></li>
-      <li><a href="{{ viajar_link }}">{{ section.settings.viajar_text }}</a></li>
-      <li><a href="{{ pasear_link }}">{{ section.settings.pasear_text }}</a></li>
-      <li><a href="{{ ofertas_link }}">{{ section.settings.ofertas_text }}</a></li>
-      <li><a href="{{ blog_link }}">{{ section.settings.blog_text }}</a></li>
+      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+        {% for link in linklists[section.settings.menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      {% else %}
+        <li><a href="/">{{ section.settings.home_text }}</a></li>
+        <li><a href="{{ perros_link }}">{{ section.settings.perros_text }}</a></li>
+        <li><a href="{{ gatos_link }}">{{ section.settings.gatos_text }}</a></li>
+        <li><a href="{{ casa_link }}">{{ section.settings.casa_text }}</a></li>
+        <li><a href="{{ viajar_link }}">{{ section.settings.viajar_text }}</a></li>
+        <li><a href="{{ pasear_link }}">{{ section.settings.pasear_text }}</a></li>
+        <li><a href="{{ ofertas_link }}">{{ section.settings.ofertas_text }}</a></li>
+        <li><a href="{{ blog_link }}">{{ section.settings.blog_text }}</a></li>
+      {% endif %}
     </ul>
 
     <!-- Actions (High-Visibility Top-Right Cart) -->
@@ -116,14 +122,20 @@
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
   <ul class="pet-mobile-nav">
-    <li><a href="/">{{ section.settings.home_text }}</a></li>
-    <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text }}</a></li>
-    <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text }}</a></li>
-    <li><a href="{{ casa_link }}">🏠 {{ section.settings.casa_text }}</a></li>
-    <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text }}</a></li>
-    <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text }}</a></li>
-    <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text }}</a></li>
-    <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text }}</a></li>
+    {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+      {% for link in linklists[section.settings.menu].links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    {% else %}
+      <li><a href="/">{{ section.settings.home_text }}</a></li>
+      <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text }}</a></li>
+      <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text }}</a></li>
+      <li><a href="{{ casa_link }}">🏠 {{ section.settings.casa_text }}</a></li>
+      <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text }}</a></li>
+      <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text }}</a></li>
+      <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text }}</a></li>
+      <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text }}</a></li>
+    {% endif %}
   </ul>
 </nav>
 
@@ -213,6 +225,13 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú de Navegación Shopify",
+      "default": "main-menu",
+      "info": "Selecciona el menú creado en Tienda Online > Navegación"
     },
     {
       "type": "text",
