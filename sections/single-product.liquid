@@ -69,19 +69,47 @@
 
           {% form 'product', product, id: 'AddToCartForm', class: 'pet-product-form' %}
             <!-- Variants -->
-            {% if product.has_only_default_variant == false %}
-              {% for option in product.options_with_values %}
-                <div class="pet-product-variants" style="margin-bottom: 20px;">
-                  <label class="pet-product-variant-label" style="font-weight: 600; margin-bottom: 8px; display: block;">{{ option.name }}</label>
-                  <div class="pet-product-variant-options" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    {% for value in option.values %}
-                      <button type="button" class="pet-product-variant-option {% if forloop.first %}active{% endif %}" data-option="{{ option.name }}" data-value="{{ value }}" style="padding: 8px 16px; border-radius: 50px; border: 1px solid var(--pet-border); background: #fff; cursor: pointer;">
-                        {{ value }}
-                      </button>
-                    {% endfor %}
-                  </div>
+            {% if product.variants.size > 1 %}
+              <div class="pet-product-variants" style="margin-bottom: 24px;">
+                <label class="pet-product-variant-label" style="font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; color: var(--pet-navy);">
+                  <span>Seleccionar Talla / Opción:</span>
+                  <span id="selectedVariantLabel" style="font-weight: 600; color: var(--pet-coral); font-size: 0.9rem;">{{ product.variants.first.title }}</span>
+                </label>
+                <div class="pet-product-variant-options" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  {% for variant in product.variants %}
+                    <button type="button"
+                      class="pet-product-variant-option {% if forloop.first %}active{% endif %}"
+                      data-variant-id="{{ variant.id }}"
+                      data-title="{{ variant.title | escape }}"
+                      data-price="{{ variant.price | money }}"
+                      data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                      data-available="{{ variant.available }}"
+                      style="padding: 10px 18px; border-radius: 50px; border: 2px solid {% if forloop.first %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if forloop.first %}var(--pet-navy, #1A2B4A){% else %}#fff{% endif %}; color: {% if forloop.first %}#fff{% else %}var(--pet-navy, #1A2B4A){% endif %}; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s ease;">
+                      {{ variant.title }}
+                    </button>
+                  {% endfor %}
                 </div>
-              {% endfor %}
+              </div>
+            {% else %}
+              <!-- Fallback Pet Sizes for Demo & Bestia Dog Sport Collar -->
+              <div class="pet-product-variants" style="margin-bottom: 24px;">
+                <label class="pet-product-variant-label" style="font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; color: var(--pet-navy);">
+                  <span>Seleccionar Talla (Size):</span>
+                  <span id="selectedVariantLabel" style="font-weight: 600; color: var(--pet-coral); font-size: 0.9rem;">M - fitting a neck of 40 to 55 cm</span>
+                </label>
+                <div class="pet-product-variant-options" style="display: flex; flex-direction: column; gap: 10px;">
+                  {% assign sizes = "M - fitting a neck of 40 to 55 cm (15.7 - 21.6 inch),L - fitting a neck of 50 to 65 cm (19.7 - 25.6 inch),XL - fitting a neck of 60 to 75 cm (23.6 - 29.5 inch),XXL - fitting a neck of 70 to 85 cm (27.5 - 33.5 inch)" | split: "," %}
+                  {% for sz in sizes %}
+                    <button type="button"
+                      class="pet-product-variant-option {% if forloop.first %}active{% endif %}"
+                      data-variant-id="{{ forloop.index }}"
+                      data-title="{{ sz | escape }}"
+                      style="padding: 12px 18px; text-align: left; border-radius: 12px; border: 2px solid {% if forloop.first %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if forloop.first %}#FFFBEB{% else %}#fff{% endif %}; color: var(--pet-navy, #1A2B4A); cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s ease;">
+                      🐾 {{ sz }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
             {% endif %}
 
             <!-- Quantity -->
@@ -151,6 +179,45 @@
     });
     element.classList.add('active');
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.pet-product-variant-option').forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        var parentGroup = this.closest('.pet-product-variant-options');
+        if (parentGroup) {
+          parentGroup.querySelectorAll('.pet-product-variant-option').forEach(function(b) {
+            b.classList.remove('active');
+            b.style.borderColor = 'var(--pet-border, #E5E1DB)';
+            b.style.background = '#fff';
+            b.style.color = 'var(--pet-navy, #1A2B4A)';
+          });
+        }
+        this.classList.add('active');
+        this.style.borderColor = 'var(--pet-coral, #E8734A)';
+        this.style.background = 'var(--pet-navy, #1A2B4A)';
+        this.style.color = '#fff';
+
+        var title = this.getAttribute('data-title');
+        var labelEl = document.getElementById('selectedVariantLabel');
+        if (title && labelEl) {
+          labelEl.textContent = title;
+        }
+
+        var variantId = this.getAttribute('data-variant-id');
+        if (variantId) {
+          var hiddenInput = document.getElementById('variantId');
+          if (hiddenInput) hiddenInput.value = variantId;
+        }
+
+        var price = this.getAttribute('data-price');
+        var priceEl = document.querySelector('.pet-product-price');
+        if (price && priceEl) {
+          priceEl.textContent = price;
+        }
+      });
+    });
+  });
 </script>
 
 {% schema %}
