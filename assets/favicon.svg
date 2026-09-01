@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2B4A" />
+      <stop offset="100%" stop-color="#0F1B30" />
+    </linearGradient>
+    <linearGradient id="pawGradIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8734A" />
+      <stop offset="100%" stop-color="#F28E6B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Badge -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGrad)" stroke="#FBF8F3" stroke-width="2" />
+
+  <!-- House Roof in White/Cream -->
+  <path d="M32 10 L50 26 C51 27 51 28 50 29 L47 32 C46 33 44 33 43 32 L32 21 L21 32 C20 33 18 33 17 32 L14 29 C13 28 13 27 14 26 Z" fill="#FBF8F3" />
+
+  <!-- Heart Paw in Coral -->
+  <!-- Main Pad (Heart Shaped) -->
+  <path d="M32 47 C26 47 21 42 21 37 C21 33 24.5 30 28.5 30 C29.8 30 31 30.5 32 31.2 C33 30.5 34.2 30 35.5 30 C39.5 30 43 33 43 37 C43 42 38 47 32 47 Z" fill="url(#pawGradIcon)" />
+
+  <!-- Toe Pads -->
+  <circle cx="21" cy="27" r="3.2" fill="url(#pawGradIcon)" />
+  <circle cx="28" cy="23" r="3.5" fill="url(#pawGradIcon)" />
+  <circle cx="36" cy="23" r="3.5" fill="url(#pawGradIcon)" />
+  <circle cx="43" cy="27" r="3.2" fill="url(#pawGradIcon)" />
+</svg>

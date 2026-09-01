@@ -7,15 +7,11 @@
     </button>
 
     <!-- Logo -->
-    <a href="/" class="pet-header-logo">
+    <a href="/" class="pet-header-logo" style="display: inline-flex; align-items: center; text-decoration: none;">
       {% if section.settings.logo != blank %}
-        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" loading="lazy">
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" loading="eager" style="max-height: 48px; width: auto;">
       {% else %}
-        {% if shop.name contains 'My Store' or shop.name == blank %}
-          Paw & Home 🐾
-        {% else %}
-          {{ shop.name }}
-        {% endif %}
+        <img src="{{ 'paw-and-home-logo.svg' | asset_url }}" alt="Paw & Home" width="220" height="44" style="height: 44px; width: auto; display: block;" loading="eager">
       {% endif %}
     </a>
 
