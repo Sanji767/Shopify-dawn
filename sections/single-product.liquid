@@ -151,6 +151,32 @@
     });
     element.classList.add('active');
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.pet-product-variant-option').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var parentGroup = this.closest('.pet-product-variant-options');
+        if (parentGroup) {
+          parentGroup.querySelectorAll('.pet-product-variant-option').forEach(function(b) {
+            b.classList.remove('active');
+            b.style.borderColor = 'var(--pet-border)';
+            b.style.background = '#fff';
+            b.style.color = 'var(--pet-navy)';
+          });
+        }
+        this.classList.add('active');
+        this.style.borderColor = 'var(--pet-coral)';
+        this.style.background = 'var(--pet-navy)';
+        this.style.color = '#fff';
+
+        var variantId = this.getAttribute('data-variant-id');
+        if (variantId) {
+          var hiddenInput = document.getElementById('variantId');
+          if (hiddenInput) hiddenInput.value = variantId;
+        }
+      });
+    });
+  });
 </script>
 
 {% schema %}

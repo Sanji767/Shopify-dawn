@@ -1,12 +1,113 @@
-{% comment %}
-Placeholder section for the main account page.
-{% endcomment %}
-<div class="main-account-section">
-  <!-- TODO: Implement account overview content -->
-</div>
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-account-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
+  <div class="pet-container container" style="max-width: 960px;">
+    <!-- Account Header -->
+    <header class="pet-account-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--pet-border, #E5E1DB);">
+      <div>
+        <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 6px;">
+          Mi Cuenta 🐾
+        </h1>
+        <p style="color: var(--pet-muted); font-size: 0.95rem; margin: 0;">
+          Bienvenido/a de nuevo, <strong>{{ customer.first_name | default: "Cliente" }}</strong>
+        </p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; border: 1px solid var(--pet-border); color: var(--pet-navy); text-decoration: none;">
+          📍 Gestionar Direcciones ({{ customer.addresses_count | default: 1 }})
+        </a>
+        <a href="{{ routes.account_logout_url }}" class="pet-btn" style="padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; background: #FEE2E2; color: #991B1B; text-decoration: none;">
+          Cerrar sesión
+        </a>
+      </div>
+    </header>
+
+    <div class="row">
+      <!-- Order History Column -->
+      <div class="col-lg-8 col-12 mb-4">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin-bottom: 20px;">
+          Historial de Pedidos
+        </h2>
+
+        {% if customer.orders.size > 0 %}
+          <div style="overflow-x: auto;">
+            <table class="pet-cart-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--pet-border); text-align: left; font-size: 0.85rem; color: var(--pet-muted);">
+                  <th style="padding: 12px;">Pedido</th>
+                  <th style="padding: 12px;">Fecha</th>
+                  <th style="padding: 12px;">Estado Pago</th>
+                  <th style="padding: 12px;">Envío</th>
+                  <th style="padding: 12px;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in customer.orders %}
+                  <tr style="border-bottom: 1px solid var(--pet-border); font-size: 0.9rem;">
+                    <td style="padding: 16px 12px; font-weight: 700;">
+                      <a href="{{ order.customer_url }}" style="color: var(--pet-coral); text-decoration: underline;">{{ order.name }}</a>
+                    </td>
+                    <td style="padding: 16px 12px; color: var(--pet-muted);">{{ order.created_at | date: "%d %b %Y" }}</td>
+                    <td style="padding: 16px 12px;">
+                      <span style="padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; background: #DCFCE7; color: #166534;">
+                        {{ order.financial_status_label }}
+                      </span>
+                    </td>
+                    <td style="padding: 16px 12px;">
+                      <span style="padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; background: #FEF3C7; color: #92400E;">
+                        {{ order.fulfillment_status_label }}
+                      </span>
+                    </td>
+                    <td style="padding: 16px 12px; font-weight: 700; color: var(--pet-navy);">{{ order.total_price | money }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div style="background: var(--pet-cream, #FAF4EB); border-radius: 16px; padding: 32px; text-align: center;">
+            <p style="font-size: 2.5rem; margin-bottom: 8px;">📦 🐾</p>
+            <h3 style="font-size: 1.25rem; margin-bottom: 6px; color: var(--pet-navy);">Aún no has realizado ningún pedido</h3>
+            <p style="color: var(--pet-muted); font-size: 0.9rem; margin-bottom: 20px;">Explora nuestro catálogo y encuentra lo mejor para tu mascota.</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">Ver productos</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Account Info / Default Address Column -->
+      <div class="col-lg-4 col-12">
+        <div style="background: #FFFFFF; border: 1px solid var(--pet-border, #E5E1DB); border-radius: 20px; padding: 24px;">
+          <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin-bottom: 16px;">
+            Dirección Principal
+          </h3>
+
+          {% if customer.default_address %}
+            <p style="font-weight: 700; margin-bottom: 4px; color: var(--pet-navy);">{{ customer.default_address.name }}</p>
+            <p style="color: var(--pet-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">
+              {{ customer.default_address.address1 }}<br>
+              {% if customer.default_address.address2 != blank %}{{ customer.default_address.address2 }}<br>{% endif %}
+              {{ customer.default_address.zip }} {{ customer.default_address.city }}<br>
+              {{ customer.default_address.country }}
+            </p>
+          {% else %}
+            <p style="color: var(--pet-muted); font-size: 0.9rem; margin-bottom: 16px;">
+              No tienes ninguna dirección registrada como principal.
+            </p>
+          {% endif %}
+
+          <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="width: 100%; text-align: center; display: block; padding: 10px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.85rem; font-weight: 700;">
+            Ver todas las direcciones
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "Main Account",
-  "settings": []
+  "name": "Cuenta de cliente",
+  "tag": "section",
+  "class": "pet-account-section"
 }
 {% endschema %}

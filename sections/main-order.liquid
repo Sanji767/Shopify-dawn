@@ -1,12 +1,69 @@
-{% comment %}
-Placeholder section for the customer's order page.
-{% endcomment %}
-<div class="main-order-section">
-  <!-- TODO: Implement order overview and details -->
-</div>
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-order-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
+  <div class="pet-container container" style="max-width: 860px;">
+    <!-- Breadcrumb & Header -->
+    <header style="margin-bottom: 32px;">
+      <nav style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">
+        <a href="/account" style="color: var(--pet-muted);">← Volver a Mi Cuenta</a>
+      </nav>
+      <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 8px;">
+        Pedido {{ order.name }}
+      </h1>
+      <p style="color: var(--pet-muted); font-size: 0.9rem;">
+        Realizado el {{ order.created_at | date: "%d de %B, %Y a las %H:%M" }}
+      </p>
+    </header>
+
+    <!-- Order Items Table -->
+    <div style="overflow-x: auto; margin-bottom: 32px;">
+      <table class="pet-cart-table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--pet-border); text-align: left; font-size: 0.85rem; color: var(--pet-muted);">
+            <th style="padding: 12px;">Producto</th>
+            <th style="padding: 12px;">Precio</th>
+            <th style="padding: 12px;">Cantidad</th>
+            <th style="padding: 12px; text-align: right;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for line_item in order.line_items %}
+            <tr style="border-bottom: 1px solid var(--pet-border); font-size: 0.9rem;">
+              <td style="padding: 16px 12px;">
+                <div style="font-weight: 700; color: var(--pet-navy);">{{ line_item.title }}</div>
+                {% if line_item.variant.title != 'Default Title' %}
+                  <div style="font-size: 0.8rem; color: var(--pet-muted);">{{ line_item.variant.title }}</div>
+                {% endif %}
+              </td>
+              <td style="padding: 16px 12px;">{{ line_item.price | money }}</td>
+              <td style="padding: 16px 12px;">{{ line_item.quantity }}</td>
+              <td style="padding: 16px 12px; text-align: right; font-weight: 700; color: var(--pet-navy);">{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr style="font-size: 0.9rem;">
+            <td colspan="3" style="padding: 12px; text-align: right; color: var(--pet-muted);">Subtotal:</td>
+            <td style="padding: 12px; text-align: right; font-weight: 600;">{{ order.line_items_subtotal_price | money }}</td>
+          </tr>
+          <tr style="font-size: 0.9rem;">
+            <td colspan="3" style="padding: 12px; text-align: right; color: var(--pet-muted);">Envío:</td>
+            <td style="padding: 12px; text-align: right; font-weight: 600;">{{ order.shipping_price | money }}</td>
+          </tr>
+          <tr style="font-size: 1.1rem; font-weight: 700; border-top: 2px solid var(--pet-navy);">
+            <td colspan="3" style="padding: 16px 12px; text-align: right; color: var(--pet-navy);">Total:</td>
+            <td style="padding: 16px 12px; text-align: right; color: var(--pet-coral);">{{ order.total_price | money }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "Main Order",
-  "settings": []
+  "name": "Detalle del pedido",
+  "tag": "section",
+  "class": "pet-order-section"
 }
 {% endschema %}

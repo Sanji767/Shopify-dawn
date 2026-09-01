@@ -1,12 +1,55 @@
-{% comment %}
-Placeholder section for the customer's addresses page.
-{% endcomment %}
-<div class="main-addresses-section">
-  <!-- TODO: Implement addresses list and editing UI -->
-</div>
+{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="pet-section pet-addresses-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
+  <div class="pet-container container" style="max-width: 800px;">
+    <!-- Breadcrumb & Header -->
+    <header style="margin-bottom: 32px;">
+      <nav style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">
+        <a href="/account" style="color: var(--pet-muted);">← Volver a Mi Cuenta</a>
+      </nav>
+      <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 8px;">
+        Direcciones de Envío 📍
+      </h1>
+    </header>
+
+    {% paginate customer.addresses by 5 %}
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        {% for address in customer.addresses %}
+          <div style="background: #FFFFFF; border: 1px solid var(--pet-border, #E5E1DB); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+            <div>
+              {% if address == customer.default_address %}
+                <span style="display: inline-block; padding: 4px 12px; background: #DCFCE7; color: #166534; font-size: 0.75rem; font-weight: 700; border-radius: 50px; margin-bottom: 10px;">
+                  DIRECCIÓN PRINCIPAL
+                </span>
+              {% endif %}
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--pet-navy); margin-bottom: 6px;">{{ address.name }}</h3>
+              <p style="color: var(--pet-muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                {{ address.address1 }}<br>
+                {% if address.address2 != blank %}{{ address.address2 }}<br>{% endif %}
+                {{ address.zip }} {{ address.city }}, {{ address.province }}<br>
+                {{ address.country }}
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; border: 1px solid var(--pet-border); text-decoration: none;">Editar</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <div style="margin-top: 24px; text-align: center;">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "Main Addresses",
-  "settings": []
+  "name": "Direcciones de cliente",
+  "tag": "section",
+  "class": "pet-addresses-section"
 }
 {% endschema %}
