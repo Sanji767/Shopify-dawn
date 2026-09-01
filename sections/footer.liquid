@@ -43,20 +43,20 @@
 
       <!-- Help & Legal Links -->
       <div>
-        <h4>{{ section.settings.col3_title | default: 'Ayuda y Legal' }}</h4>
+        <h4>{{ section.settings.col3_title | default: 'Ayuda' }}</h4>
         <ul class="pet-footer-links">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           {% if linklists[section.settings.footer_menu_2].links.size == 0 %}
-            <li><a href="/pages/about-us">Sobre nosotros</a></li>
-            <li><a href="/pages/contact">Contacto & Ayuda</a></li>
-            <li><a href="/policies/shipping-policy">Envíos (3-6 días laborables)</a></li>
-            <li><a href="/policies/refund-policy">Devoluciones (14 días RGPD)</a></li>
-            <li><a href="/policies/legal-notice">Aviso Legal</a></li>
-            <li><a href="/policies/privacy-policy">Política de Privacidad</a></li>
-            <li><a href="/policies/terms-of-service">Términos y Condiciones</a></li>
-            <li><a href="/policies/cookie-policy">Política de Cookies</a></li>
+            <li><a href="{{ pages['about-us'].url | default: '/pages/about-us' }}">Sobre nosotros</a></li>
+            <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}">Contacto & Ayuda</a></li>
+            <li><a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">Envíos (3-6 días laborables)</a></li>
+            <li><a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">Devoluciones (14 días RGPD)</a></li>
+            <li><a href="{{ shop.legal_notice.url | default: '/policies/legal-notice' }}">Aviso Legal</a></li>
+            <li><a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Política de Privacidad</a></li>
+            <li><a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}">Términos y Condiciones</a></li>
+            <li><a href="{{ shop.cookie_policy.url | default: '/policies/cookie-policy' }}">Política de Cookies</a></li>
           {% endif %}
         </ul>
       </div>
