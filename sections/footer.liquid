@@ -33,10 +33,12 @@
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           {% if linklists[section.settings.footer_menu_1].links.size == 0 %}
-            <li><a href="{% if collections['perros'] != blank and collections['perros'].title != blank %}{{ collections['perros'].url }}{% else %}/collections/all{% endif %}">Perros</a></li>
-            <li><a href="{% if collections['gatos'] != blank and collections['gatos'].title != blank %}{{ collections['gatos'].url }}{% else %}/collections/all{% endif %}">Gatos</a></li>
-            <li><a href="{% if collections['casa'] != blank and collections['casa'].title != blank %}{{ collections['casa'].url }}{% else %}/collections/all{% endif %}">Casa</a></li>
-            <li><a href="{% if collections['ofertas'] != blank and collections['ofertas'].title != blank %}{{ collections['ofertas'].url }}{% else %}/collections/all{% endif %}">Ofertas</a></li>
+            <li><a href="/collections/perros">🐶 Perros</a></li>
+            <li><a href="/collections/gatos">🐱 Gatos</a></li>
+            <li><a href="/collections/casa">🏠 Para Casa</a></li>
+            <li><a href="/collections/viajar">🚗 Para Viajar</a></li>
+            <li><a href="/collections/pasear">🦮 Para Pasear</a></li>
+            <li><a href="/collections/ofertas">🏷️ Ofertas Especiales</a></li>
           {% endif %}
         </ul>
       </div>

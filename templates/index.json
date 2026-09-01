@@ -183,7 +183,7 @@
             "description": "Todo lo que necesitas para mantener tu casa limpia y organizada con tu mascota.",
             "badge": "Popular",
             "link_text": "Ver pack",
-            "link": "/collections/all"
+            "link": "/collections/casa"
           }
         },
         "bundle_2": {
@@ -192,7 +192,7 @@
             "title": "Travel Pack",
             "description": "Viaja tranquilo con todo lo que tu mascota necesita para el camino.",
             "link_text": "Ver pack",
-            "link": "/collections/all"
+            "link": "/collections/viajar"
           }
         },
         "bundle_3": {
@@ -201,7 +201,7 @@
             "title": "Walk Pack",
             "description": "Paseos más cómodos y organizados con los accesorios esenciales.",
             "link_text": "Ver pack",
-            "link": "/collections/all"
+            "link": "/collections/pasear"
           }
         },
         "bundle_4": {
@@ -211,7 +211,7 @@
             "description": "¿Acabas de adoptar? Este pack tiene todo lo básico para empezar.",
             "badge": "Nuevo",
             "link_text": "Ver pack",
-            "link": "/collections/all"
+            "link": "/collections/perros"
           }
         }
       },
@@ -236,7 +236,7 @@
             "problem": "¿Tu sofá está lleno de pelos?",
             "solution": "Descubre nuestros productos de limpieza",
             "link_text": "Ver productos",
-            "link": "/collections/all"
+            "link": "/collections/casa"
           }
         },
         "prob_2": {
@@ -246,7 +246,7 @@
             "problem": "¿Viajar con tu perro es complicado?",
             "solution": "Todo para viajar con ellos",
             "link_text": "Ver productos",
-            "link": "/collections/all"
+            "link": "/collections/viajar"
           }
         },
         "prob_3": {
@@ -256,7 +256,7 @@
             "problem": "¿Tu mascota ensucia toda la casa?",
             "solution": "Productos para mantener tu hogar",
             "link_text": "Ver productos",
-            "link": "/collections/all"
+            "link": "/collections/casa"
           }
         },
         "prob_4": {
@@ -266,7 +266,7 @@
             "problem": "¿Necesitas organizar sus cosas?",
             "solution": "Organizadores y almacenamiento",
             "link_text": "Ver productos",
-            "link": "/collections/all"
+            "link": "/collections/casa"
           }
         }
       },
