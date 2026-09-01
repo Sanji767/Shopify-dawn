@@ -8,42 +8,73 @@
       <span style="margin: 0 6px;">/</span>
       <a href="/blogs/news" style="color: var(--pet-muted);">Blog</a>
       <span style="margin: 0 6px;">/</span>
-      <span style="color: var(--pet-navy); font-weight: 500;">{{ article.title | default: "5 Consejos para Mantener tu Sofá Libre de Pelos" }}</span>
+      <span style="color: var(--pet-navy); font-weight: 500;" id="artBreadcrumbTitle">{{ article.title | default: "Artículo de Pet Lifestyle" }}</span>
     </nav>
 
     <!-- Header -->
     <header class="pet-article-header" style="margin-bottom: 40px;">
-      <span class="pet-article-category-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+      <span class="pet-article-category-badge" id="artBadge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
         Hogar y Limpieza
       </span>
 
-      <h1 style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy); margin-bottom: 20px; line-height: 1.2;">
+      <h1 id="artTitle" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy); margin-bottom: 20px; line-height: 1.2;">
         {{ article.title | default: "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato" }}
       </h1>
 
       <div class="pet-article-meta-bar" style="display: flex; align-items: center; gap: 16px; font-size: 0.9rem; color: var(--pet-muted); padding-bottom: 20px; border-bottom: 1px solid #E5E1DB;">
-        <span>✍️ Por <strong>{{ article.author | default: "Equipo Paw & Home" }}</strong></span>
+        <span>✍️ Por <strong id="artAuthor">{{ article.author | default: "Equipo Paw & Home" }}</strong></span>
         <span>•</span>
         <span>📅 {{ article.published_at | date: "%d de %B, %Y" | default: "28 de Agosto, 2026" }}</span>
         <span>•</span>
-        <span>⏱️ 4 min de lectura</span>
+        <span id="artReadTime">⏱️ 4 min de lectura</span>
       </div>
     </header>
 
     <!-- Featured Visual -->
-    <div class="pet-article-featured-media" style="margin-bottom: 40px; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); min-height: 380px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">
+    <div class="pet-article-featured-media" style="margin-bottom: 40px; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); min-height: 380px; display: flex; align-items: center; justify-content: center; font-size: 5rem;" id="artEmojiContainer">
       {% if article.image %}
         <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title }}" style="width: 100%; height: auto; display: block;">
       {% else %}
-        🛋️ 🐱 🐶
+        <span id="artEmoji">🛋️</span>
       {% endif %}
     </div>
 
     <!-- Article Content Body -->
-    <div class="pet-article-body" style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-navy); line-height: 1.8; margin-bottom: 48px;">
+    <div class="pet-article-body" id="artBody" style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-navy); line-height: 1.8; margin-bottom: 48px;">
       {% if article.content != blank %}
         {{ article.content }}
       {% else %}
+        <!-- Default Content injected dynamically via script below -->
+      {% endif %}
+    </div>
+
+    <!-- Article Footer / Share -->
+    <footer class="pet-article-footer" style="padding-top: 32px; border-top: 1px solid #E5E1DB; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
+        ← Volver al Blog
+      </a>
+      <div style="display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--pet-muted);">
+        <span>Compartir:</span>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
+        <a href="#" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
+      </div>
+    </footer>
+  </div>
+</article>
+
+<script>
+  var articlesData = {
+    "1": {
+      title: "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato",
+      badge: "Hogar y Limpieza",
+      readTime: "⏱️ 4 min de lectura",
+      emoji: "🛋️",
+      productTitle: "Rodillo Reutilizable Quitapelos para Sofá",
+      productPrice: "19,99 €",
+      productEmoji: "🛋️",
+      productDesc: "Elimina pelos de mascotas en segundos sin necesidad de recambios adhesivos. 100% reutilizable.",
+      body: `
         <p>Convivir con peludos es una de las mayores alegrías del hogar, pero la acumulación de pelos en sofás, alfombras y mantas puede convertirse en un desafío diario si no contamos con la rutina adecuada.</p>
 
         <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. Cepillado preventivo diario</h3>
@@ -52,7 +83,6 @@
         <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">2. Utiliza mantas y protectores lavables</h3>
         <p>Colocar una manta protectora suave en las zonas favoritas de descanso de tu mascota protege el tejido del sofá. Busca textiles impermeables que repelan la humedad y se puedan lavar en la lavadora a 30°C.</p>
 
-        <!-- High-Converting Embedded Product CTA Box inside Article -->
         <div class="pet-article-product-cta" style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 28px; margin: 40px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
           <div style="font-size: 3.5rem; flex-shrink: 0; background: #fff; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
             🛋️
@@ -73,23 +103,163 @@
 
         <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">4. Aspira con boquillas para tapicería</h3>
         <p>Pasar el aspirador dos veces por semana con la boquilla especial para mascotas evita que los pelos más finos se filtren entre las fibras del tejido.</p>
-      {% endif %}
-    </div>
+      `
+    },
+    "2": {
+      title: "Cómo Viajar en Coche con tu Perro de Forma Segura y Sin Estrés",
+      badge: "Viajes en Coche",
+      readTime: "⏱️ 5 min de lectura",
+      emoji: "🚗",
+      productTitle: "Manta Protectora Impermeable para Coche",
+      productPrice: "29,99 €",
+      productEmoji: "🚗",
+      productDesc: "Protege los asientos traseros contra barro, humedad y arañazos. Incluye anclaje para cinturón de seguridad.",
+      body: `
+        <p>Viajar con nuestro compañero canino es una experiencia maravillosa, pero requiere tomar precauciones de seguridad vial tanto para proteger a la mascota como para evitar distracciones al volante.</p>
 
-    <!-- Article Footer / Share -->
-    <footer class="pet-article-footer" style="padding-top: 32px; border-top: 1px solid #E5E1DB; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-      <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
-        ← Volver al Blog
-      </a>
-      <div style="display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--pet-muted);">
-        <span>Compartir:</span>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
-      </div>
-    </footer>
-  </div>
-</article>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. Sistema de sujeción homologado obligatorio</h3>
+        <p>Nunca lleves al perro suelto en el habitáculo. Utiliza un arnés de doble enganche fijado al cinturón de seguridad o una red divisoria rígida homologada según el reglamento de tráfico.</p>
+
+        <div class="pet-article-product-cta" style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 28px; margin: 40px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+          <div style="font-size: 3.5rem; flex-shrink: 0; background: #fff; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            🚗
+          </div>
+          <div style="flex: 1; min-width: 240px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Manta Protectora Impermeable para Coche</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Protege los asientos contra barro, humedad y arañazos. Ajuste universal rápido.</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">29,99 €</span>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">2. Paradas de hidratación cada 2 horas</h3>
+        <p>En trayectos largos, realiza paradas regulares en áreas de servicio seguras. Lleva siempre una botella de agua portátil para que pueda beber agua fresca sin derramar nada dentro del coche.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">3. Climatización y ventilación</h3>
+        <p>Mantén una temperatura constante entre 20°C y 22°C. Jamás dejes a tu perro solo dentro del vehículo estacionado al sol, ni siquiera durante 5 minutos.</p>
+      `
+    },
+    "3": {
+      title: "Guía Completa para Elegir la Cama Ortopédica Perfecta para tu Mascota",
+      badge: "Salud y Descanso",
+      readTime: "⏱️ 6 min de lectura",
+      emoji: "🛏️",
+      productTitle: "Cama Ortopédica Lavable para Mascotas",
+      productPrice: "34,99 €",
+      productEmoji: "🛏️",
+      productDesc: "Relleno viscoelástico de alta densidad que protege las articulaciones y favorece un descanso profundo.",
+      body: `
+        <p>Los perros y gatos adultos duermen entre 12 y 16 horas diarias. Un descanso de calidad sobre una superficie adecuada es fundamental para prevenir problemas articulares y mantener su vitalidad.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. ¿Por qué elegir espumas ortopédicas de densidad adaptativa?</h3>
+        <p>Las camas convencionales de fibra sintética terminan deformándose con el peso del animal, obligando a sus articulaciones a tocar el suelo frío. La viscoelástica alivia los puntos de presión en caderas y codos.</p>
+
+        <div class="pet-article-product-cta" style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 28px; margin: 40px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+          <div style="font-size: 3.5rem; flex-shrink: 0; background: #fff; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            🛏️
+          </div>
+          <div style="flex: 1; min-width: 240px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Cama Ortopédica Lavable para Mascotas</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Diseño desenfundable con bordes elevados tipo nido para máxima sensación de seguridad.</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">34,99 €</span>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">2. Higiene: Fundas desenfundables e impermeables</h3>
+        <p>Opta siempre por modelos con cremallera reforzada que permitan extraer la funda para su lavado en lavadora. Una capa interior impermeable protege el núcleo viscoelástico contra posibles accidentes.</p>
+      `
+    },
+    "4": {
+      title: "Paseos Nocturnos: Seguridad e Iluminación Indispensable",
+      badge: "Paseos y Seguridad",
+      readTime: "⏱️ 3 min de lectura",
+      emoji: "🦮",
+      productTitle: "Botella Portátil de Agua para Paseo",
+      productPrice: "14,99 €",
+      productEmoji: "🦮",
+      productDesc: "Dispensador de agua con depósito integrado hermético y correa de mano ergonómica.",
+      body: `
+        <p>Al caer el sol, la visibilidad en calles y parques se reduce notablemente. Equipar a tu mascota con accesorios reflectantes es vital para que conductores y ciclistas os identifiquen a distancia.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. Elementos reflectantes de alta visibilidad</h3>
+        <p>Usa arneses y correas con costuras de hilo reflectante que devuelvan la luz de los faros de los vehículos a más de 150 metros de distancia.</p>
+
+        <div class="pet-article-product-cta" style="background: #FAF4EB; border: 2px dashed #E8734A; border-radius: 20px; padding: 28px; margin: 40px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+          <div style="font-size: 3.5rem; flex-shrink: 0; background: #fff; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            🦮
+          </div>
+          <div style="flex: 1; min-width: 240px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Botella Portátil de Agua para Paseo</h4>
+            <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Con plato integrado antidesperdicio. Ligera y compacta para cualquier paseo.</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">14,99 €</span>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+            </div>
+          </div>
+        </div>
+      `
+    },
+    "5": {
+      title: "Alimentación y Comederos Antivoracidad: Beneficios para la Digestión",
+      badge: "Nutrición",
+      readTime: "⏱️ 4 min de lectura",
+      emoji: "🥣",
+      productTitle: "Comedero Antivoracidad Antideslizante",
+      productPrice: "16,99 €",
+      productEmoji: "🥣",
+      productDesc: "Diseño en laberinto que multiplica x5 el tiempo de ingesta, evitando atragantamientos y gases.",
+      body: `
+        <p>Muchos perros engullen su ración diaria de pienso en menos de 60 segundos. Esta ingesta ansiosa causa problemas digestivos graves, gases pesados e incluso riesgo de torsión de estómago.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. ¿Cómo funcionan los comederos lentos tipo laberinto?</h3>
+        <p>Sus obstáculos internos obligan a la mascota a utilizar la lengua y el hocico para capturar pequeñas porciones, convirtiendo la hora de comer en un juego de estimulación mental que prolonga la comida de 1 a 10 minutos.</p>
+      `
+    },
+    "6": {
+      title: "Cómo Organizar los Juguetes y Accesorios de tu Mascota en Casa",
+      badge: "Organización",
+      readTime: "⏱️ 5 min de lectura",
+      emoji: "📦",
+      productTitle: "Cesta Organizadora de Juguetes",
+      productPrice: "22,99 €",
+      productEmoji: "📦",
+      productDesc: "Cesta textil de tela resistente con asas de madera para mantener la casa ordenada.",
+      body: `
+        <p>Pelotas, mordedores, correas y cepillos repartidos por el salón restan armonía al hogar. Crear un rincón de organización dedicado es la solución más estética y rápida.</p>
+
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 32px 0 16px;">1. Cestas accesibles a la altura de tu mascota</h3>
+        <p>Utilizar una cesta sin tapa a ras de suelo permite que tu perro o gato pueda elegir su juguete favorito de forma autónoma y guardarlo fácilmente al finalizar el día.</p>
+      `
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+    var artId = params.get('article') || "1";
+    var data = articlesData[artId] || articlesData["1"];
+
+    if (data) {
+      document.getElementById('artTitle').textContent = data.title;
+      document.getElementById('artBreadcrumbTitle').textContent = data.title;
+      document.getElementById('artBadge').textContent = data.badge;
+      document.getElementById('artReadTime').textContent = data.readTime;
+      document.getElementById('artEmoji').textContent = data.emoji;
+      
+      var bodyContainer = document.getElementById('artBody');
+      if (bodyContainer && bodyContainer.children.length === 0) {
+        bodyContainer.innerHTML = data.body;
+      }
+    }
+  });
+</script>
 
 {% schema %}
 {
