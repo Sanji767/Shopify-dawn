@@ -1,74 +1,62 @@
 {
   "sections": {
-    "announcement_bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "announcement_text": "Envío gratis desde 50 € · Diseñado para vivir mejor con ellos 🐾",
-        "background_color": "#1A2B4A",
-        "text_color": "#FFFFFF"
-      }
-    },
     "hero_section": {
       "type": "hero-section",
       "settings": {
-        "title": "Todo para una vida mejor juntos.",
-        "subtitle": "Productos seleccionados para hacer más fácil, cómoda y divertida la vida con tu mascota.",
-        "button_text": "Comprar ahora",
+        "title": "Productos diseñados para ti y para ellos.",
+        "subtitle": "Descubre nuestra selección pensada para hacer la vida con tu mascota más fácil, cómoda y bonita.",
+        "button_text": "Ver productos",
         "button_url": "/collections/all",
-        "button2_text": "Descubrir novedades",
-        "button2_url": "/collections/all"
+        "secondary_button_text": "Para tu mascota",
+        "secondary_button_url": "/collections/all"
       }
     },
     "pet_categories": {
       "type": "pet-categories",
-      "settings": {
-        "title": "Explora por categoría",
-        "subtitle": "Encuentra todo lo que tu mascota necesita"
-      },
       "blocks": {
         "cat_perros": {
           "type": "category",
           "settings": {
-            "emoji": "🐶",
             "title": "Perros",
-            "subtitle": "Productos para tu mejor amigo",
-            "link": "/collections/perros"
+            "subtitle": "Accesorios y confort",
+            "emoji": "🐶",
+            "bg_color": "#FAF4EB"
           }
         },
         "cat_gatos": {
           "type": "category",
           "settings": {
-            "emoji": "🐱",
             "title": "Gatos",
-            "subtitle": "Comodidad y juego para felinos",
-            "link": "/collections/gatos"
+            "subtitle": "Juegos y descanso",
+            "emoji": "🐱",
+            "bg_color": "#F2F6F0"
           }
         },
         "cat_casa": {
           "type": "category",
           "settings": {
-            "emoji": "🏠",
             "title": "Para casa",
-            "subtitle": "Mantén tu hogar impecable",
-            "link": "/collections/casa"
+            "subtitle": "Limpieza y orden",
+            "emoji": "🏠",
+            "bg_color": "#FDF3EF"
           }
         },
         "cat_viajar": {
           "type": "category",
           "settings": {
-            "emoji": "🚗",
             "title": "Para viajar",
-            "subtitle": "Viaja cómodo con tu mascota",
-            "link": "/collections/viajar"
+            "subtitle": "Seguridad en ruta",
+            "emoji": "🚗",
+            "bg_color": "#F0F4F8"
           }
         },
         "cat_pasear": {
           "type": "category",
           "settings": {
-            "emoji": "🦮",
             "title": "Para pasear",
-            "subtitle": "Paseos fáciles y divertidos",
-            "link": "/collections/pasear"
+            "subtitle": "Paseos cómodos",
+            "emoji": "🦮",
+            "bg_color": "#EFF8F5"
           }
         }
       },
@@ -78,14 +66,17 @@
         "cat_casa",
         "cat_viajar",
         "cat_pasear"
-      ]
+      ],
+      "settings": {
+        "title": "Explora por categoría",
+        "subtitle": "Encuentra justo lo que necesitas para tu día a día"
+      }
     },
     "featured_products": {
       "type": "featured-products",
       "settings": {
         "title": "Los favoritos de nuestros clientes",
-        "subtitle": "Productos que hacen la vida con tu mascota más fácil",
-        "products_to_show": 8
+        "subtitle": "Los productos mejor valorados por dueños de mascotas"
       }
     },
     "feature_values": {
@@ -104,7 +95,7 @@
           "settings": {
             "icon": "🚚",
             "feature_title": "Envío rápido",
-            "description": "Recibe tu pedido en 2-4 días laborables. Envío gratis a partir de 50 €."
+            "description": "Recibe tu pedido en 3-6 días laborables en España y Europa. Envío gratis a partir de 50 €."
           }
         },
         "val_support": {
@@ -112,11 +103,15 @@
           "settings": {
             "icon": "💚",
             "feature_title": "Atención cercana",
-            "description": "Estamos aquí para ayudarte. Contacta con nosotros cuando lo necesites."
+            "description": "Estamos aquí para ayudarte en español. Contacta con nosotros cuando lo necesites."
           }
         }
       },
-      "block_order": ["val_quality", "val_shipping", "val_support"],
+      "block_order": [
+        "val_quality",
+        "val_shipping",
+        "val_support"
+      ],
       "settings": {
         "title": "¿Por qué elegirnos?",
         "subtitle": "Productos pensados para ti y para ellos"
@@ -188,7 +183,7 @@
             "description": "Todo lo que necesitas para mantener tu casa limpia y organizada con tu mascota.",
             "badge": "Popular",
             "link_text": "Ver pack",
-            "link": "/collections/casa"
+            "link": "/collections/all"
           }
         },
         "bundle_2": {
@@ -197,7 +192,7 @@
             "title": "Travel Pack",
             "description": "Viaja tranquilo con todo lo que tu mascota necesita para el camino.",
             "link_text": "Ver pack",
-            "link": "/collections/viajar"
+            "link": "/collections/all"
           }
         },
         "bundle_3": {
@@ -206,7 +201,7 @@
             "title": "Walk Pack",
             "description": "Paseos más cómodos y organizados con los accesorios esenciales.",
             "link_text": "Ver pack",
-            "link": "/collections/pasear"
+            "link": "/collections/all"
           }
         },
         "bundle_4": {
@@ -216,7 +211,7 @@
             "description": "¿Acabas de adoptar? Este pack tiene todo lo básico para empezar.",
             "badge": "Nuevo",
             "link_text": "Ver pack",
-            "link": "/collections/perros"
+            "link": "/collections/all"
           }
         }
       },
@@ -241,7 +236,7 @@
             "problem": "¿Tu sofá está lleno de pelos?",
             "solution": "Descubre nuestros productos de limpieza",
             "link_text": "Ver productos",
-            "link": "/collections/casa"
+            "link": "/collections/all"
           }
         },
         "prob_2": {
@@ -251,17 +246,17 @@
             "problem": "¿Viajar con tu perro es complicado?",
             "solution": "Todo para viajar con ellos",
             "link_text": "Ver productos",
-            "link": "/collections/viajar"
+            "link": "/collections/all"
           }
         },
         "prob_3": {
           "type": "problem",
           "settings": {
-            "emoji": "🐾",
+            "emoji": "🏠",
             "problem": "¿Tu mascota ensucia toda la casa?",
             "solution": "Productos para mantener tu hogar",
             "link_text": "Ver productos",
-            "link": "/collections/casa"
+            "link": "/collections/all"
           }
         },
         "prob_4": {
@@ -271,7 +266,7 @@
             "problem": "¿Necesitas organizar sus cosas?",
             "solution": "Organizadores y almacenamiento",
             "link_text": "Ver productos",
-            "link": "/collections/casa"
+            "link": "/collections/all"
           }
         }
       },
@@ -364,6 +359,13 @@
         "ugc_6"
       ]
     },
+    "social_media": {
+      "type": "social-media",
+      "settings": {
+        "title": "Comunidad Paw & Home",
+        "subtitle": "Síguenos y etiqueta tus fotos para aparecer en nuestra galería"
+      }
+    },
     "pet_newsletter": {
       "type": "pet-newsletter",
       "settings": {
@@ -375,7 +377,6 @@
     }
   },
   "order": [
-    "announcement_bar",
     "hero_section",
     "pet_categories",
     "featured_products",
@@ -386,6 +387,7 @@
     "pet_problems",
     "pet_reviews",
     "pet_ugc",
+    "social_media",
     "pet_newsletter"
   ]
 }
