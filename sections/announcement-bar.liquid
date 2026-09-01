@@ -1,6 +1,10 @@
-<div class="pet-announcement-wrapper" style="background-color: {{ section.settings.background_color | default: '#1A2B4A' }}; color: {{ section.settings.text_color | default: '#FFFFFF' }}; text-align: center; padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;">
-  <div class="pet-container container" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
-    <span>{{ section.settings.announcement_text | default: "Envío gratis en pedidos superiores a 50 € · Envíos 3-6 días laborables 🐾" }}</span>
+<div class="pet-announcement-wrapper" style="background: linear-gradient(90deg, #1A2B4A 0%, #22375C 50%, #1A2B4A 100%); color: {{ section.settings.text_color | default: '#FFFFFF' }}; text-align: center; padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em; border-bottom: 1px solid rgba(255,255,255,0.08);">
+  <div class="pet-container container" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+    <span style="display: inline-flex; align-items: center; gap: 6px;">🐾 <strong>Paw & Home:</strong> Hecho con amor para ti y para ellos</span>
+    <span style="opacity: 0.5; display: none; @media(min-width: 768px){ display: inline; }">·</span>
+    <span style="display: inline-flex; align-items: center; gap: 6px;">🚚 <strong>Envío Gratis</strong> desde 50 €</span>
+    <span style="opacity: 0.5; display: none; @media(min-width: 768px){ display: inline; }">·</span>
+    <span style="display: inline-flex; align-items: center; gap: 6px;">💚 <strong>14 días</strong> de prueba sin compromiso</span>
   </div>
 </div>
 
