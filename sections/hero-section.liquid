@@ -156,14 +156,61 @@
   }
 
   @media (max-width: 991px) {
-    .pet-hero h1 { font-size: 2.75rem !important; }
+    .pet-hero { padding: 50px 0 40px; min-height: auto; }
+    .pet-hero h1 { font-size: 2.5rem !important; }
     .pet-hero p { font-size: 1.05rem !important; }
   }
-  @media (max-width: 575px) {
-    .pet-hero { padding: 50px 0 40px; }
-    .pet-hero h1 { font-size: 2.1rem !important; }
-    .pet-hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .pet-hero-trust-divider { display: none; }
+  @media (max-width: 768px) {
+    .pet-hero { 
+      padding: 36px 0 32px; 
+      min-height: auto;
+      text-align: center;
+    }
+    .pet-hero-content {
+      padding: 0 16px;
+    }
+    .pet-hero-badge { 
+      font-size: 0.78rem !important; 
+      padding: 5px 12px !important; 
+      margin: 0 auto 16px auto !important; 
+      max-width: 100%;
+      white-space: normal;
+      line-height: 1.3;
+    }
+    .pet-hero h1 { 
+      font-size: 1.95rem !important; 
+      line-height: 1.2 !important;
+      margin: 0 auto 12px auto !important;
+    }
+    .pet-hero p { 
+      font-size: 0.92rem !important; 
+      line-height: 1.5 !important;
+      margin: 0 auto 22px auto !important;
+    }
+    .pet-hero-buttons { 
+      flex-direction: column; 
+      width: 100%; 
+      gap: 10px; 
+      margin-bottom: 24px;
+    }
+    .pet-hero-buttons .pet-btn {
+      width: 100% !important;
+      justify-content: center !important;
+      padding: 13px 20px !important;
+      font-size: 0.95rem !important;
+    }
+    .pet-hero-trust { 
+      flex-direction: row; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 6px 12px; 
+      font-size: 0.78rem;
+      padding-top: 16px;
+    }
+    .pet-hero-trust-divider { 
+      display: inline-block; 
+      opacity: 0.4;
+    }
   }
 </style>
 

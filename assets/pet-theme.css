@@ -47,12 +47,19 @@
 }
 
 /* ---- Global Resets ---- */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   font-family: var(--font-body) !important;
   color: var(--pet-navy) !important;
   background-color: var(--pet-cream) !important;
   font-size: 16px !important;
   line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

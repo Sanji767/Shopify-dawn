@@ -1,17 +1,17 @@
 <!-- Header -->
 <header class="pet-header" id="pet-header">
   <div class="pet-header-inner">
-    <!-- Mobile Toggle -->
+    <!-- Mobile Toggle (Left Column on Mobile) -->
     <button class="pet-mobile-toggle" aria-label="Abrir menú" onclick="document.querySelector('.pet-mobile-menu').classList.add('open'); document.querySelector('.pet-mobile-overlay').classList.add('open');">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
 
-    <!-- Logo -->
-    <a href="/" class="pet-header-logo" style="display: inline-flex; align-items: center; text-decoration: none;">
+    <!-- Logo (Centered on Mobile, Left on Desktop) -->
+    <a href="/" class="pet-header-logo">
       {% if section.settings.logo != blank %}
-        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" loading="eager" style="max-height: 48px; width: auto;">
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" loading="eager" class="pet-logo-img">
       {% else %}
-        <img src="{{ 'paw-and-home-logo.svg' | asset_url }}" alt="Paw & Home" width="220" height="44" style="height: 44px; width: auto; display: block;" loading="eager">
+        <img src="{{ 'paw-and-home-logo.svg' | asset_url }}" alt="Paw & Home" class="pet-logo-img" loading="eager">
       {% endif %}
     </a>
 
@@ -80,7 +80,7 @@
       {% endif %}
     {% endif %}
 
-    <!-- Desktop Navigation -->
+    <!-- Desktop Navigation (Hidden on Mobile) -->
     <ul class="pet-header-nav">
       {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
         {% for link in linklists[section.settings.menu].links %}
@@ -98,12 +98,12 @@
       {% endif %}
     </ul>
 
-    <!-- Actions (High-Visibility Top-Right Cart) -->
-    <div class="pet-header-actions" style="display: flex; align-items: center; gap: 12px;">
-      <a href="/cart" class="pet-header-cart-btn" aria-label="Ver Carrito" style="display: inline-flex; align-items: center; gap: 8px; background: var(--pet-navy, #1A2B4A); color: #FFFFFF; padding: 8px 16px; border-radius: 50px; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: 0 4px 14px rgba(26, 43, 74, 0.18);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span>Carrito</span>
-        <span style="background: #E8734A; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; min-width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-left: 2px;">
+    <!-- Actions / Cart (Right Column) -->
+    <div class="pet-header-actions">
+      <a href="/cart" class="pet-header-cart-btn" aria-label="Ver Carrito">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="pet-cart-btn-text">Carrito</span>
+        <span class="pet-header-cart-bubble">
           {{ cart.item_count | default: 0 }}
         </span>
       </a>
@@ -111,28 +111,168 @@
   </div>
 </header>
 
-<!-- Mobile Menu -->
+<style>
+  .pet-header {
+    position: sticky;
+    top: 0;
+    z-index: 990;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(26, 43, 74, 0.08);
+    transition: all 0.3s ease;
+  }
+  .pet-header-inner {
+    max-width: var(--container-max, 1280px);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .pet-header-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .pet-logo-img {
+    height: 42px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  .pet-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pet-header-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pet-navy, #1A2B4A);
+    color: #FFFFFF;
+    padding: 9px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 14px rgba(26, 43, 74, 0.18);
+    position: relative;
+  }
+  .pet-header-cart-bubble {
+    background: #E8734A;
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  }
+
+  /* Responsive Mobile Header Layout */
+  @media (max-width: 991px) {
+    .pet-header-inner {
+      display: grid !important;
+      grid-template-columns: 44px 1fr 44px !important;
+      align-items: center !important;
+      height: 60px !important;
+      padding: 0 14px !important;
+      gap: 8px !important;
+    }
+    .pet-mobile-toggle {
+      display: flex !important;
+      align-items: center;
+      justify-content: flex-start;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--pet-navy, #1A2B4A);
+    }
+    .pet-header-logo {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+    .pet-logo-img {
+      height: 32px !important;
+      max-height: 32px !important;
+      max-width: 170px !important;
+      width: auto !important;
+      object-fit: contain;
+    }
+    .pet-header-actions {
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    .pet-header-cart-btn {
+      width: 40px !important;
+      height: 40px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      justify-content: center !important;
+      position: relative !important;
+    }
+    .pet-cart-btn-text {
+      display: none !important;
+    }
+    .pet-header-cart-bubble {
+      position: absolute !important;
+      top: -4px !important;
+      right: -4px !important;
+      min-width: 18px !important;
+      height: 18px !important;
+      font-size: 0.65rem !important;
+      border: 2px solid #FFFFFF !important;
+    }
+  }
+</style>
+
+<!-- Mobile Menu Drawer -->
 <div class="pet-mobile-overlay" onclick="this.classList.remove('open'); document.querySelector('.pet-mobile-menu').classList.remove('open');"></div>
 <nav class="pet-mobile-menu">
-  <button class="pet-mobile-menu-close" onclick="this.parentElement.classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="Cerrar menú">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
+  <div class="pet-mobile-menu-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--pet-border, #E5E1DB); margin-bottom: 16px;">
+    <span style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--pet-navy);">Paw &amp; Home 🐾</span>
+    <button class="pet-mobile-menu-close" onclick="this.closest('.pet-mobile-menu').classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="Cerrar menú" style="position: static; padding: 4px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
   <ul class="pet-mobile-nav">
     {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
       {% for link in linklists[section.settings.menu].links %}
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {% endfor %}
     {% else %}
-      <li><a href="/">{{ section.settings.home_text }}</a></li>
-      <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text }}</a></li>
-      <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text }}</a></li>
-      <li><a href="{{ casa_link }}">🏠 {{ section.settings.casa_text }}</a></li>
-      <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text }}</a></li>
-      <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text }}</a></li>
-      <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text }}</a></li>
-      <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text }}</a></li>
+      <li><a href="/">🏠 {{ section.settings.home_text | default: 'Inicio' }}</a></li>
+      <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text | default: 'Perros' }}</a></li>
+      <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text | default: 'Gatos' }}</a></li>
+      <li><a href="{{ casa_link }}">🛋️ {{ section.settings.casa_text | default: 'Para casa' }}</a></li>
+      <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text | default: 'Para viajar' }}</a></li>
+      <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text | default: 'Para pasear' }}</a></li>
+      <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text | default: 'Ofertas' }}</a></li>
+      <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text | default: 'Consejos & Blog' }}</a></li>
     {% endif %}
   </ul>
+
+  <!-- Mobile Drawer Footer Notice -->
+  <div style="margin-top: 32px; padding: 16px; background: var(--pet-cream, #FBF8F3); border-radius: 12px; font-size: 0.8rem; color: var(--pet-muted, #6B7280); line-height: 1.5;">
+    <p style="margin: 0 0 6px; font-weight: 700; color: var(--pet-navy);">🐾 Paw &amp; Home</p>
+    <p style="margin: 0;">🚚 Envíos 3-6 días · 💚 14 días para probar con tu peludo</p>
+  </div>
 </nav>
 
 <!-- Mini Cart Drawer -->
