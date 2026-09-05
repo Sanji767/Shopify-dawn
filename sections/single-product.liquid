@@ -2,24 +2,285 @@
   window.product = {{ product | json }} || {};
 </script>
 
-<section class="pet-product-page" style="padding: 60px 0;">
+<style>
+  /* ===== Product Page Styles ===== */
+  .pet-pdp { padding: 40px 0 60px; background: var(--pet-white, #fff); }
+
+  /* Breadcrumbs */
+  .pet-pdp-breadcrumbs { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--pet-muted, #8A8580); margin-bottom: 24px; flex-wrap: wrap; }
+  .pet-pdp-breadcrumbs a { color: var(--pet-muted, #8A8580); text-decoration: none; transition: color 0.2s; }
+  .pet-pdp-breadcrumbs a:hover { color: var(--pet-coral, #E8734A); }
+  .pet-pdp-breadcrumbs .pet-pdp-bc-sep { font-size: 0.7rem; opacity: 0.5; }
+
+  /* Gallery */
+  .pet-pdp-gallery { position: sticky; top: 20px; }
+  .pet-pdp-main-img-wrap {
+    position: relative; background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%);
+    border-radius: 20px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pet-pdp-main-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .pet-pdp-main-img-wrap:hover .pet-pdp-main-img { transform: scale(1.5); cursor: zoom-in; }
+  .pet-pdp-main-img-wrap.zoomed .pet-pdp-main-img { transform: scale(2); cursor: zoom-out; }
+  .pet-pdp-sale-badge {
+    position: absolute; top: 16px; left: 16px; background: var(--pet-coral, #E8734A);
+    color: #fff; padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
+    z-index: 2; letter-spacing: 0.5px;
+  }
+  .pet-pdp-thumbs { display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding-bottom: 4px; }
+  .pet-pdp-thumb {
+    width: 72px; height: 72px; min-width: 72px; border-radius: 12px; overflow: hidden;
+    border: 2px solid var(--pet-border, #E5E1DB); cursor: pointer; transition: all 0.2s;
+  }
+  .pet-pdp-thumb.active, .pet-pdp-thumb:hover { border-color: var(--pet-coral, #E8734A); box-shadow: 0 2px 8px rgba(232,115,74,0.2); }
+  .pet-pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Product Info */
+  .pet-pdp-info { padding-left: 20px; }
+  .pet-pdp-stock {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; font-weight: 600; margin-bottom: 10px;
+  }
+  .pet-pdp-stock--in { color: #166534; }
+  .pet-pdp-stock--out { color: #991B1B; }
+  .pet-pdp-stock-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .pet-pdp-stock--in .pet-pdp-stock-dot { background: #22C55E; animation: petPulseGreen 2s infinite; }
+  .pet-pdp-stock--out .pet-pdp-stock-dot { background: #EF4444; }
+  @keyframes petPulseGreen { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .pet-pdp-title {
+    font-family: var(--font-heading, 'DM Serif Display', serif);
+    font-size: 2rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px;
+    line-height: 1.2; letter-spacing: -0.5px;
+  }
+
+  /* Price */
+  .pet-pdp-price-wrap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pet-pdp-price {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 1.75rem; font-weight: 800; color: var(--pet-navy, #1A2B4A);
+  }
+  .pet-pdp-compare { font-size: 1.05rem; color: var(--pet-muted, #8A8580); text-decoration: line-through; }
+  .pet-pdp-discount {
+    background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 700;
+  }
+
+  /* Free shipping bar */
+  .pet-pdp-shipping-bar {
+    background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px;
+    padding: 12px 16px; margin-bottom: 20px; font-size: 0.85rem;
+  }
+  .pet-pdp-shipping-bar--free { background: #ECFDF5; border-color: #6EE7B7; }
+  .pet-pdp-shipping-progress { height: 4px; background: #E5E7EB; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+  .pet-pdp-shipping-fill { height: 100%; background: linear-gradient(90deg, #22C55E, #16A34A); border-radius: 4px; transition: width 0.6s ease; }
+
+  /* Variants */
+  .pet-pdp-variants { margin-bottom: 20px; }
+  .pet-pdp-variant-label {
+    font-weight: 700; margin-bottom: 10px; display: flex;
+    align-items: center; justify-content: space-between; color: var(--pet-navy); font-size: 0.9rem;
+  }
+  .pet-pdp-variant-selected { font-weight: 600; color: var(--pet-coral, #E8734A); font-size: 0.85rem; }
+  .pet-pdp-variant-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pet-pdp-variant-btn {
+    padding: 10px 20px; border-radius: 50px; border: 2px solid var(--pet-border, #E5E1DB);
+    background: #fff; color: var(--pet-navy, #1A2B4A); cursor: pointer;
+    font-weight: 600; font-size: 0.85rem; transition: all 0.2s ease;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+  .pet-pdp-variant-btn:hover { border-color: var(--pet-sage, #8FA885); }
+  .pet-pdp-variant-btn.active {
+    border-color: var(--pet-coral, #E8734A); background: var(--pet-navy, #1A2B4A); color: #fff;
+  }
+  .pet-pdp-variant-btn[disabled] { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+
+  /* Quantity */
+  .pet-pdp-qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .pet-pdp-qty-wrap {
+    display: inline-flex; align-items: center; border: 1px solid var(--pet-border);
+    border-radius: 50px; overflow: hidden; background: #fff;
+  }
+  .pet-pdp-qty-btn {
+    width: 40px; height: 40px; border: none; background: transparent; cursor: pointer;
+    font-size: 1.1rem; font-weight: 700; color: var(--pet-navy); display: flex;
+    align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .pet-pdp-qty-btn:hover { background: var(--pet-cream, #FBF8F3); }
+  .pet-pdp-qty-input {
+    width: 44px; text-align: center; border: none; font-weight: 700; font-size: 1rem;
+    color: var(--pet-navy); background: transparent;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+
+  /* Add to cart */
+  .pet-pdp-atc {
+    width: 100%; padding: 16px 24px; border: none; border-radius: 50px; font-size: 1.05rem;
+    font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(135deg, var(--pet-navy, #1A2B4A) 0%, #2a3f66 100%);
+    color: #fff; transition: all 0.3s ease; position: relative; overflow: hidden;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+  .pet-pdp-atc:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(26,43,74,0.3); }
+  .pet-pdp-atc:active { transform: translateY(0); }
+  .pet-pdp-atc[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .pet-pdp-secure { text-align: center; font-size: 0.78rem; color: var(--pet-muted); margin-top: 10px; }
+
+  /* Meta guarantees */
+  .pet-pdp-guarantees {
+    background: var(--pet-cream, #FBF8F3); padding: 20px; border-radius: 16px;
+    border: 1px solid var(--pet-border, #E5E1DB); margin: 24px 0;
+  }
+  .pet-pdp-guarantee {
+    display: flex; align-items: center; gap: 12px; font-size: 0.88rem;
+    color: var(--pet-navy); padding: 8px 0;
+  }
+  .pet-pdp-guarantee + .pet-pdp-guarantee { border-top: 1px solid var(--pet-border, #E5E1DB); }
+  .pet-pdp-guarantee-icon {
+    width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    background: var(--pet-white, #fff); border: 1px solid var(--pet-border, #E5E1DB);
+  }
+
+  /* Accordion tabs */
+  .pet-pdp-accordion { margin-top: 32px; border-top: 1px solid var(--pet-border, #E5E1DB); }
+  .pet-pdp-accordion details { border-bottom: 1px solid var(--pet-border, #E5E1DB); }
+  .pet-pdp-accordion summary {
+    display: flex; align-items: center; justify-content: space-between; padding: 18px 0;
+    cursor: pointer; font-weight: 700; font-size: 0.95rem; color: var(--pet-navy);
+    list-style: none; user-select: none;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+  .pet-pdp-accordion summary::-webkit-details-marker { display: none; }
+  .pet-pdp-accordion summary::marker { display: none; content: ''; }
+  .pet-pdp-acc-icon {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--pet-cream, #FBF8F3);
+    display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;
+    font-size: 0.8rem; color: var(--pet-navy);
+  }
+  details[open] .pet-pdp-acc-icon { transform: rotate(180deg); }
+  .pet-pdp-acc-body {
+    padding: 0 0 20px; font-size: 0.9rem; line-height: 1.7; color: #4A4540;
+  }
+  .pet-pdp-acc-body ul { padding-left: 20px; margin: 8px 0; }
+  .pet-pdp-acc-body li { margin-bottom: 4px; }
+
+  /* Share */
+  .pet-pdp-share { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+  .pet-pdp-share-label { font-size: 0.82rem; font-weight: 600; color: var(--pet-muted); }
+  .pet-pdp-share-btn {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--pet-border);
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; color: var(--pet-navy);
+  }
+  .pet-pdp-share-btn:hover { background: var(--pet-cream); border-color: var(--pet-coral); color: var(--pet-coral); }
+
+  /* Related products */
+  .pet-pdp-related { padding: 60px 0; background: var(--pet-cream, #FBF8F3); }
+  .pet-pdp-related-title {
+    font-family: var(--font-heading, 'DM Serif Display', serif);
+    font-size: 1.6rem; color: var(--pet-navy); text-align: center; margin-bottom: 32px;
+  }
+  .pet-pdp-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .pet-pdp-rel-card {
+    background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--pet-border);
+    transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; display: block;
+  }
+  .pet-pdp-rel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .pet-pdp-rel-img { aspect-ratio: 1/1; overflow: hidden; background: #F5EDE3; }
+  .pet-pdp-rel-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .pet-pdp-rel-card:hover .pet-pdp-rel-img img { transform: scale(1.05); }
+  .pet-pdp-rel-body { padding: 14px 16px; }
+  .pet-pdp-rel-name { font-weight: 600; font-size: 0.88rem; color: var(--pet-navy); margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pet-pdp-rel-price { font-weight: 700; font-size: 0.95rem; color: var(--pet-navy); }
+  .pet-pdp-rel-compare { font-size: 0.8rem; color: var(--pet-muted); text-decoration: line-through; margin-left: 6px; }
+
+  /* Sticky mobile ATC */
+  .pet-pdp-sticky-atc {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
+    background: #fff; border-top: 1px solid var(--pet-border); padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .pet-pdp-sticky-inner { display: flex; align-items: center; gap: 12px; max-width: 600px; margin: 0 auto; }
+  .pet-pdp-sticky-info { flex: 1; min-width: 0; }
+  .pet-pdp-sticky-name { font-weight: 600; font-size: 0.8rem; color: var(--pet-navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pet-pdp-sticky-price { font-weight: 800; font-size: 1rem; color: var(--pet-navy); }
+  .pet-pdp-sticky-btn {
+    padding: 12px 28px; border: none; border-radius: 50px; background: var(--pet-navy, #1A2B4A);
+    color: #fff; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 991px) {
+    .pet-pdp-info { padding-left: 0; margin-top: 24px; }
+    .pet-pdp-gallery { position: static; }
+    .pet-pdp-title { font-size: 1.6rem; }
+    .pet-pdp-related-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .pet-pdp-sticky-atc { display: block; }
+    .pet-pdp-main-img-wrap { aspect-ratio: auto; min-height: 300px; }
+  }
+  @media (max-width: 480px) {
+    .pet-pdp { padding: 20px 0 40px; }
+    .pet-pdp-title { font-size: 1.4rem; }
+    .pet-pdp-price { font-size: 1.5rem; }
+    .pet-pdp-thumb { width: 60px; height: 60px; min-width: 60px; }
+  }
+</style>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign free_shipping_threshold = 5000
+  assign product_price_for_bar = product.price | default: 3499
+  assign remaining = free_shipping_threshold | minus: product_price_for_bar
+  assign progress = product_price_for_bar | times: 100 | divided_by: free_shipping_threshold
+  if progress > 100
+    assign progress = 100
+  endif
+-%}
+
+<section class="pet-pdp">
   <div class="pet-container container">
+
+    <!-- Breadcrumbs -->
+    <nav class="pet-pdp-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Inicio</a>
+      <span class="pet-pdp-bc-sep">›</span>
+      {% if product.collections.size > 0 %}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span class="pet-pdp-bc-sep">›</span>
+      {% endif %}
+      <span style="color: var(--pet-navy); font-weight: 500;">{{ product.title | default: 'Producto' | truncate: 40 }}</span>
+    </nav>
+
     <div class="row">
-      <!-- Gallery -->
-      <div class="col-lg-6 col-12 mb-4">
-        <div class="pet-product-gallery">
-          <div class="pet-product-gallery-main" id="mainImage" style="background: linear-gradient(135deg, #FBF8F3 0%, #F5EDE3 100%); border-radius: 24px; padding: 20px; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+      <!-- ========== GALLERY ========== -->
+      <div class="col-lg-6 col-12">
+        <div class="pet-pdp-gallery">
+          <div class="pet-pdp-main-img-wrap" id="petPdpZoomWrap">
+            {% if product.compare_at_price > product.price %}
+              {%- assign discount_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              <span class="pet-pdp-sale-badge">-{{ discount_pct }}%</span>
+            {% endif %}
             {% if product.featured_image %}
-              <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" id="mainProductImg" style="max-width: 100%; height: auto; border-radius: 16px;">
+              <img src="{{ product.featured_image | image_url: width: 1024 }}"
+                   alt="{{ product.title | escape }}"
+                   id="mainProductImg"
+                   class="pet-pdp-main-img"
+                   loading="eager">
             {% else %}
-              <div style="font-size: 6rem; text-align: center;">🐶 🐾</div>
+              <div style="font-size: 5rem; text-align: center;">🐶 🐾</div>
             {% endif %}
           </div>
+
           {% if product.images.size > 1 %}
-            <div class="pet-product-gallery-thumbs" style="display: flex; gap: 12px; margin-top: 16px;">
+            <div class="pet-pdp-thumbs">
               {% for image in product.images %}
-                <div class="pet-product-gallery-thumb {% if forloop.first %}active{% endif %}" onclick="changeMainImage(this, '{{ image.src | image_url: width: 1024 }}')" style="width: 80px; height: 80px; border-radius: 12px; overflow: hidden; border: 2px solid #E5E1DB; cursor: pointer;">
-                  <img src="{{ image.src | image_url: width: 200 }}" alt="{{ product.title }} - {{ forloop.index }}" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="pet-pdp-thumb {% if forloop.first %}active{% endif %}"
+                     onclick="petChangeImg(this, '{{ image.src | image_url: width: 1024 }}')"
+                     role="button" tabindex="0"
+                     aria-label="Ver imagen {{ forloop.index }}">
+                  <img src="{{ image.src | image_url: width: 200 }}" alt="{{ product.title }} - {{ forloop.index }}" loading="lazy">
                 </div>
               {% endfor %}
             </div>
@@ -27,202 +288,388 @@
         </div>
       </div>
 
-      <!-- Product Info -->
+      <!-- ========== PRODUCT INFO ========== -->
       <div class="col-lg-6 col-12">
-        <div class="pet-product-info">
-          <!-- Stock & Review Rating CRO -->
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #166534; font-weight: 600;">
-              <span style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>
-              En stock en España (3-6 días)
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem;">
-              <span style="color: #F59E0B;">★★★★★</span>
-              <span style="font-weight: 700; color: var(--pet-navy);">4.9</span>
-              <span style="color: var(--pet-muted);">(128 opiniones)</span>
-            </div>
-          </div>
+        <div class="pet-pdp-info">
 
-          <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 12px;">
-            {{ product.title | default: "Cama Ortopédica Lavable para Mascotas" }}
+          <!-- Stock -->
+          {% if product.available == false %}
+            <div class="pet-pdp-stock pet-pdp-stock--out">
+              <span class="pet-pdp-stock-dot"></span> Agotado temporalmente
+            </div>
+          {% else %}
+            <div class="pet-pdp-stock pet-pdp-stock--in">
+              <span class="pet-pdp-stock-dot"></span> En stock · Envío desde España (3-6 días)
+            </div>
+          {% endif %}
+
+          <!-- Title -->
+          <h1 class="pet-pdp-title">
+            {{ product.title | default: "Producto para tu mascota" }}
           </h1>
 
-
-
           <!-- Price -->
-          <div class="pet-product-price-wrap" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-            <span class="pet-product-price" style="font-family: 'Inter', sans-serif; font-size: 1.75rem; font-weight: 700; color: var(--pet-navy);">
-              {{ product.price | default: 3499 | money }}
+          <div class="pet-pdp-price-wrap">
+            <span class="pet-pdp-price" id="petPdpPrice">
+              {{ current_variant.price | default: product.price | default: 3499 | money }}
             </span>
-            {% if product.compare_at_price > product.price or product.title == blank %}
-              <span class="pet-product-compare-price" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted); text-decoration: line-through;">
-                {{ product.compare_at_price | default: 4499 | money }}
+            {% if product.compare_at_price > product.price %}
+              <span class="pet-pdp-compare" id="petPdpCompare">
+                {{ product.compare_at_price | money }}
               </span>
-              <span class="pet-product-discount-badge" style="background: var(--pet-coral); color: #fff; padding: 4px 10px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;">
-                OFERTA -22%
+              <span class="pet-pdp-discount">
+                -{{ discount_pct }}% dto.
               </span>
             {% endif %}
           </div>
 
+          <!-- Free Shipping Progress -->
+          {% if remaining > 0 %}
+            <div class="pet-pdp-shipping-bar">
+              <span>🚚 Te faltan <strong>{{ remaining | money }}</strong> para <strong>envío gratis</strong></span>
+              <div class="pet-pdp-shipping-progress">
+                <div class="pet-pdp-shipping-fill" style="width: {{ progress }}%"></div>
+              </div>
+            </div>
+          {% else %}
+            <div class="pet-pdp-shipping-bar pet-pdp-shipping-bar--free">
+              <span>🎉 <strong>¡Envío gratis!</strong> Este producto incluye envío gratuito a España</span>
+            </div>
+          {% endif %}
+
           {% form 'product', product, id: 'AddToCartForm', class: 'pet-product-form' %}
+
             <!-- Variants -->
             {% if product.variants.size > 1 %}
-              <div class="pet-product-variants" style="margin-bottom: 24px;">
-                <label class="pet-product-variant-label" style="font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; color: var(--pet-navy);">
-                  <span>Seleccionar Talla / Opción:</span>
-                  <span id="selectedVariantLabel" style="font-weight: 600; color: var(--pet-coral); font-size: 0.9rem;">{{ product.variants.first.title }}</span>
-                </label>
-                <div class="pet-product-variant-options" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                  {% for variant in product.variants %}
-                    <button type="button"
-                      class="pet-product-variant-option {% if forloop.first %}active{% endif %}"
-                      data-variant-id="{{ variant.id }}"
-                      data-title="{{ variant.title | escape }}"
-                      data-price="{{ variant.price | money }}"
-                      data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
-                      data-available="{{ variant.available }}"
-                      style="padding: 10px 18px; border-radius: 50px; border: 2px solid {% if forloop.first %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if forloop.first %}var(--pet-navy, #1A2B4A){% else %}#fff{% endif %}; color: {% if forloop.first %}#fff{% else %}var(--pet-navy, #1A2B4A){% endif %}; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s ease;">
-                      {{ variant.title }}
-                    </button>
-                  {% endfor %}
+              {% for option in product.options_with_values %}
+                <div class="pet-pdp-variants">
+                  <label class="pet-pdp-variant-label">
+                    <span>{{ option.name }}:</span>
+                    <span class="pet-pdp-variant-selected" data-option-index="{{ forloop.index0 }}">{{ option.selected_value | default: option.values.first }}</span>
+                  </label>
+                  <div class="pet-pdp-variant-opts">
+                    {% for value in option.values %}
+                      {%- liquid
+                        assign is_selected = false
+                        if option.selected_value == value
+                          assign is_selected = true
+                        elsif forloop.first and option.selected_value == blank
+                          assign is_selected = true
+                        endif
+                      -%}
+                      <button type="button"
+                        class="pet-pdp-variant-btn {% if is_selected %}active{% endif %}"
+                        data-option-index="{{ forloop.parentloop.index0 }}"
+                        data-value="{{ value | escape }}">
+                        {{ value }}
+                      </button>
+                    {% endfor %}
+                  </div>
                 </div>
-              </div>
-            {% else %}
-              <!-- Fallback Pet Sizes for Demo & Bestia Dog Sport Collar -->
-              <div class="pet-product-variants" style="margin-bottom: 24px;">
-                <label class="pet-product-variant-label" style="font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; color: var(--pet-navy);">
-                  <span>Seleccionar Talla (Size):</span>
-                  <span id="selectedVariantLabel" style="font-weight: 600; color: var(--pet-coral); font-size: 0.9rem;">M - fitting a neck of 40 to 55 cm</span>
-                </label>
-                <div class="pet-product-variant-options" style="display: flex; flex-direction: column; gap: 10px;">
-                  {% assign sizes = "M - fitting a neck of 40 to 55 cm (15.7 - 21.6 inch),L - fitting a neck of 50 to 65 cm (19.7 - 25.6 inch),XL - fitting a neck of 60 to 75 cm (23.6 - 29.5 inch),XXL - fitting a neck of 70 to 85 cm (27.5 - 33.5 inch)" | split: "," %}
-                  {% for sz in sizes %}
-                    <button type="button"
-                      class="pet-product-variant-option {% if forloop.first %}active{% endif %}"
-                      data-variant-id="{{ forloop.index }}"
-                      data-title="{{ sz | escape }}"
-                      style="padding: 12px 18px; text-align: left; border-radius: 12px; border: 2px solid {% if forloop.first %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if forloop.first %}#FFFBEB{% else %}#fff{% endif %}; color: var(--pet-navy, #1A2B4A); cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s ease;">
-                      🐾 {{ sz }}
-                    </button>
-                  {% endfor %}
-                </div>
-                <!-- Caring Size Advice -->
-                <div style="background: #FAF4EB; border-radius: 12px; padding: 10px 14px; font-size: 0.82rem; color: #78350F; margin-top: 10px; display: flex; align-items: center; gap: 8px;">
-                  <span>💡 <strong>Consejo con cariño:</strong> Deja siempre dos dedos de holgura entre la cinta y su cuello para que tu peludo respire y se mueva con total libertad.</span>
-                </div>
-              </div>
+              {% endfor %}
             {% endif %}
 
             <!-- Quantity -->
-            <div class="pet-product-qty" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-              <label class="pet-product-variant-label" style="font-weight: 600; margin: 0;">Cantidad</label>
-              <div style="display: flex; align-items: center; border: 1px solid var(--pet-border); border-radius: 50px; overflow: hidden; background: #fff;">
-                <button type="button" onclick="updateProductQty(-1)" style="padding: 8px 16px; border: none; background: transparent; cursor: pointer; font-weight: 700;">−</button>
-                <input type="text" value="1" id="productQty" name="quantity" readonly style="width: 40px; text-align: center; border: none; font-weight: 600;">
-                <button type="button" onclick="updateProductQty(1)" style="padding: 8px 16px; border: none; background: transparent; cursor: pointer; font-weight: 700;">+</button>
+            <div class="pet-pdp-qty-row">
+              <label style="font-weight: 600; font-size: 0.9rem; color: var(--pet-navy);">Cantidad:</label>
+              <div class="pet-pdp-qty-wrap">
+                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(-1)" aria-label="Reducir cantidad">−</button>
+                <input type="text" value="1" id="productQty" name="quantity" readonly class="pet-pdp-qty-input" aria-label="Cantidad">
+                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(1)" aria-label="Aumentar cantidad">+</button>
               </div>
             </div>
 
-            <input type="hidden" name="id" id="variantId" value="{{ product.variants.first.id | default: 1 }}">
+            <input type="hidden" name="id" id="variantId" value="{{ current_variant.id | default: product.variants.first.id | default: 1 }}">
 
-            <!-- Actions -->
-            <div class="pet-product-actions" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
-              <button type="submit" name="add" class="pet-btn pet-btn-primary pet-btn-lg" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 16px; border-radius: 50px; cursor: pointer;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                Añadir al carrito
-              </button>
-              {% if section.settings.show_dynamic_checkout and product.available %}
-                <div class="pet-dynamic-checkout" style="margin-top: 4px;">
-                  {{ form | payment_button }}
-                </div>
+            <!-- Add to Cart -->
+            <button type="submit" name="add" class="pet-pdp-atc" {% unless product.available %}disabled{% endunless %}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              {% if product.available %}
+                Añadir al carrito 🐾
+              {% else %}
+                Agotado — Te avisamos cuando vuelva
               {% endif %}
-              <div style="text-align: center; font-size: 0.8rem; color: var(--pet-muted);">
-                🔒 Pago 100% Seguro · Visa, Mastercard, PayPal, Apple Pay, Klarna, iDEAL
+            </button>
+
+            {% if section.settings.show_dynamic_checkout and product.available %}
+              <div style="margin-top: 8px;">
+                {{ form | payment_button }}
               </div>
-            </div>
+            {% endif %}
+
+            <p class="pet-pdp-secure">🔒 Pago seguro · Visa, Mastercard, PayPal, Apple Pay, Google Pay</p>
+
           {% endform %}
 
-          <!-- Meta info -->
-          <div class="pet-product-meta" style="background: #FBF8F3; padding: 20px; border-radius: 16px; border: 1px solid #E5E1DB; margin-bottom: 32px;">
-            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              <span>{{ section.settings.shipping_text | default: "Envío cuidado con mimo a España y Europa (3-6 días)" }}</span>
+          <!-- Guarantee badges -->
+          <div class="pet-pdp-guarantees">
+            <div class="pet-pdp-guarantee">
+              <div class="pet-pdp-guarantee-icon">🚚</div>
+              <div>
+                <strong>{{ section.settings.shipping_text | default: "Envío 3-6 días laborables" }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Gratis a partir de 50 € en España</div>
+              </div>
             </div>
-            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-              <span>{{ section.settings.returns_text | default: "Garantía de colas contentas: 14 días para probar con tu peludo" }}</span>
+            <div class="pet-pdp-guarantee">
+              <div class="pet-pdp-guarantee-icon">↩️</div>
+              <div>
+                <strong>{{ section.settings.returns_text | default: "14 días de devolución" }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Sin preguntas, porque tu peludo merece lo mejor</div>
+              </div>
             </div>
-            <div class="pet-product-meta-item" style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>{{ section.settings.guarantee_text | default: "Materiales 100% seguros y respetuosos con su piel y salud" }}</span>
+            <div class="pet-pdp-guarantee">
+              <div class="pet-pdp-guarantee-icon">🛡️</div>
+              <div>
+                <strong>{{ section.settings.guarantee_text | default: "Materiales seguros y certificados" }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Libres de BPA, atóxicos y respetuosos con su piel</div>
+              </div>
+            </div>
+            <div class="pet-pdp-guarantee">
+              <div class="pet-pdp-guarantee-icon">💬</div>
+              <div>
+                <strong>Atención personalizada</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Contáctanos por WhatsApp o email, ¡te ayudamos!</div>
+              </div>
             </div>
           </div>
 
-          <!-- Description & Details -->
-          <div class="pet-product-description" style="line-height: 1.7; color: var(--pet-navy);">
-            <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 12px;">Descripción del producto</h3>
-            <div>
-              {{ product.description | default: "<p>Diseñada para proporcionar el máximo confort y descanso a tu mascota. Material resistente, lavable a máquina y con base antideslizante para la máxima estabilidad en tu hogar.</p>" }}
-            </div>
+          <!-- Accordion: Description / Shipping / Returns -->
+          <div class="pet-pdp-accordion">
+            <details open>
+              <summary>
+                📋 Descripción del producto
+                <span class="pet-pdp-acc-icon">▼</span>
+              </summary>
+              <div class="pet-pdp-acc-body">
+                {{ product.description | default: "<p>Producto diseñado con amor para hacer la vida con tu mascota más fácil y bonita. Materiales de calidad, resistentes y seguros.</p>" }}
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                🚚 Envío y plazos de entrega
+                <span class="pet-pdp-acc-icon">▼</span>
+              </summary>
+              <div class="pet-pdp-acc-body">
+                <ul>
+                  <li><strong>España Peninsular:</strong> 3-6 días laborables</li>
+                  <li><strong>Europa:</strong> 5-10 días laborables</li>
+                  <li><strong>Envío gratis:</strong> En pedidos superiores a 50 € (España) / 75 € (Europa)</li>
+                  <li>Recibirás un email con el número de seguimiento en cuanto salga tu pedido</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                ↩️ Devoluciones y garantía
+                <span class="pet-pdp-acc-icon">▼</span>
+              </summary>
+              <div class="pet-pdp-acc-body">
+                <ul>
+                  <li><strong>14 días naturales</strong> para iniciar una devolución sin preguntas</li>
+                  <li>El producto debe estar sin usar y en su embalaje original</li>
+                  <li>En caso de <strong>producto defectuoso</strong>, el envío de devolución es gratis</li>
+                  <li>Reembolso en un plazo máximo de 14 días tras recibir la devolución</li>
+                </ul>
+              </div>
+            </details>
+
+            {% if product.vendor and product.vendor != blank and product.vendor != shop.name %}
+              <details>
+                <summary>
+                  🏷️ Información adicional
+                  <span class="pet-pdp-acc-icon">▼</span>
+                </summary>
+                <div class="pet-pdp-acc-body">
+                  <p><strong>Marca:</strong> {{ product.vendor }}</p>
+                  {% if product.type and product.type != blank %}
+                    <p><strong>Tipo:</strong> {{ product.type }}</p>
+                  {% endif %}
+                  {% if current_variant.sku and current_variant.sku != blank %}
+                    <p><strong>SKU:</strong> {{ current_variant.sku }}</p>
+                  {% endif %}
+                  {% if product.tags.size > 0 %}
+                    <p><strong>Etiquetas:</strong> {{ product.tags | join: ', ' }}</p>
+                  {% endif %}
+                </div>
+              </details>
+            {% endif %}
           </div>
+
+          <!-- Share -->
+          <div class="pet-pdp-share">
+            <span class="pet-pdp-share-label">Compartir:</span>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir en Facebook" title="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir en X" title="X (Twitter)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://wa.me/?text={{ product.title | url_encode }}%20{{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir por WhatsApp" title="WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <button type="button" class="pet-pdp-share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(function(){alert('🐾 ¡Enlace copiado!')})" aria-label="Copiar enlace" title="Copiar enlace">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ========== RELATED PRODUCTS ========== -->
+{% if product.collections.size > 0 %}
+  {%- assign related_collection = product.collections.first -%}
+  {%- assign related_products = related_collection.products | where: 'available' -%}
+  {% if related_products.size > 1 %}
+    <section class="pet-pdp-related">
+      <div class="pet-container container">
+        <h2 class="pet-pdp-related-title">También te puede gustar 🐾</h2>
+        <div class="pet-pdp-related-grid">
+          {% assign shown = 0 %}
+          {% for rp in related_products limit: 8 %}
+            {% if rp.handle != product.handle and shown < 4 %}
+              <a href="{{ rp.url }}" class="pet-pdp-rel-card">
+                <div class="pet-pdp-rel-img">
+                  {% if rp.featured_image %}
+                    <img src="{{ rp.featured_image | image_url: width: 400 }}" alt="{{ rp.title | escape }}" loading="lazy">
+                  {% else %}
+                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">🐾</div>
+                  {% endif %}
+                </div>
+                <div class="pet-pdp-rel-body">
+                  <div class="pet-pdp-rel-name">{{ rp.title }}</div>
+                  <div>
+                    <span class="pet-pdp-rel-price">{{ rp.price | money }}</span>
+                    {% if rp.compare_at_price > rp.price %}
+                      <span class="pet-pdp-rel-compare">{{ rp.compare_at_price | money }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+              {% assign shown = shown | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endif %}
+
+<!-- ========== STICKY MOBILE ATC ========== -->
+<div class="pet-pdp-sticky-atc" id="petStickyAtc">
+  <div class="pet-pdp-sticky-inner">
+    <div class="pet-pdp-sticky-info">
+      <div class="pet-pdp-sticky-name">{{ product.title | default: 'Producto' | truncate: 30 }}</div>
+      <div class="pet-pdp-sticky-price" id="petStickyPrice">{{ current_variant.price | default: product.price | default: 3499 | money }}</div>
+    </div>
+    <button type="button" class="pet-pdp-sticky-btn" onclick="document.getElementById('AddToCartForm').requestSubmit()" {% unless product.available %}disabled{% endunless %}>
+      🐾 Añadir
+    </button>
+  </div>
+</div>
+
 <script>
-  function updateProductQty(delta) {
-    var input = document.getElementById('productQty');
-    var val = parseInt(input.value) || 1;
-    val = Math.max(1, val + delta);
-    input.value = val;
+  /* Quantity */
+  function petUpdateQty(d) {
+    var i = document.getElementById('productQty');
+    i.value = Math.max(1, (parseInt(i.value) || 1) + d);
   }
-  function changeMainImage(element, newSrc) {
-    document.getElementById('mainProductImg').src = newSrc;
-    document.querySelectorAll('.pet-product-gallery-thumb').forEach(function(el) {
-      el.classList.remove('active');
+
+  /* Gallery */
+  function petChangeImg(el, src) {
+    var img = document.getElementById('mainProductImg');
+    if (img) { img.src = src; }
+    document.querySelectorAll('.pet-pdp-thumb').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+  }
+
+  /* Zoom */
+  (function() {
+    var wrap = document.getElementById('petPdpZoomWrap');
+    if (!wrap) return;
+    wrap.addEventListener('mousemove', function(e) {
+      var img = wrap.querySelector('.pet-pdp-main-img');
+      if (!img || window.innerWidth < 992) return;
+      var rect = wrap.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      img.style.transformOrigin = x + '% ' + y + '%';
     });
-    element.classList.add('active');
-  }
+    wrap.addEventListener('mouseleave', function() {
+      var img = wrap.querySelector('.pet-pdp-main-img');
+      if (img) { img.style.transformOrigin = 'center center'; }
+    });
+  })();
 
+  /* Variants */
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.pet-product-variant-option').forEach(function(button) {
-      button.addEventListener('click', function(e) {
+    var variants = {{ product.variants | json }};
+    var options = [];
+
+    document.querySelectorAll('.pet-pdp-variant-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
         e.preventDefault();
-        var parentGroup = this.closest('.pet-product-variant-options');
-        if (parentGroup) {
-          parentGroup.querySelectorAll('.pet-product-variant-option').forEach(function(b) {
-            b.classList.remove('active');
-            b.style.borderColor = 'var(--pet-border, #E5E1DB)';
-            b.style.background = '#fff';
-            b.style.color = 'var(--pet-navy, #1A2B4A)';
-          });
-        }
+        var idx = parseInt(this.dataset.optionIndex);
+        var val = this.dataset.value;
+
+        /* Update UI */
+        this.closest('.pet-pdp-variant-opts').querySelectorAll('.pet-pdp-variant-btn').forEach(function(b) {
+          b.classList.remove('active');
+        });
         this.classList.add('active');
-        this.style.borderColor = 'var(--pet-coral, #E8734A)';
-        this.style.background = 'var(--pet-navy, #1A2B4A)';
-        this.style.color = '#fff';
 
-        var title = this.getAttribute('data-title');
-        var labelEl = document.getElementById('selectedVariantLabel');
-        if (title && labelEl) {
-          labelEl.textContent = title;
-        }
+        /* Update label */
+        var label = document.querySelector('.pet-pdp-variant-selected[data-option-index="' + idx + '"]');
+        if (label) label.textContent = val;
 
-        var variantId = this.getAttribute('data-variant-id');
-        if (variantId) {
-          var hiddenInput = document.getElementById('variantId');
-          if (hiddenInput) hiddenInput.value = variantId;
-        }
+        /* Find matching variant */
+        var selectedOptions = [];
+        document.querySelectorAll('.pet-pdp-variant-btn.active').forEach(function(b) {
+          selectedOptions[parseInt(b.dataset.optionIndex)] = b.dataset.value;
+        });
 
-        var price = this.getAttribute('data-price');
-        var priceEl = document.querySelector('.pet-product-price');
-        if (price && priceEl) {
-          priceEl.textContent = price;
+        for (var i = 0; i < variants.length; i++) {
+          var v = variants[i];
+          var match = true;
+          for (var j = 0; j < selectedOptions.length; j++) {
+            if (selectedOptions[j] && v.options && v.options[j] !== selectedOptions[j]) {
+              match = false;
+              break;
+            }
+          }
+          if (match) {
+            document.getElementById('variantId').value = v.id;
+            var priceEl = document.getElementById('petPdpPrice');
+            if (priceEl) priceEl.textContent = (v.price / 100).toFixed(2).replace('.', ',') + ' €';
+            var stickyPrice = document.getElementById('petStickyPrice');
+            if (stickyPrice) stickyPrice.textContent = (v.price / 100).toFixed(2).replace('.', ',') + ' €';
+            /* Update URL */
+            if (history.replaceState) {
+              var url = new URL(window.location);
+              url.searchParams.set('variant', v.id);
+              history.replaceState({}, '', url);
+            }
+            break;
+          }
         }
       });
     });
+
+    /* Sticky ATC visibility */
+    var atcBtn = document.querySelector('.pet-pdp-atc');
+    var sticky = document.getElementById('petStickyAtc');
+    if (atcBtn && sticky) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          sticky.style.display = entry.isIntersecting ? 'none' : 'block';
+        });
+      }, { threshold: 0 });
+      observer.observe(atcBtn);
+    }
   });
 </script>
 
@@ -240,19 +687,19 @@
       "type": "text",
       "id": "shipping_text",
       "label": "Texto envío",
-      "default": "Envío a España y Europa en 3-6 días laborables"
+      "default": "Envío 3-6 días laborables a España y Europa"
     },
     {
       "type": "text",
       "id": "returns_text",
       "label": "Texto devoluciones",
-      "default": "Devolución sin preguntas en 14 días (RGPD)"
+      "default": "14 días de devolución sin complicaciones"
     },
     {
       "type": "text",
       "id": "guarantee_text",
       "label": "Texto garantía",
-      "default": "Pago 100% seguro con SSL y soporte en español"
+      "default": "Materiales seguros y certificados UE"
     }
   ],
   "presets": [

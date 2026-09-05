@@ -3,9 +3,10 @@
     "main": {
       "type": "single-product",
       "settings": {
-        "shipping_text": "Envío en 2-4 días laborables",
-        "returns_text": "Devolución gratuita en 30 días",
-        "guarantee_text": "Pago 100% seguro"
+        "show_dynamic_checkout": true,
+        "shipping_text": "Envío 3-6 días laborables a España y Europa",
+        "returns_text": "14 días de devolución sin complicaciones",
+        "guarantee_text": "Materiales seguros y certificados UE"
       }
     }
   },
