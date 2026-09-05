@@ -35,6 +35,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'json-ld-seo' %}
 
     <link href="{{ 'bootstrap.min.css' | asset_url }}" rel="stylesheet">
     <link href="{{ 'themify-icons.css' | asset_url }}" rel="stylesheet">
@@ -51,6 +52,7 @@
 
       {{ content_for_layout }}
 
+      {% section 'trust-banner' %}
       {% section 'footer' %}
     </div>
 
@@ -61,5 +63,7 @@
     <script src="{{ 'pet-theme.js' | asset_url }}" defer></script>
 
     {% render 'cookie-banner' %}
+    {% section 'whatsapp-button' %}
+    {% render 'floating-ui' %}
   </body>
 </html>

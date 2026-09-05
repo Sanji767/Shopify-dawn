@@ -1,0 +1,342 @@
+{%- comment -%}
+  Paw & Home — Trust / Guarantee Banner Section
+  Horizontal strip with 4 trust signals, placed above the footer across all pages.
+{%- endcomment -%}
+
+{%- assign bg_color = section.settings.background_color | default: 'var(--pet-cream, #FBF8F3)' -%}
+{%- assign border_color = section.settings.border_color | default: 'var(--pet-border, #E5E1DB)' -%}
+{%- assign text_color = section.settings.text_color | default: 'var(--pet-navy, #1A2B4A)' -%}
+
+{%- assign item_1_icon = section.settings.item_1_icon | default: '🚚' -%}
+{%- assign item_1_text = section.settings.item_1_text | default: 'Envío en 3-6 días laborables' -%}
+{%- assign item_1_link = section.settings.item_1_link -%}
+
+{%- assign item_2_icon = section.settings.item_2_icon | default: '↩️' -%}
+{%- assign item_2_text = section.settings.item_2_text | default: '14 días de devolución' -%}
+{%- assign item_2_link = section.settings.item_2_link -%}
+
+{%- assign item_3_icon = section.settings.item_3_icon | default: '🔒' -%}
+{%- assign item_3_text = section.settings.item_3_text | default: 'Pago 100% seguro' -%}
+{%- assign item_3_link = section.settings.item_3_link -%}
+
+{%- assign item_4_icon = section.settings.item_4_icon | default: '💬' -%}
+{%- assign item_4_text = section.settings.item_4_text | default: 'Atención personalizada' -%}
+{%- assign item_4_link = section.settings.item_4_link -%}
+
+<section
+  class="pet-trust-banner"
+  id="pet-trust-banner-{{ section.id }}"
+  style="background-color: {{ bg_color }}; border-top-color: {{ border_color }};"
+  aria-label="Garantías de compra y confianza Paw & Home"
+>
+  <div class="pet-trust-banner__container">
+    {%- if item_1_text != blank -%}
+      {%- if item_1_link != blank -%}
+        <a href="{{ item_1_link }}" class="pet-trust-banner__item pet-trust-banner__item--link">
+      {%- else -%}
+        <div class="pet-trust-banner__item">
+      {%- endif -%}
+          {%- if item_1_icon != blank -%}
+            <span class="pet-trust-banner__icon" aria-hidden="true">{{ item_1_icon }}</span>
+          {%- endif -%}
+          <span class="pet-trust-banner__text">{{ item_1_text }}</span>
+      {%- if item_1_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if item_2_text != blank -%}
+      {%- if item_2_link != blank -%}
+        <a href="{{ item_2_link }}" class="pet-trust-banner__item pet-trust-banner__item--link">
+      {%- else -%}
+        <div class="pet-trust-banner__item">
+      {%- endif -%}
+          {%- if item_2_icon != blank -%}
+            <span class="pet-trust-banner__icon" aria-hidden="true">{{ item_2_icon }}</span>
+          {%- endif -%}
+          <span class="pet-trust-banner__text">{{ item_2_text }}</span>
+      {%- if item_2_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if item_3_text != blank -%}
+      {%- if item_3_link != blank -%}
+        <a href="{{ item_3_link }}" class="pet-trust-banner__item pet-trust-banner__item--link">
+      {%- else -%}
+        <div class="pet-trust-banner__item">
+      {%- endif -%}
+          {%- if item_3_icon != blank -%}
+            <span class="pet-trust-banner__icon" aria-hidden="true">{{ item_3_icon }}</span>
+          {%- endif -%}
+          <span class="pet-trust-banner__text">{{ item_3_text }}</span>
+      {%- if item_3_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if item_4_text != blank -%}
+      {%- if item_4_link != blank -%}
+        <a href="{{ item_4_link }}" class="pet-trust-banner__item pet-trust-banner__item--link">
+      {%- else -%}
+        <div class="pet-trust-banner__item">
+      {%- endif -%}
+          {%- if item_4_icon != blank -%}
+            <span class="pet-trust-banner__icon" aria-hidden="true">{{ item_4_icon }}</span>
+          {%- endif -%}
+          <span class="pet-trust-banner__text">{{ item_4_text }}</span>
+      {%- if item_4_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  #pet-trust-banner-{{ section.id }} {
+    width: 100%;
+    background-color: {{ bg_color }};
+    border-top: 1px solid {{ border_color }};
+    padding: 18px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    max-width: var(--container-max, 1280px);
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: {{ text_color }};
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  #pet-trust-banner-{{ section.id }} a.pet-trust-banner__item:hover {
+    color: var(--pet-coral, #E8734A);
+    transform: translateY(-1px);
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__item:hover .pet-trust-banner__icon {
+    transform: scale(1.15);
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__icon svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  #pet-trust-banner-{{ section.id }} .pet-trust-banner__text {
+    display: inline-block;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 991px) {
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__container {
+      gap: 24px;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__item {
+      font-size: 0.82rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #pet-trust-banner-{{ section.id }} {
+      padding: 16px 0;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      justify-items: center;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__item {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      font-size: 0.8rem;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    #pet-trust-banner-{{ section.id }} {
+      padding: 14px 0;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__container {
+      gap: 12px 8px;
+      padding: 0 10px;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__item {
+      font-size: 0.75rem;
+      gap: 5px;
+    }
+
+    #pet-trust-banner-{{ section.id }} .pet-trust-banner__icon {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Barra de confianza",
+  "tag": "section",
+  "class": "pet-trust-banner-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FBF8F3"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Color del borde superior",
+      "default": "#E5E1DB"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#1A2B4A"
+    },
+    {
+      "type": "header",
+      "content": "Elemento 1"
+    },
+    {
+      "type": "text",
+      "id": "item_1_icon",
+      "label": "Icono o Emoji 1",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "item_1_text",
+      "label": "Texto 1",
+      "default": "Envío en 3-6 días laborables"
+    },
+    {
+      "type": "url",
+      "id": "item_1_link",
+      "label": "Enlace 1 (opcional)"
+    },
+    {
+      "type": "header",
+      "content": "Elemento 2"
+    },
+    {
+      "type": "text",
+      "id": "item_2_icon",
+      "label": "Icono o Emoji 2",
+      "default": "↩️"
+    },
+    {
+      "type": "text",
+      "id": "item_2_text",
+      "label": "Texto 2",
+      "default": "14 días de devolución"
+    },
+    {
+      "type": "url",
+      "id": "item_2_link",
+      "label": "Enlace 2 (opcional)"
+    },
+    {
+      "type": "header",
+      "content": "Elemento 3"
+    },
+    {
+      "type": "text",
+      "id": "item_3_icon",
+      "label": "Icono o Emoji 3",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "item_3_text",
+      "label": "Texto 3",
+      "default": "Pago 100% seguro"
+    },
+    {
+      "type": "url",
+      "id": "item_3_link",
+      "label": "Enlace 3 (opcional)"
+    },
+    {
+      "type": "header",
+      "content": "Elemento 4"
+    },
+    {
+      "type": "text",
+      "id": "item_4_icon",
+      "label": "Icono o Emoji 4",
+      "default": "💬"
+    },
+    {
+      "type": "text",
+      "id": "item_4_text",
+      "label": "Texto 4",
+      "default": "Atención personalizada"
+    },
+    {
+      "type": "url",
+      "id": "item_4_link",
+      "label": "Enlace 4 (opcional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de confianza"
+    }
+  ]
+}
+{% endschema %}

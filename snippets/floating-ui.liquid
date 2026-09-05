@@ -1,0 +1,507 @@
+<!-- ============================================================
+     PAW & HOME — Floating UI Elements
+     - Back to Top Button
+     - Cart Toast Notification
+     - Recently Viewed Products Tracking
+     ============================================================ -->
+
+<div class="pet-floating-ui" aria-hidden="false">
+  <!-- 1. Back to Top Button -->
+  <button
+    type="button"
+    id="pet-back-to-top"
+    class="pet-back-to-top"
+    aria-label="Volver arriba"
+    title="Volver arriba"
+  >
+    <svg
+      class="pet-back-to-top-icon"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- 2. Cart Added Toast Notification -->
+  <div
+    id="pet-cart-toast"
+    class="pet-cart-toast"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <div class="pet-cart-toast-inner">
+      <div class="pet-cart-toast-content">
+        <div class="pet-cart-toast-text">
+          <p class="pet-cart-toast-message">🐾 ¡Añadido al carrito!</p>
+          <span id="pet-cart-toast-product" class="pet-cart-toast-product"></span>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="pet-cart-toast-close"
+        class="pet-cart-toast-close"
+        aria-label="Cerrar notificación"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============================================================
+     PAW & HOME — Floating UI Styles
+     ============================================================ */
+  :root {
+    --pet-navy: #1A2B4A;
+    --pet-cream: #FBF8F3;
+    --pet-warm: #F5EDE3;
+    --pet-sage: #8FA885;
+    --pet-coral: #E8734A;
+    --pet-white: #FFFFFF;
+    --pet-muted: #8A8580;
+    --pet-border: #E5E1DB;
+  }
+
+  .pet-floating-ui {
+    position: relative;
+  }
+
+  /* ------------------------------------------------------------
+     1. Back to Top Button
+     ------------------------------------------------------------ */
+  .pet-back-to-top {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--pet-navy, #1A2B4A);
+    color: var(--pet-white, #FFFFFF);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(26, 43, 74, 0.22);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px) scale(0.92);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .pet-back-to-top.pet-is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .pet-back-to-top:hover {
+    background-color: var(--pet-coral, #E8734A);
+    box-shadow: 0 6px 20px rgba(232, 115, 74, 0.38);
+    transform: translateY(-2px) scale(1.06);
+  }
+
+  .pet-back-to-top:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+  .pet-back-to-top:focus-visible {
+    outline: 2px solid var(--pet-coral, #E8734A);
+    outline-offset: 3px;
+  }
+
+  .pet-back-to-top-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--pet-white, #FFFFFF);
+    transition: transform 0.2s ease;
+  }
+
+  .pet-back-to-top:hover .pet-back-to-top-icon {
+    transform: translateY(-2px);
+  }
+
+  /* ------------------------------------------------------------
+     2. Cart Toast Notification
+     ------------------------------------------------------------ */
+  .pet-cart-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1001;
+    max-width: 380px;
+    width: auto;
+    background-color: var(--pet-sage, #8FA885);
+    color: var(--pet-white, #FFFFFF);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(26, 43, 74, 0.18), 0 3px 8px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.35s ease;
+    pointer-events: none;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+
+  .pet-cart-toast.pet-toast-show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .pet-cart-toast.pet-toast-hiding {
+    opacity: 0;
+    visibility: visible;
+    transform: translateX(120%);
+    transition: transform 0.32s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.32s ease;
+  }
+
+  .pet-cart-toast-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 18px;
+  }
+
+  .pet-cart-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pet-cart-toast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .pet-cart-toast-message {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--pet-white, #FFFFFF);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .pet-cart-toast-product {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0;
+    display: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+  }
+
+  .pet-cart-toast-product.has-product {
+    display: block;
+  }
+
+  .pet-cart-toast-close {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    margin: -6px -6px -6px 4px;
+    color: var(--pet-white, #FFFFFF);
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.82;
+    transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .pet-cart-toast-close:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+  }
+
+  .pet-cart-toast-close:focus-visible {
+    outline: 2px solid var(--pet-white, #FFFFFF);
+    outline-offset: 1px;
+  }
+
+  /* ------------------------------------------------------------
+     Mobile-friendly adjustments & Safe Area support
+     ------------------------------------------------------------ */
+  @media (max-width: 767px) {
+    .pet-back-to-top {
+      bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+      right: calc(16px + env(safe-area-inset-right, 0px));
+      width: 44px;
+      height: 44px;
+    }
+
+    .pet-cart-toast {
+      top: calc(14px + env(safe-area-inset-top, 0px));
+      right: calc(14px + env(safe-area-inset-right, 0px));
+      left: calc(14px + env(safe-area-inset-left, 0px));
+      max-width: calc(100% - 28px);
+      box-sizing: border-box;
+    }
+
+    .pet-cart-toast-inner {
+      padding: 12px 16px;
+    }
+
+    .pet-cart-toast-message {
+      font-size: 0.9rem;
+    }
+
+    .pet-cart-toast-product {
+      max-width: 200px;
+      font-size: 0.78rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // ============================================================
+    // 1. Back to Top Button
+    // ============================================================
+    var backToTopBtn = document.getElementById('pet-back-to-top');
+
+    if (backToTopBtn) {
+      var isScrollTicking = false;
+
+      function updateBackToTopVisibility() {
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (scrollY > 400) {
+          backToTopBtn.classList.add('pet-is-visible');
+        } else {
+          backToTopBtn.classList.remove('pet-is-visible');
+        }
+        isScrollTicking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!isScrollTicking) {
+          window.requestAnimationFrame(updateBackToTopVisibility);
+          isScrollTicking = true;
+        }
+      }, { passive: true });
+
+      // Initial check on load
+      updateBackToTopVisibility();
+
+      backToTopBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // ============================================================
+    // 2. Toast Notification for Cart
+    // ============================================================
+    var toast = document.getElementById('pet-cart-toast');
+    var toastProduct = document.getElementById('pet-cart-toast-product');
+    var toastCloseBtn = document.getElementById('pet-cart-toast-close');
+    var toastTimer = null;
+    var TOAST_DURATION = 3000; // 3 seconds auto-dismiss
+
+    function hideToast() {
+      if (!toast) return;
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+      toast.classList.remove('pet-toast-show');
+      toast.classList.add('pet-toast-hiding');
+      setTimeout(function () {
+        toast.classList.remove('pet-toast-hiding');
+      }, 350);
+    }
+
+    function showToast(detail) {
+      if (!toast) return;
+
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+
+      // Display optional product title if provided
+      if (toastProduct) {
+        var productTitle = '';
+        if (typeof detail === 'string') {
+          productTitle = detail;
+        } else if (detail && typeof detail === 'object') {
+          productTitle = detail.title || detail.productTitle || (detail.item && detail.item.title) || '';
+        }
+
+        if (productTitle && productTitle !== '🐾 ¡Añadido al carrito!') {
+          toastProduct.textContent = productTitle;
+          toastProduct.classList.add('has-product');
+        } else {
+          toastProduct.textContent = '';
+          toastProduct.classList.remove('has-product');
+        }
+      }
+
+      toast.classList.remove('pet-toast-hiding');
+      toast.classList.add('pet-toast-show');
+
+      // Auto-dismiss after 3 seconds
+      toastTimer = setTimeout(function () {
+        hideToast();
+      }, TOAST_DURATION);
+    }
+
+    if (toastCloseBtn) {
+      toastCloseBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        hideToast();
+      });
+    }
+
+    // Trigger A: Custom Event 'cart:item-added' on window or document
+    function handleCartItemAdded(event) {
+      var detail = event && event.detail ? event.detail : null;
+      showToast(detail);
+    }
+    window.addEventListener('cart:item-added', handleCartItemAdded);
+    document.addEventListener('cart:item-added', handleCartItemAdded);
+
+    // Update cart counter helper
+    function refreshHeaderCartCount() {
+      fetch('/cart.js')
+        .then(function (res) {
+          if (!res.ok) throw new Error('Cart count error');
+          return res.json();
+        })
+        .then(function (cart) {
+          var counters = document.querySelectorAll('.pet-header-cart-bubble, .cartCount, .mini-cart-count');
+          counters.forEach(function (counter) {
+            counter.textContent = cart.item_count;
+          });
+        })
+        .catch(function () {
+          // Fail silently
+        });
+    }
+
+    // Trigger B: Intercept AddToCartForm submit
+    document.addEventListener('submit', function (e) {
+      var form = e.target;
+      if (!form || !form.tagName || form.tagName.toLowerCase() !== 'form') return;
+
+      var isCartForm = form.id === 'AddToCartForm' ||
+                       form.classList.contains('pet-product-form') ||
+                       (form.action && form.action.indexOf('/cart/add') !== -1);
+
+      if (isCartForm) {
+        e.preventDefault();
+
+        var submitBtn = form.querySelector('[type="submit"]') || form.querySelector('button[name="add"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
+
+        var formData = new FormData(form);
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+          }
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Error al añadir al carrito');
+            return res.json();
+          })
+          .then(function (item) {
+            var event = new CustomEvent('cart:item-added', {
+              bubbles: true,
+              detail: { item: item, title: item.title || item.product_title }
+            });
+            document.dispatchEvent(event);
+            refreshHeaderCartCount();
+          })
+          .catch(function () {
+            // Fallback: Show toast
+            showToast('🐾 ¡Añadido al carrito!');
+          })
+          .finally(function () {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+            }
+          });
+      }
+    });
+
+    // ============================================================
+    // 3. Recently Viewed Products Tracker (localStorage)
+    // ============================================================
+    {% if template contains 'product' and product %}
+      try {
+        var currentProductData = {
+          id: {{ product.id | json }},
+          title: {{ product.title | json }},
+          url: {{ product.url | json }},
+          image: {{ product.featured_image | image_url: width: 300 | json }},
+          price: {{ product.price | money | json }}
+        };
+        var rvList = JSON.parse(localStorage.getItem('pet_recently_viewed') || '[]');
+        rvList = rvList.filter(function (item) {
+          return item && item.id !== currentProductData.id;
+        });
+        rvList.unshift(currentProductData);
+        if (rvList.length > 8) rvList = rvList.slice(0, 8);
+        localStorage.setItem('pet_recently_viewed', JSON.stringify(rvList));
+        window.petRecentlyViewed = rvList;
+        document.dispatchEvent(new CustomEvent('pet:recently-viewed-updated', { detail: { items: rvList } }));
+      } catch (err) {
+        // Storage restricted / private mode
+      }
+    {% endif %}
+
+    // Expose global helper
+    window.petShowCartToast = showToast;
+  });
+</script>

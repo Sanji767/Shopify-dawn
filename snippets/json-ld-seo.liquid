@@ -1,0 +1,152 @@
+{%- comment -%}
+  JSON-LD Structured Data for Paw & Home (SEO)
+  Schemas included:
+  1. Organization (All pages)
+  2. WebSite with SearchAction (Homepage only)
+  3. BreadcrumbList (Collection & Product pages: Home > Collection Title > Product Title)
+  4. Product with Offers (Product pages only)
+{%- endcomment -%}
+
+{%- liquid
+  assign logo_url = 'paw-and-home-logo.svg' | asset_url
+  unless logo_url contains '://'
+    if logo_url contains '//'
+      assign logo_url = logo_url | prepend: 'https:'
+    else
+      assign logo_url = shop.url | append: logo_url
+    endif
+  endunless
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "logo": {{ logo_url | json }},
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": {{ shop.email | json }},
+    "contactType": "customer service"
+  },
+  "sameAs": []
+}
+</script>
+
+{%- if request.page_type == 'index' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {{ shop.url | append: '/search?q={search_term_string}' | json }},
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'collection' or request.page_type == 'product' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ 'Inicio' | json }},
+        "item": {{ shop.url | json }}
+      }
+      {%- if request.page_type == 'collection' -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ collection.title | json }},
+          "item": {{ shop.url | append: collection.url | json }}
+        }
+      {%- elsif request.page_type == 'product' -%}
+        {%- if product.collections.size > 0 -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ product.collections.first.title | json }},
+            "item": {{ shop.url | append: product.collections.first.url | json }}
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ product.title | json }},
+            "item": {{ shop.url | append: product.url | json }}
+          }
+        {%- else -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ product.title | json }},
+            "item": {{ shop.url | append: product.url | json }}
+          }
+        {%- endif -%}
+      {%- endif -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'product' -%}
+  {%- liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign product_description = product.description | strip_html | strip_newlines | default: product.title
+
+    if product.featured_image
+      assign product_image_url = product.featured_image | image_url: width: 1024
+    elsif product.images.first
+      assign product_image_url = product.images.first | image_url: width: 1024
+    else
+      assign product_image_url = 'paw-and-home-logo.svg' | asset_url
+    endif
+
+    unless product_image_url contains '://'
+      if product_image_url contains '//'
+        assign product_image_url = product_image_url | prepend: 'https:'
+      else
+        assign product_image_url = shop.url | append: product_image_url
+      endif
+    endunless
+
+    if current_variant.available
+      assign product_availability = 'https://schema.org/InStock'
+    elsif product.available
+      assign product_availability = 'https://schema.org/InStock'
+    else
+      assign product_availability = 'https://schema.org/OutOfStock'
+    endif
+
+    assign product_sku = current_variant.sku | default: product.id
+  -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product_description | json }},
+    "image": {{ product_image_url | json }},
+    "sku": {{ product_sku | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": {{ shop.name | json }}
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": {{ product.price | divided_by: 100.0 | json }},
+      "priceCurrency": {{ shop.currency | json }},
+      "availability": {{ product_availability | json }},
+      "url": {{ shop.url | append: product.url | json }}
+    }
+  }
+  </script>
+{%- endif -%}
