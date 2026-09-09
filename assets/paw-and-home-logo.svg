@@ -31,7 +31,7 @@
 
   <!-- Typography -->
   <!-- Main Brand Name -->
-  <text x="70" y="36" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="28" font-weight="700" fill="#1A2B4A" letter-spacing="-0.5">
+  <text x="70" y="36" font-family="'Fraunces', Georgia, serif" font-size="28" font-weight="700" fill="#1A2B4A" letter-spacing="-0.5">
     Paw <tspan fill="#E8734A">&amp;</tspan> Home
   </text>
 

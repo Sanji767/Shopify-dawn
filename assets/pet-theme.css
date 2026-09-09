@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
 /* ============================================================
    PET LIFESTYLE THEME — Custom Styles
    ============================================================
@@ -18,8 +20,8 @@
   --pet-success: #22C55E;
   --pet-error: #EF4444;
 
-  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -67,9 +69,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading) !important;
   color: var(--pet-navy) !important;
-  font-weight: 700 !important;
+  font-weight: 650 !important;
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
+  font-feature-settings: "opsz" 36;
 }
 
 p {
@@ -116,12 +119,13 @@ img {
 }
 .pet-section-title h2 {
   font-family: var(--font-heading) !important;
-  font-size: clamp(1.75rem, 3.5vw, 2.25rem) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.025em !important;
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
   line-height: 1.25 !important;
   color: var(--pet-navy) !important;
   margin-bottom: var(--spacing-sm);
+  font-feature-settings: "opsz" 36;
 }
 .pet-section-title p,
 .pet-section-subtitle {
