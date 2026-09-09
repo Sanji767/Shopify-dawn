@@ -1,5 +1,24 @@
 {{ 'pet-theme.css' | asset_url | stylesheet_tag }}
 
+<style>
+  .pet-cart-recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 768px) {
+    .pet-cart-recommendations-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+  @media (max-width: 420px) {
+    .pet-cart-recommendations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <section class="pet-section pet-cart-page" style="padding: 60px 0; background-color: var(--pet-cream, #FBF8F3); min-height: 80vh;">
   <div class="pet-container container" style="max-width: 1080px;">
     
@@ -156,7 +175,7 @@
           <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin-bottom: 20px; text-align: center;">
             Los favoritos más mimados este mes
           </h3>
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+          <div class="pet-cart-recommendations-grid">
             {% assign sample_titles = "Cama Ortopédica,Manta Coche,Rodillo Pelos,Botella Paseo" | split: "," %}
             {% assign sample_prices = "34,99 €,29,99 €,19,99 €,14,99 €" | split: "," %}
             {% for i in (0..3) %}

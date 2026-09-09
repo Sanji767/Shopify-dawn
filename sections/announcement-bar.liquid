@@ -1,24 +1,32 @@
-<div class="pet-announcement-bar">
+<div class="pet-announcement-bar" style="background: {{ section.settings.background_color | default: '#1A2B4A' }}; color: {{ section.settings.text_color | default: '#FFFFFF' }};">
   <div class="pet-container">
-    <div class="pet-announcement-items">
-      <span class="pet-announcement-item pet-announcement-item--main">
-        🐾 <strong>Paw & Home:</strong> Hecho con amor para ti y para ellos
-      </span>
-      <span class="pet-announcement-sep">·</span>
-      <span class="pet-announcement-item">
-        🚚 <strong>Envío Gratis</strong> desde 50 €
-      </span>
-      <span class="pet-announcement-sep">·</span>
-      <span class="pet-announcement-item">
-        💚 <strong>14 días</strong> de prueba sin compromiso
-      </span>
-    </div>
+    {% if section.settings.announcement_text != blank and section.settings.announcement_text != "Envío gratis en pedidos superiores a 50 € · Envíos 3-6 días laborables 🐾" %}
+      <div class="pet-announcement-items">
+        <span class="pet-announcement-item pet-announcement-item--main">
+          {{ section.settings.announcement_text }}
+        </span>
+      </div>
+    {% else %}
+      <div class="pet-announcement-items">
+        <span class="pet-announcement-item pet-announcement-item--main">
+          🐾 <strong>Paw &amp; Home:</strong> Hecho con amor para ti y para ellos
+        </span>
+        <span class="pet-announcement-sep">·</span>
+        <span class="pet-announcement-item">
+          🚚 <strong>Envío Gratis</strong> desde 50 €
+        </span>
+        <span class="pet-announcement-sep">·</span>
+        <span class="pet-announcement-item">
+          💚 <strong>14 días</strong> de prueba sin compromiso
+        </span>
+      </div>
+    {% endif %}
   </div>
 </div>
 
 <style>
   .pet-announcement-bar {
-    background: linear-gradient(90deg, #1A2B4A 0%, #22375C 50%, #1A2B4A 100%);
+    background: {{ section.settings.background_color | default: 'linear-gradient(90deg, #1A2B4A 0%, #22375C 50%, #1A2B4A 100%)' }};
     color: {{ section.settings.text_color | default: '#FFFFFF' }};
     text-align: center;
     padding: 7px 12px;

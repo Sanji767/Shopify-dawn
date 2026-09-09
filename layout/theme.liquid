@@ -35,7 +35,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-    {% comment %} {% render 'json-ld-seo' %} {% endcomment %}
+    {% render 'json-ld-seo' %}
 
     <link href="{{ 'bootstrap.min.css' | asset_url }}" rel="stylesheet">
     <link href="{{ 'themify-icons.css' | asset_url }}" rel="stylesheet">
@@ -64,6 +64,6 @@
 
     {% render 'cookie-banner' %}
     {% section 'whatsapp-button' %}
-    {% comment %} {% render 'floating-ui' %} {% endcomment %}
+    {% render 'floating-ui' %}
   </body>
 </html>

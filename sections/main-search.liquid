@@ -34,7 +34,7 @@
           Hemos encontrado <strong>{{ search.results_count }}</strong> resultado(s) para tu búsqueda.
         </p>
 
-        <div class="pet-products-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+        <div class="pet-products-grid">
           {% for item in search.results %}
             <article class="pet-product-card">
               <a href="{{ item.url }}" class="pet-product-card-img-wrap">
