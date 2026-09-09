@@ -83,15 +83,40 @@
     var acceptBtn = document.getElementById('pet-cookie-accept');
     var rejectBtn = document.getElementById('pet-cookie-reject');
 
-    if (!localStorage.getItem('pet_cookie_consent')) {
+    function updateShopifyConsent(hasConsent) {
+      function applyConsent() {
+        if (window.Shopify && window.Shopify.customerPrivacy && typeof window.Shopify.customerPrivacy.setTrackingConsent === 'function') {
+          window.Shopify.customerPrivacy.setTrackingConsent(hasConsent, function() {});
+        }
+      }
+
+      if (window.Shopify && window.Shopify.loadFeatures) {
+        window.Shopify.loadFeatures(
+          [{ name: 'consent-tracking-api', version: '0.1' }],
+          function(error) {
+            if (!error) {
+              applyConsent();
+            }
+          }
+        );
+      } else {
+        applyConsent();
+      }
+    }
+
+    var storedConsent = localStorage.getItem('pet_cookie_consent');
+    if (!storedConsent) {
       setTimeout(function() {
         if (banner) banner.classList.add('show');
       }, 800);
+    } else {
+      updateShopifyConsent(storedConsent === 'accepted');
     }
 
     if (acceptBtn) {
       acceptBtn.addEventListener('click', function() {
         localStorage.setItem('pet_cookie_consent', 'accepted');
+        updateShopifyConsent(true);
         if (banner) banner.classList.remove('show');
       });
     }
@@ -99,6 +124,7 @@
     if (rejectBtn) {
       rejectBtn.addEventListener('click', function() {
         localStorage.setItem('pet_cookie_consent', 'necessary_only');
+        updateShopifyConsent(false);
         if (banner) banner.classList.remove('show');
       });
     }

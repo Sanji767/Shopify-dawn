@@ -429,26 +429,6 @@
       // Foreign visitor detected! Default to English
       window.switchStoreLanguage('en', false);
     }
-
-    // 4. Background IP Country verification (non-blocking, fallback)
-    try {
-      if (!sessionStorage.getItem('paw_ip_checked')) {
-        sessionStorage.setItem('paw_ip_checked', '1');
-        fetch('https://get.geojs.io/v1/ip/country.json')
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            if (data && data.country) {
-              var country = data.country.toUpperCase();
-              var newLang = (country === 'ES') ? 'es' : 'en';
-              // Only override if user hasn't made an explicit choice
-              if (!localStorage.getItem('paw_user_lang')) {
-                window.switchStoreLanguage(newLang, false);
-              }
-            }
-          })
-          .catch(function() {});
-      }
-    } catch(e) {}
   }
 
   // Run on DOMContentLoaded or immediately if already loaded

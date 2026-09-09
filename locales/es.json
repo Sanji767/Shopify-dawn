@@ -896,7 +896,8 @@
       "email_placeholder": "Email",
       "message_placeholder": "Mensaje",
       "send_message": "Enviar mensaje",
-      "thank_you": "¡Gracias por contactarnos! Te responderemos lo antes posible. 🐾"
+      "thank_you": "¡Gracias por contactarnos! Te responderemos lo antes posible. 🐾",
+      "privacy_consent": "He leído y acepto la"
     },
     "page": {
       "title_fallback": "Información de Paw & Home",
@@ -915,7 +916,7 @@
       "returns_contact": "Para iniciar una devolución, escríbenos a nuestro servicio de atención al cliente en <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contacto</a> y te guiaremos paso a paso.",
       "privacy_title": "Política de Privacidad (RGPD) 🔒",
       "privacy_text": "En Paw & Home respetamos tu privacidad. Los datos personales facilitados durante la compra o suscripción serán tratados exclusivamente para la gestión de tus pedidos, envíos y comunicaciones consentidas.",
-      "privacy_contact": "Si tienes alguna pregunta sobre nuestras prácticas de privacidad o esta Política de Privacidad, o si deseas ejercer cualquiera de los derechos que te asisten, por favor ponte en contacto con nosotros por correo electrónico en <strong>mohamedelabyad56@gmail.com</strong> o por correo postal en <strong>Ronda del Guinardó, 08025, Barcelona, España</strong>.",
+      "privacy_contact": "Si tienes alguna pregunta sobre nuestras prácticas de privacidad o esta Política de Privacidad, o si deseas ejercer cualquiera de los derechos que te asisten, por favor ponte en contacto con nosotros por correo electrónico en <strong>hola@pawandhome.com</strong> o por correo postal en <strong>Ronda del Guinardó, 08025, Barcelona, España</strong>.",
       "privacy_controller": "A efectos de las leyes de protección de datos aplicables (RGPD / LOPDGDD), somos los responsables del tratamiento (data controller) de tu información personal.",
       "terms_title": "Términos y Condiciones de Uso",
       "terms_text": "Al acceder y realizar compras en Paw & Home aceptas las presentes condiciones generales de venta. Todos los precios se muestran en euros (€) e incluyen los impuestos aplicables (IVA).",

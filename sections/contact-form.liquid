@@ -26,6 +26,17 @@
               <textarea name="contact[message]" placeholder="{{ 'paw.contact.message_placeholder' | t }}" rows="5" required
                 style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem; resize: vertical;"></textarea>
             </div>
+            <div class="col-12 mb-3">
+              <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--pet-muted); cursor: pointer; text-align: left;">
+                <input type="checkbox" required name="contact[privacy_consent]" style="margin-top: 3px; accent-color: var(--pet-sage); cursor: pointer;">
+                <span>
+                  {{ 'paw.contact.privacy_consent' | t }}
+                  <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); text-decoration: underline;">
+                    {{ 'paw.footer.privacy_policy' | t }}
+                  </a>.
+                </span>
+              </label>
+            </div>
             <div class="col-12">
               <button type="submit" class="pet-btn pet-btn-primary" style="width: 100%;">{{ 'paw.contact.send_message' | t }}</button>
             </div>
@@ -80,7 +91,7 @@
       "type": "text",
       "id": "address",
       "label": "Dirección & Email",
-      "default": "Ronda del Guinardó, 08025, Barcelona, España · mohamedelabyad56@gmail.com"
+      "default": "Ronda del Guinardó, 08025, Barcelona, España · hola@pawandhome.com"
     }
   ],
   "presets": [

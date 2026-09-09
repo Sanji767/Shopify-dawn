@@ -33,12 +33,12 @@
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           {% if linklists[section.settings.footer_menu_1].links.size == 0 %}
-            <li><a href="/collections/perros">{{ 'paw.footer.dogs' | t }}</a></li>
-            <li><a href="/collections/gatos">{{ 'paw.footer.cats' | t }}</a></li>
-            <li><a href="/collections/casa">{{ 'paw.footer.for_home' | t }}</a></li>
-            <li><a href="/collections/viajar">{{ 'paw.footer.for_travel' | t }}</a></li>
-            <li><a href="/collections/pasear">{{ 'paw.footer.for_walks' | t }}</a></li>
-            <li><a href="/collections/ofertas">{{ 'paw.footer.special_deals' | t }}</a></li>
+            <li><a href="{{ collections['perros'].url | default: '/collections/perros' }}">{{ 'paw.footer.dogs' | t }}</a></li>
+            <li><a href="{{ collections['gatos'].url | default: '/collections/gatos' }}">{{ 'paw.footer.cats' | t }}</a></li>
+            <li><a href="{{ collections['casa'].url | default: '/collections/casa' }}">{{ 'paw.footer.for_home' | t }}</a></li>
+            <li><a href="{{ collections['viajar'].url | default: '/collections/viajar' }}">{{ 'paw.footer.for_travel' | t }}</a></li>
+            <li><a href="{{ collections['pasear'].url | default: '/collections/pasear' }}">{{ 'paw.footer.for_walks' | t }}</a></li>
+            <li><a href="{{ collections['ofertas'].url | default: '/collections/ofertas' }}">{{ 'paw.footer.special_deals' | t }}</a></li>
           {% endif %}
         </ul>
       </div>
@@ -53,14 +53,14 @@
           {% if linklists[section.settings.footer_menu_2].links.size == 0 %}
             <li><a href="{{ pages['about-us'].url | default: '/pages/about-us' }}">{{ 'paw.footer.about_us' | t }}</a></li>
             <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}">{{ 'paw.footer.contact_help' | t }}</a></li>
-            <li><a href="/pages/faq">{{ 'paw.footer.faq' | t | default: 'Preguntas Frecuentes' }}</a></li>
-            <li><a href="/pages/rastrear-pedido">{{ 'paw.footer.track_order' | t | default: 'Rastrear Pedido' }}</a></li>
+            <li><a href="{{ pages['faq'].url | default: '/pages/faq' }}">{{ 'paw.footer.faq' | t | default: 'Preguntas Frecuentes' }}</a></li>
+            <li><a href="{{ pages['rastrear-pedido'].url | default: '/pages/rastrear-pedido' }}">{{ 'paw.footer.track_order' | t | default: 'Rastrear Pedido' }}</a></li>
             <li><a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{{ 'paw.footer.shipping_info' | t }}</a></li>
             <li><a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{{ 'paw.footer.returns_info' | t }}</a></li>
             <li><a href="{{ shop.legal_notice.url | default: '/policies/legal-notice' }}">{{ 'paw.footer.legal_notice' | t }}</a></li>
             <li><a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">{{ 'paw.footer.privacy_policy' | t }}</a></li>
             <li><a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}">{{ 'paw.footer.terms_conditions' | t }}</a></li>
-            <li><a href="{{ shop.cookie_policy.url | default: '/policies/cookie-policy' }}">{{ 'paw.footer.cookie_policy' | t }}</a></li>
+            <li><a href="{{ shop.cookie_policy.url | default: pages['politica-de-cookies'].url | default: shop.privacy_policy.url | default: '/policies/privacy-policy' }}">{{ 'paw.footer.cookie_policy' | t }}</a></li>
           {% endif %}
         </ul>
       </div>

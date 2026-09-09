@@ -49,9 +49,9 @@
 
           <p class="paw-popup-legal">
             {% if request.locale.iso_code == 'en' %}
-              🔒 No spam. Unsubscribe anytime with 1 click.
+              🔒 No spam. Unsubscribe anytime with 1 click. By subscribing you agree to our <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Privacy Policy</a>.
             {% else %}
-              🔒 Sin spam. Puedes cancelar tu suscripción con 1 clic.
+              🔒 Sin spam. Puedes cancelar tu suscripción con 1 clic. Al suscribirte aceptas nuestra <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Política de Privacidad</a>.
             {% endif %}
           </p>
 

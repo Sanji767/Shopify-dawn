@@ -178,6 +178,11 @@
     pointer-events: auto;
   }
 
+  .pet-cart-toast.pet-toast-error {
+    background-color: var(--pet-coral, #E8734A);
+    box-shadow: 0 10px 28px rgba(232, 115, 74, 0.28), 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
   .pet-cart-toast.pet-toast-hiding {
     opacity: 0;
     visibility: visible;
@@ -358,7 +363,7 @@
       }, 350);
     }
 
-    function showToast(detail) {
+    function showToast(detail, isError) {
       if (!toast) return;
 
       if (toastTimer) {
@@ -366,31 +371,48 @@
         toastTimer = null;
       }
 
-      // Display optional product title if provided
-      if (toastProduct) {
-        var productTitle = '';
-        if (typeof detail === 'string') {
-          productTitle = detail;
-        } else if (detail && typeof detail === 'object') {
-          productTitle = detail.title || detail.productTitle || (detail.item && detail.item.title) || '';
+      var msgElem = toast.querySelector('.pet-cart-toast-message');
+      if (isError) {
+        toast.classList.add('pet-toast-error');
+        if (msgElem) {
+          msgElem.textContent = (typeof detail === 'string' && detail) ? detail : '{{ _error_adding }}';
         }
-
-        if (productTitle && productTitle !== '{{ _added_to_cart }}') {
-          toastProduct.textContent = productTitle;
-          toastProduct.classList.add('has-product');
-        } else {
+        if (toastProduct) {
           toastProduct.textContent = '';
           toastProduct.classList.remove('has-product');
+        }
+      } else {
+        toast.classList.remove('pet-toast-error');
+        if (msgElem) {
+          msgElem.textContent = '{{ _added_to_cart }}';
+        }
+        // Display optional product title if provided
+        if (toastProduct) {
+          var productTitle = '';
+          if (typeof detail === 'string') {
+            productTitle = detail;
+          } else if (detail && typeof detail === 'object') {
+            productTitle = detail.title || detail.productTitle || (detail.item && detail.item.title) || '';
+          }
+
+          if (productTitle && productTitle !== '{{ _added_to_cart }}' && productTitle !== '{{ _error_adding }}') {
+            toastProduct.textContent = productTitle;
+            toastProduct.classList.add('has-product');
+          } else {
+            toastProduct.textContent = '';
+            toastProduct.classList.remove('has-product');
+          }
         }
       }
 
       toast.classList.remove('pet-toast-hiding');
       toast.classList.add('pet-toast-show');
 
-      // Auto-dismiss after 3 seconds
+      // Auto-dismiss: 4s for errors, 3s for success
+      var duration = isError ? 4000 : TOAST_DURATION;
       toastTimer = setTimeout(function () {
         hideToast();
-      }, TOAST_DURATION);
+      }, duration);
     }
 
     if (toastCloseBtn) {
@@ -403,7 +425,7 @@
     // Trigger A: Custom Event 'cart:item-added' on window or document
     function handleCartItemAdded(event) {
       var detail = event && event.detail ? event.detail : null;
-      showToast(detail);
+      showToast(detail, false);
     }
     window.addEventListener('cart:item-added', handleCartItemAdded);
     document.addEventListener('cart:item-added', handleCartItemAdded);
@@ -454,7 +476,14 @@
           }
         })
           .then(function (res) {
-            if (!res.ok) throw new Error('{{ _error_adding }}');
+            if (!res.ok) {
+              return res.json().then(function (errData) {
+                var description = (errData && errData.description) || (errData && errData.message) || '{{ _error_adding }}';
+                throw new Error(description);
+              }).catch(function (e) {
+                throw new Error(e.message || '{{ _error_adding }}');
+              });
+            }
             return res.json();
           })
           .then(function (item) {
@@ -465,9 +494,9 @@
             document.dispatchEvent(event);
             refreshHeaderCartCount();
           })
-          .catch(function () {
-            // Fallback: Show toast
-            showToast('{{ _added_to_cart }}');
+          .catch(function (err) {
+            var errMsg = (err && err.message) ? err.message : '{{ _error_adding }}';
+            showToast(errMsg, true);
           })
           .finally(function () {
             if (submitBtn) {

@@ -1,5 +1,3 @@
-{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
-
 <style>
   .pet-cart-recommendations-grid {
     display: grid;
@@ -153,7 +151,7 @@
               {{ 'paw.cart.secure_payment' | t }}
             </div>
 
-            <a href="/collections/all" style="display: block; text-align: center; font-size: 0.85rem; color: var(--pet-navy); font-weight: 600; text-decoration: underline;">
+            <a href="{{ routes.all_products_collection_url }}" style="display: block; text-align: center; font-size: 0.85rem; color: var(--pet-navy); font-weight: 600; text-decoration: underline;">
               {{ 'paw.cart.continue_shopping' | t }}
             </a>
           </div>
@@ -167,7 +165,7 @@
         <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.cart.empty_title' | t }}</h2>
         <p style="color: var(--pet-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 32px;">{{ 'paw.cart.empty_text' | t }}</p>
         
-        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 1.05rem; display: inline-block;">
+        <a href="{{ routes.all_products_collection_url }}" class="pet-btn pet-btn-primary" style="padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 1.05rem; display: inline-block;">
           {{ 'paw.cart.empty_cta' | t }}
         </a>
 
@@ -186,7 +184,7 @@
                 </div>
                 <h4 style="font-size: 0.9rem; margin: 0 0 4px; color: var(--pet-navy);">{{ sample_titles[i] }}</h4>
                 <p style="font-weight: 700; color: var(--pet-coral); margin: 0 0 10px; font-size: 0.95rem;">{{ sample_prices[i] }}</p>
-                <a href="/collections/all" class="pet-btn pet-btn-secondary" style="padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; text-decoration: none; display: block; border: 1px solid var(--pet-navy); color: var(--pet-navy);">{{ 'paw.cart.view_with_love' | t }}</a>
+                <a href="{{ routes.all_products_collection_url }}" class="pet-btn pet-btn-secondary" style="padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; text-decoration: none; display: block; border: 1px solid var(--pet-navy); color: var(--pet-navy);">{{ 'paw.cart.view_with_love' | t }}</a>
               </div>
             {% endfor %}
           </div>

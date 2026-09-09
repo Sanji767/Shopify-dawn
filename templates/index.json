@@ -20,7 +20,8 @@
             "title": "Perros",
             "subtitle": "Accesorios y confort",
             "emoji": "🐶",
-            "bg_color": "#FAF4EB"
+            "bg_color": "#FAF4EB",
+            "link": "/collections/perros"
           }
         },
         "cat_gatos": {
@@ -29,7 +30,8 @@
             "title": "Gatos",
             "subtitle": "Juegos y descanso",
             "emoji": "🐱",
-            "bg_color": "#F2F6F0"
+            "bg_color": "#F2F6F0",
+            "link": "/collections/gatos"
           }
         },
         "cat_casa": {
@@ -38,7 +40,8 @@
             "title": "Para casa",
             "subtitle": "Limpieza y orden",
             "emoji": "🏠",
-            "bg_color": "#FDF3EF"
+            "bg_color": "#FDF3EF",
+            "link": "/collections/casa"
           }
         },
         "cat_viajar": {
@@ -47,7 +50,8 @@
             "title": "Para viajar",
             "subtitle": "Seguridad en ruta",
             "emoji": "🚗",
-            "bg_color": "#F0F4F8"
+            "bg_color": "#F0F4F8",
+            "link": "/collections/viajar"
           }
         },
         "cat_pasear": {
@@ -56,7 +60,8 @@
             "title": "Para pasear",
             "subtitle": "Paseos cómodos",
             "emoji": "🦮",
-            "bg_color": "#EFF8F5"
+            "bg_color": "#EFF8F5",
+            "link": "/collections/pasear"
           }
         }
       },

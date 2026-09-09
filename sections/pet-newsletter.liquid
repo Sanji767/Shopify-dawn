@@ -1,5 +1,3 @@
-{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
-
 <section class="pet-section pet-newsletter" id="pet-newsletter-{{ section.id }}">
   <div class="pet-container container">
     <div class="pet-newsletter-card">
@@ -45,6 +43,14 @@
                 {% endif %}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
+            </div>
+
+            <div style="margin-top: 10px; font-size: 0.78rem; color: var(--pet-muted); text-align: center;">
+              {% if request.locale.iso_code == 'en' %}
+                By subscribing you agree to our <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); text-decoration: underline;">Privacy Policy</a>.
+              {% else %}
+                Al suscribirte aceptas nuestra <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); text-decoration: underline;">Política de Privacidad</a>.
+              {% endif %}
             </div>
 
             {% if form.errors %}

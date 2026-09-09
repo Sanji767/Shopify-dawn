@@ -884,7 +884,8 @@
       "email_placeholder": "Email",
       "message_placeholder": "Message",
       "send_message": "Send message",
-      "thank_you": "Thank you for contacting us! We'll reply as soon as possible. 🐾"
+      "thank_you": "Thank you for contacting us! We'll reply as soon as possible. 🐾",
+      "privacy_consent": "I have read and agree to the"
     },
     "page": {
       "title_fallback": "Paw & Home Information",
@@ -903,7 +904,7 @@
       "returns_contact": "To initiate a return, write to our customer service at <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contact</a> and we'll guide you step by step.",
       "privacy_title": "Privacy Policy (GDPR) 🔒",
       "privacy_text": "At Paw & Home, we respect your privacy. Personal data provided during purchases or subscriptions will be used exclusively for managing your orders, shipping, and consented communications.",
-      "privacy_contact": "If you have any questions about our privacy practices or this Privacy Policy, or if you wish to exercise any of your rights, please contact us by email at <strong>mohamedelabyad56@gmail.com</strong> or by mail at <strong>Ronda del Guinardó, 08025, Barcelona, Spain</strong>.",
+      "privacy_contact": "If you have any questions about our privacy practices or this Privacy Policy, or if you wish to exercise any of your rights, please contact us by email at <strong>hola@pawandhome.com</strong> or by mail at <strong>Ronda del Guinardó, 08025, Barcelona, Spain</strong>.",
       "privacy_controller": "For the purposes of applicable data protection laws (GDPR / LOPDGDD), we are the data controllers of your personal information.",
       "terms_title": "Terms & Conditions of Use",
       "terms_text": "By accessing and making purchases at Paw & Home, you accept these general terms of sale. All prices are shown in euros (€) and include applicable taxes (VAT).",

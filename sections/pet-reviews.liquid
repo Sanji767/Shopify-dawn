@@ -1,5 +1,3 @@
-{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
-
 <section class="pet-section pet-reviews-section" style="background-color: {{ section.settings.background_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="pet-container container">
     {% if section.settings.title != blank %}
@@ -37,7 +35,6 @@
                     {% endif %}
                   {% endfor %}
                 </div>
-                <span class="pet-review-verified">{{ 'paw.reviews.verified_purchase' | t }}</span>
               </div>
 
               {% if block.settings.review_text != blank %}
@@ -93,7 +90,6 @@
             <article class="pet-review-card">
               <div class="pet-review-card__header">
                 <div class="pet-review-card__stars">★★★★★</div>
-                <span class="pet-review-verified">{{ 'paw.reviews.verified_purchase' | t }}</span>
               </div>
               <blockquote class="pet-review-card__text">
                 <p>“{{ rev_texts[i] }}”</p>

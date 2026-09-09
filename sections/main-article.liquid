@@ -1,12 +1,10 @@
-{{ 'pet-theme.css' | asset_url | stylesheet_tag }}
-
 <article class="pet-article-page" style="padding: 60px 0; background-color: var(--pet-white, #FFFFFF);">
   <div class="pet-container container" style="max-width: 840px;">
     <!-- Breadcrumb -->
     <nav class="pet-article-breadcrumb" style="margin-bottom: 24px; font-size: 0.85rem; color: var(--pet-muted);">
-      <a href="/" style="color: var(--pet-muted);">{{ 'paw.article.home_breadcrumb' | t }}</a>
+      <a href="{{ routes.root_url }}" style="color: var(--pet-muted);">{{ 'paw.article.home_breadcrumb' | t }}</a>
       <span style="margin: 0 6px;">/</span>
-      <a href="/blogs/news" style="color: var(--pet-muted);">{{ 'paw.article.blog_breadcrumb' | t }}</a>
+      <a href="{{ blog.url | default: '/blogs/news' }}" style="color: var(--pet-muted);">{{ 'paw.article.blog_breadcrumb' | t }}</a>
       <span style="margin: 0 6px;">/</span>
       <span style="color: var(--pet-navy); font-weight: 500;" id="artBreadcrumbTitle">{% assign _at = 'paw.article.article_fallback' | t %}{{ article.title | default: _at }}</span>
     </nav>
@@ -50,14 +48,14 @@
 
     <!-- Article Footer / Share -->
     <footer class="pet-article-footer" style="padding-top: 32px; border-top: 1px solid #E5E1DB; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-      <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
+      <a href="{{ blog.url | default: '/blogs/news' }}" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
         {{ 'paw.article.back_to_blog' | t }}
       </a>
       <div style="display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--pet-muted);">
         <span>{{ 'paw.article.share_label' | t }}</span>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
-        <a href="#" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ canonical_url | url_encode }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
+        <a href="https://pinterest.com/pin/create/button/?url={{ canonical_url | url_encode }}&description={{ article.title | url_encode }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
+        <a href="https://api.whatsapp.com/send?text={{ article.title | url_encode }}%20{{ canonical_url | url_encode }}" target="_blank" rel="noopener noreferrer" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
       </div>
     </footer>
   </div>
@@ -244,22 +242,33 @@
   };
 
   document.addEventListener('DOMContentLoaded', function() {
-    var params = new URLSearchParams(window.location.search);
-    var artId = params.get('article') || "1";
-    var data = articlesData[artId] || articlesData["1"];
+    {% if article.content == blank %}
+      var params = new URLSearchParams(window.location.search);
+      var artId = params.get('article') || "1";
+      var data = articlesData[artId] || articlesData["1"];
 
-    if (data) {
-      document.getElementById('artTitle').textContent = data.title;
-      document.getElementById('artBreadcrumbTitle').textContent = data.title;
-      document.getElementById('artBadge').textContent = data.badge;
-      document.getElementById('artReadTime').textContent = data.readTime;
-      document.getElementById('artEmoji').textContent = data.emoji;
-      
-      var bodyContainer = document.getElementById('artBody');
-      if (bodyContainer && bodyContainer.children.length === 0) {
-        bodyContainer.innerHTML = data.body;
+      if (data) {
+        var titleEl = document.getElementById('artTitle');
+        if (titleEl) titleEl.textContent = data.title;
+
+        var breadcrumbEl = document.getElementById('artBreadcrumbTitle');
+        if (breadcrumbEl) breadcrumbEl.textContent = data.title;
+
+        var badgeEl = document.getElementById('artBadge');
+        if (badgeEl) badgeEl.textContent = data.badge;
+
+        var readTimeEl = document.getElementById('artReadTime');
+        if (readTimeEl) readTimeEl.textContent = data.readTime;
+
+        var emojiEl = document.getElementById('artEmoji');
+        if (emojiEl) emojiEl.textContent = data.emoji;
+        
+        var bodyContainer = document.getElementById('artBody');
+        if (bodyContainer && bodyContainer.children.length === 0) {
+          bodyContainer.innerHTML = data.body;
+        }
       }
-    }
+    {% endif %}
   });
 </script>
 
