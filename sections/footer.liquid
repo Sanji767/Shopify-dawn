@@ -53,6 +53,8 @@
           {% if linklists[section.settings.footer_menu_2].links.size == 0 %}
             <li><a href="{{ pages['about-us'].url | default: '/pages/about-us' }}">{{ 'paw.footer.about_us' | t }}</a></li>
             <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}">{{ 'paw.footer.contact_help' | t }}</a></li>
+            <li><a href="/pages/faq">{{ 'paw.footer.faq' | t | default: 'Preguntas Frecuentes' }}</a></li>
+            <li><a href="/pages/rastrear-pedido">{{ 'paw.footer.track_order' | t | default: 'Rastrear Pedido' }}</a></li>
             <li><a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{{ 'paw.footer.shipping_info' | t }}</a></li>
             <li><a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{{ 'paw.footer.returns_info' | t }}</a></li>
             <li><a href="{{ shop.legal_notice.url | default: '/policies/legal-notice' }}">{{ 'paw.footer.legal_notice' | t }}</a></li>
@@ -82,8 +84,31 @@
     </div>
 
     <!-- Bottom -->
-    <div class="pet-footer-bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} {% if shop.name contains 'My Store' or shop.name == blank %}Paw & Home{% else %}{{ shop.name }}{% endif %}. {{ 'paw.footer.all_rights_reserved' | t }}</p>
+    <div class="pet-footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <p style="margin: 0;">&copy; {{ 'now' | date: '%Y' }} {% if shop.name contains 'My Store' or shop.name == blank %}Paw & Home{% else %}{{ shop.name }}{% endif %}. {{ 'paw.footer.all_rights_reserved' | t }}</p>
+      
+      <!-- Country & Language Switcher -->
+      <div class="pet-footer-localization" style="display: flex; align-items: center; gap: 8px;">
+        {%- form 'localization', id: 'FooterLocalizationForm', class: 'pet-footer-lang-form' -%}
+          <select name="language_code" onchange="this.form.submit()" aria-label="Idioma / Language" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; outline: none; font-family: inherit;">
+            {%- for language in localization.available_languages -%}
+              <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %} style="color: #1A2B4A; background: #FFFFFF;">
+                {% if language.iso_code == 'es' %}🇪🇸 Español{% elsif language.iso_code == 'en' %}🇬🇧 English{% else %}{{ language.endonym_name | capitalize }}{% endif %}
+              </option>
+            {%- endfor -%}
+          </select>
+          {%- if localization.available_countries.size > 1 -%}
+            <select name="country_code" onchange="this.form.submit()" aria-label="País / Country" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; outline: none; font-family: inherit;">
+              {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %} style="color: #1A2B4A; background: #FFFFFF;">
+                  {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
       <div class="pet-footer-payments" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
         <span class="pet-pay-badge" style="background:#fff; color:#1A2B4A; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">VISA</span>
         <span class="pet-pay-badge" style="background:#fff; color:#EB001B; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">Mastercard</span>

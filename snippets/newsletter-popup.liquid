@@ -1,0 +1,303 @@
+{%- comment -%}
+  Paw & Home - Welcome & Exit-Intent 10% Off Newsletter Popup
+{%- endcomment -%}
+
+<div id="pawNewsletterPopup" class="paw-popup-overlay" style="display: none;" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="paw-popup-card">
+    <button class="paw-popup-close" id="pawPopupClose" aria-label="Cerrar">&times;</button>
+    
+    <div class="paw-popup-inner">
+      <div class="paw-popup-badge">🐾 CLUB PAW &amp; HOME</div>
+      
+      <h3 class="paw-popup-title">
+        {% if request.locale.iso_code == 'en' %}
+          Get 10% off your first order! 🐶🐱
+        {% else %}
+          ¡Consigue un 10% dto en tu primer pedido! 🐶🐱
+        {% endif %}
+      </h3>
+      
+      <p class="paw-popup-subtitle">
+        {% if request.locale.iso_code == 'en' %}
+          Join thousands of happy pet parents. Enjoy exclusive deals, lifestyle tips, and special surprises for your furry friend.
+        {% else %}
+          Únete a nuestra comunidad de pet lovers y recibe ofertas exclusivas, trucos de convivencia y detalles para consentir a tu compañero.
+        {% endif %}
+      </p>
+
+      <div id="pawPopupFormWrap">
+        {% form 'customer', id: 'pawPopupForm' %}
+          <input type="hidden" name="contact[tags]" value="newsletter,popup_10off">
+          
+          <div class="paw-popup-input-group">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              id="pawPopupEmail" 
+              placeholder="{% if request.locale.iso_code == 'en' %}Your email address...{% else %}Tu correo electrónico...{% endif %}" 
+              required
+              class="paw-popup-input"
+            >
+            <button type="submit" class="paw-popup-btn">
+              {% if request.locale.iso_code == 'en' %}
+                Claim My 10% Off →
+              {% else %}
+                Quiero mi 10% dto →
+              {% endif %}
+            </button>
+          </div>
+
+          <p class="paw-popup-legal">
+            {% if request.locale.iso_code == 'en' %}
+              🔒 No spam. Unsubscribe anytime with 1 click.
+            {% else %}
+              🔒 Sin spam. Puedes cancelar tu suscripción con 1 clic.
+            {% endif %}
+          </p>
+
+          {% if form.posted_successfully? %}
+            <script>
+              window.pawFormSuccess = true;
+            </script>
+          {% endif %}
+        {% endform %}
+      </div>
+
+      <!-- Success State -->
+      <div id="pawPopupSuccess" style="display: none; text-align: center; padding: 20px 0;">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">🎉 🐾</div>
+        <h4 style="font-size: 1.3rem; color: #1A2B4A; margin-bottom: 8px;">
+          {% if request.locale.iso_code == 'en' %}Welcome to the family!{% else %}¡Bienvenid@ a la familia!{% endif %}
+        </h4>
+        <p style="color: #6B7280; font-size: 0.95rem; margin-bottom: 16px;">
+          {% if request.locale.iso_code == 'en' %}Use this coupon code at checkout:{% else %}Usa este cupón en la pantalla de pago:{% endif %}
+        </p>
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: #F5EDE3; border: 2px dashed #E8734A; border-radius: 10px; padding: 10px 20px;">
+          <span style="font-family: monospace; font-size: 1.3rem; font-weight: 800; color: #E8734A; letter-spacing: 2px;" id="pawCouponCode">BIENVENIDO10</span>
+          <button onclick="navigator.clipboard.writeText('BIENVENIDO10'); this.textContent='✓ Copiado';" style="padding: 6px 12px; background: #1A2B4A; color: #fff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+            {% if request.locale.iso_code == 'en' %}Copy{% else %}Copiar{% endif %}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .paw-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .paw-popup-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .paw-popup-card {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 24px;
+    position: relative;
+    padding: 40px 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background-image: radial-gradient(circle at 10% 10%, #FBF8F3 0%, #FFFFFF 100%);
+  }
+  .paw-popup-overlay.open .paw-popup-card {
+    transform: scale(1);
+  }
+  .paw-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    background: #F4F1EC;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #1A2B4A;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .paw-popup-close:hover {
+    background: #EAE6DE;
+    transform: rotate(90deg);
+  }
+  .paw-popup-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    background: #F5EDE3;
+    border: 1px solid #E8734A;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #E8734A;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .paw-popup-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.85rem;
+    color: #1A2B4A;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+  .paw-popup-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #6B7280;
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+  .paw-popup-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .paw-popup-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 50px;
+    border: 1px solid #E5E1DB;
+    font-size: 0.95rem;
+    background: #FFFFFF;
+    color: #1A2B4A;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    box-sizing: border-box;
+  }
+  .paw-popup-input:focus {
+    border-color: #E8734A;
+  }
+  .paw-popup-btn {
+    width: 100%;
+    padding: 14px 24px;
+    border-radius: 50px;
+    border: none;
+    background: #E8734A;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(232, 115, 74, 0.35);
+  }
+  .paw-popup-btn:hover {
+    background: #d4633b;
+    transform: translateY(-1px);
+  }
+  .paw-popup-legal {
+    font-size: 0.75rem;
+    color: #8A8580;
+    text-align: center;
+    margin: 10px 0 0;
+  }
+  @media (max-width: 480px) {
+    .paw-popup-card {
+      padding: 32px 20px;
+    }
+    .paw-popup-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var POPUP_KEY = 'paw_popup_dismissed_v1';
+    var popup = document.getElementById('pawNewsletterPopup');
+    var closeBtn = document.getElementById('pawPopupClose');
+    var form = document.getElementById('pawPopupForm');
+
+    if (!popup) return;
+
+    function isDismissed() {
+      try {
+        var val = localStorage.getItem(POPUP_KEY);
+        if (!val) return false;
+        var exp = parseInt(val, 10);
+        return Date.now() < exp;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function dismiss(days) {
+      try {
+        var exp = Date.now() + (days || 7) * 24 * 60 * 60 * 1000;
+        localStorage.setItem(POPUP_KEY, exp.toString());
+      } catch (e) {}
+    }
+
+    function showPopup() {
+      if (isDismissed()) return;
+      popup.style.display = 'flex';
+      // Force reflow
+      void popup.offsetWidth;
+      popup.classList.add('open');
+      popup.setAttribute('aria-hidden', 'false');
+    }
+
+    function hidePopup() {
+      popup.classList.remove('open');
+      popup.setAttribute('aria-hidden', 'true');
+      setTimeout(function() {
+        popup.style.display = 'none';
+      }, 300);
+      dismiss(7);
+    }
+
+    closeBtn.addEventListener('click', hidePopup);
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        hidePopup();
+      }
+    });
+
+    // Check if posted successfully
+    if (window.pawFormSuccess) {
+      document.getElementById('pawPopupFormWrap').style.display = 'none';
+      document.getElementById('pawPopupSuccess').style.display = 'block';
+      showPopup();
+      dismiss(30);
+      return;
+    }
+
+    if (isDismissed()) return;
+
+    // Trigger 1: After 6 seconds
+    var timer = setTimeout(showPopup, 6000);
+
+    // Trigger 2: Exit Intent (mouse moves up toward address bar)
+    document.addEventListener('mouseleave', function onMouseLeave(e) {
+      if (e.clientY < 15 && !isDismissed()) {
+        clearTimeout(timer);
+        showPopup();
+        document.removeEventListener('mouseleave', onMouseLeave);
+      }
+    });
+  })();
+</script>

@@ -582,7 +582,23 @@
       "privacy_policy": "Política de Privacidad",
       "terms_conditions": "Términos y Condiciones",
       "cookie_policy": "Política de Cookies",
+      "faq": "Preguntas Frecuentes",
+      "track_order": "Rastrear mi Pedido",
       "all_rights_reserved": "Todos los derechos reservados."
+    },
+    "track": {
+      "badge": "SEGUIMIENTO EN TIEMPO REAL",
+      "title": "Rastrea el pedido de tu mascota 📦🐾",
+      "subtitle": "Introduce el número de seguimiento que te enviamos por correo electrónico para ver el estado de entrega en directo.",
+      "input_placeholder": "Ej: 003400... o número de tracking",
+      "button": "Localizar paquete",
+      "hint": "Envíos gestionados con GLS, Correos Express, SEUR y DHL (3-6 días laborables).",
+      "card_time_title": "Plazo de Entrega",
+      "card_time_desc": "3 a 6 días laborables en España peninsular y Europa.",
+      "card_carrier_title": "Transportistas de Confianza",
+      "card_carrier_desc": "Entrega con transportistas certificados con seguimiento paso a paso.",
+      "card_help_title": "¿Necesitas ayuda?",
+      "card_help_desc": "Escríbenos por WhatsApp o email y te ayudamos a localizarlo al instante."
     },
     "announcement": {
       "default_text": "Envío gratis en pedidos superiores a 50 € · Envíos 3-6 días laborables 🐾",

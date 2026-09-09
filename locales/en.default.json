@@ -570,7 +570,23 @@
       "privacy_policy": "Privacy Policy",
       "terms_conditions": "Terms & Conditions",
       "cookie_policy": "Cookie Policy",
+      "faq": "Frequently Asked Questions",
+      "track_order": "Track My Order",
       "all_rights_reserved": "All rights reserved."
+    },
+    "track": {
+      "badge": "REAL-TIME TRACKING",
+      "title": "Track your pet's order 📦🐾",
+      "subtitle": "Enter the tracking number we emailed you to check your delivery status in real time.",
+      "input_placeholder": "E.g. 003400... or tracking number",
+      "button": "Track package",
+      "hint": "Shipped via GLS, Correos Express, SEUR, and DHL (3-6 business days).",
+      "card_time_title": "Delivery Time",
+      "card_time_desc": "3 to 6 business days across mainland Spain and Europe.",
+      "card_carrier_title": "Trusted Couriers",
+      "card_carrier_desc": "Delivered with certified couriers featuring step-by-step tracking.",
+      "card_help_title": "Need Help?",
+      "card_help_desc": "Contact us via WhatsApp or email and we'll help you locate it immediately."
     },
     "announcement": {
       "default_text": "Free shipping on orders over €50 · Shipping 3-6 business days 🐾",
