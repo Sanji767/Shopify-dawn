@@ -2,7 +2,10 @@
 Placeholder section for the main activate account page.
 {% endcomment %}
 <div class="main-activate-account">
-  <!-- TODO: Implement activate account content -->
+  <div class="activate-account-message" style="padding:24px; text-align:center;">
+    <p>{{ 'paw.activate_account.success' | t }}</p>
+    <a href="/account/login" class="btn-primary" style="display:inline-block; margin-top:12px; padding:10px 20px;">{{ 'paw.activate_account.login' | t }}</a>
+  </div>
 </div>
 {% schema %}
 {

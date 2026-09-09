@@ -244,13 +244,13 @@
 
     <!-- Breadcrumbs -->
     <nav class="pet-pdp-breadcrumbs" aria-label="Breadcrumb">
-      <a href="/">Inicio</a>
+      <a href="/">{{ 'paw.product.home_breadcrumb' | t }}</a>
       <span class="pet-pdp-bc-sep">›</span>
       {% if product.collections.size > 0 %}
         <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
         <span class="pet-pdp-bc-sep">›</span>
       {% endif %}
-      <span style="color: var(--pet-navy); font-weight: 500;">{{ product.title | default: 'Producto' | truncate: 40 }}</span>
+      <span style="color: var(--pet-navy); font-weight: 500;">{% assign _t = 'paw.product.product_fallback' | t %}{{ product.title | default: _t | truncate: 40 }}</span>
     </nav>
 
     <div class="row">
@@ -295,17 +295,17 @@
           <!-- Stock -->
           {% if product.available == false %}
             <div class="pet-pdp-stock pet-pdp-stock--out">
-              <span class="pet-pdp-stock-dot"></span> Agotado temporalmente
+              <span class="pet-pdp-stock-dot"></span> {{ 'paw.product.out_of_stock_temp' | t }}
             </div>
           {% else %}
             <div class="pet-pdp-stock pet-pdp-stock--in">
-              <span class="pet-pdp-stock-dot"></span> En stock · Envío desde España (3-6 días)
+              <span class="pet-pdp-stock-dot"></span> {{ 'paw.product.in_stock' | t }}
             </div>
           {% endif %}
 
           <!-- Title -->
           <h1 class="pet-pdp-title">
-            {{ product.title | default: "Producto para tu mascota" }}
+            {% assign _t = 'paw.product.product_fallback_title' | t %}{{ product.title | default: _t }}
           </h1>
 
           <!-- Price -->
@@ -318,7 +318,7 @@
                 {{ product.compare_at_price | money }}
               </span>
               <span class="pet-pdp-discount">
-                -{{ discount_pct }}% dto.
+                {{ 'paw.product.discount_pct' | t: pct: discount_pct }}
               </span>
             {% endif %}
           </div>
@@ -326,14 +326,14 @@
           <!-- Free Shipping Progress -->
           {% if remaining > 0 %}
             <div class="pet-pdp-shipping-bar">
-              <span>🚚 Te faltan <strong>{{ remaining | money }}</strong> para <strong>envío gratis</strong></span>
+              <span>{% assign _amount = remaining | money %}{{ 'paw.product.remaining_free_ship' | t: amount: _amount }}</span>
               <div class="pet-pdp-shipping-progress">
                 <div class="pet-pdp-shipping-fill" style="width: {{ progress }}%"></div>
               </div>
             </div>
           {% else %}
             <div class="pet-pdp-shipping-bar pet-pdp-shipping-bar--free">
-              <span>🎉 <strong>¡Envío gratis!</strong> Este producto incluye envío gratuito a España</span>
+              <span>{{ 'paw.product.free_ship_achieved' | t }}</span>
             </div>
           {% endif %}
 
@@ -371,11 +371,11 @@
 
             <!-- Quantity -->
             <div class="pet-pdp-qty-row">
-              <label style="font-weight: 600; font-size: 0.9rem; color: var(--pet-navy);">Cantidad:</label>
+              <label style="font-weight: 600; font-size: 0.9rem; color: var(--pet-navy);">{{ 'paw.product.quantity' | t }}</label>
               <div class="pet-pdp-qty-wrap">
-                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(-1)" aria-label="Reducir cantidad">−</button>
-                <input type="text" value="1" id="productQty" name="quantity" readonly class="pet-pdp-qty-input" aria-label="Cantidad">
-                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(1)" aria-label="Aumentar cantidad">+</button>
+                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(-1)" aria-label="{{ 'paw.product.decrease_qty' | t }}">>−</button>
+                <input type="text" value="1" id="productQty" name="quantity" readonly class="pet-pdp-qty-input" aria-label="{{ 'paw.product.quantity_label' | t }}">
+                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(1)" aria-label="{{ 'paw.product.increase_qty' | t }}">+</button>
               </div>
             </div>
 
@@ -385,9 +385,9 @@
             <button type="submit" name="add" class="pet-pdp-atc" {% unless product.available %}disabled{% endunless %}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               {% if product.available %}
-                Añadir al carrito 🐾
+                {{ 'paw.product.add_to_cart' | t }}
               {% else %}
-                Agotado — Te avisamos cuando vuelva
+                {{ 'paw.product.sold_out_notify' | t }}
               {% endif %}
             </button>
 
@@ -397,7 +397,7 @@
               </div>
             {% endif %}
 
-            <p class="pet-pdp-secure">🔒 Pago seguro · Visa, Mastercard, PayPal, Apple Pay, Google Pay</p>
+            <p class="pet-pdp-secure">{{ 'paw.product.secure_payment' | t }}</p>
 
           {% endform %}
 
@@ -406,29 +406,29 @@
             <div class="pet-pdp-guarantee">
               <div class="pet-pdp-guarantee-icon">🚚</div>
               <div>
-                <strong>{{ section.settings.shipping_text | default: "Envío 3-6 días laborables" }}</strong>
-                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Gratis a partir de 50 € en España</div>
+                <strong>{% assign _t = 'paw.product.shipping_text_fallback' | t %}{{ section.settings.shipping_text | default: _t }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">{{ 'paw.product.shipping_free_from' | t }}</div>
               </div>
             </div>
             <div class="pet-pdp-guarantee">
               <div class="pet-pdp-guarantee-icon">↩️</div>
               <div>
-                <strong>{{ section.settings.returns_text | default: "14 días de devolución" }}</strong>
-                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Sin preguntas, porque tu peludo merece lo mejor</div>
+                <strong>{% assign _t = 'paw.product.returns_text_fallback' | t %}{{ section.settings.returns_text | default: _t }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">{{ 'paw.product.returns_detail' | t }}</div>
               </div>
             </div>
             <div class="pet-pdp-guarantee">
               <div class="pet-pdp-guarantee-icon">🛡️</div>
               <div>
-                <strong>{{ section.settings.guarantee_text | default: "Materiales seguros y certificados" }}</strong>
-                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Libres de BPA, atóxicos y respetuosos con su piel</div>
+                <strong>{% assign _t = 'paw.product.guarantee_text_fallback' | t %}{{ section.settings.guarantee_text | default: _t }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">{{ 'paw.product.guarantee_detail' | t }}</div>
               </div>
             </div>
             <div class="pet-pdp-guarantee">
               <div class="pet-pdp-guarantee-icon">💬</div>
               <div>
-                <strong>Atención personalizada</strong>
-                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">Contáctanos por WhatsApp o email, ¡te ayudamos!</div>
+                <strong>{{ 'paw.product.personalized_support' | t }}</strong>
+                <div style="font-size: 0.8rem; color: var(--pet-muted); margin-top: 2px;">{{ 'paw.product.support_detail' | t }}</div>
               </div>
             </div>
           </div>
@@ -437,40 +437,40 @@
           <div class="pet-pdp-accordion">
             <details open>
               <summary>
-                📋 Descripción del producto
+                {{ 'paw.product.description_tab' | t }}
                 <span class="pet-pdp-acc-icon">▼</span>
               </summary>
               <div class="pet-pdp-acc-body">
-                {{ product.description | default: "<p>Producto diseñado con amor para hacer la vida con tu mascota más fácil y bonita. Materiales de calidad, resistentes y seguros.</p>" }}
+                {% assign _desc = 'paw.product.description_fallback' | t %}{{ product.description | default: _desc }}
               </div>
             </details>
 
             <details>
               <summary>
-                🚚 Envío y plazos de entrega
+                {{ 'paw.product.shipping_tab' | t }}
                 <span class="pet-pdp-acc-icon">▼</span>
               </summary>
               <div class="pet-pdp-acc-body">
                 <ul>
-                  <li><strong>España Peninsular:</strong> 3-6 días laborables</li>
-                  <li><strong>Europa:</strong> 5-10 días laborables</li>
-                  <li><strong>Envío gratis:</strong> En pedidos superiores a 50 € (España) / 75 € (Europa)</li>
-                  <li>Recibirás un email con el número de seguimiento en cuanto salga tu pedido</li>
+                  <li>{{ 'paw.product.shipping_spain' | t }}</li>
+                  <li>{{ 'paw.product.shipping_europe' | t }}</li>
+                  <li>{{ 'paw.product.shipping_free_threshold' | t }}</li>
+                  <li>{{ 'paw.product.shipping_tracking' | t }}</li>
                 </ul>
               </div>
             </details>
 
             <details>
               <summary>
-                ↩️ Devoluciones y garantía
+                {{ 'paw.product.returns_tab' | t }}
                 <span class="pet-pdp-acc-icon">▼</span>
               </summary>
               <div class="pet-pdp-acc-body">
                 <ul>
-                  <li><strong>14 días naturales</strong> para iniciar una devolución sin preguntas</li>
-                  <li>El producto debe estar sin usar y en su embalaje original</li>
-                  <li>En caso de <strong>producto defectuoso</strong>, el envío de devolución es gratis</li>
-                  <li>Reembolso en un plazo máximo de 14 días tras recibir la devolución</li>
+                  <li>{{ 'paw.product.returns_14_days' | t }}</li>
+                  <li>{{ 'paw.product.returns_condition' | t }}</li>
+                  <li>{{ 'paw.product.returns_defective' | t }}</li>
+                  <li>{{ 'paw.product.returns_refund' | t }}</li>
                 </ul>
               </div>
             </details>
@@ -478,19 +478,19 @@
             {% if product.vendor and product.vendor != blank and product.vendor != shop.name %}
               <details>
                 <summary>
-                  🏷️ Información adicional
+                  {{ 'paw.product.additional_info_tab' | t }}
                   <span class="pet-pdp-acc-icon">▼</span>
                 </summary>
                 <div class="pet-pdp-acc-body">
-                  <p><strong>Marca:</strong> {{ product.vendor }}</p>
+                  <p><strong>{{ 'paw.product.brand_label' | t }}</strong> {{ product.vendor }}</p>
                   {% if product.type and product.type != blank %}
-                    <p><strong>Tipo:</strong> {{ product.type }}</p>
+                    <p><strong>{{ 'paw.product.type_label' | t }}</strong> {{ product.type }}</p>
                   {% endif %}
                   {% if current_variant.sku and current_variant.sku != blank %}
-                    <p><strong>SKU:</strong> {{ current_variant.sku }}</p>
+                    <p><strong>{{ 'paw.product.sku_label' | t }}</strong> {{ current_variant.sku }}</p>
                   {% endif %}
                   {% if product.tags.size > 0 %}
-                    <p><strong>Etiquetas:</strong> {{ product.tags | join: ', ' }}</p>
+                    <p><strong>{{ 'paw.product.tags_label' | t }}</strong> {{ product.tags | join: ', ' }}</p>
                   {% endif %}
                 </div>
               </details>
@@ -499,17 +499,17 @@
 
           <!-- Share -->
           <div class="pet-pdp-share">
-            <span class="pet-pdp-share-label">Compartir:</span>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir en Facebook" title="Facebook">
+            <span class="pet-pdp-share-label">{{ 'paw.product.share_label' | t }}</span>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="{{ 'paw.product.share_facebook' | t }}" title="Facebook">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir en X" title="X (Twitter)">
+            <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="{{ 'paw.product.share_x' | t }}" title="X (Twitter)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <a href="https://wa.me/?text={{ product.title | url_encode }}%20{{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="Compartir por WhatsApp" title="WhatsApp">
+            <a href="https://wa.me/?text={{ product.title | url_encode }}%20{{ shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener" class="pet-pdp-share-btn" aria-label="{{ 'paw.product.share_whatsapp' | t }}" title="WhatsApp">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
-            <button type="button" class="pet-pdp-share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(function(){alert('🐾 ¡Enlace copiado!')})" aria-label="Copiar enlace" title="Copiar enlace">
+            <button type="button" class="pet-pdp-share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(function(){alert('{{ 'paw.product.link_copied' | t | escape }}')})" aria-label="{{ 'paw.product.copy_link' | t }}" title="{{ 'paw.product.copy_link' | t }}">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
             </button>
           </div>
@@ -527,7 +527,7 @@
   {% if related_products.size > 1 %}
     <section class="pet-pdp-related">
       <div class="pet-container container">
-        <h2 class="pet-pdp-related-title">También te puede gustar 🐾</h2>
+        <h2 class="pet-pdp-related-title">{{ 'paw.product.related_products' | t }}</h2>
         <div class="pet-pdp-related-grid">
           {% assign shown = 0 %}
           {% for rp in related_products limit: 8 %}
@@ -563,11 +563,11 @@
 <div class="pet-pdp-sticky-atc" id="petStickyAtc">
   <div class="pet-pdp-sticky-inner">
     <div class="pet-pdp-sticky-info">
-      <div class="pet-pdp-sticky-name">{{ product.title | default: 'Producto' | truncate: 30 }}</div>
+      <div class="pet-pdp-sticky-name">{% assign _t = 'paw.product.product_fallback' | t %}{{ product.title | default: _t | truncate: 25 }}</div>
       <div class="pet-pdp-sticky-price" id="petStickyPrice">{{ current_variant.price | default: product.price | default: 3499 | money }}</div>
     </div>
     <button type="button" class="pet-pdp-sticky-btn" onclick="document.getElementById('AddToCartForm').requestSubmit()" {% unless product.available %}disabled{% endunless %}>
-      🐾 Añadir
+      {{ 'paw.product.add_sticky' | t }}
     </button>
   </div>
 </div>

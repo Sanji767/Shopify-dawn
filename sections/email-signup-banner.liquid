@@ -2,7 +2,10 @@
 Placeholder email signup banner section for password page.
 {% endcomment %}
 <div class="email-signup-banner">
-  <!-- TODO: implement email signup form -->
+  <form method="post" action="/contact" class="email-signup-form" style="display:flex; gap:8px; align-items:center;">
+    <input type="email" name="contact[email]" placeholder="{{ 'paw.email_signup.placeholder' | t }}" required class="input-email" style="flex:1; padding:8px; border:1px solid var(--color-border); border-radius:4px;" />
+    <button type="submit" class="btn-primary" style="padding:8px 16px;">{{ 'paw.email_signup.submit' | t }}</button>
+  </form>
 </div>
 {% schema %}
 {

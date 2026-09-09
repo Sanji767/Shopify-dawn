@@ -6,18 +6,18 @@
     <header class="pet-account-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--pet-border, #E5E1DB);">
       <div>
         <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 6px;">
-          Mi Cuenta 🐾
+          {{ 'paw.account.my_account' | t }}
         </h1>
         <p style="color: var(--pet-muted); font-size: 0.95rem; margin: 0;">
-          Bienvenido/a de nuevo, <strong>{{ customer.first_name | default: "Cliente" }}</strong>
+          {{ 'paw.account.welcome_back' | t }} <strong>{% assign _t = 'paw.account.customer_fallback' | t %}{{ customer.first_name | default: _t }}</strong>
         </p>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
         <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; border: 1px solid var(--pet-border); color: var(--pet-navy); text-decoration: none;">
-          📍 Gestionar Direcciones ({{ customer.addresses_count | default: 1 }})
+          {{ 'paw.account.manage_addresses' | t }} ({{ customer.addresses_count | default: 1 }})
         </a>
         <a href="{{ routes.account_logout_url }}" class="pet-btn" style="padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; background: #FEE2E2; color: #991B1B; text-decoration: none;">
-          Cerrar sesión
+          {{ 'paw.account.log_out' | t }}
         </a>
       </div>
     </header>
@@ -26,7 +26,7 @@
       <!-- Order History Column -->
       <div class="col-lg-8 col-12 mb-4">
         <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin-bottom: 20px;">
-          Historial de Pedidos
+          {{ 'paw.account.order_history' | t }}
         </h2>
 
         {% if customer.orders.size > 0 %}
@@ -34,11 +34,11 @@
             <table class="pet-cart-table" style="width: 100%; border-collapse: collapse;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--pet-border); text-align: left; font-size: 0.85rem; color: var(--pet-muted);">
-                  <th style="padding: 12px;">Pedido</th>
-                  <th style="padding: 12px;">Fecha</th>
-                  <th style="padding: 12px;">Estado Pago</th>
-                  <th style="padding: 12px;">Envío</th>
-                  <th style="padding: 12px;">Total</th>
+                  <th style="padding: 12px;">{{ 'paw.account.order_header' | t }}</th>
+                  <th style="padding: 12px;">{{ 'paw.account.date_header' | t }}</th>
+                  <th style="padding: 12px;">{{ 'paw.account.payment_status' | t }}</th>
+                  <th style="padding: 12px;">{{ 'paw.account.shipping_header' | t }}</th>
+                  <th style="padding: 12px;">{{ 'paw.account.total_header' | t }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,9 +67,9 @@
         {% else %}
           <div style="background: var(--pet-cream, #FAF4EB); border-radius: 16px; padding: 32px; text-align: center;">
             <p style="font-size: 2.5rem; margin-bottom: 8px;">📦 🐾</p>
-            <h3 style="font-size: 1.25rem; margin-bottom: 6px; color: var(--pet-navy);">Aún no has realizado ningún pedido</h3>
-            <p style="color: var(--pet-muted); font-size: 0.9rem; margin-bottom: 20px;">Explora nuestro catálogo y encuentra lo mejor para tu mascota.</p>
-            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">Ver productos</a>
+            <h3 style="font-size: 1.25rem; margin-bottom: 6px; color: var(--pet-navy);">{{ 'paw.account.no_orders' | t }}</h3>
+            <p style="color: var(--pet-muted); font-size: 0.9rem; margin-bottom: 20px;">{{ 'paw.account.no_orders_text' | t }}</p>
+            <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">{{ 'paw.account.view_products' | t }}</a>
           </div>
         {% endif %}
       </div>
@@ -78,7 +78,7 @@
       <div class="col-lg-4 col-12">
         <div style="background: #FFFFFF; border: 1px solid var(--pet-border, #E5E1DB); border-radius: 20px; padding: 24px;">
           <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin-bottom: 16px;">
-            Dirección Principal
+            {{ 'paw.account.main_address' | t }}
           </h3>
 
           {% if customer.default_address %}
@@ -91,12 +91,12 @@
             </p>
           {% else %}
             <p style="color: var(--pet-muted); font-size: 0.9rem; margin-bottom: 16px;">
-              No tienes ninguna dirección registrada como principal.
+              {{ 'paw.account.no_main_address' | t }}
             </p>
           {% endif %}
 
           <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="width: 100%; text-align: center; display: block; padding: 10px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.85rem; font-weight: 700;">
-            Ver todas las direcciones
+            {{ 'paw.account.view_all_addresses' | t }}
           </a>
         </div>
       </div>

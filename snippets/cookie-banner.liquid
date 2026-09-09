@@ -4,15 +4,15 @@
     <div class="pet-cookie-text">
       <span class="pet-cookie-icon">🍪</span>
       <p>
-        Utilizamos cookies propias y de terceros para garantizar la mejor experiencia en nuestra tienda, analizar el tráfico y personalizar contenido. Puedes aceptar todas las cookies o configurar tus preferencias. Más información en nuestra <a href="/policies/privacy-policy" style="color: var(--pet-coral); text-decoration: underline;">Política de Privacidad</a>.
+        {{ 'paw.cookie.text' | t }}
       </p>
     </div>
     <div class="pet-cookie-actions">
       <button type="button" id="pet-cookie-accept" class="pet-btn pet-btn-primary pet-btn-sm">
-        Aceptar todas
+        {{ 'paw.cookie.accept_all' | t }}
       </button>
       <button type="button" id="pet-cookie-reject" class="pet-btn pet-btn-secondary pet-btn-sm" style="border: 1px solid var(--pet-border); color: var(--pet-navy);">
-        Solo necesarias
+        {{ 'paw.cookie.necessary_only' | t }}
       </button>
     </div>
   </div>

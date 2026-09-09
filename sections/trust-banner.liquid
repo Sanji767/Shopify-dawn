@@ -8,26 +8,30 @@
 {%- assign text_color = section.settings.text_color | default: 'var(--pet-navy, #1A2B4A)' -%}
 
 {%- assign item_1_icon = section.settings.item_1_icon | default: '🚚' -%}
-{%- assign item_1_text = section.settings.item_1_text | default: 'Envío en 3-6 días laborables' -%}
+{%- assign _t = 'paw.trust.shipping_fallback' | t -%}
+{%- assign item_1_text = section.settings.item_1_text | default: _t -%}
 {%- assign item_1_link = section.settings.item_1_link -%}
 
 {%- assign item_2_icon = section.settings.item_2_icon | default: '↩️' -%}
-{%- assign item_2_text = section.settings.item_2_text | default: '14 días de devolución' -%}
+{%- assign _t = 'paw.trust.returns_fallback' | t -%}
+{%- assign item_2_text = section.settings.item_2_text | default: _t -%}
 {%- assign item_2_link = section.settings.item_2_link -%}
 
 {%- assign item_3_icon = section.settings.item_3_icon | default: '🔒' -%}
-{%- assign item_3_text = section.settings.item_3_text | default: 'Pago 100% seguro' -%}
+{%- assign _t = 'paw.trust.secure_payment_fallback' | t -%}
+{%- assign item_3_text = section.settings.item_3_text | default: _t -%}
 {%- assign item_3_link = section.settings.item_3_link -%}
 
 {%- assign item_4_icon = section.settings.item_4_icon | default: '💬' -%}
-{%- assign item_4_text = section.settings.item_4_text | default: 'Atención personalizada' -%}
+{%- assign _t = 'paw.trust.support_fallback' | t -%}
+{%- assign item_4_text = section.settings.item_4_text | default: _t -%}
 {%- assign item_4_link = section.settings.item_4_link -%}
 
 <section
   class="pet-trust-banner"
   id="pet-trust-banner-{{ section.id }}"
   style="background-color: {{ bg_color }}; border-top-color: {{ border_color }};"
-  aria-label="Garantías de compra y confianza Paw & Home"
+  aria-label="{{ 'paw.trust.aria_label' | t }}"
 >
   <div class="pet-trust-banner__container">
     {%- if item_1_text != blank -%}

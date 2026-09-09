@@ -5,23 +5,23 @@
     <!-- Blog Header Banner -->
     <div class="pet-blog-header" style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
       <span class="pet-blog-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border: 1px solid #E8734A; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
-        📖 CONSEJOS Y LIFESTYLE
+        {{ 'paw.blog.tag_label' | t }}
       </span>
       <h1 class="pet-blog-title" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
-        {{ blog.title | default: "El Blog de Paw & Home" }}
+        {% assign _bt = 'paw.blog.title_fallback' | t %}{{ blog.title | default: _bt }}
       </h1>
       <p class="pet-blog-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted, #6B7280); line-height: 1.6;">
-        Guías prácticas, consejos de limpieza, viajes sin estrés y todo lo necesario para disfrutar al máximo de la vida con tu mascota.
+        {{ 'paw.blog.subtitle' | t }}
       </p>
     </div>
 
     <!-- Category Filters -->
     <div class="pet-blog-categories" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
-      <span class="pet-blog-cat-chip active" style="padding: 8px 18px; border-radius: 50px; background: var(--pet-navy); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Todos los artículos</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐶 Perros</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🐱 Gatos</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🏠 Hogar y Limpieza</span>
-      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">🚗 Viajes en Coche</span>
+      <span class="pet-blog-cat-chip active" style="padding: 8px 18px; border-radius: 50px; background: var(--pet-navy); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer;">{{ 'paw.blog.all_articles' | t }}</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">{{ 'paw.blog.dogs_cat' | t }}</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">{{ 'paw.blog.cats_cat' | t }}</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">{{ 'paw.blog.home_cleaning_cat' | t }}</span>
+      <span class="pet-blog-cat-chip" style="padding: 8px 18px; border-radius: 50px; background: #fff; border: 1px solid #E5E1DB; color: var(--pet-navy); font-size: 0.85rem; font-weight: 600; cursor: pointer;">{{ 'paw.blog.car_travel_cat' | t }}</span>
     </div>
 
     <!-- Articles Grid -->
@@ -41,14 +41,14 @@
               <div class="pet-article-meta">
                 <span class="pet-article-date">{{ article.published_at | date: "%d %b, %Y" }}</span>
                 <span class="pet-article-dot">•</span>
-                <span class="pet-article-read-time">⏱️ 4 min</span>
+                <span class="pet-article-read-time">{{ 'paw.blog.read_time' | t }}</span>
               </div>
               <h2 class="pet-article-card-title">
                 <a href="{{ article.url }}">{{ article.title }}</a>
               </h2>
               <p class="pet-article-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
               <a href="{{ article.url }}" class="pet-article-link">
-                Leer artículo
+                {{ 'paw.blog.read_article' | t }}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
@@ -73,7 +73,7 @@
             </a>
             <div class="pet-article-content">
               <div class="pet-article-meta">
-                <span class="pet-article-date">Paw & Home Equipo</span>
+                <span class="pet-article-date">{{ 'paw.blog.team_author' | t }}</span>
                 <span class="pet-article-dot">•</span>
                 <span class="pet-article-read-time">⏱️ {{ blog_reads[i] }}</span>
               </div>
@@ -82,7 +82,7 @@
               </h2>
               <p class="pet-article-excerpt">{{ blog_excerpts[i] }}</p>
               <a href="/blogs/news/articulo-{{ art_id }}" class="pet-article-link">
-                Leer artículo
+                {{ 'paw.blog.read_article' | t }}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>

@@ -16,13 +16,13 @@
 
     {% if section.settings.instagram_url != blank %}
       <div class="pet-ugc-cta-wrapper">
-        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" class="pet-ugc-instagram-link" aria-label="Síguenos en Instagram">
+        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" class="pet-ugc-instagram-link" aria-label="{{ 'paw.ugc.follow_instagram' | t }}">
           <svg class="pet-ugc-instagram-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
             <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
             <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
           </svg>
-          <span>{{ section.settings.instagram_text | default: 'Síguenos en Instagram' }}</span>
+          <span>{% assign _t = 'paw.ugc.follow_instagram' | t %}{{ section.settings.instagram_text | default: _t }}</span>
         </a>
       </div>
     {% endif %}
@@ -32,14 +32,15 @@
         {% for block in section.blocks %}
           <div class="pet-ugc-item" {{ block.shopify_attributes }}>
             {% if block.settings.link != blank %}
-              <a href="{{ block.settings.link }}" class="pet-ugc-item__link" target="_blank" rel="noopener noreferrer" aria-label="Ver publicación {{ forloop.index }}">
+              <a href="{{ block.settings.link }}" class="pet-ugc-item__link" target="_blank" rel="noopener noreferrer" aria-label="{{ 'paw.ugc.view_post' | t: index: forloop.index }}">
             {% endif %}
 
               <div class="pet-ugc-item__image-wrapper">
                 {% if block.settings.image != blank %}
+                  {% assign _t = 'paw.ugc.community_content' | t %}
                   <img
                     src="{{ block.settings.image | image_url: width: 600 }}"
-                    alt="{{ block.settings.image.alt | default: 'Contenido de comunidad' }}"
+                    alt="{{ block.settings.image.alt | default: _t }}"
                     width="600"
                     height="600"
                     loading="lazy"

@@ -4,17 +4,17 @@
   <div class="pet-container container" style="max-width: 840px;">
     <!-- Breadcrumb -->
     <nav class="pet-article-breadcrumb" style="margin-bottom: 24px; font-size: 0.85rem; color: var(--pet-muted);">
-      <a href="/" style="color: var(--pet-muted);">Inicio</a>
+      <a href="/" style="color: var(--pet-muted);">{{ 'paw.article.home_breadcrumb' | t }}</a>
       <span style="margin: 0 6px;">/</span>
-      <a href="/blogs/news" style="color: var(--pet-muted);">Blog</a>
+      <a href="/blogs/news" style="color: var(--pet-muted);">{{ 'paw.article.blog_breadcrumb' | t }}</a>
       <span style="margin: 0 6px;">/</span>
-      <span style="color: var(--pet-navy); font-weight: 500;" id="artBreadcrumbTitle">{{ article.title | default: "Artículo de Pet Lifestyle" }}</span>
+      <span style="color: var(--pet-navy); font-weight: 500;" id="artBreadcrumbTitle">{% assign _at = 'paw.article.article_fallback' | t %}{{ article.title | default: _at }}</span>
     </nav>
 
     <!-- Header -->
     <header class="pet-article-header" style="margin-bottom: 40px;">
       <span class="pet-article-category-badge" id="artBadge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
-        Hogar y Limpieza
+        {{ 'paw.article.home_cleaning' | t }}
       </span>
 
       <h1 id="artTitle" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy); margin-bottom: 20px; line-height: 1.2;">
@@ -22,11 +22,11 @@
       </h1>
 
       <div class="pet-article-meta-bar" style="display: flex; align-items: center; gap: 16px; font-size: 0.9rem; color: var(--pet-muted); padding-bottom: 20px; border-bottom: 1px solid #E5E1DB;">
-        <span>✍️ Por <strong id="artAuthor">{{ article.author | default: "Equipo Paw & Home" }}</strong></span>
+        <span>{{ 'paw.article.by_author' | t }} <strong id="artAuthor">{% assign _aa = 'paw.article.author_fallback' | t %}{{ article.author | default: _aa }}</strong></span>
         <span>•</span>
         <span>📅 {{ article.published_at | date: "%d de %B, %Y" | default: "28 de Agosto, 2026" }}</span>
         <span>•</span>
-        <span id="artReadTime">⏱️ 4 min de lectura</span>
+        <span id="artReadTime">{{ 'paw.article.read_time_4' | t }}</span>
       </div>
     </header>
 
@@ -51,10 +51,10 @@
     <!-- Article Footer / Share -->
     <footer class="pet-article-footer" style="padding-top: 32px; border-top: 1px solid #E5E1DB; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
       <a href="/blogs/news" class="pet-btn pet-btn-secondary" style="padding: 10px 24px; border-radius: 50px; border: 1px solid var(--pet-navy); color: var(--pet-navy); text-decoration: none; font-size: 0.9rem;">
-        ← Volver al Blog
+        {{ 'paw.article.back_to_blog' | t }}
       </a>
       <div style="display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--pet-muted);">
-        <span>Compartir:</span>
+        <span>{{ 'paw.article.share_label' | t }}</span>
         <a href="#" style="color: var(--pet-navy); font-weight: 600;">Facebook</a>
         <a href="#" style="color: var(--pet-navy); font-weight: 600;">Pinterest</a>
         <a href="#" style="color: var(--pet-navy); font-weight: 600;">WhatsApp</a>
@@ -64,6 +64,8 @@
 </article>
 
 <script>
+  var recommendedText = {{ 'paw.article.recommended_in_article' | t | json }};
+  var viewProductText = {{ 'paw.article.view_product' | t | json }};
   var articlesData = {
     "1": {
       title: "5 Consejos para Mantener tu Sofá Libre de Pelos de Perro y Gato",
@@ -88,12 +90,12 @@
             🛋️
           </div>
           <div style="flex: 1; min-width: 240px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">${recommendedText}</span>
             <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Rodillo Reutilizable Quitapelos para Sofá</h4>
             <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Elimina pelos de mascotas en segundos sin necesidad de recambios adhesivos. 100% reutilizable.</p>
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">19,99 €</span>
-              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">${viewProductText}</a>
             </div>
           </div>
         </div>
@@ -125,12 +127,12 @@
             🚗
           </div>
           <div style="flex: 1; min-width: 240px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">${recommendedText}</span>
             <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Manta Protectora Impermeable para Coche</h4>
             <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Protege los asientos contra barro, humedad y arañazos. Ajuste universal rápido.</p>
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">29,99 €</span>
-              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">${viewProductText}</a>
             </div>
           </div>
         </div>
@@ -162,12 +164,12 @@
             🛏️
           </div>
           <div style="flex: 1; min-width: 240px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">${recommendedText}</span>
             <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Cama Ortopédica Lavable para Mascotas</h4>
             <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Diseño desenfundable con bordes elevados tipo nido para máxima sensación de seguridad.</p>
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">34,99 €</span>
-              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">${viewProductText}</a>
             </div>
           </div>
         </div>
@@ -196,12 +198,12 @@
             🦮
           </div>
           <div style="flex: 1; min-width: 240px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">RECOMENDADO EN ESTE ARTÍCULO</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em;">${recommendedText}</span>
             <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--pet-navy); margin: 4px 0 8px;">Botella Portátil de Agua para Paseo</h4>
             <p style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">Con plato integrado antidesperdicio. Ligera y compacta para cualquier paseo.</p>
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">14,99 €</span>
-              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">Ver Producto →</a>
+              <a href="/collections/all" class="pet-btn pet-btn-primary pet-btn-sm" style="padding: 8px 18px; border-radius: 50px; text-decoration: none;">${viewProductText}</a>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 <header class="pet-header" id="pet-header">
   <div class="pet-header-inner">
     <!-- Mobile Toggle (Left Column on Mobile) -->
-    <button class="pet-mobile-toggle" aria-label="Abrir menú" onclick="document.querySelector('.pet-mobile-menu').classList.add('open'); document.querySelector('.pet-mobile-overlay').classList.add('open');">
+    <button class="pet-mobile-toggle" aria-label="{{ 'paw.header.open_menu' | t }}" onclick="document.querySelector('.pet-mobile-menu').classList.add('open'); document.querySelector('.pet-mobile-overlay').classList.add('open');">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
 
@@ -100,15 +100,15 @@
 
     <!-- Actions / Search & Cart (Right Column) -->
     <div class="pet-header-actions">
-      <a href="/search" class="pet-header-search-btn" aria-label="Buscar productos">
+      <a href="/search" class="pet-header-search-btn" aria-label="{{ 'paw.header.search_products' | t }}">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </a>
-      <a href="/cart" class="pet-header-cart-btn" aria-label="Ver Carrito">
+      <a href="/cart" class="pet-header-cart-btn" aria-label="{{ 'paw.header.view_cart' | t }}">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="pet-cart-btn-text">Carrito</span>
+        <span class="pet-cart-btn-text">{{ 'paw.header.cart' | t }}</span>
         <span class="pet-header-cart-bubble">
           {{ cart.item_count | default: 0 }}
         </span>
@@ -275,7 +275,7 @@
 <nav class="pet-mobile-menu">
   <div class="pet-mobile-menu-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--pet-border, #E5E1DB); margin-bottom: 16px;">
     <span style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--pet-navy);">Paw &amp; Home 🐾</span>
-    <button class="pet-mobile-menu-close" onclick="this.closest('.pet-mobile-menu').classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="Cerrar menú" style="position: static; padding: 4px;">
+    <button class="pet-mobile-menu-close" onclick="this.closest('.pet-mobile-menu').classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="{{ 'paw.header.close_menu' | t }}" style="position: static; padding: 4px;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
@@ -283,7 +283,7 @@
   <!-- Search input in Mobile Drawer -->
   <form action="/search" method="get" role="search" style="margin-bottom: 20px;">
     <div style="position: relative; display: flex; align-items: center;">
-      <input type="search" name="q" placeholder="¿Qué buscas para tu mascota?..." style="width: 100%; padding: 10px 16px 10px 38px; border-radius: 50px; border: 1px solid var(--pet-border, #E5E1DB); font-size: 0.9rem; background: var(--pet-cream, #FBF8F3); outline: none; font-family: 'Inter', sans-serif;">
+      <input type="search" name="q" placeholder="{{ 'paw.header.search_placeholder' | t }}" style="width: 100%; padding: 10px 16px 10px 38px; border-radius: 50px; border: 1px solid var(--pet-border, #E5E1DB); font-size: 0.9rem; background: var(--pet-cream, #FBF8F3); outline: none; font-family: 'Inter', sans-serif;">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="position: absolute; left: 13px; color: var(--pet-muted, #8A8580); pointer-events: none;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </div>
   </form>
@@ -293,32 +293,32 @@
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {% endfor %}
     {% else %}
-      <li><a href="/">🏠 {{ section.settings.home_text | default: 'Inicio' }}</a></li>
-      <li><a href="{{ perros_link }}">🐶 {{ section.settings.perros_text | default: 'Perros' }}</a></li>
-      <li><a href="{{ gatos_link }}">🐱 {{ section.settings.gatos_text | default: 'Gatos' }}</a></li>
-      <li><a href="{{ casa_link }}">🛋️ {{ section.settings.casa_text | default: 'Para casa' }}</a></li>
-      <li><a href="{{ viajar_link }}">🚗 {{ section.settings.viajar_text | default: 'Para viajar' }}</a></li>
-      <li><a href="{{ pasear_link }}">🦮 {{ section.settings.pasear_text | default: 'Para pasear' }}</a></li>
-      <li><a href="{{ ofertas_link }}">🏷️ {{ section.settings.ofertas_text | default: 'Ofertas' }}</a></li>
-      <li><a href="{{ blog_link }}">📖 {{ section.settings.blog_text | default: 'Consejos & Blog' }}</a></li>
+      <li><a href="/">🏠 {% assign _t = 'paw.header.home' | t %}{{ section.settings.home_text | default: _t }}</a></li>
+      <li><a href="{{ perros_link }}">🐶 {% assign _t = 'paw.header.dogs' | t %}{{ section.settings.perros_text | default: _t }}</a></li>
+      <li><a href="{{ gatos_link }}">🐱 {% assign _t = 'paw.header.cats' | t %}{{ section.settings.gatos_text | default: _t }}</a></li>
+      <li><a href="{{ casa_link }}">🛋️ {% assign _t = 'paw.header.for_home' | t %}{{ section.settings.casa_text | default: _t }}</a></li>
+      <li><a href="{{ viajar_link }}">🚗 {% assign _t = 'paw.header.for_travel' | t %}{{ section.settings.viajar_text | default: _t }}</a></li>
+      <li><a href="{{ pasear_link }}">🦮 {% assign _t = 'paw.header.for_walks' | t %}{{ section.settings.pasear_text | default: _t }}</a></li>
+      <li><a href="{{ ofertas_link }}">🏷️ {% assign _t = 'paw.header.deals' | t %}{{ section.settings.ofertas_text | default: _t }}</a></li>
+      <li><a href="{{ blog_link }}">📖 {% assign _t = 'paw.header.blog' | t %}{{ section.settings.blog_text | default: _t }}</a></li>
     {% endif %}
   </ul>
 
   <!-- Mobile Drawer Footer Notice -->
   <div style="margin-top: 32px; padding: 16px; background: var(--pet-cream, #FBF8F3); border-radius: 12px; font-size: 0.8rem; color: var(--pet-muted, #6B7280); line-height: 1.5;">
     <p style="margin: 0 0 6px; font-weight: 700; color: var(--pet-navy);">🐾 Paw &amp; Home</p>
-    <p style="margin: 0;">🚚 Envíos 3-6 días · 💚 14 días para probar con tu peludo</p>
+    <p style="margin: 0;">{{ 'paw.header.promo_banner' | t }}</p>
   </div>
 </nav>
 
 <!-- Mini Cart Drawer -->
 <div class="mini-cart">
   <div class="mini-cart-content">
-    <button class="mini-cart-close" aria-label="Cerrar carrito">
+    <button class="mini-cart-close" aria-label="{{ 'paw.header.close_cart' | t }}">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div class="mini-cart-items">
-      <p class="top-p" style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--pet-navy);">Tu Carrito ({{ cart.item_count }})</p>
+      <p class="top-p" style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--pet-navy);">{{ 'paw.header.your_cart_count' | t: count: cart.item_count }}</p>
 
       {% if cart.item_count > 0 %}
         <!-- Free shipping bar -->
@@ -329,9 +329,9 @@
         <div class="pet-cart-free-shipping" style="margin-bottom: 20px;">
           <p class="pet-cart-free-shipping-text" style="font-size: 0.85rem; text-align: center; margin-bottom: 8px;">
             {% if remaining > 0 %}
-              Te faltan <strong>{{ remaining | money }}</strong> para envío gratis 🚚
+              {% assign remaining_money = remaining | money %}{{ 'paw.header.remaining_free_shipping' | t: amount: remaining_money }}
             {% else %}
-              ¡Tienes envío gratis! 🎉
+              {{ 'paw.header.free_shipping_achieved' | t }}
             {% endif %}
           </p>
           <div class="pet-cart-free-shipping-bar {% if remaining <= 0 %}complete{% endif %}">
@@ -362,7 +362,7 @@
                 <button onclick="updateQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})" style="width: 28px; height: 28px; border: 1px solid var(--pet-border); border-radius: 4px; background: white; cursor: pointer; font-size: 1rem;">+</button>
               </div>
             </div>
-            <a href="#" onclick="removeItem({{ forloop.index }}, 0); return false;" style="font-size: 0.75rem; color: var(--pet-muted); text-decoration: underline; display: inline-block; margin-top: 4px;">Eliminar</a>
+            <a href="#" onclick="removeItem({{ forloop.index }}, 0); return false;" style="font-size: 0.75rem; color: var(--pet-muted); text-decoration: underline; display: inline-block; margin-top: 4px;">{{ 'paw.header.remove' | t }}</a>
           </div>
         </div>
       {% endfor %}
@@ -371,19 +371,19 @@
     {% if cart.item_count > 0 %}
       <div class="mini-cart-action clearfix" style="padding-top: 16px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-          <span style="font-weight: 600;">Subtotal</span>
+          <span style="font-weight: 600;">{{ 'paw.header.subtotal' | t }}</span>
           <span style="font-weight: 700; font-size: 1.1rem;">{{ cart.items_subtotal_price | money }}</span>
         </div>
         <div class="mini-btn">
-          <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%;">Finalizar compra</a>
+          <a href="/checkout" class="pet-btn pet-btn-primary" style="display: block; text-align: center; width: 100%;">{{ 'paw.header.checkout' | t }}</a>
         </div>
-        <a href="/cart" style="display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--pet-muted);">Ver carrito completo</a>
+        <a href="/cart" style="display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--pet-muted);">{{ 'paw.header.view_full_cart' | t }}</a>
       </div>
     {% else %}
       <div style="text-align: center; padding: 40px 0;">
         <p style="font-size: 3rem; margin-bottom: 8px;">🛒</p>
-        <p style="color: var(--pet-muted);">Tu carrito está vacío</p>
-        <a href="/collections" class="pet-btn pet-btn-primary pet-btn-sm" style="margin-top: 16px;">Explorar productos</a>
+        <p style="color: var(--pet-muted);">{{ 'paw.header.empty_cart' | t }}</p>
+        <a href="/collections" class="pet-btn pet-btn-primary pet-btn-sm" style="margin-top: 16px;">{{ 'paw.header.explore_products' | t }}</a>
       </div>
     {% endif %}
   </div>

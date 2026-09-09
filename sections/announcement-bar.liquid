@@ -9,15 +9,15 @@
     {% else %}
       <div class="pet-announcement-items">
         <span class="pet-announcement-item pet-announcement-item--main">
-          🐾 <strong>Paw &amp; Home:</strong> Hecho con amor para ti y para ellos
+          🐾 <strong>Paw &amp; Home:</strong> {{ 'paw.announcement.brand_tagline' | t }}
         </span>
         <span class="pet-announcement-sep">·</span>
         <span class="pet-announcement-item">
-          🚚 <strong>Envío Gratis</strong> desde 50 €
+          🚚 <strong>{{ 'paw.announcement.free_shipping' | t }}</strong> {{ 'paw.announcement.free_shipping_from' | t }}
         </span>
         <span class="pet-announcement-sep">·</span>
         <span class="pet-announcement-item">
-          💚 <strong>14 días</strong> de prueba sin compromiso
+          💚 <strong>{{ 'paw.announcement.trial_days' | t }}</strong> {{ 'paw.announcement.trial_text' | t }}
         </span>
       </div>
     {% endif %}

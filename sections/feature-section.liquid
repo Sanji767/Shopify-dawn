@@ -23,8 +23,10 @@
 
       {% if section.blocks.size == 0 %}
         {% assign default_icons = "✨,🏠,💚" | split: "," %}
-        {% assign default_titles = "Amor en cada detalle,Pensado para la vida real,Siempre a tu lado" | split: "," %}
-        {% assign default_descs = "Solo elegimos productos cómodos, seguros y duraderos que usaríamos sin dudarlo con nuestros propios compañeros peludos.,Sabemos lo que es un sofá con pelos o unas patitas llenas de barro tras pasear. Te ayudamos a disfrutar juntos sin estrés.,Hablamos tu mismo idioma: el de quienes nos desvivimos por su bienestar y felicidad. Escríbenos cuando lo necesites." | split: "," %}
+        {% capture feat_titles %}{{ 'paw.features.title_1' | t }},{{ 'paw.features.title_2' | t }},{{ 'paw.features.title_3' | t }}{% endcapture %}
+        {% assign default_titles = feat_titles | split: "," %}
+        {% capture feat_descs %}{{ 'paw.features.desc_1' | t }},{{ 'paw.features.desc_2' | t }},{{ 'paw.features.desc_3' | t }}{% endcapture %}
+        {% assign default_descs = feat_descs | split: "," %}
         {% for i in (0..2) %}
           <div class="pet-feature-col">
             <div class="pet-feature-card">

@@ -4,7 +4,7 @@
   <div class="pet-container container" style="max-width: 800px;">
     <header class="pet-page-header" style="text-align: center; margin-bottom: 40px;">
       <h1 class="pet-page-title" style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy, #1A2B4A);">
-        {{ page.title | default: "Información de Paw & Home" }}
+        {% assign _pt = 'paw.page.title_fallback' | t %}{{ page.title | default: _pt }}
       </h1>
     </header>
 
@@ -14,36 +14,36 @@
       {% else %}
         <!-- Rich Default Fallback Copy when page has no content yet -->
         {% if page.handle contains 'about' or page.title contains 'Sobre' %}
-          <h3>Bienvenido a Paw & Home 🐾</h3>
-          <p>En Paw & Home somos amantes de las mascotas dedicados a seleccionar los mejores productos de estilo de vida para perros, gatos y sus dueños. Nuestra misión es hacer que la convivencia en el hogar, los paseos y los viajes sean más cómodos, limpios y divertidos.</p>
-          <p>Seleccionamos cuidadosamente cada artículo garantizando alta calidad, durabilidad y diseño funcional para la vida moderna en España y Europa.</p>
+          <h3>{{ 'paw.page.welcome_title' | t }}</h3>
+          <p>{{ 'paw.page.welcome_text' | t }}</p>
+          <p>{{ 'paw.page.quality_text' | t }}</p>
         {% elsif page.handle contains 'shipping' or page.title contains 'Envío' %}
-          <h3>Información de Envíos 🚚</h3>
-          <p><strong>Plazo de Entrega:</strong> Todos los pedidos se procesan en 24h laborables y se entregan en un plazo estimado de <strong>3 a 6 días laborables</strong> en España peninsular y Europa.</p>
-          <p><strong>Gastos de Envío:</strong></p>
+          <h3>{{ 'paw.page.shipping_title' | t }}</h3>
+          <p>{{ 'paw.page.shipping_delivery' | t }}</p>
+          <p>{{ 'paw.page.shipping_costs' | t }}</p>
           <ul>
-            <li>Pedidos superiores a 50 €: <strong>ENVÍO GRATIS</strong></li>
-            <li>Pedidos inferiores a 50 €: Tarifa fija de <strong>3,99 €</strong></li>
+            <li>{{ 'paw.page.shipping_free' | t }}</li>
+            <li>{{ 'paw.page.shipping_flat' | t }}</li>
           </ul>
-          <p>Recibirás un número de seguimiento por correo electrónico en cuanto tu paquete salga del almacén.</p>
+          <p>{{ 'paw.page.shipping_tracking' | t }}</p>
         {% elsif page.handle contains 'refund' or page.title contains 'Devoluc' %}
-          <h3>Política de Devoluciones y Desistimiento ↩️</h3>
-          <p>Conforme a la normativa europea del consumidor (RGPD), dispones de <strong>14 días naturales</strong> desde la recepción de tu pedido para solicitar una devolución sin necesidad de justificación.</p>
-          <p><strong>Requisitos:</strong> El producto debe encontrarse en su estado original, sin usar y con su embalaje original.</p>
-          <p>Para iniciar una devolución, escríbenos a nuestro servicio de atención al cliente en <a href="/pages/contact" style="color: var(--pet-coral);">Contacto</a> y te guiaremos paso a paso.</p>
+          <h3>{{ 'paw.page.returns_title' | t }}</h3>
+          <p>{{ 'paw.page.returns_text' | t }}</p>
+          <p>{{ 'paw.page.returns_requirements' | t }}</p>
+          <p>{{ 'paw.page.returns_contact' | t }}</p>
         {% elsif page.handle contains 'privacy' or page.title contains 'Privacidad' %}
-          <h3>Política de Privacidad (RGPD) 🔒</h3>
-          <p>En Paw & Home respetamos tu privacidad. Los datos personales facilitados durante la compra o suscripción serán tratados exclusivamente para la gestión de tus pedidos, envíos y comunicaciones consentidas.</p>
-          <p>Si tienes alguna pregunta sobre nuestras prácticas de privacidad o esta Política de Privacidad, o si deseas ejercer cualquiera de los derechos que te asisten, por favor ponte en contacto con nosotros por correo electrónico en <strong>mohamedelabyad56@gmail.com</strong> o por correo postal en <strong>Ronda del Guinardó, 08025, Barcelona, España</strong>.</p>
-          <p>A efectos de las leyes de protección de datos aplicables (RGPD / LOPDGDD), somos los responsables del tratamiento (data controller) de tu información personal.</p>
+          <h3>{{ 'paw.page.privacy_title' | t }}</h3>
+          <p>{{ 'paw.page.privacy_text' | t }}</p>
+          <p>{{ 'paw.page.privacy_contact' | t }}</p>
+          <p>{{ 'paw.page.privacy_controller' | t }}</p>
         {% elsif page.handle contains 'terms' or page.title contains 'Términos' %}
-          <h3>Términos y Condiciones de Uso</h3>
-          <p>Al acceder y realizar compras en Paw & Home aceptas las presentes condiciones generales de venta. Todos los precios se muestran en euros (€) e incluyen los impuestos aplicables (IVA).</p>
-          <p>Paw & Home se reserva el derecho de modificar productos, precios y promociones sin previo aviso, respetando siempre los pedidos confirmados previamente.</p>
+          <h3>{{ 'paw.page.terms_title' | t }}</h3>
+          <p>{{ 'paw.page.terms_text' | t }}</p>
+          <p>{{ 'paw.page.terms_changes' | t }}</p>
         {% else %}
-          <h3>Información del Sitio</h3>
-          <p>Esta página se encuentra en proceso de actualización de contenidos. Si tienes alguna duda o consulta urgente, por favor contáctanos directamente desde nuestro formulario de atención al cliente.</p>
-          <p style="margin-top: 24px;"><a href="/pages/contact" class="pet-btn pet-btn-primary">Ir a Contacto & Ayuda</a></p>
+          <h3>{{ 'paw.page.site_info_title' | t }}</h3>
+          <p>{{ 'paw.page.site_info_text' | t }}</p>
+          <p style="margin-top: 24px;"><a href="/pages/contact" class="pet-btn pet-btn-primary">{{ 'paw.page.go_to_contact' | t }}</a></p>
         {% endif %}
       {% endif %}
     </div>

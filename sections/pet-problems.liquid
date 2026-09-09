@@ -35,7 +35,7 @@
                 {% endif %}
 
                 <span class="pet-problem-card__cta">
-                  {{ block.settings.link_text | default: 'Ver solución' }}
+                  {% assign _t = 'paw.problems.view_solution' | t %}{{ block.settings.link_text | default: _t }}
                   <svg class="pet-problem-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -59,7 +59,7 @@
                 <div class="pet-problem-card__divider"></div>
                 <p class="pet-problem-card__solution">{{ def_sols[i] }}</p>
                 <span class="pet-problem-card__cta">
-                  Ver solución
+                  {{ 'paw.problems.view_solution' | t }}
                   <svg class="pet-problem-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>

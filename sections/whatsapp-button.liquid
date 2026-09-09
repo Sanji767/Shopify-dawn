@@ -18,15 +18,15 @@
           class="pet-whatsapp-tooltip-link"
           target="_blank"
           rel="noopener noreferrer"
-          title="Abrir chat de WhatsApp"
+          title="{{ 'paw.whatsapp.open_chat' | t }}"
         >
           <span class="pet-whatsapp-tooltip-text">{{ section.settings.tooltip_text }}</span>
         </a>
         <button
           type="button"
           class="pet-whatsapp-tooltip-close"
-          aria-label="Cerrar sugerencia de ayuda"
-          title="Cerrar mensaje"
+          aria-label="{{ 'paw.whatsapp.close_help' | t }}"
+          title="{{ 'paw.whatsapp.close_message' | t }}"
           onclick="petDismissWhatsAppTooltip(event, '{{ section.id }}')"
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false">
@@ -42,8 +42,8 @@
       class="pet-whatsapp-btn"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contactar por WhatsApp con Paw & Home"
-      title="Contactar por WhatsApp"
+      aria-label="{{ 'paw.whatsapp.contact_label' | t }}"
+      title="{{ 'paw.whatsapp.contact_title' | t }}"
       {% if section.settings.show_tooltip and section.settings.tooltip_text != blank %}
         aria-describedby="pet-whatsapp-tooltip-{{ section.id }}"
       {% endif %}

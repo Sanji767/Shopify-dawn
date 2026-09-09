@@ -4,17 +4,17 @@
   <div class="pet-container container" style="max-width: 600px;">
     <div style="font-size: 5rem; margin-bottom: 20px;">🐶 🐾</div>
     <h1 style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy); margin-bottom: 16px;">
-      ¡Ups! Esta página se ha despistado
+      {{ 'paw.error_404.title' | t }}
     </h1>
     <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted); line-height: 1.6; margin-bottom: 32px;">
-      La sección o producto que buscas no está disponible o ha cambiado de dirección. ¡Explora nuestro catálogo para encontrar lo que tu mascota necesita!
+      {{ 'paw.error_404.text' | t }}
     </p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="/" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">
-        Volver al Inicio
+        {{ 'paw.error_404.back_home' | t }}
       </a>
       <a href="/collections/all" class="pet-btn pet-btn-secondary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none; border: 2px solid var(--pet-navy); color: var(--pet-navy);">
-        Ver todos los productos
+        {{ 'paw.error_404.view_all_products' | t }}
       </a>
     </div>
   </div>

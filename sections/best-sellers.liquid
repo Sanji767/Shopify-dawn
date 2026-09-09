@@ -263,9 +263,9 @@
               {% if on_sale or sold_out %}
                 <div class="pet-product-card-badges">
                   {% if sold_out %}
-                    <span class="pet-product-badge pet-product-badge--sold-out">Agotado</span>
+                    <span class="pet-product-badge pet-product-badge--sold-out">{{ 'paw.product.sold_out' | t }}</span>
                   {% elsif on_sale %}
-                    <span class="pet-product-badge pet-product-badge--sale">Oferta</span>
+                    <span class="pet-product-badge pet-product-badge--sale">{{ 'paw.product.sale' | t }}</span>
                   {% endif %}
                 </div>
               {% endif %}
@@ -311,9 +311,9 @@
 
               <div class="pet-product-card-actions">
                 {% if sold_out %}
-                  <span class="pet-product-quick-add pet-product-quick-add--sold-out">Agotado</span>
+                  <span class="pet-product-quick-add pet-product-quick-add--sold-out">{{ 'paw.product.sold_out_btn' | t }}</span>
                 {% else %}
-                  <a href="{{ product.url }}" class="pet-product-quick-add">Ver producto</a>
+                  <a href="{{ product.url }}" class="pet-product-quick-add">{{ 'paw.product.view_product' | t }}</a>
                 {% endif %}
               </div>
             </div>
@@ -331,10 +331,10 @@
               {% if i == 0 %}📦{% elsif i == 1 %}🥣{% elsif i == 2 %}💡{% else %}🦮{% endif %}
             </div>
             <div class="pet-product-card-info">
-              <span class="pet-stock-badge" style="background:#FEE2E2; color:#991B1B;">🔥 Quedan pocas unidades</span>
+              <span class="pet-stock-badge" style="background:#FEE2E2; color:#991B1B;">{{ 'paw.best_sellers.low_stock' | t }}</span>
               <div class="pet-product-card-rating">
                 <span class="pet-stars">★★★★★</span>
-                <span class="pet-rating-count">(4.9 · 112 opiniones)</span>
+                <span class="pet-rating-count">{{ 'paw.best_sellers.reviews_badge' | t }}</span>
               </div>
               <h3 class="pet-product-card-title">
                 <a href="/collections/all">{{ bs_titles[i] }}</a>
@@ -344,7 +344,7 @@
                 <span class="pet-product-card-price-compare">{{ bs_compares[i] }}</span>
               </div>
               <div class="pet-product-card-actions">
-                <a href="/collections/all" class="pet-product-quick-add">Ver producto</a>
+                <a href="/collections/all" class="pet-product-quick-add">{{ 'paw.product.view_product' | t }}</a>
               </div>
             </div>
           </article>

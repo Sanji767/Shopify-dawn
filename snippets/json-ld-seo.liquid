@@ -59,7 +59,7 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "name": {{ 'Inicio' | json }},
+        "name": {{ 'paw.json_ld.home' | t | json }},
         "item": {{ shop.url | json }}
       }
       {%- if request.page_type == 'collection' -%}

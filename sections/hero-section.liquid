@@ -10,11 +10,11 @@
   <div class="pet-hero-content">
     <div class="pet-hero-badge">
       <span class="pet-hero-badge-icon">🐾</span>
-      <span>Porque nunca han sido solo mascotas: son nuestra familia</span>
+      <span>{{ 'paw.hero.badge' | t }}</span>
     </div>
 
-    <h1>{{ section.settings.title | default: "Hacerlos felices es nuestra forma de darles las gracias." }}</h1>
-    <p>{{ section.settings.subtitle | default: "Cuidamos de su descanso, sus paseos y la armonía de tu hogar con soluciones hechas con auténtico cariño por los animales." }}</p>
+    <h1>{% assign _t = 'paw.hero.title_fallback' | t %}{{ section.settings.title | default: _t }}</h1>
+    <p>{% assign _t = 'paw.hero.subtitle_fallback' | t %}{{ section.settings.subtitle | default: _t }}</p>
 
     <div class="pet-hero-buttons">
       {% if section.settings.button_text != blank %}
@@ -34,15 +34,15 @@
     <div class="pet-hero-trust">
       <div class="pet-hero-trust-item">
         <span class="pet-hero-stars">★★★★★</span>
-        <span>4.9/5 por miles de familias con mascota</span>
+        <span>{{ 'paw.hero.social_proof' | t }}</span>
       </div>
       <div class="pet-hero-trust-divider"></div>
       <div class="pet-hero-trust-item">
-        <span>🚚 Envíos cuidados con cariño (3-6 días)</span>
+        <span>{{ 'paw.hero.shipping_badge' | t }}</span>
       </div>
       <div class="pet-hero-trust-divider"></div>
       <div class="pet-hero-trust-item">
-        <span>💚 14 días para probar con tu peludo</span>
+        <span>{{ 'paw.hero.trial_badge' | t }}</span>
       </div>
     </div>
   </div>

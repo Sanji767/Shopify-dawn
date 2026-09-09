@@ -5,10 +5,10 @@
     <!-- Breadcrumb & Header -->
     <header style="margin-bottom: 32px;">
       <nav style="font-size: 0.85rem; color: var(--pet-muted); margin-bottom: 12px;">
-        <a href="/account" style="color: var(--pet-muted);">← Volver a Mi Cuenta</a>
+        <a href="/account" style="color: var(--pet-muted);">{{ 'paw.addresses.back_to_account' | t }}</a>
       </nav>
       <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 8px;">
-        Direcciones de Envío 📍
+        {{ 'paw.addresses.shipping_addresses' | t }}
       </h1>
     </header>
 
@@ -19,7 +19,7 @@
             <div>
               {% if address == customer.default_address %}
                 <span style="display: inline-block; padding: 4px 12px; background: #DCFCE7; color: #166534; font-size: 0.75rem; font-weight: 700; border-radius: 50px; margin-bottom: 10px;">
-                  DIRECCIÓN PRINCIPAL
+                  {{ 'paw.addresses.main_address' | t }}
                 </span>
               {% endif %}
               <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--pet-navy); margin-bottom: 6px;">{{ address.name }}</h3>
@@ -31,7 +31,7 @@
               </p>
             </div>
             <div style="display: flex; gap: 10px;">
-              <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; border: 1px solid var(--pet-border); text-decoration: none;">Editar</a>
+              <a href="/account/addresses" class="pet-btn pet-btn-secondary" style="padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; border: 1px solid var(--pet-border); text-decoration: none;">{{ 'paw.addresses.edit' | t }}</a>
             </div>
           </div>
         {% endfor %}

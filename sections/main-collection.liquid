@@ -380,11 +380,11 @@
       <div class="pet-collection-toolbar">
         <p class="pet-collection-count">
           {{ collection.products_count }}
-          {% if collection.products_count == 1 %}producto{% else %}productos{% endif %}
+          {% if collection.products_count == 1 %}{{ 'paw.collection.product_singular' | t }}{% else %}{{ 'paw.collection.product_plural' | t }}{% endif %}
         </p>
 
         <div class="pet-collection-sort">
-          <label for="pet-sort-select-{{ section.id }}" class="pet-collection-sort-label">Ordenar por:</label>
+          <label for="pet-sort-select-{{ section.id }}" class="pet-collection-sort-label">{{ 'paw.collection.sort_by' | t }}</label>
           <select
             id="pet-sort-select-{{ section.id }}"
             class="pet-collection-sort-select"
@@ -392,22 +392,22 @@
           >
             <option value="{{ collection.url }}?sort_by=manual"
               {% if collection.sort_by == 'manual' or collection.sort_by == blank %} selected{% endif %}
-            >Destacados</option>
+            >{{ 'paw.collection.sort_featured' | t }}</option>
             <option value="{{ collection.url }}?sort_by=best-selling"
               {% if collection.sort_by == 'best-selling' %} selected{% endif %}
-            >Más vendidos</option>
+            >{{ 'paw.collection.sort_best_selling' | t }}</option>
             <option value="{{ collection.url }}?sort_by=price-ascending"
               {% if collection.sort_by == 'price-ascending' %} selected{% endif %}
-            >Precio: Menor a Mayor</option>
+            >{{ 'paw.collection.sort_price_asc' | t }}</option>
             <option value="{{ collection.url }}?sort_by=price-descending"
               {% if collection.sort_by == 'price-descending' %} selected{% endif %}
-            >Precio: Mayor a Menor</option>
+            >{{ 'paw.collection.sort_price_desc' | t }}</option>
             <option value="{{ collection.url }}?sort_by=title-ascending"
               {% if collection.sort_by == 'title-ascending' %} selected{% endif %}
-            >Nombre: A-Z</option>
+            >{{ 'paw.collection.sort_name_az' | t }}</option>
             <option value="{{ collection.url }}?sort_by=created-descending"
               {% if collection.sort_by == 'created-descending' %} selected{% endif %}
-            >Más recientes</option>
+            >{{ 'paw.collection.sort_newest' | t }}</option>
           </select>
         </div>
       </div>
@@ -431,9 +431,9 @@
                 {% if on_sale or sold_out %}
                   <div class="pet-product-card-badges">
                     {% if sold_out %}
-                      <span class="pet-product-badge pet-product-badge--sold-out">Agotado</span>
+                      <span class="pet-product-badge pet-product-badge--sold-out">{{ 'paw.product.sold_out' | t }}</span>
                     {% elsif on_sale %}
-                      <span class="pet-product-badge pet-product-badge--sale">Oferta</span>
+                      <span class="pet-product-badge pet-product-badge--sale">{{ 'paw.product.sale' | t }}</span>
                     {% endif %}
                   </div>
                 {% endif %}
@@ -481,9 +481,9 @@
 
                 <div class="pet-product-card-actions">
                   {% if sold_out %}
-                    <span class="pet-product-quick-add pet-product-quick-add--sold-out">Agotado</span>
+                    <span class="pet-product-quick-add pet-product-quick-add--sold-out">{{ 'paw.product.sold_out_btn' | t }}</span>
                   {% else %}
-                    <a href="{{ product.url }}" class="pet-product-quick-add">Agregar rápido</a>
+                    <a href="{{ product.url }}" class="pet-product-quick-add">{{ 'paw.collection.quick_add' | t }}</a>
                   {% endif %}
                 </div>
               </div>
@@ -493,9 +493,9 @@
 
         {%- comment -%} Pagination {%- endcomment -%}
         {% if paginate.pages > 1 %}
-          <nav class="pet-pagination" aria-label="Paginación de la colección">
+          <nav class="pet-pagination" aria-label="{{ 'paw.collection.pagination_label' | t }}">
             {% if paginate.previous %}
-              <a href="{{ paginate.previous.url }}" aria-label="Página anterior">&laquo; Anterior</a>
+              <a href="{{ paginate.previous.url }}" aria-label="{{ 'paw.collection.prev_page' | t }}">&laquo; {{ 'paw.collection.previous' | t }}</a>
             {% endif %}
 
             {% for part in paginate.parts %}
@@ -511,15 +511,15 @@
             {% endfor %}
 
             {% if paginate.next %}
-              <a href="{{ paginate.next.url }}" aria-label="Página siguiente">Siguiente &raquo;</a>
+              <a href="{{ paginate.next.url }}" aria-label="{{ 'paw.collection.next_page' | t }}">{{ 'paw.collection.next' | t }} &raquo;</a>
             {% endif %}
           </nav>
         {% endif %}
 
       {% else %}
         <div class="pet-collection-empty" style="text-align: center; padding: 40px 0;">
-          <h2 style="font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--pet-navy); margin-bottom: 8px;">Explora nuestros productos destacados</h2>
-          <p style="color: var(--pet-muted); margin-bottom: 32px;">No hay productos asignados a esta categoría aún, pero aquí tienes los más populares:</p>
+          <h2 style="font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.collection.empty_title' | t }}</h2>
+          <p style="color: var(--pet-muted); margin-bottom: 32px;">{{ 'paw.collection.empty_text' | t }}</p>
           
           <div class="pet-products-grid" style="text-align: left; margin-bottom: 40px;">
             {% assign sample_titles = "Cama Ortopédica Lavable para Mascotas,Manta Protectora Impermeable para Coche,Rodillo Reutilizable Quitapelos para Sofá,Botella Portátil de Agua para Paseo" | split: "," %}
@@ -531,7 +531,7 @@
                   {% if i == 0 %}🛏️{% elsif i == 1 %}🚗{% elsif i == 2 %}🛋️{% else %}🦮{% endif %}
                 </div>
                 <div class="pet-product-card-info" style="padding: 16px;">
-                  <span class="pet-stock-badge">⚡ Más vendido</span>
+                  <span class="pet-stock-badge">{{ 'paw.product.bestseller_badge' | t }}</span>
                   <div class="pet-product-card-rating" style="display:flex; gap:4px; font-size:0.8rem; margin-bottom:6px;">
                     <span style="color:#F59E0B;">★★★★★</span>
                     <span style="color:var(--pet-muted);">(4.9)</span>
@@ -543,12 +543,12 @@
                     <span class="pet-product-card-price-current" style="font-weight: 700; font-size: 1.1rem; color: var(--pet-navy);">{{ sample_prices[i] }}</span>
                     <span class="pet-product-card-price-compare" style="color: var(--pet-muted); text-decoration: line-through; margin-left: 6px; font-size: 0.85rem;">{{ sample_compares[i] }}</span>
                   </div>
-                  <a href="/collections/all" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">Ver producto</a>
+                  <a href="/collections/all" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">{{ 'paw.product.view_product' | t }}</a>
                 </div>
               </article>
             {% endfor %}
           </div>
-          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 36px; border-radius: 50px; text-decoration: none;">Ver todo el catálogo</a>
+          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 36px; border-radius: 50px; text-decoration: none;">{{ 'paw.collection.view_all_catalog' | t }}</a>
         </div>
       {% endif %}
 

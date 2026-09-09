@@ -6,9 +6,9 @@
     <header style="text-align: center; max-width: 640px; margin: 0 auto 40px;">
       <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy); margin-bottom: 16px;">
         {% if search.performed %}
-          Resultados para "{{ search.terms }}"
+          {{ 'paw.search.results_for' | t: terms: search.terms }}
         {% else %}
-          Buscar productos
+          {{ 'paw.search.search_products' | t }}
         {% endif %}
       </h1>
 
@@ -18,12 +18,12 @@
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
-          placeholder="¿Qué buscas para tu mascota?..."
+          placeholder="{{ 'paw.search.search_placeholder' | t }}"
           style="flex: 1; padding: 14px 20px; border-radius: 50px; border: 1px solid var(--pet-border, #E5E1DB); font-family: 'Inter', sans-serif; font-size: 0.95rem;"
           required
         >
         <button type="submit" class="pet-btn pet-btn-primary" style="padding: 14px 28px; border-radius: 50px;">
-          Buscar
+          {{ 'paw.search.search_btn' | t }}
         </button>
       </form>
     </header>
@@ -31,7 +31,7 @@
     {% if search.performed %}
       {% if search.results_count > 0 %}
         <p style="text-align: center; color: var(--pet-muted); margin-bottom: 32px; font-size: 0.95rem;">
-          Hemos encontrado <strong>{{ search.results_count }}</strong> resultado(s) para tu búsqueda.
+          {{ 'paw.search.results_found' | t: count: search.results_count }}
         </p>
 
         <div class="pet-products-grid">
@@ -55,7 +55,7 @@
                     {{ item.price | money }}
                   </div>
                 {% endif %}
-                <a href="{{ item.url }}" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">Ver resultado</a>
+                <a href="{{ item.url }}" class="pet-product-quick-add" style="display: block; text-align: center; background: var(--pet-navy); color: #fff; padding: 10px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">{{ 'paw.search.view_result' | t }}</a>
               </div>
             </article>
           {% endfor %}
@@ -63,15 +63,15 @@
       {% else %}
         <div style="text-align: center; padding: 40px 0;">
           <p style="font-size: 3.5rem; margin-bottom: 12px;">🔍 🐾</p>
-          <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--pet-navy); margin-bottom: 8px;">No encontramos resultados para "{{ search.terms }}"</h2>
-          <p style="color: var(--pet-muted); margin-bottom: 24px;">Intenta buscar otros términos como "cama", "manta", "viaje" o "rodillo".</p>
-          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Ver todo el catálogo</a>
+          <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.search.no_results' | t: terms: search.terms }}</h2>
+          <p style="color: var(--pet-muted); margin-bottom: 24px;">{{ 'paw.search.no_results_hint' | t }}</p>
+          <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">{{ 'paw.search.view_all_catalog' | t }}</a>
         </div>
       {% endif %}
     {% else %}
       <div style="text-align: center; padding: 40px 0;">
-        <p style="color: var(--pet-muted); margin-bottom: 24px;">Escribe una palabra en el buscador superior para encontrar lo que necesitas.</p>
-        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">Explorar catálogo</a>
+        <p style="color: var(--pet-muted); margin-bottom: 24px;">{{ 'paw.search.empty_hint' | t }}</p>
+        <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 14px 32px; border-radius: 50px; text-decoration: none;">{{ 'paw.search.explore_catalog' | t }}</a>
       </div>
     {% endif %}
   </div>

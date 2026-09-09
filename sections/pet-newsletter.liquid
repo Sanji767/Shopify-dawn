@@ -4,7 +4,7 @@
   <div class="pet-container container">
     <div class="pet-newsletter-card">
       <div class="pet-newsletter-inner">
-        <span class="pet-newsletter-badge">💌 COMUNIDAD PET LOVERS</span>
+        <span class="pet-newsletter-badge">{{ 'paw.newsletter.tag_label' | t }}</span>
         <h2 class="pet-newsletter-title">{{ section.settings.title }}</h2>
         <p class="pet-newsletter-subtitle">{{ section.settings.subtitle }}</p>
 
@@ -33,18 +33,18 @@
 
             {% if form.errors %}
               <div class="pet-newsletter-error">
-                <p>Por favor introduce un correo válido.</p>
+                <p>{{ 'paw.newsletter.invalid_email' | t }}</p>
               </div>
             {% endif %}
           {% endif %}
         {% endform %}
 
         <div class="pet-newsletter-trust">
-          <span>🔒 Sin spam</span>
+          <span>{{ 'paw.newsletter.no_spam' | t }}</span>
           <span>•</span>
-          <span>🐾 10% dto en tu primer pedido</span>
+          <span>{{ 'paw.newsletter.first_order_discount' | t }}</span>
           <span>•</span>
-          <span>Cancela cuando quieras</span>
+          <span>{{ 'paw.newsletter.cancel_anytime' | t }}</span>
         </div>
       </div>
     </div>

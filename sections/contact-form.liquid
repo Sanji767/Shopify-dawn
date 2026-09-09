@@ -11,28 +11,28 @@
         {% form 'contact' %}
           <div class="row">
             <div class="col-lg-6 col-12 mb-3">
-              <input type="text" name="contact[firstName]" placeholder="Nombre" required
+              <input type="text" name="contact[firstName]" placeholder="{{ 'paw.contact.name_placeholder' | t }}" required
                 style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
             </div>
             <div class="col-lg-6 col-12 mb-3">
-              <input type="text" name="contact[lastName]" placeholder="Apellido"
+              <input type="text" name="contact[lastName]" placeholder="{{ 'paw.contact.last_name_placeholder' | t }}"
                 style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
             </div>
             <div class="col-12 mb-3">
-              <input type="email" name="contact[email]" placeholder="Email" required
+              <input type="email" name="contact[email]" placeholder="{{ 'paw.contact.email_placeholder' | t }}" required
                 style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem;">
             </div>
             <div class="col-12 mb-3">
-              <textarea name="contact[message]" placeholder="Mensaje" rows="5" required
+              <textarea name="contact[message]" placeholder="{{ 'paw.contact.message_placeholder' | t }}" rows="5" required
                 style="width: 100%; padding: 14px 16px; border: 1px solid var(--pet-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem; resize: vertical;"></textarea>
             </div>
             <div class="col-12">
-              <button type="submit" class="pet-btn pet-btn-primary" style="width: 100%;">Enviar mensaje</button>
+              <button type="submit" class="pet-btn pet-btn-primary" style="width: 100%;">{{ 'paw.contact.send_message' | t }}</button>
             </div>
 
             {% if form.posted_successfully? %}
               <div class="col-12 mt-3">
-                <p style="text-align: center; color: var(--pet-sage); font-weight: 500;">¡Gracias por contactarnos! Te responderemos lo antes posible. 🐾</p>
+                <p style="text-align: center; color: var(--pet-sage); font-weight: 500;">{{ 'paw.contact.thank_you' | t }}</p>
               </div>
             {% endif %}
             {% if form.errors %}
