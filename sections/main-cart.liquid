@@ -22,7 +22,7 @@
     
     <!-- Cart Title Header -->
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
-      <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--pet-navy, #1A2B4A); margin: 0;">
+      <h1 style="font-family: var(--font-heading); font-size: 2.75rem; color: var(--pet-navy, #1A2B4A); margin: 0;">
         {{ 'paw.cart.title' | t }}
       </h1>
       {% if cart.item_count > 0 %}
@@ -103,7 +103,7 @@
             <div style="font-size: 2.5rem; flex-shrink: 0;">🛋️</div>
             <div style="flex: 1; min-width: 200px;">
               <span style="font-size: 0.75rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase;">{{ 'paw.cart.upsell_title' | t }}</span>
-              <h4 style="font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--pet-navy); margin: 2px 0 4px;">{{ 'paw.cart.upsell_product' | t }}</h4>
+              <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--pet-navy); margin: 2px 0 4px;">{{ 'paw.cart.upsell_product' | t }}</h4>
               <p style="font-size: 0.85rem; color: var(--pet-muted); margin: 0;">{{ 'paw.cart.upsell_desc' | t }}</p>
             </div>
             <a href="/collections/all" class="pet-btn pet-btn-primary" style="padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; text-decoration: none;">{{ 'paw.cart.upsell_add' | t }}</a>
@@ -113,7 +113,7 @@
         <!-- Right Column: Order Summary Card -->
         <div class="col-lg-4 col-12">
           <div style="background: #FFFFFF; border: 1px solid #E5E1DB; border-radius: 24px; padding: 28px; position: sticky; top: 100px; box-shadow: 0 10px 30px rgba(26,43,74,0.06);">
-            <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--pet-navy); margin: 0 0 20px; padding-bottom: 16px; border-bottom: 1px solid #E5E1DB;">
+            <h2 style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--pet-navy); margin: 0 0 20px; padding-bottom: 16px; border-bottom: 1px solid #E5E1DB;">
               {{ 'paw.cart.order_summary' | t }}
             </h2>
 
@@ -162,7 +162,7 @@
       <!-- Empty Cart Showcase State -->
       <div style="background: #FFFFFF; border-radius: 28px; padding: 48px 24px; text-align: center; max-width: 860px; margin: 0 auto; border: 1px solid #E5E1DB;">
         <div style="font-size: 4rem; margin-bottom: 16px;">😴 🐾</div>
-        <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.cart.empty_title' | t }}</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 2.25rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.cart.empty_title' | t }}</h2>
         <p style="color: var(--pet-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 32px;">{{ 'paw.cart.empty_text' | t }}</p>
         
         <a href="{{ routes.all_products_collection_url }}" class="pet-btn pet-btn-primary" style="padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 1.05rem; display: inline-block;">
@@ -171,7 +171,7 @@
 
         <!-- Popular Recommendations Grid -->
         <div style="margin-top: 48px; text-align: left;">
-          <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--pet-navy); margin-bottom: 20px; text-align: center;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--pet-navy); margin-bottom: 20px; text-align: center;">
             {{ 'paw.cart.recommendations_title' | t }}
           </h3>
           <div class="pet-cart-recommendations-grid">

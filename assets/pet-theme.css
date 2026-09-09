@@ -18,8 +18,8 @@
   --pet-success: #22C55E;
   --pet-error: #EF4444;
 
-  --font-heading: 'DM Serif Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -67,9 +67,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading) !important;
   color: var(--pet-navy) !important;
-  font-weight: 400 !important;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
 }
 
 p {
@@ -115,22 +115,77 @@ img {
   margin-bottom: var(--spacing-xl);
 }
 .pet-section-title h2 {
-  font-size: 2.5rem;
+  font-family: var(--font-heading) !important;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.25 !important;
+  color: var(--pet-navy) !important;
   margin-bottom: var(--spacing-sm);
 }
-.pet-section-title p {
+.pet-section-title p,
+.pet-section-subtitle {
+  font-family: var(--font-body) !important;
   color: var(--pet-muted) !important;
-  font-size: 1.1rem !important;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1rem !important;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6 !important;
 }
 @media (max-width: 768px) {
   .pet-section-title h2 {
-    font-size: 1.75rem;
+    font-size: 1.75rem !important;
   }
-  .pet-section-title p {
+  .pet-section-title p,
+  .pet-section-subtitle {
     font-size: 0.95rem !important;
   }
+}
+
+/* ---- Standardized Product Cards ---- */
+.pet-product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--pet-white);
+  border: 1px solid var(--pet-border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.pet-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.pet-product-card-img-wrap {
+  aspect-ratio: 1 / 1 !important;
+  overflow: hidden;
+  position: relative;
+  background: var(--pet-cream);
+}
+.pet-product-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pet-product-card-info {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  padding: var(--spacing-md);
+}
+.pet-product-card-title {
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: var(--pet-navy) !important;
+  margin-bottom: var(--spacing-xs);
+}
+.pet-product-card-actions {
+  margin-top: auto !important;
+  padding-top: var(--spacing-sm);
 }
 
 /* ---- Buttons ---- */

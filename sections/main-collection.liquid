@@ -12,7 +12,7 @@
   }
 
   .pet-collection-header-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.75rem;
     color: var(--pet-navy);
     margin-bottom: 12px;
@@ -295,7 +295,7 @@
   }
 
   .pet-collection-empty h2 {
-    font-family: 'DM Serif Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.75rem;
     color: var(--pet-navy);
     margin-bottom: 12px;
@@ -516,7 +516,7 @@
 
       {% else %}
         <div class="pet-collection-empty" style="text-align: center; padding: 40px 0;">
-          <h2 style="font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.collection.empty_title' | t }}</h2>
+          <h2 style="font-family: var(--font-heading); font-size: 2rem; color: var(--pet-navy); margin-bottom: 8px;">{{ 'paw.collection.empty_title' | t }}</h2>
           <p style="color: var(--pet-muted); margin-bottom: 32px;">{{ 'paw.collection.empty_text' | t }}</p>
           
           <div class="pet-products-grid" style="text-align: left; margin-bottom: 40px;">

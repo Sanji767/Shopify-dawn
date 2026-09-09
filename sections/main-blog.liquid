@@ -5,7 +5,7 @@
       <span class="pet-blog-badge" style="display: inline-block; padding: 6px 16px; background: #F5EDE3; border: 1px solid #E8734A; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--pet-coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
         {{ 'paw.blog.tag_label' | t }}
       </span>
-      <h1 class="pet-blog-title" style="font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
+      <h1 class="pet-blog-title" style="font-family: var(--font-heading); font-size: 3rem; color: var(--pet-navy, #1A2B4A); margin-bottom: 16px; line-height: 1.2;">
         {% assign _bt = 'paw.blog.title_fallback' | t %}{{ blog.title | default: _bt }}
       </h1>
       <p class="pet-blog-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--pet-muted, #6B7280); line-height: 1.6;">
@@ -148,7 +148,7 @@
     margin-bottom: 12px;
   }
   .pet-article-card-title {
-    font-family: 'DM Serif Display', serif !important;
+    font-family: var(--font-heading) !important;
     font-size: 1.35rem !important;
     color: var(--pet-navy) !important;
     margin: 0 0 12px !important;

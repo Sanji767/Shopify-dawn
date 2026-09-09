@@ -2,7 +2,7 @@
 <section class="pet-section pet-features-section">
   <div class="pet-container container">
     <div class="pet-section-title" style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 0.5rem;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 0.5rem;">
         {% if request.locale.iso_code == 'en' %}
           Made by and for those who cannot imagine life without pets
         {% else %}
@@ -128,7 +128,7 @@
     line-height: 1;
   }
   .pet-feature-card h3 {
-    font-family: 'DM Serif Display', serif !important;
+    font-family: var(--font-heading) !important;
     font-size: 1.4rem !important;
     color: var(--pet-navy) !important;
     margin-bottom: 12px !important;

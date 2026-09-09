@@ -324,7 +324,7 @@
 <div class="pet-mobile-overlay" onclick="this.classList.remove('open'); document.querySelector('.pet-mobile-menu').classList.remove('open');"></div>
 <nav class="pet-mobile-menu">
   <div class="pet-mobile-menu-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--pet-border, #E5E1DB); margin-bottom: 16px;">
-    <span style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--pet-navy);">Paw &amp; Home 🐾</span>
+    <span style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--pet-navy);">Paw &amp; Home 🐾</span>
     <button class="pet-mobile-menu-close" onclick="this.closest('.pet-mobile-menu').classList.remove('open'); document.querySelector('.pet-mobile-overlay').classList.remove('open');" aria-label="{{ 'paw.header.close_menu' | t }}" style="position: static; padding: 4px;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>

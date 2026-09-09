@@ -388,13 +388,10 @@
     "pet_categories",
     "featured_products",
     "feature_values",
-    "pet_owners",
-    "best_sellers",
-    "pet_bundles",
     "pet_problems",
+    "pet_bundles",
     "pet_reviews",
     "pet_ugc",
-    "social_media",
     "pet_newsletter"
   ]
 }
