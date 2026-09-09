@@ -5,8 +5,20 @@
     <div class="row pet-owners-wrapper align-items-center">
       <div class="col-lg-6 col-12 pet-owners-content">
         <span class="pet-owners-eyebrow">{{ 'paw.owners.tag_label' | t }}</span>
-        <h2 class="pet-owners-title">{% assign _t = 'paw.owners.title_fallback' | t %}{{ section.settings.title | default: _t }}</h2>
-        <p class="pet-owners-description">{% assign _d = 'paw.owners.desc_fallback' | t %}{{ section.settings.description | default: _d }}</p>
+        <h2 class="pet-owners-title">
+          {% if request.locale.iso_code == 'en' %}
+            {{ 'paw.owners.title_fallback' | t }}
+          {% else %}
+            {% assign _t = 'paw.owners.title_fallback' | t %}{{ section.settings.title | default: _t }}
+          {% endif %}
+        </h2>
+        <p class="pet-owners-description">
+          {% if request.locale.iso_code == 'en' %}
+            {{ 'paw.owners.desc_fallback' | t }}
+          {% else %}
+            {% assign _d = 'paw.owners.desc_fallback' | t %}{{ section.settings.description | default: _d }}
+          {% endif %}
+        </p>
 
         <div class="pet-owners-features">
           {% if section.blocks.size > 0 %}
@@ -14,7 +26,19 @@
               {% if block.type == 'feature' %}
                 <div class="pet-owners-feature-item" {{ block.shopify_attributes }}>
                   <span class="pet-owners-feature-icon">{{ block.settings.icon }}</span>
-                  <span class="pet-owners-feature-title">{{ block.settings.title }}</span>
+                  <span class="pet-owners-feature-title">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case block.settings.title %}
+                        {% when 'Casa limpia' %}Clean Home
+                        {% when 'Viajes' %}Travel
+                        {% when 'Organización' %}Organization
+                        {% when 'Lifestyle' %}Lifestyle
+                        {% else %}{{ block.settings.title }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.title }}
+                    {% endif %}
+                  </span>
                 </div>
               {% endif %}
             {% endfor %}
@@ -27,7 +51,11 @@
         </div>
 
         <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="pet-btn pet-btn-primary pet-btn-lg">
-          {% assign _t = 'paw.owners.cta_fallback' | t %}{{ section.settings.cta_text | default: _t }}
+          {% if request.locale.iso_code == 'en' %}
+            {{ 'paw.owners.cta_fallback' | t }}
+          {% else %}
+            {% assign _t = 'paw.owners.cta_fallback' | t %}{{ section.settings.cta_text | default: _t }}
+          {% endif %}
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4.166 10h11.668M10 4.166L15.833 10 10 15.833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>

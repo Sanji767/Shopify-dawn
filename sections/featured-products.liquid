@@ -233,9 +233,21 @@
 <section class="pet-section pet-featured-products" id="pet-featured-products-{{ section.id }}">
   <div class="pet-container container">
     <div class="pet-section-header">
-      <h2 class="pet-section-title">{{ section.settings.title }}</h2>
+      <h2 class="pet-section-title">
+        {% if request.locale.iso_code == 'en' %}
+          Most-Loved Favorites
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
+      </h2>
       {% if section.settings.subtitle != blank %}
-        <p class="pet-section-subtitle">{{ section.settings.subtitle }}</p>
+        <p class="pet-section-subtitle">
+          {% if request.locale.iso_code == 'en' %}
+            The highest-rated essentials by families with dogs and cats
+          {% else %}
+            {{ section.settings.subtitle }}
+          {% endif %}
+        </p>
       {% endif %}
     </div>
 

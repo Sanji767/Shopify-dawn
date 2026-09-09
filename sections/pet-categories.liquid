@@ -4,13 +4,21 @@
   <div class="pet-container container">
     {% if section.settings.title != blank %}
       <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
-        {{ section.settings.title }}
+        {% if request.locale.iso_code == 'en' %}
+          Explore by Category
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
       </h2>
     {% endif %}
 
     {% if section.settings.subtitle != blank %}
       <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
-        {{ section.settings.subtitle }}
+        {% if request.locale.iso_code == 'en' %}
+          Find exactly what you need for daily life with your furry friend
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
       </p>
     {% endif %}
 
@@ -45,10 +53,36 @@
                   <span class="pet-category-card__emoji">{{ block.settings.emoji }}</span>
                 {% endif %}
                 {% if block.settings.title != blank %}
-                  <h3 class="pet-category-card__title">{{ block.settings.title }}</h3>
+                  <h3 class="pet-category-card__title">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case block.settings.title %}
+                        {% when 'Perros' %}Dogs
+                        {% when 'Gatos' %}Cats
+                        {% when 'Para casa' %}For Home
+                        {% when 'Para viajar' %}For Travel
+                        {% when 'Para pasear' %}For Walks
+                        {% else %}{{ block.settings.title }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.title }}
+                    {% endif %}
+                  </h3>
                 {% endif %}
                 {% if block.settings.subtitle != blank %}
-                  <p class="pet-category-card__subtitle">{{ block.settings.subtitle }}</p>
+                  <p class="pet-category-card__subtitle">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case block.settings.subtitle %}
+                        {% when 'Accesorios y confort' %}Accessories &amp; Comfort
+                        {% when 'Juegos y descanso' %}Play &amp; Rest
+                        {% when 'Limpieza y orden' %}Cleaning &amp; Order
+                        {% when 'Seguridad en ruta' %}Travel Safety
+                        {% when 'Paseos cómodos' %}Comfortable Walks
+                        {% else %}{{ block.settings.subtitle }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.subtitle }}
+                    {% endif %}
+                  </p>
                 {% endif %}
                 
                 <span class="pet-category-card__link-text">

@@ -2,8 +2,20 @@
 <section class="pet-section" style="background: var(--pet-warm);">
   <div class="pet-container">
     <div class="pet-section-title">
-      <h2>{{ section.settings.title }}</h2>
-      <p>{{ section.settings.subtitle }}</p>
+      <h2>
+        {% if request.locale.iso_code == 'en' %}
+          Paw &amp; Home Community
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
+      </h2>
+      <p>
+        {% if request.locale.iso_code == 'en' %}
+          Share your moment — Follow us on Instagram
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
+      </p>
     </div>
     <div class="pet-ugc-grid">
       {% for block in section.blocks %}

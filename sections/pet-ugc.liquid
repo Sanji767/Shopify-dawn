@@ -4,13 +4,21 @@
   <div class="pet-container container">
     {% if section.settings.title != blank %}
       <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
-        {{ section.settings.title }}
+        {% if request.locale.iso_code == 'en' %}
+          Paw &amp; Home Community
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
       </h2>
     {% endif %}
 
     {% if section.settings.subtitle != blank %}
       <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
-        {{ section.settings.subtitle }}
+        {% if request.locale.iso_code == 'en' %}
+          Share your moment — Follow us on Instagram
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
       </p>
     {% endif %}
 

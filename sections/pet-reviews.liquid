@@ -4,13 +4,21 @@
   <div class="pet-container container">
     {% if section.settings.title != blank %}
       <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
-        {{ section.settings.title }}
+        {% if request.locale.iso_code == 'en' %}
+          What Our Customers Say
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
       </h2>
     {% endif %}
 
     {% if section.settings.subtitle != blank %}
       <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
-        {{ section.settings.subtitle }}
+        {% if request.locale.iso_code == 'en' %}
+          Genuine stories from families who share their lives with pets
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
       </p>
     {% endif %}
 
@@ -34,7 +42,18 @@
 
               {% if block.settings.review_text != blank %}
                 <blockquote class="pet-review-card__text">
-                  <p>“{{ block.settings.review_text }}”</p>
+                  <p>
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case forloop.index %}
+                        {% when 1 %}“The car accessories totally transformed our road trips. The seat protector is super durable and a breeze to clean.”
+                        {% when 2 %}“The pet hair remover roller works wonders! Finally I can keep the living room clean with two shedding cats.”
+                        {% when 3 %}“Outstanding quality and quick delivery. The portable water bottle and poop bag dispenser are everyday lifesavers.”
+                        {% else %}“{{ block.settings.review_text }}”
+                      {% endcase %}
+                    {% else %}
+                      “{{ block.settings.review_text }}”
+                    {% endif %}
+                  </p>
                 </blockquote>
               {% endif %}
 
@@ -47,7 +66,18 @@
                     <cite class="pet-review-card__author">{{ block.settings.author_name }}</cite>
                   {% endif %}
                   {% if block.settings.author_detail != blank %}
-                    <span class="pet-review-card__detail">{{ block.settings.author_detail }}</span>
+                    <span class="pet-review-card__detail">
+                      {% if request.locale.iso_code == 'en' %}
+                        {% case forloop.index %}
+                          {% when 1 %}Max's Mom (Golden Retriever)
+                          {% when 2 %}Misa &amp; Leo's Dad (Cats)
+                          {% when 3 %}Bubu's Mom (Poodle)
+                          {% else %}{{ block.settings.author_detail }}
+                        {% endcase %}
+                      {% else %}
+                        {{ block.settings.author_detail }}
+                      {% endif %}
+                    </span>
                   {% endif %}
                 </div>
               </footer>

@@ -4,13 +4,21 @@
   <div class="pet-container container">
     {% if section.settings.title != blank %}
       <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
-        {{ section.settings.title }}
+        {% if request.locale.iso_code == 'en' %}
+          Everything You Need, in One Single Bundle
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
       </h2>
     {% endif %}
 
     {% if section.settings.subtitle != blank %}
       <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
-        {{ section.settings.subtitle }}
+        {% if request.locale.iso_code == 'en' %}
+          Save more and equip yourself completely with our curated bundles
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
       </p>
     {% endif %}
 
@@ -36,7 +44,17 @@
                 {% endif %}
 
                 {% if block.settings.badge != blank %}
-                  <span class="pet-bundle-card__badge">{{ block.settings.badge }}</span>
+                  <span class="pet-bundle-card__badge">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case block.settings.badge %}
+                        {% when 'Popular' %}Popular
+                        {% when 'Nuevo' %}New
+                        {% else %}{{ block.settings.badge }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.badge }}
+                    {% endif %}
+                  </span>
                 {% endif %}
               </div>
 
@@ -46,7 +64,19 @@
                 {% endif %}
 
                 {% if block.settings.description != blank %}
-                  <p class="pet-bundle-card__description">{{ block.settings.description }}</p>
+                  <p class="pet-bundle-card__description">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case forloop.index %}
+                        {% when 1 %}Everything you need to keep your home clean and organized with your pet.
+                        {% when 2 %}Travel with peace of mind with everything your pet needs on the road.
+                        {% when 3 %}More comfortable and organized walks with essential gear.
+                        {% when 4 %}Just adopted? This pack has all the essentials to get started.
+                        {% else %}{{ block.settings.description }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.description }}
+                    {% endif %}
+                  </p>
                 {% endif %}
 
                 <div class="pet-bundle-price-wrap" style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
@@ -62,7 +92,11 @@
                 </div>
 
                 <a href="{{ block.settings.link | default: '/collections/all' }}" class="pet-bundle-card__link">
-                  {% assign _t = 'paw.bundles.view_pack' | t %}{{ block.settings.link_text | default: _t }}
+                  {% if request.locale.iso_code == 'en' %}
+                    View Bundle
+                  {% else %}
+                    {% assign _t = 'paw.bundles.view_pack' | t %}{{ block.settings.link_text | default: _t }}
+                  {% endif %}
                   <svg class="pet-bundle-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>

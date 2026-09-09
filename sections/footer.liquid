@@ -27,7 +27,7 @@
 
       <!-- Shop Links -->
       <div>
-        <h4>{{ section.settings.col2_title }}</h4>
+        <h4>{% if request.locale.iso_code == 'en' %}Navigation{% else %}{{ section.settings.col2_title | default: 'Navegación' }}{% endif %}</h4>
         <ul class="pet-footer-links">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -45,7 +45,7 @@
 
       <!-- Help & Legal Links -->
       <div>
-        <h4>{% assign _t = 'paw.footer.help' | t %}{{ section.settings.col3_title | default: _t }}</h4>
+        <h4>{% if request.locale.iso_code == 'en' %}Help &amp; Legal{% else %}{% assign _t = 'paw.footer.help' | t %}{{ section.settings.col3_title | default: _t }}{% endif %}</h4>
         <ul class="pet-footer-links">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -67,13 +67,13 @@
 
       <!-- Newsletter -->
       <div>
-        <h4>{{ section.settings.newsletter_title }}</h4>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 16px;">{{ section.settings.newsletter_subtitle }}</p>
+        <h4>{% if request.locale.iso_code == 'en' %}Join Our Family{% else %}{{ section.settings.newsletter_title | default: 'Únete a la familia' }}{% endif %}</h4>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 16px;">{% if request.locale.iso_code == 'en' %}Receive exclusive offers and tips to care for your pet.{% else %}{{ section.settings.newsletter_subtitle | default: 'Recibe ofertas exclusivas y consejos para cuidar de tu mascota.' }}{% endif %}</p>
         {% form 'customer' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="pet-newsletter-form">
-            <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder }}" required>
-            <button type="submit">{{ section.settings.newsletter_button }}</button>
+            <input type="email" name="contact[email]" placeholder="{% if request.locale.iso_code == 'en' %}Your email...{% else %}{{ section.settings.newsletter_placeholder | default: 'Tu correo...' }}{% endif %}" required>
+            <button type="submit">{% if request.locale.iso_code == 'en' %}Join{% else %}{{ section.settings.newsletter_button | default: 'Unirme' }}{% endif %}</button>
           </div>
           {{ form.errors | default_errors }}
           {% if form.posted_successfully? %}

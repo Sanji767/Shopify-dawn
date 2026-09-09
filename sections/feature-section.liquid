@@ -2,9 +2,21 @@
 <section class="pet-section pet-features-section">
   <div class="pet-container container">
     <div class="pet-section-title" style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 0.5rem;">{{ section.settings.title }}</h2>
+      <h2 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--pet-navy); margin-bottom: 0.5rem;">
+        {% if request.locale.iso_code == 'en' %}
+          Made by and for those who cannot imagine life without pets
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
+      </h2>
       {% if section.settings.subtitle != blank %}
-        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-muted); max-width: 600px; margin: 0 auto;">{{ section.settings.subtitle }}</p>
+        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--pet-muted); max-width: 600px; margin: 0 auto;">
+          {% if request.locale.iso_code == 'en' %}
+            Love, respect, and quality in every corner of our store
+          {% else %}
+            {{ section.settings.subtitle }}
+          {% endif %}
+        </p>
       {% endif %}
     </div>
 
@@ -15,8 +27,33 @@
             <div class="pet-feature-icon-wrapper">
               <span class="pet-feature-icon">{{ block.settings.icon }}</span>
             </div>
-            <h3>{{ block.settings.feature_title }}</h3>
-            <p>{{ block.settings.description }}</p>
+            <h3>
+              {% if request.locale.iso_code == 'en' %}
+                {% case block.settings.feature_title %}
+                  {% when 'Amor en cada detalle' %}Love in Every Detail
+                  {% when 'Pensado para la vida real' %}Designed for Real Life
+                  {% when 'Siempre a tu lado' %}Always By Your Side
+                  {% else %}{{ block.settings.feature_title }}
+                {% endcase %}
+              {% else %}
+                {{ block.settings.feature_title }}
+              {% endif %}
+            </h3>
+            <p>
+              {% if request.locale.iso_code == 'en' %}
+                {% if forloop.index == 1 %}
+                  We only select comfortable, safe, durable products we would use with our own furry companions.
+                {% elsif forloop.index == 2 %}
+                  We know the feeling of a fur-covered sofa or muddy paws after a walk. We help you enjoy life together stress-free.
+                {% elsif forloop.index == 3 %}
+                  We speak your language: passionate about their happiness and well-being. Message us anytime you need.
+                {% else %}
+                  {{ block.settings.description }}
+                {% endif %}
+              {% else %}
+                {{ block.settings.description }}
+              {% endif %}
+            </p>
           </div>
         </div>
       {% endfor %}

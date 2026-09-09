@@ -8,23 +8,28 @@
 {%- assign text_color = section.settings.text_color | default: 'var(--pet-navy, #1A2B4A)' -%}
 
 {%- assign item_1_icon = section.settings.item_1_icon | default: '🚚' -%}
-{%- assign _t = 'paw.trust.shipping_fallback' | t -%}
-{%- assign item_1_text = section.settings.item_1_text | default: _t -%}
-{%- assign item_1_link = section.settings.item_1_link -%}
-
 {%- assign item_2_icon = section.settings.item_2_icon | default: '↩️' -%}
-{%- assign _t = 'paw.trust.returns_fallback' | t -%}
-{%- assign item_2_text = section.settings.item_2_text | default: _t -%}
-{%- assign item_2_link = section.settings.item_2_link -%}
-
 {%- assign item_3_icon = section.settings.item_3_icon | default: '🔒' -%}
-{%- assign _t = 'paw.trust.secure_payment_fallback' | t -%}
-{%- assign item_3_text = section.settings.item_3_text | default: _t -%}
-{%- assign item_3_link = section.settings.item_3_link -%}
-
 {%- assign item_4_icon = section.settings.item_4_icon | default: '💬' -%}
-{%- assign _t = 'paw.trust.support_fallback' | t -%}
-{%- assign item_4_text = section.settings.item_4_text | default: _t -%}
+
+{%- if request.locale.iso_code == 'en' -%}
+  {%- assign item_1_text = 'paw.trust.shipping_fallback' | t -%}
+  {%- assign item_2_text = 'paw.trust.returns_fallback' | t -%}
+  {%- assign item_3_text = 'paw.trust.secure_payment_fallback' | t -%}
+  {%- assign item_4_text = 'paw.trust.support_fallback' | t -%}
+{%- else -%}
+  {%- assign _t = 'paw.trust.shipping_fallback' | t -%}
+  {%- assign item_1_text = section.settings.item_1_text | default: _t -%}
+  {%- assign _t = 'paw.trust.returns_fallback' | t -%}
+  {%- assign item_2_text = section.settings.item_2_text | default: _t -%}
+  {%- assign _t = 'paw.trust.secure_payment_fallback' | t -%}
+  {%- assign item_3_text = section.settings.item_3_text | default: _t -%}
+  {%- assign _t = 'paw.trust.support_fallback' | t -%}
+  {%- assign item_4_text = section.settings.item_4_text | default: _t -%}
+{%- endif -%}
+{%- assign item_1_link = section.settings.item_1_link -%}
+{%- assign item_2_link = section.settings.item_2_link -%}
+{%- assign item_3_link = section.settings.item_3_link -%}
 {%- assign item_4_link = section.settings.item_4_link -%}
 
 <section

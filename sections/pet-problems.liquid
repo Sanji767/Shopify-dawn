@@ -4,13 +4,21 @@
   <div class="pet-container container">
     {% if section.settings.title != blank %}
       <h2 class="pet-section-title" style="color: {{ section.settings.title_color }};">
-        {{ section.settings.title }}
+        {% if request.locale.iso_code == 'en' %}
+          We Understand Because It Happens to Us Too
+        {% else %}
+          {{ section.settings.title }}
+        {% endif %}
       </h2>
     {% endif %}
 
     {% if section.settings.subtitle != blank %}
       <p class="pet-section-subtitle" style="color: {{ section.settings.subtitle_color }};">
-        {{ section.settings.subtitle }}
+        {% if request.locale.iso_code == 'en' %}
+          Smart solutions for the daily joys and challenges of living with furry companions
+        {% else %}
+          {{ section.settings.subtitle }}
+        {% endif %}
       </p>
     {% endif %}
 
@@ -25,17 +33,51 @@
 
               <div class="pet-problem-card__content">
                 {% if block.settings.problem != blank %}
-                  <h3 class="pet-problem-card__question">{{ block.settings.problem }}</h3>
+                  <h3 class="pet-problem-card__question">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case forloop.index %}
+                        {% when 1 %}Does your sofa seem to grow its own coat of fur?
+                        {% when 2 %}Is riding in the car with your pet full of stress or stray hair?
+                        {% when 3 %}Do they come back from walks leaving muddy paw prints all over?
+                        {% when 4 %}Do you notice them struggling to stand up after a long nap?
+                        {% else %}{{ block.settings.problem }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.problem }}
+                    {% endif %}
+                  </h3>
                 {% endif %}
 
                 <div class="pet-problem-card__divider"></div>
 
                 {% if block.settings.solution != blank %}
-                  <p class="pet-problem-card__solution">{{ block.settings.solution }}</p>
+                  <p class="pet-problem-card__solution">
+                    {% if request.locale.iso_code == 'en' %}
+                      {% case forloop.index %}
+                        {% when 1 %}Discover how to get it spotless in seconds without damaging fabrics.
+                        {% when 2 %}Waterproof seat covers and protectors so they travel safe and relaxed.
+                        {% when 3 %}Gentle paw-cleaning solutions before stepping onto your rugs and floors.
+                        {% when 4 %}Orthopedic memory-foam beds designed to protect joints and ensure deep rest.
+                        {% else %}{{ block.settings.solution }}
+                      {% endcase %}
+                    {% else %}
+                      {{ block.settings.solution }}
+                    {% endif %}
+                  </p>
                 {% endif %}
 
                 <span class="pet-problem-card__cta">
-                  {% assign _t = 'paw.problems.view_solution' | t %}{{ block.settings.link_text | default: _t }}
+                  {% if request.locale.iso_code == 'en' %}
+                    {% case forloop.index %}
+                      {% when 1 %}See Solution
+                      {% when 2 %}Travel in Peace
+                      {% when 3 %}Care for Paws
+                      {% when 4 %}Care for Their Rest
+                      {% else %}View Solution
+                    {% endcase %}
+                  {% else %}
+                    {% assign _t = 'paw.problems.view_solution' | t %}{{ block.settings.link_text | default: _t }}
+                  {% endif %}
                   <svg class="pet-problem-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>

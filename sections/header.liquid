@@ -82,50 +82,38 @@
 
     <!-- Desktop Navigation (Hidden on Mobile) -->
     <ul class="pet-header-nav">
-      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 3 %}
         {% for link in linklists[section.settings.menu].links %}
           <li><a href="{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
       {% else %}
-        <li><a href="/">{{ section.settings.home_text }}</a></li>
-        <li><a href="{{ perros_link }}">{{ section.settings.perros_text }}</a></li>
-        <li><a href="{{ gatos_link }}">{{ section.settings.gatos_text }}</a></li>
-        <li><a href="{{ casa_link }}">{{ section.settings.casa_text }}</a></li>
-        <li><a href="{{ viajar_link }}">{{ section.settings.viajar_text }}</a></li>
-        <li><a href="{{ pasear_link }}">{{ section.settings.pasear_text }}</a></li>
-        <li><a href="{{ ofertas_link }}">{{ section.settings.ofertas_text }}</a></li>
-        <li><a href="{{ blog_link }}">{{ section.settings.blog_text }}</a></li>
+        <li><a href="/">{% if request.locale.iso_code == 'en' %}Home{% else %}Inicio{% endif %}</a></li>
+        <li><a href="{{ perros_link }}">{% if request.locale.iso_code == 'en' %}🐶 Dogs{% else %}🐶 Perros{% endif %}</a></li>
+        <li><a href="{{ gatos_link }}">{% if request.locale.iso_code == 'en' %}🐱 Cats{% else %}🐱 Gatos{% endif %}</a></li>
+        <li><a href="{{ casa_link }}">{% if request.locale.iso_code == 'en' %}🛋️ For Home{% else %}🛋️ Para Casa{% endif %}</a></li>
+        <li><a href="{{ viajar_link }}">{% if request.locale.iso_code == 'en' %}🚗 For Travel{% else %}🚗 Para Viajar{% endif %}</a></li>
+        <li><a href="{{ pasear_link }}">{% if request.locale.iso_code == 'en' %}🦮 For Walks{% else %}🦮 Para Pasear{% endif %}</a></li>
+        <li><a href="{{ ofertas_link }}">{% if request.locale.iso_code == 'en' %}🏷️ Deals{% else %}🏷️ Ofertas{% endif %}</a></li>
+        <li><a href="{{ blog_link }}">{% if request.locale.iso_code == 'en' %}📖 Blog{% else %}📖 Blog{% endif %}</a></li>
       {% endif %}
     </ul>
 
     <!-- Actions / Search & Cart (Right Column) -->
     <div class="pet-header-actions">
-      <!-- Interactive Language Selector -->
-      <div class="pet-lang-dropdown-wrapper">
-        <button type="button" class="pet-header-lang-btn" id="petLangDropdownBtn" onclick="toggleLangDropdown(event)" aria-expanded="false" aria-label="Cambiar idioma / Switch language">
-          <span style="font-size: 1rem; line-height: 1;">{% if request.locale.iso_code == 'en' %}🇬🇧{% else %}🇪🇸{% endif %}</span>
-          <span style="font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em;">{% if request.locale.iso_code == 'en' %}EN{% else %}ES{% endif %}</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      <!-- Direct Language Switcher (1-Click Instant Toggle) -->
+      {%- form 'localization', id: 'HeaderLanguageFormDirect' -%}
+        <input type="hidden" name="language_code" id="HeaderLanguageCodeInput" value="{{ localization.language.iso_code | default: request.locale.iso_code }}">
+      {%- endform -%}
+
+      <div class="pet-lang-pill-wrapper" role="group" aria-label="Seleccionar idioma / Select language">
+        <button type="button" class="pet-lang-pill-btn {% unless request.locale.iso_code == 'en' %}active{% endunless %}" data-paw-lang="es" onclick="switchStoreLanguage('es', true)" aria-label="Español" title="Español">
+          <span>🇪🇸</span>
+          <span class="pet-lang-pill-text">ES</span>
         </button>
-
-        <div class="pet-lang-dropdown-menu" id="petLangDropdownMenu">
-          {%- if localization.available_languages.size > 1 -%}
-            {%- form 'localization', id: 'HeaderLanguageFormDirect' -%}
-              <input type="hidden" name="language_code" id="HeaderLanguageCodeInput" value="{{ localization.language.iso_code }}">
-            {%- endform -%}
-          {%- endif -%}
-
-          <button type="button" class="pet-lang-option {% unless request.locale.iso_code == 'en' %}active{% endunless %}" onclick="executeLanguageSwitch('es', event)">
-            <span style="font-size: 1.1rem;">🇪🇸</span>
-            <span>Español</span>
-            {% unless request.locale.iso_code == 'en' %}<span class="check" style="margin-left: auto; color: var(--pet-coral); font-weight: 800;">✓</span>{% endunless %}
-          </button>
-          <button type="button" class="pet-lang-option {% if request.locale.iso_code == 'en' %}active{% endif %}" onclick="executeLanguageSwitch('en', event)">
-            <span style="font-size: 1.1rem;">🇬🇧</span>
-            <span>English</span>
-            {% if request.locale.iso_code == 'en' %}<span class="check" style="margin-left: auto; color: var(--pet-coral); font-weight: 800;">✓</span>{% endif %}
-          </button>
-        </div>
+        <button type="button" class="pet-lang-pill-btn {% if request.locale.iso_code == 'en' %}active{% endif %}" data-paw-lang="en" onclick="switchStoreLanguage('en', true)" aria-label="English" title="English">
+          <span>🇬🇧</span>
+          <span class="pet-lang-pill-text">EN</span>
+        </button>
       </div>
 
       <a href="/search" class="pet-header-search-btn" aria-label="{{ 'paw.header.search_products' | t }}">
@@ -196,85 +184,39 @@
     color: var(--pet-coral, #E8734A);
     transform: translateY(-1px);
   }
-  .pet-lang-dropdown-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-  .pet-header-lang-btn {
+  .pet-lang-pill-wrapper {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
     background: #F4F1EC;
     border: 1px solid var(--pet-border, #E5E1DB);
-    color: var(--pet-navy, #1A2B4A);
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 7px 12px;
     border-radius: 50px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .pet-lang-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 50px;
+    color: var(--pet-muted, #6B7280);
+    font-size: 0.78rem;
+    font-weight: 700;
     cursor: pointer;
-    outline: none;
     font-family: 'Inter', sans-serif;
     transition: all 0.2s ease;
     line-height: 1;
+    outline: none;
   }
-  .pet-header-lang-btn:hover {
-    background: #EAE6DE;
-    color: var(--pet-coral, #E8734A);
-    border-color: #D5CFC5;
-  }
-  .pet-header-lang-btn svg {
-    transition: transform 0.2s ease;
-  }
-  .pet-header-lang-btn[aria-expanded="true"] svg {
-    transform: rotate(180deg);
-  }
-  .pet-lang-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: #FFFFFF;
-    border: 1px solid var(--pet-border, #E5E1DB);
-    border-radius: 14px;
-    box-shadow: 0 12px 28px rgba(26, 43, 74, 0.14);
-    min-width: 155px;
-    padding: 6px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-  }
-  .pet-lang-dropdown-menu.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  .pet-lang-option {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 12px;
-    border: none;
-    background: transparent;
-    border-radius: 8px;
+  .pet-lang-pill-btn:hover {
     color: var(--pet-navy, #1A2B4A);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    text-align: left;
-    gap: 8px;
-    text-decoration: none;
-    transition: background 0.15s ease, color 0.15s ease;
-    box-sizing: border-box;
   }
-  .pet-lang-option:hover {
-    background: #F4F1EC;
+  .pet-lang-pill-btn.active {
+    background: #FFFFFF;
     color: var(--pet-coral, #E8734A);
-  }
-  .pet-lang-option.active {
-    background: #FDF4EE;
-    color: var(--pet-coral, #E8734A);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   }
   .pet-header-cart-btn {
     display: inline-flex;
@@ -396,19 +338,19 @@
     </div>
   </form>
   <ul class="pet-mobile-nav">
-    {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+    {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 3 %}
       {% for link in linklists[section.settings.menu].links %}
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {% endfor %}
     {% else %}
-      <li><a href="/">🏠 {% assign _t = 'paw.header.home' | t %}{{ section.settings.home_text | default: _t }}</a></li>
-      <li><a href="{{ perros_link }}">🐶 {% assign _t = 'paw.header.dogs' | t %}{{ section.settings.perros_text | default: _t }}</a></li>
-      <li><a href="{{ gatos_link }}">🐱 {% assign _t = 'paw.header.cats' | t %}{{ section.settings.gatos_text | default: _t }}</a></li>
-      <li><a href="{{ casa_link }}">🛋️ {% assign _t = 'paw.header.for_home' | t %}{{ section.settings.casa_text | default: _t }}</a></li>
-      <li><a href="{{ viajar_link }}">🚗 {% assign _t = 'paw.header.for_travel' | t %}{{ section.settings.viajar_text | default: _t }}</a></li>
-      <li><a href="{{ pasear_link }}">🦮 {% assign _t = 'paw.header.for_walks' | t %}{{ section.settings.pasear_text | default: _t }}</a></li>
-      <li><a href="{{ ofertas_link }}">🏷️ {% assign _t = 'paw.header.deals' | t %}{{ section.settings.ofertas_text | default: _t }}</a></li>
-      <li><a href="{{ blog_link }}">📖 {% assign _t = 'paw.header.blog' | t %}{{ section.settings.blog_text | default: _t }}</a></li>
+      <li><a href="/">{% if request.locale.iso_code == 'en' %}🏠 Home{% else %}🏠 Inicio{% endif %}</a></li>
+      <li><a href="{{ perros_link }}">{% if request.locale.iso_code == 'en' %}🐶 Dogs{% else %}🐶 Perros{% endif %}</a></li>
+      <li><a href="{{ gatos_link }}">{% if request.locale.iso_code == 'en' %}🐱 Cats{% else %}🐱 Gatos{% endif %}</a></li>
+      <li><a href="{{ casa_link }}">{% if request.locale.iso_code == 'en' %}🛋️ For Home{% else %}🛋️ Para Casa{% endif %}</a></li>
+      <li><a href="{{ viajar_link }}">{% if request.locale.iso_code == 'en' %}🚗 For Travel{% else %}🚗 Para Viajar{% endif %}</a></li>
+      <li><a href="{{ pasear_link }}">{% if request.locale.iso_code == 'en' %}🦮 For Walks{% else %}🦮 Para Pasear{% endif %}</a></li>
+      <li><a href="{{ ofertas_link }}">{% if request.locale.iso_code == 'en' %}🏷️ Deals{% else %}🏷️ Ofertas{% endif %}</a></li>
+      <li><a href="{{ blog_link }}">{% if request.locale.iso_code == 'en' %}📖 Blog{% else %}📖 Blog{% endif %}</a></li>
     {% endif %}
   </ul>
 
@@ -418,10 +360,10 @@
       🌐 Idioma / Language
     </div>
     <div style="display: flex; gap: 8px;">
-      <button type="button" onclick="executeLanguageSwitch('es', event)" style="flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid {% unless request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endunless %}; background: {% unless request.locale.iso_code == 'en' %}#FDF4EE{% else %}#FFFFFF{% endunless %}; color: {% unless request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-navy, #1A2B4A){% endunless %}; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease;">
+      <button type="button" data-paw-lang="es" onclick="switchStoreLanguage('es', true)" style="flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid {% unless request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endunless %}; background: {% unless request.locale.iso_code == 'en' %}#FDF4EE{% else %}#FFFFFF{% endunless %}; color: {% unless request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-navy, #1A2B4A){% endunless %}; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease;">
         <span>🇪🇸</span> Español
       </button>
-      <button type="button" onclick="executeLanguageSwitch('en', event)" style="flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid {% if request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if request.locale.iso_code == 'en' %}#FDF4EE{% else %}#FFFFFF{% endif %}; color: {% if request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-navy, #1A2B4A){% endif %}; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease;">
+      <button type="button" data-paw-lang="en" onclick="switchStoreLanguage('en', true)" style="flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid {% if request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-border, #E5E1DB){% endif %}; background: {% if request.locale.iso_code == 'en' %}#FDF4EE{% else %}#FFFFFF{% endif %}; color: {% if request.locale.iso_code == 'en' %}var(--pet-coral, #E8734A){% else %}var(--pet-navy, #1A2B4A){% endif %}; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease;">
         <span>🇬🇧</span> English
       </button>
     </div>
@@ -513,68 +455,37 @@
 </div>
 
 <script>
-  function toggleLangDropdown(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    var btn = document.getElementById('petLangDropdownBtn');
-    var menu = document.getElementById('petLangDropdownMenu');
-    if (!btn || !menu) return;
-    var isOpen = menu.classList.contains('open');
-    if (isOpen) {
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    } else {
-      menu.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  function executeLanguageSwitch(targetCode, e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    // 1. If native Shopify localization form is available, submit it
+  window.switchStoreLanguage = window.switchStoreLanguage || function(targetLang, userInitiated) {
+    if (!targetLang) return;
+    targetLang = targetLang.toLowerCase();
+    try {
+      localStorage.setItem('paw_user_lang', targetLang);
+      document.cookie = 'paw_lang=' + targetLang + '; path=/; max-age=31536000; SameSite=Lax';
+    } catch(e) {}
     var form = document.getElementById('HeaderLanguageFormDirect');
     var input = document.getElementById('HeaderLanguageCodeInput');
-    if (form && input) {
-      input.value = targetCode;
-      form.submit();
-      return;
+    if (form && input && userInitiated) {
+      input.value = targetLang;
+      if (!window.Shopify || !window.Shopify.designMode) {
+        form.submit();
+        return;
+      }
     }
-
-    // 2. Direct URL switching according to Shopify locale routes
     var pathname = window.location.pathname;
     var search = window.location.search;
     var hash = window.location.hash;
-
-    if (targetCode === 'en') {
+    if (targetLang === 'en') {
       if (!pathname.startsWith('/en')) {
-        var newPath = '/en' + (pathname === '/' ? '' : pathname);
-        window.location.href = newPath + search + hash;
+        window.location.href = '/en' + (pathname === '/' ? '' : pathname) + search + hash;
       }
     } else {
-      // Switch to Spanish (default root)
       if (pathname.startsWith('/en')) {
-        var cleanPath = pathname.replace(/^\/en(\/|$)/, '/');
-        window.location.href = cleanPath + search + hash;
+        window.location.href = pathname.replace(/^\/en(\/|$)/, '/') + search + hash;
       } else {
         window.location.reload();
       }
     }
-  }
-
-  document.addEventListener('click', function(e) {
-    var btn = document.getElementById('petLangDropdownBtn');
-    var menu = document.getElementById('petLangDropdownMenu');
-    if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
+  };
 </script>
 
 {% schema %}

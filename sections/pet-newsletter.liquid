@@ -5,13 +5,25 @@
     <div class="pet-newsletter-card">
       <div class="pet-newsletter-inner">
         <span class="pet-newsletter-badge">{{ 'paw.newsletter.tag_label' | t }}</span>
-        <h2 class="pet-newsletter-title">{{ section.settings.title }}</h2>
-        <p class="pet-newsletter-subtitle">{{ section.settings.subtitle }}</p>
+        <h2 class="pet-newsletter-title">
+          {% if request.locale.iso_code == 'en' %}
+            Join Our Community
+          {% else %}
+            {{ section.settings.title }}
+          {% endif %}
+        </h2>
+        <p class="pet-newsletter-subtitle">
+          {% if request.locale.iso_code == 'en' %}
+            Tips, fresh arrivals, and curated picks to enjoy life with your pet even more.
+          {% else %}
+            {{ section.settings.subtitle }}
+          {% endif %}
+        </p>
 
         {% form 'customer', class: 'pet-newsletter-form-wrapper' %}
           {% if form.posted_successfully? %}
             <div class="pet-newsletter-success">
-              🎉 {{ section.settings.success_message }}
+              🎉 {% if request.locale.iso_code == 'en' %}Welcome to our pet lover family! 🐾{% else %}{{ section.settings.success_message }}{% endif %}
             </div>
           {% else %}
             <div class="pet-newsletter-form">
@@ -20,13 +32,17 @@
                 type="email"
                 name="contact[email]"
                 class="pet-newsletter-input"
-                placeholder="{{ section.settings.placeholder_text }}"
+                placeholder="{% if request.locale.iso_code == 'en' %}Your email address{% else %}{{ section.settings.placeholder_text }}{% endif %}"
                 required
                 autocomplete="email"
-                aria-label="{{ section.settings.placeholder_text }}"
+                aria-label="{% if request.locale.iso_code == 'en' %}Your email address{% else %}{{ section.settings.placeholder_text }}{% endif %}"
               >
               <button type="submit" class="pet-newsletter-btn">
-                {{ section.settings.button_text }}
+                {% if request.locale.iso_code == 'en' %}
+                  Join Now
+                {% else %}
+                  {{ section.settings.button_text }}
+                {% endif %}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
             </div>
