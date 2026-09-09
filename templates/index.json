@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_section": {
@@ -6,9 +15,7 @@
         "title": "Hacerlos felices es nuestra forma de darles las gracias.",
         "subtitle": "Cuidamos de su descanso, sus paseos y la armonía de tu hogar con soluciones hechas con auténtico cariño por los animales.",
         "button_text": "Ver mimos para ellos",
-        "button_url": "/collections/all",
-        "secondary_button_text": "Para tu hogar",
-        "secondary_button_url": "/collections/all"
+        "button_url": "/collections/all"
       }
     },
     "pet_categories": {
@@ -17,50 +24,45 @@
         "cat_perros": {
           "type": "category",
           "settings": {
+            "emoji": "🐶",
             "title": "Perros",
             "subtitle": "Accesorios y confort",
-            "emoji": "🐶",
-            "bg_color": "#FAF4EB",
             "link": "/collections/perros"
           }
         },
         "cat_gatos": {
           "type": "category",
           "settings": {
+            "emoji": "🐱",
             "title": "Gatos",
             "subtitle": "Juegos y descanso",
-            "emoji": "🐱",
-            "bg_color": "#F2F6F0",
             "link": "/collections/gatos"
           }
         },
         "cat_casa": {
           "type": "category",
           "settings": {
+            "emoji": "🏠",
             "title": "Para casa",
             "subtitle": "Limpieza y orden",
-            "emoji": "🏠",
-            "bg_color": "#FDF3EF",
             "link": "/collections/casa"
           }
         },
         "cat_viajar": {
           "type": "category",
           "settings": {
+            "emoji": "🚗",
             "title": "Para viajar",
             "subtitle": "Seguridad en ruta",
-            "emoji": "🚗",
-            "bg_color": "#F0F4F8",
             "link": "/collections/viajar"
           }
         },
         "cat_pasear": {
           "type": "category",
           "settings": {
+            "emoji": "🦮",
             "title": "Para pasear",
             "subtitle": "Paseos cómodos",
-            "emoji": "🦮",
-            "bg_color": "#EFF8F5",
             "link": "/collections/pasear"
           }
         }
@@ -124,12 +126,6 @@
     },
     "pet_owners": {
       "type": "pet-owners",
-      "settings": {
-        "title": "Vivir con ellos es maravilloso (incluso cuando llenan todo de pelos).",
-        "description": "Convivir con un perro o un gato llena la casa de alegría, miradas cómplices y momentos únicos. Creamos soluciones pensadas desde el corazón para que disfrutes de su compañía manteniendo tu hogar bonito, limpio y en calma.",
-        "cta_text": "Mímale como se merece",
-        "cta_url": "/collections/all"
-      },
       "blocks": {
         "feat_casa": {
           "type": "feature",
@@ -165,7 +161,13 @@
         "feat_viajes",
         "feat_organizacion",
         "feat_lifestyle"
-      ]
+      ],
+      "settings": {
+        "title": "Vivir con ellos es maravilloso (incluso cuando llenan todo de pelos).",
+        "description": "Convivir con un perro o un gato llena la casa de alegría, miradas cómplices y momentos únicos. Creamos soluciones pensadas desde el corazón para que disfrutes de su compañía manteniendo tu hogar bonito, limpio y en calma.",
+        "cta_text": "Mímale como se merece",
+        "cta_url": "/collections/all"
+      }
     },
     "best_sellers": {
       "type": "best-sellers",
@@ -176,17 +178,13 @@
     },
     "pet_bundles": {
       "type": "pet-bundles",
-      "settings": {
-        "title": "Todo lo que necesitas, en un solo pack",
-        "subtitle": "Ahorra y equípate al completo con nuestros packs seleccionados"
-      },
       "blocks": {
         "bundle_1": {
           "type": "bundle",
           "settings": {
+            "badge": "Popular",
             "title": "Home Pack",
             "description": "Todo lo que necesitas para mantener tu casa limpia y organizada con tu mascota.",
-            "badge": "Popular",
             "link_text": "Ver pack",
             "link": "/collections/casa"
           }
@@ -212,9 +210,9 @@
         "bundle_4": {
           "type": "bundle",
           "settings": {
+            "badge": "Nuevo",
             "title": "New Pet Pack",
             "description": "¿Acabas de adoptar? Este pack tiene todo lo básico para empezar.",
-            "badge": "Nuevo",
             "link_text": "Ver pack",
             "link": "/collections/perros"
           }
@@ -225,14 +223,14 @@
         "bundle_2",
         "bundle_3",
         "bundle_4"
-      ]
+      ],
+      "settings": {
+        "title": "Todo lo que necesitas, en un solo pack",
+        "subtitle": "Ahorra y equípate al completo con nuestros packs seleccionados"
+      }
     },
     "pet_problems": {
       "type": "pet-problems",
-      "settings": {
-        "title": "Te entendemos porque también nos pasa",
-        "subtitle": "Pequeñas soluciones a los retos diarios de convivir con nuestros compañeros peludos"
-      },
       "blocks": {
         "prob_1": {
           "type": "problem",
@@ -280,14 +278,14 @@
         "prob_2",
         "prob_3",
         "prob_4"
-      ]
+      ],
+      "settings": {
+        "title": "Te entendemos porque también nos pasa",
+        "subtitle": "Pequeñas soluciones a los retos diarios de convivir con nuestros compañeros peludos"
+      }
     },
     "pet_reviews": {
       "type": "pet-reviews",
-      "settings": {
-        "title": "Lo que dicen nuestros clientes",
-        "subtitle": "Experiencias reales de personas que viven con mascotas"
-      },
       "blocks": {
         "rev_1": {
           "type": "review",
@@ -321,14 +319,14 @@
         "rev_1",
         "rev_2",
         "rev_3"
-      ]
+      ],
+      "settings": {
+        "title": "Lo que dicen nuestros clientes",
+        "subtitle": "Experiencias reales de personas que viven con mascotas"
+      }
     },
     "pet_ugc": {
       "type": "pet-ugc",
-      "settings": {
-        "title": "#VidaConMascota",
-        "subtitle": "Comparte tu momento — Síguenos en Instagram"
-      },
       "blocks": {
         "ugc_1": {
           "type": "image",
@@ -362,7 +360,11 @@
         "ugc_4",
         "ugc_5",
         "ugc_6"
-      ]
+      ],
+      "settings": {
+        "title": "#VidaConMascota",
+        "subtitle": "Comparte tu momento — Síguenos en Instagram"
+      }
     },
     "social_media": {
       "type": "social-media",
