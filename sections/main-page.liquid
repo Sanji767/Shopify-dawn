@@ -17,22 +17,22 @@
           <p>{{ 'paw.page.quality_text' | t }}</p>
         {% elsif page.handle contains 'shipping' or page.title contains 'Envío' %}
           <h3>{{ 'paw.page.shipping_title' | t }}</h3>
-          <p>{{ 'paw.page.shipping_delivery' | t }}</p>
-          <p>{{ 'paw.page.shipping_costs' | t }}</p>
+          <p>{{ 'paw.page.shipping_delivery_html' | t }}</p>
+          <p>{{ 'paw.page.shipping_costs_html' | t }}</p>
           <ul>
-            <li>{{ 'paw.page.shipping_free' | t }}</li>
-            <li>{{ 'paw.page.shipping_flat' | t }}</li>
+            <li>{{ 'paw.page.shipping_free_html' | t }}</li>
+            <li>{{ 'paw.page.shipping_flat_html' | t }}</li>
           </ul>
           <p>{{ 'paw.page.shipping_tracking' | t }}</p>
         {% elsif page.handle contains 'refund' or page.title contains 'Devoluc' %}
           <h3>{{ 'paw.page.returns_title' | t }}</h3>
-          <p>{{ 'paw.page.returns_text' | t }}</p>
-          <p>{{ 'paw.page.returns_requirements' | t }}</p>
-          <p>{{ 'paw.page.returns_contact' | t }}</p>
+          <p>{{ 'paw.page.returns_text_html' | t }}</p>
+          <p>{{ 'paw.page.returns_requirements_html' | t }}</p>
+          <p>{{ 'paw.page.returns_contact_html' | t }}</p>
         {% elsif page.handle contains 'privacy' or page.title contains 'Privacidad' %}
           <h3>{{ 'paw.page.privacy_title' | t }}</h3>
           <p>{{ 'paw.page.privacy_text' | t }}</p>
-          <p>{{ 'paw.page.privacy_contact' | t }}</p>
+          <p>{{ 'paw.page.privacy_contact_html' | t }}</p>
           <p>{{ 'paw.page.privacy_controller' | t }}</p>
         {% elsif page.handle contains 'terms' or page.title contains 'Términos' %}
           <h3>{{ 'paw.page.terms_title' | t }}</h3>

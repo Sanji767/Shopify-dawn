@@ -326,14 +326,14 @@
           <!-- Free Shipping Progress -->
           {% if remaining > 0 %}
             <div class="pet-pdp-shipping-bar">
-              <span>{% assign _amount = remaining | money %}{{ 'paw.product.remaining_free_ship' | t: amount: _amount }}</span>
+              <span>{% assign _amount = remaining | money %}{{ 'paw.product.remaining_free_ship_html' | t: amount: _amount }}</span>
               <div class="pet-pdp-shipping-progress">
                 <div class="pet-pdp-shipping-fill" style="width: {{ progress }}%"></div>
               </div>
             </div>
           {% else %}
             <div class="pet-pdp-shipping-bar pet-pdp-shipping-bar--free">
-              <span>{{ 'paw.product.free_ship_achieved' | t }}</span>
+              <span>{{ 'paw.product.free_ship_achieved_html' | t }}</span>
             </div>
           {% endif %}
 
@@ -373,7 +373,7 @@
             <div class="pet-pdp-qty-row">
               <label style="font-weight: 600; font-size: 0.9rem; color: var(--pet-navy);">{{ 'paw.product.quantity' | t }}</label>
               <div class="pet-pdp-qty-wrap">
-                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(-1)" aria-label="{{ 'paw.product.decrease_qty' | t }}">>−</button>
+                <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(-1)" aria-label="{{ 'paw.product.decrease_qty' | t }}">−</button>
                 <input type="text" value="1" id="productQty" name="quantity" readonly class="pet-pdp-qty-input" aria-label="{{ 'paw.product.quantity_label' | t }}">
                 <button type="button" class="pet-pdp-qty-btn" onclick="petUpdateQty(1)" aria-label="{{ 'paw.product.increase_qty' | t }}">+</button>
               </div>
@@ -441,7 +441,7 @@
                 <span class="pet-pdp-acc-icon">▼</span>
               </summary>
               <div class="pet-pdp-acc-body">
-                {% assign _desc = 'paw.product.description_fallback' | t %}{{ product.description | default: _desc }}
+                {% assign _desc = 'paw.product.description_fallback_html' | t %}{{ product.description | default: _desc }}
               </div>
             </details>
 
@@ -452,9 +452,9 @@
               </summary>
               <div class="pet-pdp-acc-body">
                 <ul>
-                  <li>{{ 'paw.product.shipping_spain' | t }}</li>
-                  <li>{{ 'paw.product.shipping_europe' | t }}</li>
-                  <li>{{ 'paw.product.shipping_free_threshold' | t }}</li>
+                  <li>{{ 'paw.product.shipping_spain_html' | t }}</li>
+                  <li>{{ 'paw.product.shipping_europe_html' | t }}</li>
+                  <li>{{ 'paw.product.shipping_free_threshold_html' | t }}</li>
                   <li>{{ 'paw.product.shipping_tracking' | t }}</li>
                 </ul>
               </div>
@@ -467,9 +467,9 @@
               </summary>
               <div class="pet-pdp-acc-body">
                 <ul>
-                  <li>{{ 'paw.product.returns_14_days' | t }}</li>
+                  <li>{{ 'paw.product.returns_14_days_html' | t }}</li>
                   <li>{{ 'paw.product.returns_condition' | t }}</li>
-                  <li>{{ 'paw.product.returns_defective' | t }}</li>
+                  <li>{{ 'paw.product.returns_defective_html' | t }}</li>
                   <li>{{ 'paw.product.returns_refund' | t }}</li>
                 </ul>
               </div>

@@ -8,7 +8,7 @@
         <p style="font-weight: 600; color: var(--pet-coral); margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">{% assign _t = 'paw.about.heading' | t %}{{ section.settings.subtitle | default: _t }}</p>
         <h3 style="font-size: 1.5rem; margin-bottom: 24px;">{% assign _t = 'paw.about.title' | t %}{{ section.settings.heading | default: _t }}</h3>
         <div style="color: var(--pet-muted); line-height: 1.8; font-size: 0.95rem;">
-          {% assign _t = 'paw.about.content' | t %}{{ section.settings.description | default: _t }}
+          {% assign _t = 'paw.about.content_html' | t %}{{ section.settings.description | default: _t }}
         </div>
       </div>
     </div>

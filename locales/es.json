@@ -566,14 +566,14 @@
       "close_cart": "Cerrar carrito",
       "your_cart": "Tu Carrito",
       "your_cart_count": "Tu Carrito ({{ count }})",
-      "remaining_free_shipping": "Te faltan <strong>{{ amount }}</strong> para envío gratis 🚚",
       "free_shipping_achieved": "¡Tienes envío gratis! 🎉",
       "remove": "Eliminar",
       "subtotal": "Subtotal",
       "checkout": "Finalizar compra",
       "view_full_cart": "Ver carrito completo",
       "empty_cart": "Tu carrito está vacío",
-      "explore_products": "Explorar productos"
+      "explore_products": "Explorar productos",
+      "remaining_free_shipping_html": "Te faltan <strong>{{ amount }}</strong> para envío gratis 🚚"
     },
     "footer": {
       "dogs": "🐶 Perros",
@@ -638,8 +638,6 @@
       "in_stock": "En stock · Envío desde España (3-6 días)",
       "product_fallback_title": "Producto para tu mascota",
       "discount_pct": "-{{ pct }}% dto.",
-      "remaining_free_ship": "🚚 Te faltan <strong>{{ amount }}</strong> para <strong>envío gratis</strong>",
-      "free_ship_achieved": "🎉 <strong>¡Envío gratis!</strong> Este producto incluye envío gratuito a España",
       "quantity": "Cantidad:",
       "decrease_qty": "Reducir cantidad",
       "quantity_label": "Cantidad",
@@ -656,16 +654,10 @@
       "personalized_support": "Atención personalizada",
       "support_detail": "Contáctanos por WhatsApp o email, ¡te ayudamos!",
       "description_tab": "📋 Descripción del producto",
-      "description_fallback": "<p>Producto diseñado con amor para hacer la vida con tu mascota más fácil y bonita. Materiales de calidad, resistentes y seguros.</p>",
       "shipping_tab": "🚚 Envío y plazos de entrega",
-      "shipping_spain": "<strong>España Peninsular:</strong> 3-6 días laborables",
-      "shipping_europe": "<strong>Europa:</strong> 5-10 días laborables",
-      "shipping_free_threshold": "<strong>Envío gratis:</strong> En pedidos superiores a 50 € (España) / 75 € (Europa)",
       "shipping_tracking": "Recibirás un email con el número de seguimiento en cuanto salga tu pedido",
       "returns_tab": "↩️ Devoluciones y garantía",
-      "returns_14_days": "<strong>14 días naturales</strong> para iniciar una devolución sin preguntas",
       "returns_condition": "El producto debe estar sin usar y en su embalaje original",
-      "returns_defective": "En caso de <strong>producto defectuoso</strong>, el envío de devolución es gratis",
       "returns_refund": "Reembolso en un plazo máximo de 14 días tras recibir la devolución",
       "additional_info_tab": "🏷️ Información adicional",
       "brand_label": "Marca:",
@@ -679,13 +671,20 @@
       "copy_link": "Copiar enlace",
       "link_copied": "🐾 ¡Enlace copiado!",
       "related_products": "También te puede gustar 🐾",
-      "add_sticky": "🐾 Añadir"
+      "add_sticky": "🐾 Añadir",
+      "remaining_free_ship_html": "🚚 Te faltan <strong>{{ amount }}</strong> para <strong>envío gratis</strong>",
+      "free_ship_achieved_html": "🎉 <strong>¡Envío gratis!</strong> Este producto incluye envío gratuito a España",
+      "description_fallback_html": "<p>Producto diseñado con amor para hacer la vida con tu mascota más fácil y bonita. Materiales de calidad, resistentes y seguros.</p>",
+      "shipping_spain_html": "<strong>España Peninsular:</strong> 3-6 días laborables",
+      "shipping_europe_html": "<strong>Europa:</strong> 5-10 días laborables",
+      "shipping_free_threshold_html": "<strong>Envío gratis:</strong> En pedidos superiores a 50 € (España) / 75 € (Europa)",
+      "returns_14_days_html": "<strong>14 días naturales</strong> para iniciar una devolución sin preguntas",
+      "returns_defective_html": "En caso de <strong>producto defectuoso</strong>, el envío de devolución es gratis"
     },
     "cart": {
       "title": "Tu Carrito para mimar a tu peludo 🛒🐾",
       "item_singular": "mimo",
       "item_plural": "mimos",
-      "remaining_free_shipping": "Te faltan <strong>{{ amount }}</strong> para que le llegue el",
       "free_shipping_label": "ENVÍO GRATIS A CASA 🏡",
       "free_shipping_achieved": "🎉 ¡Enhorabuena! Has conseguido",
       "free_shipping_word": "ENVÍO GRATIS",
@@ -710,7 +709,8 @@
       "empty_text": "Parece que aún no has elegido nada para consentir a tu compañero. Date una vuelta y encuentra ese detalle especial que le alegrará el día.",
       "empty_cta": "Explorar mimos para ellos →",
       "recommendations_title": "Los favoritos más mimados este mes",
-      "view_with_love": "Ver con cariño"
+      "view_with_love": "Ver con cariño",
+      "remaining_free_shipping_html": "Te faltan <strong>{{ amount }}</strong> para que le llegue el"
     },
     "collection": {
       "product_singular": "producto",
@@ -737,13 +737,13 @@
       "search_products": "Buscar productos",
       "search_placeholder": "¿Qué buscas para tu mascota?...",
       "search_btn": "Buscar",
-      "results_found": "Hemos encontrado <strong>{{ count }}</strong> resultado(s) para tu búsqueda.",
       "view_result": "Ver resultado",
       "no_results": "No encontramos resultados para \"{{ terms }}\"",
       "no_results_hint": "Intenta buscar otros términos como \"cama\", \"manta\", \"viaje\" o \"rodillo\".",
       "view_all_catalog": "Ver todo el catálogo",
       "empty_hint": "Escribe una palabra en el buscador superior para encontrar lo que necesitas.",
-      "explore_catalog": "Explorar catálogo"
+      "explore_catalog": "Explorar catálogo",
+      "results_found_html": "Hemos encontrado <strong>{{ count }}</strong> resultado(s) para tu búsqueda."
     },
     "blog": {
       "tag_label": "📖 CONSEJOS Y LIFESTYLE",
@@ -905,29 +905,28 @@
       "welcome_text": "En Paw & Home somos amantes de las mascotas dedicados a seleccionar los mejores productos de estilo de vida para perros, gatos y sus dueños. Nuestra misión es hacer que la convivencia en el hogar, los paseos y los viajes sean más cómodos, limpios y divertidos.",
       "quality_text": "Seleccionamos cuidadosamente cada artículo garantizando alta calidad, durabilidad y diseño funcional para la vida moderna en España y Europa.",
       "shipping_title": "Información de Envíos 🚚",
-      "shipping_delivery": "<strong>Plazo de Entrega:</strong> Todos los pedidos se procesan en 24h laborables y se entregan en un plazo estimado de <strong>3 a 6 días laborables</strong> en España peninsular y Europa.",
-      "shipping_costs": "<strong>Gastos de Envío:</strong>",
-      "shipping_free": "Pedidos superiores a 50 €: <strong>ENVÍO GRATIS</strong>",
-      "shipping_flat": "Pedidos inferiores a 50 €: Tarifa fija de <strong>3,99 €</strong>",
       "shipping_tracking": "Recibirás un número de seguimiento por correo electrónico en cuanto tu paquete salga del almacén.",
       "returns_title": "Política de Devoluciones y Desistimiento ↩️",
-      "returns_text": "Conforme a la normativa europea del consumidor (RGPD), dispones de <strong>14 días naturales</strong> desde la recepción de tu pedido para solicitar una devolución sin necesidad de justificación.",
-      "returns_requirements": "<strong>Requisitos:</strong> El producto debe encontrarse en su estado original, sin usar y con su embalaje original.",
-      "returns_contact": "Para iniciar una devolución, escríbenos a nuestro servicio de atención al cliente en <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contacto</a> y te guiaremos paso a paso.",
       "privacy_title": "Política de Privacidad (RGPD) 🔒",
       "privacy_text": "En Paw & Home respetamos tu privacidad. Los datos personales facilitados durante la compra o suscripción serán tratados exclusivamente para la gestión de tus pedidos, envíos y comunicaciones consentidas.",
-      "privacy_contact": "Si tienes alguna pregunta sobre nuestras prácticas de privacidad o esta Política de Privacidad, o si deseas ejercer cualquiera de los derechos que te asisten, por favor ponte en contacto con nosotros por correo electrónico en <strong>hola@pawandhome.com</strong> o por correo postal en <strong>Ronda del Guinardó, 08025, Barcelona, España</strong>.",
       "privacy_controller": "A efectos de las leyes de protección de datos aplicables (RGPD / LOPDGDD), somos los responsables del tratamiento (data controller) de tu información personal.",
       "terms_title": "Términos y Condiciones de Uso",
       "terms_text": "Al acceder y realizar compras en Paw & Home aceptas las presentes condiciones generales de venta. Todos los precios se muestran en euros (€) e incluyen los impuestos aplicables (IVA).",
       "terms_changes": "Paw & Home se reserva el derecho de modificar productos, precios y promociones sin previo aviso, respetando siempre los pedidos confirmados previamente.",
       "site_info_title": "Información del Sitio",
       "site_info_text": "Esta página se encuentra en proceso de actualización de contenidos. Si tienes alguna duda o consulta urgente, por favor contáctanos directamente desde nuestro formulario de atención al cliente.",
-      "go_to_contact": "Ir a Contacto & Ayuda"
+      "go_to_contact": "Ir a Contacto & Ayuda",
+      "shipping_delivery_html": "<strong>Plazo de Entrega:</strong> Todos los pedidos se procesan en 24h laborables y se entregan en un plazo estimado de <strong>3 a 6 días laborables</strong> en España peninsular y Europa.",
+      "shipping_costs_html": "<strong>Gastos de Envío:</strong>",
+      "shipping_free_html": "Pedidos superiores a 50 €: <strong>ENVÍO GRATIS</strong>",
+      "shipping_flat_html": "Pedidos inferiores a 50 €: Tarifa fija de <strong>3,99 €</strong>",
+      "returns_text_html": "Conforme a la normativa europea del consumidor (RGPD), dispones de <strong>14 días naturales</strong> desde la recepción de tu pedido para solicitar una devolución sin necesidad de justificación.",
+      "returns_requirements_html": "<strong>Requisitos:</strong> El producto debe encontrarse en su estado original, sin usar y con su embalaje original.",
+      "returns_contact_html": "Para iniciar una devolución, escríbenos a nuestro servicio de atención al cliente en <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contacto</a> y te guiaremos paso a paso.",
+      "privacy_contact_html": "Si tienes alguna pregunta sobre nuestras prácticas de privacidad o esta Política de Privacidad, o si deseas ejercer cualquiera de los derechos que te asisten, por favor ponte en contacto con nosotros por correo electrónico en <strong>hola@pawandhome.com</strong> o por correo postal en <strong>Ronda del Guinardó, 08025, Barcelona, España</strong>."
     },
     "faq": {
       "q1": "¿Cuánto tardará en llegar el paquete a casa y cuánto cuesta el envío? 🚚🐾",
-      "a1": "¡Sabemos la ilusión con la que tú y tu peludo esperáis cada pedido! Preparamos y enviamos todos los paquetes con mucho mimo directamente desde nuestros almacenes centrales en Europa con nuestro partner logístico BigBuy. El plazo de entrega habitual en España peninsular y países de Europa es de <strong>3 a 6 días laborables</strong>.",
       "q2": "¿Cómo puedo seguir los pasos de mi pedido en tiempo real? 📦🔍",
       "a2": "¡Muy fácil! Nada más despachar el pedido, recibirás un email con un enlace de seguimiento.",
       "q3": "¿Hacéis envíos a toda España y a otros países de Europa? 🇪🇺🏡",
@@ -945,7 +944,8 @@
       "q9": "¿Puedo cambiar la dirección de entrega o cancelar mi pedido tras comprar? ⏱️✏️",
       "a9": "Trabajamos a la velocidad del rayo para que tu pedido salga cuanto antes. Contacta con nosotros lo antes posible y haremos lo que podamos.",
       "q10": "¿Cómo puedo contactar con vosotros si tengo cualquier duda o consulta? 💌🐾",
-      "a10": "¡Nos encanta charlar con otros papás y mamás de mascotas! Contacta con nosotros cuando quieras."
+      "a10": "¡Nos encanta charlar con otros papás y mamás de mascotas! Contacta con nosotros cuando quieras.",
+      "a1_html": "¡Sabemos la ilusión con la que tú y tu peludo esperáis cada pedido! Preparamos y enviamos todos los paquetes con mucho mimo directamente desde nuestros almacenes centrales en Europa con nuestro partner logístico BigBuy. El plazo de entrega habitual en España peninsular y países de Europa es de <strong>3 a 6 días laborables</strong>."
     },
     "error_404": {
       "title": "¡Ups! Esta página se ha despistado",
@@ -957,7 +957,7 @@
       "tag": "NUESTRO PROPÓSITO",
       "heading": "DE AMANTES DE LOS ANIMALES, PARA TI",
       "title": "Creado por y para quienes no concebimos la vida sin ellos",
-      "content": "<p>Nuestra historia no nació en una oficina, sino en el suelo del salón, buscando una cama que de verdad cuidara las articulaciones de nuestros perros y buscando soluciones reales para mantener nuestra casa limpia sin renunciar a sus mimos en el sofá.</p><p>Para nosotros, nunca han sido solo mascotas: son quienes nos esperan tras un día largo, quienes nos alegran la mañana con un movimiento de cola y quienes nos enseñan lo que es el amor incondicional.</p><p><strong>Nuestra regla de oro:</strong> Si no es lo bastante cómodo, seguro y duradero para nuestros propios compañeros peludos, jamás lo ofreceremos para los tuyos.</p>"
+      "content_html": "<p>Nuestra historia no nació en una oficina, sino en el suelo del salón, buscando una cama que de verdad cuidara las articulaciones de nuestros perros y buscando soluciones reales para mantener nuestra casa limpia sin renunciar a sus mimos en el sofá.</p><p>Para nosotros, nunca han sido solo mascotas: son quienes nos esperan tras un día largo, quienes nos alegran la mañana con un movimiento de cola y quienes nos enseñan lo que es el amor incondicional.</p><p><strong>Nuestra regla de oro:</strong> Si no es lo bastante cómodo, seguro y duradero para nuestros propios compañeros peludos, jamás lo ofreceremos para los tuyos.</p>"
     },
     "whatsapp": {
       "open_chat": "Abrir chat de WhatsApp",
@@ -967,9 +967,9 @@
       "contact_title": "Contactar por WhatsApp"
     },
     "cookie": {
-      "text": "Utilizamos cookies propias y de terceros para garantizar la mejor experiencia en nuestra tienda, analizar el tráfico y personalizar contenido. Puedes aceptar todas las cookies o configurar tus preferencias. Más información en nuestra <a href=\"/policies/privacy-policy\" style=\"color: var(--pet-coral, #E8734A); text-decoration: underline;\">Política de Privacidad</a>.",
       "accept_all": "Aceptar todas",
-      "necessary_only": "Solo necesarias"
+      "necessary_only": "Solo necesarias",
+      "text_html": "Utilizamos cookies propias y de terceros para garantizar la mejor experiencia en nuestra tienda, analizar el tráfico y personalizar contenido. Puedes aceptar todas las cookies o configurar tus preferencias. Más información en nuestra <a href=\"/policies/privacy-policy\" style=\"color: var(--pet-coral, #E8734A); text-decoration: underline;\">Política de Privacidad</a>."
     },
     "floating": {
       "back_to_top": "Volver arriba",

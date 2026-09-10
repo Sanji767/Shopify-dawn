@@ -29,7 +29,7 @@
     {% if search.performed %}
       {% if search.results_count > 0 %}
         <p style="text-align: center; color: var(--pet-muted); margin-bottom: 32px; font-size: 0.95rem;">
-          {{ 'paw.search.results_found' | t: count: search.results_count }}
+          {{ 'paw.search.results_found_html' | t: count: search.results_count }}
         </p>
 
         <div class="pet-products-grid">

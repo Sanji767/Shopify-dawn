@@ -554,14 +554,14 @@
       "close_cart": "Close cart",
       "your_cart": "Your Cart",
       "your_cart_count": "Your Cart ({{ count }})",
-      "remaining_free_shipping": "You're <strong>{{ amount }}</strong> away from free shipping 🚚",
       "free_shipping_achieved": "You've got free shipping! 🎉",
       "remove": "Remove",
       "subtotal": "Subtotal",
       "checkout": "Checkout",
       "view_full_cart": "View full cart",
       "empty_cart": "Your cart is empty",
-      "explore_products": "Explore products"
+      "explore_products": "Explore products",
+      "remaining_free_shipping_html": "You're <strong>{{ amount }}</strong> away from free shipping 🚚"
     },
     "footer": {
       "dogs": "🐶 Dogs",
@@ -626,8 +626,6 @@
       "in_stock": "In stock · Shipping from Spain (3-6 days)",
       "product_fallback_title": "Product for your pet",
       "discount_pct": "-{{ pct }}% off",
-      "remaining_free_ship": "🚚 You're <strong>{{ amount }}</strong> away from <strong>free shipping</strong>",
-      "free_ship_achieved": "🎉 <strong>Free shipping!</strong> This product includes free shipping to Spain",
       "quantity": "Quantity:",
       "decrease_qty": "Decrease quantity",
       "quantity_label": "Quantity",
@@ -644,16 +642,10 @@
       "personalized_support": "Personalized support",
       "support_detail": "Contact us via WhatsApp or email, we'll help you!",
       "description_tab": "📋 Product description",
-      "description_fallback": "<p>Product designed with love to make life with your pet easier and more beautiful. Quality materials, durable and safe.</p>",
       "shipping_tab": "🚚 Shipping & delivery times",
-      "shipping_spain": "<strong>Mainland Spain:</strong> 3-6 business days",
-      "shipping_europe": "<strong>Europe:</strong> 5-10 business days",
-      "shipping_free_threshold": "<strong>Free shipping:</strong> On orders over €50 (Spain) / €75 (Europe)",
       "shipping_tracking": "You'll receive an email with the tracking number as soon as your order ships",
       "returns_tab": "↩️ Returns & warranty",
-      "returns_14_days": "<strong>14 calendar days</strong> to initiate a return, no questions asked",
       "returns_condition": "Product must be unused and in original packaging",
-      "returns_defective": "For <strong>defective products</strong>, return shipping is free",
       "returns_refund": "Refund within a maximum of 14 days after receiving the return",
       "additional_info_tab": "🏷️ Additional information",
       "brand_label": "Brand:",
@@ -667,13 +659,20 @@
       "copy_link": "Copy link",
       "link_copied": "🐾 Link copied!",
       "related_products": "You may also like 🐾",
-      "add_sticky": "🐾 Add"
+      "add_sticky": "🐾 Add",
+      "remaining_free_ship_html": "🚚 You're <strong>{{ amount }}</strong> away from <strong>free shipping</strong>",
+      "free_ship_achieved_html": "🎉 <strong>Free shipping!</strong> This product includes free shipping to Spain",
+      "description_fallback_html": "<p>Product designed with love to make life with your pet easier and more beautiful. Quality materials, durable and safe.</p>",
+      "shipping_spain_html": "<strong>Mainland Spain:</strong> 3-6 business days",
+      "shipping_europe_html": "<strong>Europe:</strong> 5-10 business days",
+      "shipping_free_threshold_html": "<strong>Free shipping:</strong> On orders over €50 (Spain) / €75 (Europe)",
+      "returns_14_days_html": "<strong>14 calendar days</strong> to initiate a return, no questions asked",
+      "returns_defective_html": "For <strong>defective products</strong>, return shipping is free"
     },
     "cart": {
       "title": "Your Cart to pamper your furry friend 🛒🐾",
       "item_singular": "treat",
       "item_plural": "treats",
-      "remaining_free_shipping": "You're <strong>{{ amount }}</strong> away from",
       "free_shipping_label": "FREE HOME DELIVERY 🏡",
       "free_shipping_achieved": "🎉 Congrats! You've earned",
       "free_shipping_word": "FREE SHIPPING",
@@ -698,7 +697,8 @@
       "empty_text": "Looks like you haven't picked anything to spoil your companion yet. Take a look around and find that special something to brighten their day.",
       "empty_cta": "Explore treats for them →",
       "recommendations_title": "This month's most pampered favorites",
-      "view_with_love": "View with love"
+      "view_with_love": "View with love",
+      "remaining_free_shipping_html": "You're <strong>{{ amount }}</strong> away from"
     },
     "collection": {
       "product_singular": "product",
@@ -725,13 +725,13 @@
       "search_products": "Search products",
       "search_placeholder": "What are you looking for for your pet?...",
       "search_btn": "Search",
-      "results_found": "We found <strong>{{ count }}</strong> result(s) for your search.",
       "view_result": "View result",
       "no_results": "We found no results for \"{{ terms }}\"",
       "no_results_hint": "Try searching for other terms like \"bed\", \"blanket\", \"travel\" or \"roller\".",
       "view_all_catalog": "View full catalog",
       "empty_hint": "Type a word in the search bar above to find what you need.",
-      "explore_catalog": "Explore catalog"
+      "explore_catalog": "Explore catalog",
+      "results_found_html": "We found <strong>{{ count }}</strong> result(s) for your search."
     },
     "blog": {
       "tag_label": "📖 TIPS & LIFESTYLE",
@@ -893,29 +893,28 @@
       "welcome_text": "At Paw & Home, we are pet lovers dedicated to selecting the best lifestyle products for dogs, cats, and their owners. Our mission is to make living together at home, walks, and travels more comfortable, clean, and fun.",
       "quality_text": "We carefully select each item, guaranteeing high quality, durability, and functional design for modern life in Spain and Europe.",
       "shipping_title": "Shipping Information 🚚",
-      "shipping_delivery": "<strong>Delivery Time:</strong> All orders are processed within 24 business hours and delivered in an estimated <strong>3 to 6 business days</strong> in mainland Spain and Europe.",
-      "shipping_costs": "<strong>Shipping Costs:</strong>",
-      "shipping_free": "Orders over €50: <strong>FREE SHIPPING</strong>",
-      "shipping_flat": "Orders under €50: Flat rate of <strong>€3.99</strong>",
       "shipping_tracking": "You'll receive a tracking number by email as soon as your package leaves the warehouse.",
       "returns_title": "Returns & Withdrawal Policy ↩️",
-      "returns_text": "In accordance with European consumer regulations (GDPR), you have <strong>14 calendar days</strong> from receiving your order to request a return without needing to provide a reason.",
-      "returns_requirements": "<strong>Requirements:</strong> The product must be in its original condition, unused, and with its original packaging.",
-      "returns_contact": "To initiate a return, write to our customer service at <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contact</a> and we'll guide you step by step.",
       "privacy_title": "Privacy Policy (GDPR) 🔒",
       "privacy_text": "At Paw & Home, we respect your privacy. Personal data provided during purchases or subscriptions will be used exclusively for managing your orders, shipping, and consented communications.",
-      "privacy_contact": "If you have any questions about our privacy practices or this Privacy Policy, or if you wish to exercise any of your rights, please contact us by email at <strong>hola@pawandhome.com</strong> or by mail at <strong>Ronda del Guinardó, 08025, Barcelona, Spain</strong>.",
       "privacy_controller": "For the purposes of applicable data protection laws (GDPR / LOPDGDD), we are the data controllers of your personal information.",
       "terms_title": "Terms & Conditions of Use",
       "terms_text": "By accessing and making purchases at Paw & Home, you accept these general terms of sale. All prices are shown in euros (€) and include applicable taxes (VAT).",
       "terms_changes": "Paw & Home reserves the right to modify products, prices, and promotions without prior notice, always respecting previously confirmed orders.",
       "site_info_title": "Site Information",
       "site_info_text": "This page is being updated with new content. If you have any urgent questions or inquiries, please contact us directly through our customer service form.",
-      "go_to_contact": "Go to Contact & Help"
+      "go_to_contact": "Go to Contact & Help",
+      "shipping_delivery_html": "<strong>Delivery Time:</strong> All orders are processed within 24 business hours and delivered in an estimated <strong>3 to 6 business days</strong> in mainland Spain and Europe.",
+      "shipping_costs_html": "<strong>Shipping Costs:</strong>",
+      "shipping_free_html": "Orders over €50: <strong>FREE SHIPPING</strong>",
+      "shipping_flat_html": "Orders under €50: Flat rate of <strong>€3.99</strong>",
+      "returns_text_html": "In accordance with European consumer regulations (GDPR), you have <strong>14 calendar days</strong> from receiving your order to request a return without needing to provide a reason.",
+      "returns_requirements_html": "<strong>Requirements:</strong> The product must be in its original condition, unused, and with its original packaging.",
+      "returns_contact_html": "To initiate a return, write to our customer service at <a href=\"/pages/contact\" style=\"color:var(--pet-coral);text-decoration:underline;\">Contact</a> and we'll guide you step by step.",
+      "privacy_contact_html": "If you have any questions about our privacy practices or this Privacy Policy, or if you wish to exercise any of your rights, please contact us by email at <strong>hola@pawandhome.com</strong> or by mail at <strong>Ronda del Guinardó, 08025, Barcelona, Spain</strong>."
     },
     "faq": {
       "q1": "How long will it take for my package to arrive and how much does shipping cost? 🚚🐾",
-      "a1": "We know how excited you and your furry friend are for each order! We prepare and ship all packages with great care directly from our central warehouses in Europe with our logistics partner BigBuy. The usual delivery time in mainland Spain and European countries is <strong>3 to 6 business days</strong>.",
       "q2": "How can I track my order in real time? 📦🔍",
       "a2": "Very easy! As soon as we dispatch your order, you'll receive an email with a tracking link.",
       "q3": "Do you ship to all of Spain and other European countries? 🇪🇺🏡",
@@ -933,7 +932,8 @@
       "q9": "Can I change the delivery address or cancel my order after buying? ⏱️✏️",
       "a9": "We work at lightning speed to get your order out as quickly as possible. Contact us right away and we'll do our best.",
       "q10": "How can I contact you if I have any questions? 💌🐾",
-      "a10": "We love chatting with other pet moms and dads! Contact us anytime."
+      "a10": "We love chatting with other pet moms and dads! Contact us anytime.",
+      "a1_html": "We know how excited you and your furry friend are for each order! We prepare and ship all packages with great care directly from our central warehouses in Europe with our logistics partner BigBuy. The usual delivery time in mainland Spain and European countries is <strong>3 to 6 business days</strong>."
     },
     "error_404": {
       "title": "Oops! This page got a bit lost",
@@ -945,7 +945,7 @@
       "tag": "OUR PURPOSE",
       "heading": "FROM ANIMAL LOVERS, FOR YOU",
       "title": "Created by and for those who can't imagine life without them",
-      "content": "<p>Our story didn't start in an office, but on the living room floor, looking for a bed that truly cared for our dogs' joints and searching for real solutions to keep our home clean without giving up their cuddles on the sofa.</p><p>For us, they've never been just pets: they're the ones who wait for us after a long day, who brighten our mornings with a wag of their tail, and who teach us what unconditional love truly means.</p><p><strong>Our golden rule:</strong> If it isn't comfortable, safe, and durable enough for our own furry companions, we would never offer it for yours.</p>"
+      "content_html": "<p>Our story didn't start in an office, but on the living room floor, looking for a bed that truly cared for our dogs' joints and searching for real solutions to keep our home clean without giving up their cuddles on the sofa.</p><p>For us, they've never been just pets: they're the ones who wait for us after a long day, who brighten our mornings with a wag of their tail, and who teach us what unconditional love truly means.</p><p><strong>Our golden rule:</strong> If it isn't comfortable, safe, and durable enough for our own furry companions, we would never offer it for yours.</p>"
     },
     "whatsapp": {
       "open_chat": "Open WhatsApp chat",
@@ -955,9 +955,9 @@
       "contact_title": "Contact via WhatsApp"
     },
     "cookie": {
-      "text": "We use our own and third-party cookies to ensure the best experience in our store, analyze traffic, and personalize content. You can accept all cookies or configure your preferences. More information in our <a href=\"/policies/privacy-policy\" style=\"color: var(--pet-coral, #E8734A); text-decoration: underline;\">Privacy Policy</a>.",
       "accept_all": "Accept all",
-      "necessary_only": "Necessary only"
+      "necessary_only": "Necessary only",
+      "text_html": "We use our own and third-party cookies to ensure the best experience in our store, analyze traffic, and personalize content. You can accept all cookies or configure your preferences. More information in our <a href=\"/policies/privacy-policy\" style=\"color: var(--pet-coral, #E8734A); text-decoration: underline;\">Privacy Policy</a>."
     },
     "floating": {
       "back_to_top": "Back to top",

@@ -394,7 +394,7 @@
         <div class="pet-cart-free-shipping" style="margin-bottom: 20px;">
           <p class="pet-cart-free-shipping-text" style="font-size: 0.85rem; text-align: center; margin-bottom: 8px;">
             {% if remaining > 0 %}
-              {% assign remaining_money = remaining | money %}{{ 'paw.header.remaining_free_shipping' | t: amount: remaining_money }}
+              {% assign remaining_money = remaining | money %}{{ 'paw.header.remaining_free_shipping_html' | t: amount: remaining_money }}
             {% else %}
               {{ 'paw.header.free_shipping_achieved' | t }}
             {% endif %}

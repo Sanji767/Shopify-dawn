@@ -43,7 +43,7 @@
         <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--pet-navy); margin-bottom: 10px; text-align: center;">
           {% if remaining > 0 %}
             {% assign _amount = remaining | money %}
-            {{ 'paw.cart.remaining_free_shipping' | t: amount: _amount }} <strong style="color: #166534;">{{ 'paw.cart.free_shipping_label' | t }}</strong>
+            {{ 'paw.cart.remaining_free_shipping_html' | t: amount: _amount }} <strong style="color: #166534;">{{ 'paw.cart.free_shipping_label' | t }}</strong>
           {% else %}
             {{ 'paw.cart.free_shipping_achieved' | t }} <strong style="color: #166534;">{{ 'paw.cart.free_shipping_word' | t }}</strong> {{ 'paw.cart.free_shipping_suffix' | t }}
           {% endif %}
